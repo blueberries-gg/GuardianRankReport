@@ -5,6 +5,9 @@ import solidJs from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://nznaza.github.io',
+  base: 'GuardianRankReport',
+  trailingSlash: 'never',
   integrations: [solidJs({devtools: true})],
   vite: {
     plugins: [basicSsl()],
