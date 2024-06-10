@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
-    "@astrojs/solid-js": "^4.2.0",
+    "@astrojs/solid-js": "^4.3.0",
     "@nanostores/solid": "^0.4.2",
-    "astro": "^4.8.4",
+    "astro": "^4.10.1",
     "bungie-api-ts": "^5.1.0",
     "core-js": "^3.37.1",
     "nanostores": "^0.10.3",
@@ -25,14 +25,14 @@
     "@astrojs/check": "^0.7.0",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@eslint/js": "^9.2.0",
+    "@eslint/js": "^9.4.0",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
-    "astro": "^4.8.4",
+    "astro": "^4.10.1",
     "eslint": "^8.57.0",
-    "globals": "^15.1.0",
+    "globals": "^15.4.0",
     "husky": "^9.0.11",
     "prettier": "3.2.5",
-    "typescript": "^5.5.1-rc",
-    "typescript-eslint": "^7.8.0"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.0"
   }
 }

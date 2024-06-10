@@ -260,7 +260,7 @@ export const mapActivities: { [key in keyof typeof DestinyActivity]: IActivity }
 		Type: ActivityType.Raid,
 	},
 
-	OperationSeraphsShield: {
+	SeraphsShield: {
 		Modes: {
 			Normal: [1221538367, 202306511],
 			Legend: [2919809209, 995051012],
