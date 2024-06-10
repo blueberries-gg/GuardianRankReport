@@ -30,6 +30,9 @@ env:
 
 jobs:
   build:
+    env:
+      PUBLIC_BUNGIE_API_KEY: ${{ secrets.PUBLIC_BUNGIE_API_KEY }}
+      PUBLIC_BUNGIE_CLIENT_ID: ${{ secrets.PUBLIC_BUNGIE_CLIENT_ID }}
     name: Build
     runs-on: ubuntu-latest
     steps:
