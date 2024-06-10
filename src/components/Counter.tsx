@@ -1,5 +1,6 @@
 import { useStore } from '@nanostores/solid';
 import { counter, increment, decrement} from '../stores/counter';
+import { gp} from '../stores/destinyPlayerData'
 
 export default function() {
 
@@ -10,5 +11,6 @@ export default function() {
         <button onClick={decrement}>-</button>
         <span>{$number()}</span>
         <button onClick={increment}>+</button>
+        <button onClick={gp}>tt</button>
     </>);
 }

@@ -1,0 +1,72 @@
+---
+import { useStore } from "@nanostores/solid";
+import PlayerBadge from "../components/PlayerBadge";
+import SearchBar from "../components/SearchBar.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Guardian Rank Report">
+	<script>
+		import { GetInformationForMember } from "../stores/destinyPlayerData";
+		import { BungieMembershipType } from "bungie-api-ts/destiny2";
+		import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
+		import { IDisplayActivity, mapActivities } from "../utils/activities";
+		import { ActivityType } from "../enums/ActivityType";
+
+		function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) {
+			let displayActivitiesStrings: string[] = [];
+			displayActivities.forEach((displayActivity) => {
+				let details = `${activitiesEN[displayActivity.Activity]}\n`;
+				displayActivity.Completions.forEach((contributors, mode) => {
+					details += `${ModeTypeEN[mode]}\n`;
+					details += `Completions: ${Array.from(contributors.values()).reduce((p, a) => p + a, 0)}\nContributors: ${JSON.stringify(Object.fromEntries(contributors))}\n`;
+				});
+				displayActivitiesStrings.push(details);
+				console.log(displayActivity.Activity);
+			});
+			displayActivitiesStrings.map((x) => console.log(x));
+			return displayActivitiesStrings;
+		}
+		window.addEventListener("DOMContentLoaded", async () => {
+			const url = new URL(window.location.href);
+			const params = new URLSearchParams(url.search);
+			const bungieNetMembershipIdName = "id";
+			const membershipTypeName = "type";
+			const bungieNetMembershipId = params.get(bungieNetMembershipIdName);
+			const membershipType = params.get(membershipTypeName);
+
+			let activityCompletions = await GetInformationForMember(bungieNetMembershipId!, parseInt(membershipType!));
+			let activityCompletionsArray = Array.from(activityCompletions.values());
+			// .sort((x, y) => x.Activity.localeCompare(y.Activity))
+			// .sort((x, y) => mapActivities[x.Activity].Type - mapActivities[y.Activity].Type);
+
+			document.querySelector<HTMLInputElement>(`#raids`)!.value = GetPrintableActivityInfo(
+				activityCompletionsArray.filter((x) => mapActivities[x.Activity].Type == ActivityType.Raid).sort((x, y) => x.Activity.localeCompare(y.Activity))
+			).join("\n");
+			document.querySelector<HTMLInputElement>(`#dungeons`)!.value = GetPrintableActivityInfo(
+				activityCompletionsArray
+					.filter((x) => mapActivities[x.Activity].Type == ActivityType.Dungeon)
+					.sort((x, y) => x.Activity.localeCompare(y.Activity))
+			).join("\n");
+			document.querySelector<HTMLInputElement>(`#exoticMissions`)!.value = GetPrintableActivityInfo(
+				activityCompletionsArray
+					.filter((x) => mapActivities[x.Activity].Type == ActivityType.ExoticMission)
+					.sort((x, y) => x.Activity.localeCompare(y.Activity))
+			).join("\n");
+			document.querySelector<HTMLInputElement>(`#gms`)!.value = GetPrintableActivityInfo(
+				activityCompletionsArray
+					.filter((x) => mapActivities[x.Activity].Type == ActivityType.ScoredNightFall)
+					.sort((x, y) => x.Activity.localeCompare(y.Activity))
+			).join("\n");
+		});
+	</script>
+	<main>
+		
+		<SearchBar />
+		<PlayerBadge client:load/>
+		<textarea id="raids" style="height: 90vh; width:20vw"></textarea>
+		<textarea id="dungeons" style="height: 90vh; width:20vw"></textarea>
+		<textarea id="exoticMissions" style="height: 90vh; width:20vw"></textarea>
+		<textarea id="gms" style="height: 90vh; width:20vw"></textarea>
+	</main>
+</Layout>
