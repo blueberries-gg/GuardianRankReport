@@ -73,9 +73,23 @@ import Layout from "../layouts/Layout.astro";
 	<main>
 		<SearchBar />
 		<PlayerBadge client:load />
-		<textarea id="raids" style="height: 93vh; width:24vw"></textarea>
-		<textarea id="dungeons" style="height: 93vh; width:24vw"></textarea>
-		<textarea id="exoticMissions" style="height: 93vh; width:24vw"></textarea>
-		<textarea id="gms" style="height: 93vh; width:24vw"></textarea>
+		<div style="display: flex;color:white">
+			<div style="height: 93vh; width:34vw; display: flex; flex-direction:column">
+				<label for="raids">Raids</label>
+				<textarea id="raids" style="height: 100%;"></textarea>
+			</div>
+			<div style="height: 93vh; width:22vw; display: flex; flex-direction:column">
+				<label for="dungeons">Dungeons</label>
+				<textarea id="dungeons" style="height: 100%;"></textarea>
+			</div>
+			<div style="height: 93vh; width:22vw; display: flex; flex-direction:column">
+				<label for="exoticMissions">Exotic Missions</label>
+				<textarea id="exoticMissions" style="height: 100%;"></textarea>
+			</div>
+			<div style="height: 93vh; width:22vw; display: flex; flex-direction:column">
+				<label for="gms">GM's</label>
+				<textarea id="gms" style="height: 100%;"></textarea>
+			</div>
+		</div>
 	</main>
 </Layout>
