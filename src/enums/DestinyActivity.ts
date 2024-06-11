@@ -29,6 +29,7 @@ export enum DestinyActivity {
 	LeviathanEaterOfWorlds,
 	LeviathanSpireOfStars,
 	SeraphsShield,
+	Pantheon,
 	PhanteonAtraksSovereign,
 	PhanteonNezarecSublime,
 	PhanteonOryxExalted,

@@ -4,6 +4,9 @@ export function IsDestinyResponseValid(response: ServerResponse<any>) {
 	return response.ErrorCode == 0 || response.ErrorCode == 1;
 }
 
+export function ReorderMap<T,VT>(map: Map<T, VT>, keys: T[]) {
+	return new Map(keys.map((k) => [k, map.get(k)!]));
+}
 
 export function MapIntersection<K, V>(First: Map<K, V>, Second: Map<K, V>) {
 	var result = new Map<K, V>();

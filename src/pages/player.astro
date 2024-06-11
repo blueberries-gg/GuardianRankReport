@@ -12,19 +12,29 @@ import Layout from "../layouts/Layout.astro";
 		import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
 		import { IDisplayActivity, mapActivities } from "../utils/activities";
 		import { ActivityType } from "../enums/ActivityType";
+		import { ModeType } from "../enums/ModeType";
 
 		function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) {
 			let displayActivitiesStrings: string[] = [];
 			displayActivities.forEach((displayActivity) => {
 				let details = `${activitiesEN[displayActivity.Activity]}\n`;
+				if (displayActivity.hasSeal != undefined) details += `Seal ${displayActivity.hasSeal}\n`;
+
+				if (displayActivity.hasSoloFlawless != undefined) details += `Solo Flawless ${displayActivity.hasSoloFlawless}\n`;
+				if (displayActivity.hasSolo != undefined) details += `Solo ${displayActivity.hasSolo}\n`;
+				if (displayActivity.hasFlawless != undefined) details += `Flawless ${displayActivity.hasFlawless}\n`;
+
+				if (displayActivity.UncompleteObjectives != undefined)
+					details += `Pending ${displayActivity.UncompleteObjectives.length} of ${mapActivities[displayActivity.Activity].SealObjectives?.length}\n`;
 				displayActivity.Completions.forEach((contributors, mode) => {
-					details += `${ModeTypeEN[mode]}\n`;
-					details += `Completions: ${Array.from(contributors.values()).reduce((p, a) => p + a, 0)}\nContributors: ${JSON.stringify(Object.fromEntries(contributors))}\n`;
+					if (contributors.size >= 1) {
+						if (Object.values(ModeType).includes(mode)) details += `${ModeTypeEN[mode as keyof typeof ModeType]}\n`;
+						details += `Completions: ${Array.from(contributors.values()).reduce((p, a) => p + a, 0)}\nContributors: ${JSON.stringify(Object.fromEntries(contributors))}\n`;
+					}
 				});
 				displayActivitiesStrings.push(details);
-				console.log(displayActivity.Activity);
 			});
-			displayActivitiesStrings.map((x) => console.log(x));
+			//displayActivitiesStrings.map((x) => console.log(x));
 			return displayActivitiesStrings;
 		}
 		window.addEventListener("DOMContentLoaded", async () => {
@@ -61,9 +71,8 @@ import Layout from "../layouts/Layout.astro";
 		});
 	</script>
 	<main>
-		
 		<SearchBar />
-		<PlayerBadge client:load/>
+		<PlayerBadge client:load />
 		<textarea id="raids" style="height: 93vh; width:24vw"></textarea>
 		<textarea id="dungeons" style="height: 93vh; width:24vw"></textarea>
 		<textarea id="exoticMissions" style="height: 93vh; width:24vw"></textarea>

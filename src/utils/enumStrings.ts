@@ -46,6 +46,7 @@ export const activitiesEN: { [key in keyof typeof DestinyActivity]: string;  } =
 	LeviathanEaterOfWorlds: "Leviathan, Eater of Worlds",
 	LeviathanSpireOfStars: "Leviathan, Spire of Stars",
 	SeraphsShield: "Operation: Seraph's Shield",
+	Pantheon: "The Pantheon",
 	PhanteonAtraksSovereign: "The Pantheon: Atraks Sovereign",
 	PhanteonNezarecSublime: "The Pantheon: Nezarec Sublime",
 	PhanteonOryxExalted: "The Pantheon: Oryx Exalted",

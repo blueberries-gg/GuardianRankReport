@@ -15,10 +15,12 @@ import {
 	DestinyHistoricalStatsAccountResult,
 	getDestinyAggregateActivityStats,
 	searchDestinyPlayerByBungieName,
+	DestinyRecordComponent,
+	DestinyRecordState,
 } from "bungie-api-ts/destiny2";
 import { OwnsExpansion } from "../utils/Profiles";
-import { IsDestinyResponseValid, MapSetIntersection } from "../utils/common";
-import { IActivityAndMode, IDisplayActivity, mapActivitiesAndModeByHash } from "../utils/activities";
+import { IsDestinyResponseValid, MapSetIntersection, ReorderMap } from "../utils/common";
+import { IActivityAndMode, IDisplayActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/activities";
 import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
 import { ExactSearchRequest, UserInfoCard, UserSearchPrefixRequest, searchByGlobalNamePost } from "bungie-api-ts/user";
 import { getCommonSettings, getGlobalAlerts } from "bungie-api-ts/core";
@@ -28,7 +30,7 @@ import { ActivityType } from "../enums/ActivityType";
 
 export const healthStatus = atom(true);
 export const DestinyEnabled = atom(true);
-export const CurrentPlayerProfile : WritableAtom<UserInfoCard>= atom({})
+export const CurrentPlayerProfile: WritableAtom<UserInfoCard> = atom({});
 export const healthStatusReason = atom("No alert for the moment, you should not be seeing this");
 
 async function $http(config: HttpClientConfig) {
@@ -71,7 +73,12 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 	let ownedAcivities: Set<number>;
 	let activeActivities: Map<number, IActivityAndMode>;
 	let allActiveActivities: Set<number>;
-
+	let records: {
+		[key: number]: DestinyRecordComponent;
+	};
+	let CharacterRecords: {
+		[key: number]: DestinyRecordComponent;
+	}[];
 	let profileInfoResponse: Promise<void | ServerResponse<DestinyProfileResponse>> = getProfile($http, {
 		components: [
 			DestinyComponentType.Profiles,
@@ -91,6 +98,8 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			allActiveActivities = new Set(activeDestinyActivities.map((activity) => activity.activityHash));
 			ownedAcivities = new Set(activeDestinyActivities.filter((a) => a.canLead || a.canJoin).map((activity) => activity.activityHash));
 			activeActivities = MapSetIntersection(allActiveActivities, mapActivitiesAndModeByHash);
+			records = r.Response.profileRecords.data!.records;
+			CharacterRecords = Object.values(r.Response.characterRecords.data!).map((x) => x.records);
 		} else allResponsesGood = false;
 	});
 
@@ -134,21 +143,124 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 	});
 
 	let activityCompletions: Map<keyof typeof DestinyActivity, IDisplayActivity> = new Map<keyof typeof DestinyActivity, IDisplayActivity>();
+
 	aggregateActivities.forEach((value, key) => {
 		if (value == 0) return;
-		let activity = mapActivitiesAndModeByHash.get(key)!;
-		let activityKey = activity.Activity;
-		let displayActivity = activityCompletions.get(activityKey) ?? {
-			Activity: activity.Activity,
-			Completions: new Map<keyof typeof ModeType, Map<keyof typeof ModeType, number>>(),
-		};
+		let activityAndMode = mapActivitiesAndModeByHash.get(key)!;
+		let activityKey = activityAndMode.Activity;
+		let currentActivity = mapActivities[activityKey];
+		let TopLeveActivity = currentActivity;
 
-		let ModeCompletionMap = displayActivity.Completions.get(activity.Mode) ?? new Map<keyof typeof ModeType, number>();
-		ModeCompletionMap.set(activity.UnderlyingMode, ModeCompletionMap.get(activity.UnderlyingMode) ?? 0 + value);
+		if (!currentActivity.TopLevel) {
+			activityKey = DestinyActivity[currentActivity.ParentActivity!] as keyof typeof DestinyActivity;
+			TopLeveActivity = mapActivities[activityKey];
+		}
 
-		displayActivity.Completions.set(activity.Mode, ModeCompletionMap);
+		let displayActivity = activityCompletions.get(activityKey);
+		let activityType = mapActivities[activityAndMode.Activity].Type;
 
-		activityCompletions.set(activityKey, displayActivity);
+		if (displayActivity == undefined) {
+			displayActivity = {
+				Activity: activityKey,
+				Completions: new Map<keyof typeof ModeType, Map<keyof typeof ModeType, number>>(),
+			};
+
+			if (TopLeveActivity.SealHash !== undefined) {
+				let sealHash = TopLeveActivity.SealHash;
+				let record = records[sealHash];
+				CharacterRecords.forEach((characterRecords) => {
+					if (record == undefined) record = characterRecords[sealHash];
+				});
+
+				displayActivity.hasSeal = (record.state & DestinyRecordState.CanEquipTitle) != 0;
+			}
+
+			if (TopLeveActivity.FlawlessHash !== undefined) {
+				let flawlessHash = TopLeveActivity.FlawlessHash;
+				let record = records[flawlessHash];
+				CharacterRecords.forEach((characterRecords) => {
+					if (record == undefined) record = characterRecords[flawlessHash];
+				});
+
+				displayActivity.hasFlawless = !(
+					(record.state & DestinyRecordState.RecordRedeemed) == 0 &&
+					((record.state & DestinyRecordState.RewardUnavailable) != 0 ? true : (record.state & DestinyRecordState.ObjectiveNotCompleted) != 0)
+				);
+			}
+
+
+			
+			if (TopLeveActivity.SoloFlawlessHash !== undefined) {
+				let flawlessHash = TopLeveActivity.SoloFlawlessHash;
+				let record = records[flawlessHash];
+				CharacterRecords.forEach((characterRecords) => {
+					if (record == undefined) record = characterRecords[flawlessHash];
+				});
+
+				displayActivity.hasSoloFlawless = !(
+					(record.state & DestinyRecordState.RecordRedeemed) == 0 &&
+					((record.state & DestinyRecordState.RewardUnavailable) != 0 ? true : (record.state & DestinyRecordState.ObjectiveNotCompleted) != 0)
+				);
+			}
+
+
+			if (TopLeveActivity.SoloHash !== undefined) {
+				let flawlessHash = TopLeveActivity.SoloHash;
+				let record = records[flawlessHash];
+				CharacterRecords.forEach((characterRecords) => {
+					if (record == undefined) record = characterRecords[flawlessHash];
+				});
+
+				displayActivity.hasSolo = !(
+					(record.state & DestinyRecordState.RecordRedeemed) == 0 &&
+					((record.state & DestinyRecordState.RewardUnavailable) != 0 ? true : (record.state & DestinyRecordState.ObjectiveNotCompleted) != 0)
+				);
+			}
+
+
+			if (TopLeveActivity.SealObjectives !== undefined) {
+				let undefinedSealRecords = TopLeveActivity.SealObjectives?.filter((x) => records[x] == undefined);
+				let definedSealRecords = TopLeveActivity.SealObjectives?.filter((x) => records[x] !== undefined);
+				let uncompleteSealRecords = definedSealRecords.filter(
+					(x) =>
+						(records[x].state & DestinyRecordState.RecordRedeemed) == 0 &&
+						((records[x].state & DestinyRecordState.RewardUnavailable) != 0
+							? true
+							: (records[x].state & DestinyRecordState.ObjectiveNotCompleted) != 0)
+				);
+				CharacterRecords.forEach((characterRecords) => {
+					definedSealRecords = undefinedSealRecords.filter((x) => characterRecords[x] !== undefined);
+					undefinedSealRecords = undefinedSealRecords.filter((x) => characterRecords[x] == undefined);
+					uncompleteSealRecords = uncompleteSealRecords.concat(
+						definedSealRecords.filter(
+							(x) =>
+								(characterRecords[x].state & DestinyRecordState.RecordRedeemed) == 0 &&
+								((characterRecords[x].state & DestinyRecordState.RewardUnavailable) != 0
+									? true
+									: (characterRecords[x].state & DestinyRecordState.ObjectiveNotCompleted) != 0)
+						)
+					);
+				});
+				uncompleteSealRecords = uncompleteSealRecords.concat(undefinedSealRecords);
+				displayActivity.UncompleteObjectives = uncompleteSealRecords;
+			}
+
+			if (activityType == ActivityType.Raid || activityType == ActivityType.Dungeon || activityType == ActivityType.ExoticMission) {
+				displayActivity.Completions.set("Normal", new Map<keyof typeof ModeType, number>());
+				displayActivity.Completions.set("Master", new Map<keyof typeof ModeType, number>());
+			}
+		}
+		if (currentActivity.TopLevel) {
+			let ModeCompletionMap = displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<keyof typeof ModeType, number>();
+			ModeCompletionMap.set(activityAndMode.UnderlyingMode, ModeCompletionMap.get(activityAndMode.UnderlyingMode) ?? 0 + value);
+			displayActivity.Completions.set(activityAndMode.Mode, ModeCompletionMap);
+			activityCompletions.set(activityKey, displayActivity);
+		} else {
+			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<keyof typeof DestinyActivity, number>();
+			ModeCompletionMap.set(activityAndMode.Activity, ModeCompletionMap.get(activityAndMode.Activity) ?? 0 + value);
+			displayActivity.Completions.set(activityKey, ModeCompletionMap);
+			activityCompletions.set(activityKey, displayActivity);
+		}
 	});
 
 	return activityCompletions;
@@ -167,12 +279,14 @@ async function GetPlayerByFullName(name: string, code: number) {
 		displayNameCode: code,
 	} as ExactSearchRequest);
 	if (IsDestinyResponseValid(usersResponse)) {
-		return [{
-			bungieNetMembershipId: usersResponse.Response[0]?.membershipId,
-			membershipType: usersResponse.Response[0]?.membershipType,
-			name: `${usersResponse.Response[0].bungieGlobalDisplayName}#${("000" + usersResponse.Response[0].bungieGlobalDisplayNameCode).slice(-4)}`,
-			membershipTypes: usersResponse.Response[0]?.applicableMembershipTypes[0],
-		}];
+		return [
+			{
+				bungieNetMembershipId: usersResponse.Response[0]?.membershipId,
+				membershipType: usersResponse.Response[0]?.membershipType,
+				name: `${usersResponse.Response[0].bungieGlobalDisplayName}#${("000" + usersResponse.Response[0].bungieGlobalDisplayNameCode).slice(-4)}`,
+				membershipTypes: usersResponse.Response[0]?.applicableMembershipTypes[0],
+			},
+		];
 	}
 	return [];
 }
