@@ -1,50 +1,6 @@
 <div>
-	<input id="searchInputUsername" type="text" />
+	<input id="searchInputUsername" list="players" />
+	<datalist id="players"> </datalist>
 	<button id="searchButtontUsername">Search</button>
 </div>
-<script>
-	import { GetPlayerInformation } from "../stores/destinyPlayerData";
-	import { navigate } from "astro:transitions/client";
-
-	window.addEventListener("DOMContentLoaded", () => {
-		const input = document.querySelector<HTMLInputElement>(`#searchInputUsername`);
-		const button = document.querySelector<HTMLInputElement>(`#searchButtontUsername`);
-		input?.focus();
-
-		// Check if the current URL has any query params
-		const url = new URL(window.location.href);
-		const params = new URLSearchParams(url.search);
-		const queryParamName = "user";
-		const query = params.get(queryParamName);
-
-		// Add Listener to update the URL when the input changes
-		input?.addEventListener("input", (e) => {
-			const input = e.target as HTMLInputElement;
-			/*const url = new URL(window.location.href);
-			const params = new URLSearchParams(url.search);
-			params.set(queryParamName, input.value);
-			window.history.replaceState({}, "", `${url.pathname}?${params}`);*/
-		});
-
-		input?.addEventListener("keyup", (e) => {
-			if (e.key === "Enter") button?.dispatchEvent(new Event("click", { bubbles: true }));
-		});
-
-		button?.addEventListener("click", async (e) => {
-			let users = await GetPlayerInformation(input?.value || "");
-			console.log(JSON.stringify(users));
-			if (users.length == 1) {
-				const params = new URLSearchParams();
-				params.set("id",users[0].bungieNetMembershipId)
-				params.set("type",users[0].membershipType.toString())
-				navigate(`${import.meta.env.BASE_URL}/player?${params}`);
-			}
-		});
-
-		// If query exists on page load
-		if (query && input) {
-			input.value = query;
-			input.dispatchEvent(new Event("input", { bubbles: true }));
-		}
-	});
-</script>
+<script src="../scripts/search.ts"></script>
