@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const params = new URLSearchParams();
             params.set("id", users[0].bungieNetMembershipId);
             params.set("type", users[0].membershipType.toString());
-            navigate(`player?${params}`);
+            navigate(`${import.meta.env.BASE_URL}/player?${params}`);
         } else {
             if (listUsernames?.hasChildNodes()) listUsernames.replaceChildren();
             users.forEach(function (item) {
