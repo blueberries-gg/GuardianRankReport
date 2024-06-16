@@ -1,5 +1,7 @@
 import { ServerResponse } from "bungie-api-ts/destiny2";
 
+export type KeysOf<T> = (keyof T & string)
+
 export function IsDestinyResponseValid(response: ServerResponse<any>) {
 	return response.ErrorCode == 0 || response.ErrorCode == 1;
 }

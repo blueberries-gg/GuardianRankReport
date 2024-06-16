@@ -1,6 +1,6 @@
 ---
 import { useStore } from "@nanostores/solid";
-import PlayerBadge from "../components/PlayerBadge";
+import PlayerBadge from "../components/PlayerBadge.astro";
 import SearchBar from "../components/SearchBar.astro";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -10,9 +10,14 @@ import Layout from "../layouts/Layout.astro";
 		import { GetInformationForMember } from "../stores/destinyPlayerData";
 		import { BungieMembershipType } from "bungie-api-ts/destiny2";
 		import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
-		import { IDisplayActivity, mapActivities } from "../utils/activities";
+		import { KeysOf } from "../utils/common";
+		import { IDisplayActivity, mapActivities, mapDungeons, mapRaids, mapScoredNightFalls, mapExoticMissions } from "../utils/activities";
 		import { ActivityType } from "../enums/ActivityType";
 		import { ModeType } from "../enums/ModeType";
+		import { Raids } from "../enums/DestinyActivity";
+import { Dungeons } from "../enums/DestinyActivity";
+import { ExoticMissions } from "../enums/DestinyActivity";
+import { ScoredNightFalls } from "../enums/DestinyActivity";
 
 		function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) {
 			let displayActivitiesStrings: string[] = [];
@@ -28,7 +33,7 @@ import Layout from "../layouts/Layout.astro";
 					details += `Pending ${displayActivity.UncompleteObjectives.length} of ${mapActivities[displayActivity.Activity].SealObjectives?.length}\n`;
 				displayActivity.Completions.forEach((contributors, mode) => {
 					if (contributors.size >= 1) {
-						if (Object.values(ModeType).includes(mode)) details += `${ModeTypeEN[mode as keyof typeof ModeType]}\n`;
+						if (Object.values(ModeType).includes(mode)) details += `${ModeTypeEN[mode as KeysOf<typeof ModeType>]}\n`;
 						details += `Completions: ${Array.from(contributors.values()).reduce((p, a) => p + a, 0)}\nContributors: ${JSON.stringify(Object.fromEntries(contributors))}\n`;
 					}
 				});
@@ -51,28 +56,30 @@ import Layout from "../layouts/Layout.astro";
 			// .sort((x, y) => mapActivities[x.Activity].Type - mapActivities[y.Activity].Type);
 
 			document.querySelector<HTMLInputElement>(`#raids`)!.value = GetPrintableActivityInfo(
-				activityCompletionsArray.filter((x) => mapActivities[x.Activity].Type == ActivityType.Raid).sort((x, y) => x.Activity.localeCompare(y.Activity))
+				activityCompletionsArray
+					.filter((x) => mapRaids[x.Activity as KeysOf<typeof Raids>]?.Type !== undefined)
+					.sort((x, y) => x.Activity.localeCompare(y.Activity))
 			).join("\n");
 			document.querySelector<HTMLInputElement>(`#dungeons`)!.value = GetPrintableActivityInfo(
 				activityCompletionsArray
-					.filter((x) => mapActivities[x.Activity].Type == ActivityType.Dungeon)
+				.filter((x) => mapDungeons[x.Activity as KeysOf<typeof Dungeons>]?.Type !== undefined)
 					.sort((x, y) => x.Activity.localeCompare(y.Activity))
 			).join("\n");
 			document.querySelector<HTMLInputElement>(`#exoticMissions`)!.value = GetPrintableActivityInfo(
 				activityCompletionsArray
-					.filter((x) => mapActivities[x.Activity].Type == ActivityType.ExoticMission)
+				.filter((x) => mapExoticMissions[x.Activity as KeysOf<typeof ExoticMissions>]?.Type !== undefined)
 					.sort((x, y) => x.Activity.localeCompare(y.Activity))
 			).join("\n");
 			document.querySelector<HTMLInputElement>(`#gms`)!.value = GetPrintableActivityInfo(
 				activityCompletionsArray
-					.filter((x) => mapActivities[x.Activity].Type == ActivityType.ScoredNightFall)
+				.filter((x) => mapScoredNightFalls[x.Activity as KeysOf<typeof ScoredNightFalls>]?.Type !== undefined)
 					.sort((x, y) => x.Activity.localeCompare(y.Activity))
 			).join("\n");
 		});
 	</script>
 	<main>
 		<SearchBar />
-		<PlayerBadge client:load />
+		<PlayerBadge />
 		<div style="display: flex;color:white">
 			<div style="height: 93vh; width:34vw; display: flex; flex-direction:column">
 				<label for="raids">Raids</label>

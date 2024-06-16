@@ -19,7 +19,7 @@ import {
 	DestinyRecordState,
 } from "bungie-api-ts/destiny2";
 import { OwnsExpansion } from "../utils/Profiles";
-import { IsDestinyResponseValid, MapSetIntersection, ReorderMap } from "../utils/common";
+import { IsDestinyResponseValid, KeysOf, MapSetIntersection, ReorderMap } from "../utils/common";
 import { IActivityAndMode, IDisplayActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/activities";
 import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
 import { ExactSearchRequest, UserInfoCard, UserSearchPrefixRequest, searchByGlobalNamePost } from "bungie-api-ts/user";
@@ -28,9 +28,14 @@ import { DestinyActivity } from "../enums/DestinyActivity";
 import { ModeType } from "../enums/ModeType";
 import { ActivityType } from "../enums/ActivityType";
 
+export interface PlayerBadgeData {
+	hasInfo: boolean;
+	info: UserInfoCard;
+}
+
 export const healthStatus = atom(true);
 export const DestinyEnabled = atom(true);
-export const CurrentPlayerProfile: WritableAtom<UserInfoCard> = atom({});
+export const CurrentPlayerProfile: WritableAtom<PlayerBadgeData> = atom({});
 export const healthStatusReason = atom("No alert for the moment, you should not be seeing this");
 
 async function $http(config: HttpClientConfig) {
@@ -90,7 +95,10 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		membershipType: membershipType,
 	}).then(async (r) => {
 		if (IsDestinyResponseValid(r)) {
-			CurrentPlayerProfile.set(r.Response.profile.data!.userInfo);
+			CurrentPlayerProfile.set({
+				info: r.Response.profile.data!.userInfo,
+				hasInfo: true,
+			});
 			//Characters = profileInfoResponse.Response.profile.data!.characterIds;
 			let activeDestinyActivities = r.Response.profile
 				.data!.characterIds.map((character) => r.Response.characterActivities.data![character].availableActivities)
@@ -152,7 +160,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		let TopLeveActivity = currentActivity;
 
 		if (!currentActivity.TopLevel) {
-			activityKey = DestinyActivity[currentActivity.ParentActivity!] as keyof typeof DestinyActivity;
+			activityKey = DestinyActivity[currentActivity.ParentActivity!] as KeysOf<typeof DestinyActivity>;
 			TopLeveActivity = mapActivities[activityKey];
 		}
 
@@ -161,8 +169,9 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 
 		if (displayActivity == undefined) {
 			displayActivity = {
-				Activity: activityKey,
-				Completions: new Map<keyof typeof ModeType, Map<keyof typeof ModeType, number>>(),
+				Activity: activityKey ,
+				Completions: new Map<KeysOf<typeof ModeType>, Map<KeysOf<typeof ModeType>, number>>(),
+				isActive: mapActivities[activityKey].Type != ActivityType.ScoredNightFall ? mapActivities[activityKey].Active! : false,
 			};
 
 			if (TopLeveActivity.SealHash !== undefined) {
@@ -188,8 +197,6 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				);
 			}
 
-
-			
 			if (TopLeveActivity.SoloFlawlessHash !== undefined) {
 				let flawlessHash = TopLeveActivity.SoloFlawlessHash;
 				let record = records[flawlessHash];
@@ -203,7 +210,6 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				);
 			}
 
-
 			if (TopLeveActivity.SoloHash !== undefined) {
 				let flawlessHash = TopLeveActivity.SoloHash;
 				let record = records[flawlessHash];
@@ -216,7 +222,6 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 					((record.state & DestinyRecordState.RewardUnavailable) != 0 ? true : (record.state & DestinyRecordState.ObjectiveNotCompleted) != 0)
 				);
 			}
-
 
 			if (TopLeveActivity.SealObjectives !== undefined) {
 				let undefinedSealRecords = TopLeveActivity.SealObjectives?.filter((x) => records[x] == undefined);
@@ -246,17 +251,17 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			}
 
 			if (activityType == ActivityType.Raid || activityType == ActivityType.Dungeon || activityType == ActivityType.ExoticMission) {
-				displayActivity.Completions.set("Normal", new Map<keyof typeof ModeType, number>());
-				displayActivity.Completions.set("Master", new Map<keyof typeof ModeType, number>());
+				displayActivity.Completions.set("Normal", new Map<KeysOf<typeof ModeType>, number>());
+				displayActivity.Completions.set("Master", new Map<KeysOf<typeof ModeType>, number>());
 			}
 		}
 		if (currentActivity.TopLevel) {
-			let ModeCompletionMap = displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<keyof typeof ModeType, number>();
+			let ModeCompletionMap = displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<KeysOf<typeof ModeType>, number>();
 			ModeCompletionMap.set(activityAndMode.UnderlyingMode, ModeCompletionMap.get(activityAndMode.UnderlyingMode) ?? 0 + value);
 			displayActivity.Completions.set(activityAndMode.Mode, ModeCompletionMap);
 			activityCompletions.set(activityKey, displayActivity);
 		} else {
-			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<keyof typeof DestinyActivity, number>();
+			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map< KeysOf<typeof DestinyActivity>, number>();
 			ModeCompletionMap.set(activityAndMode.Activity, ModeCompletionMap.get(activityAndMode.Activity) ?? 0 + value);
 			displayActivity.Completions.set(activityKey, ModeCompletionMap);
 			activityCompletions.set(activityKey, displayActivity);

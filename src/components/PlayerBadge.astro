@@ -1,0 +1,12 @@
+<div id="playerBadge" style="color:white">Guardian#-1</div>
+
+<script>
+	import { UserInfoCard } from "bungie-api-ts/user";
+	import { CurrentPlayerProfile } from "../stores/destinyPlayerData";
+
+	// Listen to changes in the store, and show/hide the dialog accordingly
+	CurrentPlayerProfile.subscribe((profile) => {
+		if (profile.hasInfo)
+			document.getElementById("playerBadge")!.innerHTML = `${profile.info.bungieGlobalDisplayName}#${profile.info.bungieGlobalDisplayNameCode}`;
+	});
+</script>
