@@ -5,8 +5,11 @@ export const BASE_BUNGIE_URL = 'https://www.bungie.net/';
 
 export type KeysOf<T> = (keyof T & string)
 
-export function IsDestinyResponseValid(response: ServerResponse<any>) {
-	return response.ErrorCode == 0 || response.ErrorCode == 1;
+export function IsDestinyResponseValid(response: ServerResponse<any>, errorCallback: (response: ServerResponse<any>) => void) {
+	if (response.ErrorCode == 0 || response.ErrorCode == 1)
+	return true;
+	errorCallback(response);
+	return false;
 }
 
 export function ReorderMap<T,VT>(map: Map<T, VT>, keys: T[]) {

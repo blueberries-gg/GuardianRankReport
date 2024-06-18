@@ -44,6 +44,7 @@ export const healthStatus = atom(true);
 export const DestinyEnabled = atom(true);
 export const CurrentPlayerProfile: WritableAtom<PlayerBadgeData> = atom({});
 export const healthStatusReason = atom("No alert for the moment, you should not be seeing this");
+export const healthStatusTitle = atom("Error");
 
 async function $http(config: HttpClientConfig) {
 	let url = new URL(config.url);
@@ -75,7 +76,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		membershipType: membershipType,
 		groups: [DestinyStatsGroupType.None],
 	}).then((r) => {
-		if (IsDestinyResponseValid(r)) {
+		if (IsDestinyResponseValid(r, getBungieErrorMessage)) {
 			DeletedCharacters = r.Response.characters.filter((c) => c.deleted).map((c) => c.characterId);
 			Characters = r.Response.characters.filter((c) => !c.deleted).map((c) => c.characterId);
 			AllCharacters = r.Response.characters.map((c) => c.characterId);
@@ -101,14 +102,14 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		destinyMembershipId: destinyMembershipId.toString(),
 		membershipType: membershipType,
 	}).then(async (r) => {
-		if (IsDestinyResponseValid(r)) {
+		if (IsDestinyResponseValid(r, getBungieErrorMessage)) {
 			CurrentPlayerProfile.set({
 				info: r.Response.profile.data!.userInfo,
 				hasInfo: true,
 				character: Object.values(r.Response.characters.data!).sort((x, y) => y!.dateLastPlayed.localeCompare(x!.dateLastPlayed))[0]!,
-				currentGuardianRank: r.Response.profile.data!.currentGuardianRank ,
+				currentGuardianRank: r.Response.profile.data!.currentGuardianRank,
 				lifetimeHighestGuardianRank: r.Response.profile.data!.lifetimeHighestGuardianRank,
-				renewedGuardianRank:  (r.Response.profile.data!as any) .renewedGuardianRank
+				renewedGuardianRank: (r.Response.profile.data! as any).renewedGuardianRank,
 			});
 			//Characters = profileInfoResponse.Response.profile.data!.characterIds;
 			let activeDestinyActivities = r.Response.profile
@@ -139,7 +140,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 
 	let allAggregateActivitiesArrayResponses = await Promise.all(allAggregateActivitiesArrayPromises);
 	allAggregateActivitiesArrayResponses.forEach((aggregateActivityResponse) => {
-		if (IsDestinyResponseValid(aggregateActivityResponse)) {
+		if (IsDestinyResponseValid(aggregateActivityResponse, getBungieErrorMessage)) {
 			let aggregateActivity = aggregateActivityResponse.Response.activities
 				.filter((a) => mapActivitiesAndModeByHash.has(a.activityHash))
 				.map((a) => {
@@ -291,7 +292,7 @@ export const GetPlayerInformation = async (name: string) => {
 
 export const GetDestinyInventoryItemDefinitionEntityDefinition = async (hashIdentifier: number) => {
 	let definition = await getDestinyEntityDefinition($http, { entityType: "DestinyInventoryItemDefinition", hashIdentifier });
-	if (IsDestinyResponseValid(definition)) {
+	if (IsDestinyResponseValid(definition, getBungieErrorMessage)) {
 		return definition.Response as DestinyInventoryItemDefinition;
 	}
 };
@@ -301,7 +302,7 @@ async function GetPlayerByFullName(name: string, code: number) {
 		displayName: name,
 		displayNameCode: code,
 	} as ExactSearchRequest);
-	if (IsDestinyResponseValid(usersResponse)) {
+	if (IsDestinyResponseValid(usersResponse, getBungieErrorMessage)) {
 		return [
 			{
 				bungieNetMembershipId: usersResponse.Response[0]?.membershipId,
@@ -329,7 +330,7 @@ async function GetPlayerByPrefix(name: string) {
 			displayNamePrefix: name,
 		} as UserSearchPrefixRequest);
 
-		if (IsDestinyResponseValid(usersResponse)) {
+		if (IsDestinyResponseValid(usersResponse, getBungieErrorMessage)) {
 			hasMore = usersResponse.Response.hasMore;
 			pageNumber++;
 			users = users.concat(
@@ -352,16 +353,23 @@ async function GetPlayerByPrefix(name: string) {
 async function getHealhStatus() {
 	let destinySettings = await getCommonSettings($http);
 	let destinyEnabled = false;
-	if (IsDestinyResponseValid(destinySettings)) destinyEnabled = destinySettings.Response.systems["Destiny2"].enabled;
+	if (IsDestinyResponseValid(destinySettings, getBungieErrorMessage)) destinyEnabled = destinySettings.Response.systems["Destiny2"].enabled;
 	if (!destinyEnabled) {
 		healthStatusReason.set("Destiny is offline");
 		let globalAlert = getGlobalAlerts($http, {});
-		if (IsDestinyResponseValid(destinySettings)) healthStatusReason.set((await globalAlert).Response[0].AlertHtml);
+		if (IsDestinyResponseValid(destinySettings, getBungieErrorMessage)) healthStatusReason.set((await globalAlert).Response[0].AlertHtml);
 		healthStatus.set(false);
 	}
 	DestinyEnabled.set(destinyEnabled);
 }
 
+function getBungieErrorMessage(response: ServerResponse<any>) {
+	if ((response.ErrorCode as number) == -1) healthStatusTitle.set(`Internal Error(${response.ErrorStatus})`);
+	else healthStatusTitle.set(`Bungie(${response.ErrorStatus})`);
+
+	healthStatusReason.set(`${response.Message}`);
+	healthStatus.set(false);
+}
 export const gp = async () => {
 	getHealhStatus();
 	//console.log(await GetPlayerInformation("icicle"));
@@ -369,15 +377,16 @@ export const gp = async () => {
 	//await GetInformationForMember(4611686018527458332n, BungieMembershipType.TigerSteam);
 };
 async function FetchSuccess(r: Response | undefined): Promise<any> {
-	if (DestinyEnabled.get()) healthStatusReason.set("");
-	healthStatus.set(true);
+	if (DestinyEnabled.get()) {
+		healthStatusReason.set("");
+		healthStatusTitle.set("");
+		healthStatus.set(true);
+	}
 	return await r?.json();
 }
 
 function FetchErrorProcess(e: Error): Promise<any> {
-	healthStatusReason.set(e.message);
-	healthStatus.set(false);
 	return new Promise((resolve) => {
-		resolve({ ErrorCode: -1, Message: e.message });
+		resolve({ ErrorCode: -1, Message: e.message, ErrorStatus: "FetchError" });
 	});
 }
