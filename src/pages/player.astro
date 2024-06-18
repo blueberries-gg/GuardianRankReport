@@ -15,9 +15,9 @@ import Layout from "../layouts/Layout.astro";
 		import { ActivityType } from "../enums/ActivityType";
 		import { ModeType } from "../enums/ModeType";
 		import { Raids } from "../enums/DestinyActivity";
-import { Dungeons } from "../enums/DestinyActivity";
-import { ExoticMissions } from "../enums/DestinyActivity";
-import { ScoredNightFalls } from "../enums/DestinyActivity";
+		import { Dungeons } from "../enums/DestinyActivity";
+		import { ExoticMissions } from "../enums/DestinyActivity";
+		import { ScoredNightFalls } from "../enums/DestinyActivity";
 
 		function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) {
 			let displayActivitiesStrings: string[] = [];
@@ -62,17 +62,17 @@ import { ScoredNightFalls } from "../enums/DestinyActivity";
 			).join("\n");
 			document.querySelector<HTMLInputElement>(`#dungeons`)!.value = GetPrintableActivityInfo(
 				activityCompletionsArray
-				.filter((x) => mapDungeons[x.Activity as KeysOf<typeof Dungeons>]?.Type !== undefined)
+					.filter((x) => mapDungeons[x.Activity as KeysOf<typeof Dungeons>]?.Type !== undefined)
 					.sort((x, y) => x.Activity.localeCompare(y.Activity))
 			).join("\n");
 			document.querySelector<HTMLInputElement>(`#exoticMissions`)!.value = GetPrintableActivityInfo(
 				activityCompletionsArray
-				.filter((x) => mapExoticMissions[x.Activity as KeysOf<typeof ExoticMissions>]?.Type !== undefined)
+					.filter((x) => mapExoticMissions[x.Activity as KeysOf<typeof ExoticMissions>]?.Type !== undefined)
 					.sort((x, y) => x.Activity.localeCompare(y.Activity))
 			).join("\n");
 			document.querySelector<HTMLInputElement>(`#gms`)!.value = GetPrintableActivityInfo(
 				activityCompletionsArray
-				.filter((x) => mapScoredNightFalls[x.Activity as KeysOf<typeof ScoredNightFalls>]?.Type !== undefined)
+					.filter((x) => mapScoredNightFalls[x.Activity as KeysOf<typeof ScoredNightFalls>]?.Type !== undefined)
 					.sort((x, y) => x.Activity.localeCompare(y.Activity))
 			).join("\n");
 		});

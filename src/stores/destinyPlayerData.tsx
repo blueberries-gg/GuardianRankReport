@@ -17,6 +17,9 @@ import {
 	searchDestinyPlayerByBungieName,
 	DestinyRecordComponent,
 	DestinyRecordState,
+	DestinyCharacterComponent,
+	getDestinyEntityDefinition,
+	DestinyInventoryItemDefinition,
 } from "bungie-api-ts/destiny2";
 import { OwnsExpansion } from "../utils/Profiles";
 import { IsDestinyResponseValid, KeysOf, MapSetIntersection, ReorderMap } from "../utils/common";
@@ -31,6 +34,10 @@ import { ActivityType } from "../enums/ActivityType";
 export interface PlayerBadgeData {
 	hasInfo: boolean;
 	info: UserInfoCard;
+	character: DestinyCharacterComponent;
+	currentGuardianRank: number;
+	lifetimeHighestGuardianRank: number;
+	renewedGuardianRank: number;
 }
 
 export const healthStatus = atom(true);
@@ -87,7 +94,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 	let profileInfoResponse: Promise<void | ServerResponse<DestinyProfileResponse>> = getProfile($http, {
 		components: [
 			DestinyComponentType.Profiles,
-			//DestinyComponentType.Characters,
+			DestinyComponentType.Characters,
 			DestinyComponentType.CharacterActivities, // Access to Activities
 			DestinyComponentType.Records, //Emblems and collections
 		],
@@ -98,6 +105,10 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			CurrentPlayerProfile.set({
 				info: r.Response.profile.data!.userInfo,
 				hasInfo: true,
+				character: Object.values(r.Response.characters.data!).sort((x, y) => y!.dateLastPlayed.localeCompare(x!.dateLastPlayed))[0]!,
+				currentGuardianRank: r.Response.profile.data!.currentGuardianRank ,
+				lifetimeHighestGuardianRank: r.Response.profile.data!.lifetimeHighestGuardianRank,
+				renewedGuardianRank:  (r.Response.profile.data!as any) .renewedGuardianRank
 			});
 			//Characters = profileInfoResponse.Response.profile.data!.characterIds;
 			let activeDestinyActivities = r.Response.profile
@@ -169,7 +180,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 
 		if (displayActivity == undefined) {
 			displayActivity = {
-				Activity: activityKey ,
+				Activity: activityKey,
 				Completions: new Map<KeysOf<typeof ModeType>, Map<KeysOf<typeof ModeType>, number>>(),
 				isActive: mapActivities[activityKey].Type != ActivityType.ScoredNightFall ? mapActivities[activityKey].Active! : false,
 			};
@@ -261,7 +272,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			displayActivity.Completions.set(activityAndMode.Mode, ModeCompletionMap);
 			activityCompletions.set(activityKey, displayActivity);
 		} else {
-			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map< KeysOf<typeof DestinyActivity>, number>();
+			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<KeysOf<typeof DestinyActivity>, number>();
 			ModeCompletionMap.set(activityAndMode.Activity, ModeCompletionMap.get(activityAndMode.Activity) ?? 0 + value);
 			displayActivity.Completions.set(activityKey, ModeCompletionMap);
 			activityCompletions.set(activityKey, displayActivity);
@@ -276,6 +287,13 @@ export const GetPlayerInformation = async (name: string) => {
 	if (namesplit.length == 1) {
 		return await GetPlayerByPrefix(name);
 	} else return await GetPlayerByFullName(namesplit[0], parseInt(namesplit[1], 10));
+};
+
+export const GetDestinyInventoryItemDefinitionEntityDefinition = async (hashIdentifier: number) => {
+	let definition = await getDestinyEntityDefinition($http, { entityType: "DestinyInventoryItemDefinition", hashIdentifier });
+	if (IsDestinyResponseValid(definition)) {
+		return definition.Response as DestinyInventoryItemDefinition;
+	}
 };
 
 async function GetPlayerByFullName(name: string, code: number) {

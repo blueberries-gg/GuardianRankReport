@@ -1,18 +1,23 @@
 import { defineConfig } from 'astro/config';
-import basicSsl from '@vitejs/plugin-basic-ssl'
-
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import solidJs from "@astrojs/solid-js";
+
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nznaza.github.io',
   base: 'GuardianRankReport',
   trailingSlash: 'never',
-  integrations: [solidJs({devtools: true})],
+  integrations: [solidJs({
+    devtools: true
+  }), icon({
+    iconDir: "src/resources/svg",
+  })],
   vite: {
     plugins: [basicSsl()],
     server: {
-      https: true,
-    },
-  },
+      https: true
+    }
+  }
 });

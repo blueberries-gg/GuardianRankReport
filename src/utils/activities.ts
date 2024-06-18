@@ -5,7 +5,7 @@ import { DestinyActivity, Dungeons, ExoticMissions, Raids, ScoredNightFalls } fr
 import { ModeType } from "../enums/ModeType";
 import { KeysOf } from "./common";
 
-export interface IBaseActivity {
+interface _IBaseActivity {
 	Modes: { [key in KeysOf<typeof ModeType>]?: number[] };
 	SubActivities?: DestinyActivity[];
 	ParentActivity?: DestinyActivity | undefined;
@@ -20,7 +20,7 @@ export interface IBaseActivity {
 	FlawlessHash?: number;
 }
 
-interface IActivityGenericSeal extends IBaseActivity {
+interface _IActivityGenericSeal extends _IBaseActivity {
 	SubActivities: DestinyActivity[];
 	Active: boolean;
 	Free: boolean;
@@ -31,7 +31,7 @@ interface IActivityGenericSeal extends IBaseActivity {
 	SoloFlawlessHash?: never;
 	FlawlessHash?: never;
 }
-interface IActivityRaidNoSeal extends IBaseActivity {
+interface _IActivityRaidNoSeal extends _IBaseActivity {
 	Type: ActivityType.Raid;
 	SubActivities?: never;
 	Active: false;
@@ -43,7 +43,7 @@ interface IActivityRaidNoSeal extends IBaseActivity {
 	SoloFlawlessHash?: never;
 	FlawlessHash?: never;
 }
-interface IActivityRaidWithSeal extends IBaseActivity {
+interface _IActivityRaidWithSeal extends _IBaseActivity {
 	Type: ActivityType.Raid;
 	SubActivities?: never;
 	Active: boolean;
@@ -55,7 +55,7 @@ interface IActivityRaidWithSeal extends IBaseActivity {
 	SoloFlawlessHash?: never;
 	FlawlessHash: number;
 }
-interface IActivityDungeonWithSeal extends IBaseActivity {
+interface _IActivityDungeonWithSeal extends _IBaseActivity {
 	Type: ActivityType.Dungeon;
 	SubActivities?: never;
 	Active: boolean;
@@ -67,7 +67,7 @@ interface IActivityDungeonWithSeal extends IBaseActivity {
 	SoloFlawlessHash: number;
 	FlawlessHash: number;
 }
-interface IActivityDungeonNoSeal extends IBaseActivity {
+interface _IActivityDungeonNoSeal extends _IBaseActivity {
 	Type: ActivityType.Dungeon;
 	SubActivities?: never;
 	Active: boolean;
@@ -79,7 +79,7 @@ interface IActivityDungeonNoSeal extends IBaseActivity {
 	SoloFlawlessHash: number;
 	FlawlessHash: number;
 }
-interface IActivityExoticMission extends IBaseActivity {
+interface _IActivityExoticMission extends _IBaseActivity {
 	Type: ActivityType.ExoticMission;
 	SubActivities?: never;
 	Active: boolean;
@@ -91,7 +91,7 @@ interface IActivityExoticMission extends IBaseActivity {
 	SoloFlawlessHash?: never;
 	FlawlessHash?: never;
 }
-interface IActivityScoredNightfall extends IBaseActivity {
+interface _IActivityScoredNightfall extends _IBaseActivity {
 	Type: ActivityType.ScoredNightFall;
 	SubActivities?: never;
 	SealHash?: never;
@@ -102,13 +102,13 @@ interface IActivityScoredNightfall extends IBaseActivity {
 }
 
 type IActivity =
-	| IActivityGenericSeal
-	| IActivityRaidWithSeal
-	| IActivityDungeonWithSeal
-	| IActivityRaidNoSeal
-	| IActivityDungeonNoSeal
-	| IActivityExoticMission
-	| IActivityScoredNightfall;
+	| _IActivityGenericSeal
+	| _IActivityRaidWithSeal
+	| _IActivityDungeonWithSeal
+	| _IActivityRaidNoSeal
+	| _IActivityDungeonNoSeal
+	| _IActivityExoticMission
+	| _IActivityScoredNightfall;
 
 export interface IActivityAndMode {
 	Activity: KeysOf<typeof DestinyActivity>;
@@ -126,7 +126,6 @@ export interface IDisplayActivity {
 	hasSoloFlawless?: boolean;
 	isActive: boolean;
 }
-
 
 export const mapDungeons: { [key in KeysOf<typeof Dungeons>]: IActivity } = {
 	Duality: {
@@ -619,7 +618,6 @@ export const mapExoticMissions: { [key in KeysOf<typeof ExoticMissions>]: IActiv
 		Free: true,
 	},
 };
-
 export const mapScoredNightFalls: { [key in KeysOf<typeof ScoredNightFalls>]: IActivity } = {
 	AGardenWorld: {
 		Modes: {

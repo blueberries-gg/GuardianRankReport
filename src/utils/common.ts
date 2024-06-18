@@ -1,5 +1,8 @@
 import { ServerResponse } from "bungie-api-ts/destiny2";
 
+
+export const BASE_BUNGIE_URL = 'https://www.bungie.net/';
+
 export type KeysOf<T> = (keyof T & string)
 
 export function IsDestinyResponseValid(response: ServerResponse<any>) {

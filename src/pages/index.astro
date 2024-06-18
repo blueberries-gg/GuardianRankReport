@@ -2,16 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import Counter from "../components/Counter";
-import {StatusBar }from "../components/StatusBar";
+import { StatusBar } from "../components/StatusBar";
 import SearchBar from "../components/SearchBar.astro";
 ---
 
-
-
 <Layout title="Guardian Rank Report">
 	<main>
-		<!-- 
-		<Counter client:load/> -->
+		<!-- <Counter client:load/> -->
 		<SearchBar />
 	</main>
 </Layout>
@@ -26,5 +23,4 @@ import SearchBar from "../components/SearchBar.astro";
 		font-size: 20px;
 		line-height: 1.6;
 	}
-
 </style>
