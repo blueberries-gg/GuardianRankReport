@@ -3,10 +3,12 @@ import "core-js/proposals/set-methods-v2";
 import { ActivityType } from "../enums/ActivityType";
 import { DestinyActivity, Dungeons, ExoticMissions, Raids, ScoredNightFalls } from "../enums/DestinyActivity";
 import { ModeType } from "../enums/ModeType";
-import { KeysOf } from "./common";
+import { StringsKeysOf } from "./common";
 
+
+// Activities as of manifest 226232.24.06.12.1730-3-bnet.55913
 interface _IBaseActivity {
-	Modes: { [key in KeysOf<typeof ModeType>]?: number[] };
+	Modes: { [key in StringsKeysOf<typeof ModeType>]?: number[] };
 	SubActivities?: DestinyActivity[];
 	ParentActivity?: DestinyActivity | undefined;
 	TopLevel: boolean;
@@ -111,14 +113,17 @@ type IActivity =
 	| _IActivityScoredNightfall;
 
 export interface IActivityAndMode {
-	Activity: KeysOf<typeof DestinyActivity>;
-	Mode: KeysOf<typeof ModeType>;
-	UnderlyingMode: KeysOf<typeof ModeType>;
+	Activity: keyof typeof DestinyActivity;
+	Mode: StringsKeysOf<typeof ModeType>;
+	UnderlyingMode: StringsKeysOf<typeof ModeType>;
 }
 
 export interface IDisplayActivity {
-	Activity: KeysOf<typeof DestinyActivity>;
-	Completions: Map<KeysOf<typeof ModeType> | KeysOf<typeof DestinyActivity>, Map<KeysOf<typeof ModeType> | KeysOf<typeof DestinyActivity>, number>>;
+	Activity: keyof typeof DestinyActivity;
+	Completions: Map<
+		StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>,
+		Map<StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>, number>
+	>;
 	UncompleteObjectives?: number[];
 	hasSeal?: boolean;
 	hasFlawless?: boolean;
@@ -127,7 +132,7 @@ export interface IDisplayActivity {
 	isActive: boolean;
 }
 
-export const mapDungeons: { [key in KeysOf<typeof Dungeons>]: IActivity } = {
+export const mapDungeons: { [key in keyof typeof Dungeons]: IActivity } = {
 	Duality: {
 		Modes: {
 			Normal: [2823159265],
@@ -247,11 +252,11 @@ export const mapDungeons: { [key in KeysOf<typeof Dungeons>]: IActivity } = {
 		Free: false,
 	},
 };
-export const mapRaids: { [key in KeysOf<typeof Raids>]: IActivity } = {
+export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 	CrotasEnd: {
 		Modes: {
 			Contest: [156253568],
-			/*Superior Swordplay*/ Normal: [4179289725],
+			/*Superior Swordplay*/ Normal: [4179289725, ],
 			Master: [1507509200],
 		},
 		Type: ActivityType.Raid,
@@ -466,6 +471,7 @@ export const mapRaids: { [key in KeysOf<typeof Raids>]: IActivity } = {
 		Modes: {
 			Normal: [1541433876],
 			Contest: [2192826039],
+			Master: [4129614942],
 		},
 		Type: ActivityType.Raid,
 		TopLevel: true,
@@ -528,7 +534,7 @@ export const mapRaids: { [key in KeysOf<typeof Raids>]: IActivity } = {
 		Free: false,
 	},
 };
-export const mapExoticMissions: { [key in KeysOf<typeof ExoticMissions>]: IActivity } = {
+export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivity } = {
 	Avalon: {
 		Modes: {
 			Normal: [3755529435],
@@ -618,7 +624,7 @@ export const mapExoticMissions: { [key in KeysOf<typeof ExoticMissions>]: IActiv
 		Free: true,
 	},
 };
-export const mapScoredNightFalls: { [key in KeysOf<typeof ScoredNightFalls>]: IActivity } = {
+export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IActivity } = {
 	AGardenWorld: {
 		Modes: {
 			Grandmaster: [2533203708],
@@ -675,9 +681,30 @@ export const mapScoredNightFalls: { [key in KeysOf<typeof ScoredNightFalls>]: IA
 		TopLevel: true,
 	},
 
+	DefiantBattlegroundCosmodrome: {
+		Modes: {
+			Grandmaster: [3640623961, 53750498],
+		},
+		Type: ActivityType.ScoredNightFall,
+		TopLevel: true,
+	},
+	DefiantBattlegroundEDZ: {
+		Modes: {
+			Grandmaster: [952545351, 2748682956],
+		},
+		Type: ActivityType.ScoredNightFall,
+		TopLevel: true,
+	},
+	DefiantBattlegroundOrbitalPrison: {
+		Modes: {
+			Grandmaster: [2619900708, 1030419231],
+		},
+		Type: ActivityType.ScoredNightFall,
+		TopLevel: true,
+	},
 	ExodusCrash: {
 		Modes: {
-			Grandmaster: [3233498454, 54961125, 68611398, 707920309],
+			Grandmaster: [3233498454, 54961125, 68611398, 707920309, 2280860193, 2823591786],
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
@@ -731,9 +758,14 @@ export const mapScoredNightFalls: { [key in KeysOf<typeof ScoredNightFalls>]: IA
 		TopLevel: true,
 	},
 
+	Liminality: {
+		Modes: { Grandmaster: [1700470403, 2099835168] },
+		Type: ActivityType.ScoredNightFall,
+		TopLevel: true,
+	},
 	LegendPsiOpsBattlegroundCosmodrome: {
 		Modes: {
-			Grandmaster: [1387912492, 968118631],
+			Grandmaster: [1387912492, 968118631, 3640623961],
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
@@ -883,7 +915,7 @@ export const mapScoredNightFalls: { [key in KeysOf<typeof ScoredNightFalls>]: IA
 		TopLevel: true,
 	},
 };
-export const mapActivities: { [key in KeysOf<typeof DestinyActivity>]: IActivity } = {
+export const mapActivities: { [key in keyof typeof DestinyActivity]: IActivity } = {
 	...mapDungeons,
 	...mapRaids,
 	...mapExoticMissions,
@@ -898,18 +930,18 @@ function _getMapActivitesAndModeByHash(activitiesFilter: { [key in keyof typeof 
 		Object.entries(activitiesFilter).flatMap(([activityName, activity]) =>
 			Object.entries(activity.Modes).flatMap(([modeName, modeHashes]) =>
 				modeHashes!.forEach((m) => {
-					let mode = modeName as KeysOf<typeof ModeType>;
-					let modeType = ModeType[modeName as KeysOf<typeof ModeType>];
+					let mode = modeName as StringsKeysOf<typeof ModeType>;
+					let modeType = ModeType[modeName as StringsKeysOf<typeof ModeType>];
 					if (modeType == ModeType.Contest || modeType == ModeType.Guided || modeType == ModeType.NormalLegacy)
 						// This modes should be considered Normal for clear calculations
-						mode = ModeType[ModeType.Normal] as KeysOf<typeof ModeType>;
+						mode = ModeType[ModeType.Normal] as StringsKeysOf<typeof ModeType>;
 					if (modeType == ModeType.Legend || modeType == ModeType.Heroic)
 						// Legend should be considered Master for clear calculations
-						mode = ModeType[ModeType.Master] as KeysOf<typeof ModeType>;
+						mode = ModeType[ModeType.Master] as StringsKeysOf<typeof ModeType>;
 					_mapActivitiesAndModeByHash!.set(m, {
-						Activity: activityName as KeysOf<typeof DestinyActivity>,
-						Mode: mode as KeysOf<typeof ModeType>,
-						UnderlyingMode: modeName as KeysOf<typeof ModeType>,
+						Activity: activityName as StringsKeysOf<typeof DestinyActivity>,
+						Mode: mode as StringsKeysOf<typeof ModeType>,
+						UnderlyingMode: modeName as StringsKeysOf<typeof ModeType>,
 					});
 				})
 			)

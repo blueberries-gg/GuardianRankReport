@@ -22,7 +22,7 @@ import {
 	DestinyInventoryItemDefinition,
 } from "bungie-api-ts/destiny2";
 import { OwnsExpansion } from "../utils/Profiles";
-import { IsDestinyResponseValid, KeysOf, MapSetIntersection, ReorderMap } from "../utils/common";
+import { IsDestinyResponseValid, StringsKeysOf, MapSetIntersection, ReorderMap } from "../utils/common";
 import { IActivityAndMode, IDisplayActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/activities";
 import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
 import { ExactSearchRequest, UserInfoCard, UserSearchPrefixRequest, searchByGlobalNamePost } from "bungie-api-ts/user";
@@ -172,7 +172,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		let TopLeveActivity = currentActivity;
 
 		if (!currentActivity.TopLevel) {
-			activityKey = DestinyActivity[currentActivity.ParentActivity!] as KeysOf<typeof DestinyActivity>;
+			activityKey = DestinyActivity[currentActivity.ParentActivity!] as StringsKeysOf<typeof DestinyActivity>;
 			TopLeveActivity = mapActivities[activityKey];
 		}
 
@@ -182,7 +182,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		if (displayActivity == undefined) {
 			displayActivity = {
 				Activity: activityKey,
-				Completions: new Map<KeysOf<typeof ModeType>, Map<KeysOf<typeof ModeType>, number>>(),
+				Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
 				isActive: mapActivities[activityKey].Type != ActivityType.ScoredNightFall ? mapActivities[activityKey].Active! : false,
 			};
 
@@ -263,23 +263,22 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			}
 
 			if (activityType == ActivityType.Raid || activityType == ActivityType.Dungeon || activityType == ActivityType.ExoticMission) {
-				displayActivity.Completions.set("Normal", new Map<KeysOf<typeof ModeType>, number>());
-				displayActivity.Completions.set("Master", new Map<KeysOf<typeof ModeType>, number>());
+				displayActivity.Completions.set("Normal", new Map<StringsKeysOf<typeof ModeType>, number>());
+				displayActivity.Completions.set("Master", new Map<StringsKeysOf<typeof ModeType>, number>());
 			}
 		}
 		if (currentActivity.TopLevel) {
-			let ModeCompletionMap = displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<KeysOf<typeof ModeType>, number>();
+			let ModeCompletionMap = displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<StringsKeysOf<typeof ModeType>, number>();
 			ModeCompletionMap.set(activityAndMode.UnderlyingMode, ModeCompletionMap.get(activityAndMode.UnderlyingMode) ?? 0 + value);
 			displayActivity.Completions.set(activityAndMode.Mode, ModeCompletionMap);
 			activityCompletions.set(activityKey, displayActivity);
 		} else {
-			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<KeysOf<typeof DestinyActivity>, number>();
+			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<StringsKeysOf<typeof DestinyActivity>, number>();
 			ModeCompletionMap.set(activityAndMode.Activity, ModeCompletionMap.get(activityAndMode.Activity) ?? 0 + value);
 			displayActivity.Completions.set(activityKey, ModeCompletionMap);
 			activityCompletions.set(activityKey, displayActivity);
 		}
 	});
-
 	return activityCompletions;
 };
 
