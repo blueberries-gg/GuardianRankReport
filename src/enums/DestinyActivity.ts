@@ -2,6 +2,8 @@ import { StringsKeysOf } from "../utils/common";
 
 export enum ExoticMissions {
 	Avalon = "Avalon",
+	DualDestiny = "DualDestiny",
+	Excision = "Excision",
 	Harbinger = "Harbinger",
 	Presage = "Presage",
 	SeraphsShield = "SeraphsShield",

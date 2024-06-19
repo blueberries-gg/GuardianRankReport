@@ -86,6 +86,8 @@ export const ScoredNightFallsEn: { [key in keyof typeof ScoredNightFalls]: strin
 };
 export const ExoticMissionsEn: { [key in keyof typeof ExoticMissions]: string } = {
 	Avalon: "//node.ovrd.AVALON//",
+	DualDestiny: "Dual Destiny",
+	Excision: "Excision",
 	Harbinger: "Harbinger",
 	SeraphsShield: "Operation: Seraph's Shield",
 	Presage: "Presage",

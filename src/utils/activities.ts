@@ -537,12 +537,31 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivity } = {
 	Avalon: {
 		Modes: {
-			Normal: [3755529435],
-			Legend: [3083261666],
+			Normal: [3755529435, 509188661],
+			Legend: [3083261666, 3951571983],
 		},
 		Type: ActivityType.ExoticMission,
 		TopLevel: true,
 		Active: false,
+		Free: false,
+	},
+	DualDestiny: {
+		Modes: {
+			Normal:[2162125410]
+		},
+		Type: ActivityType.ExoticMission,
+		TopLevel: true,
+		Active: true,
+		Free: false,
+	},
+	Excision: {
+		Modes: {
+			Grandmaster:[3794571135],
+			Normal: [2657428132, 1512617309]
+		},
+		Type: ActivityType.ExoticMission,
+		TopLevel: true,
+		Active: true,
 		Free: false,
 	},
 	Harbinger: {
@@ -578,8 +597,8 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 	},
 	Starcrossed: {
 		Modes: {
-			Normal: [896748846],
-			Legend: [1013336498],
+			Normal: [896748846, 196691221],
+			Legend: [1013336498, 3214480871],
 		},
 		Type: ActivityType.ExoticMission,
 		TopLevel: true,
