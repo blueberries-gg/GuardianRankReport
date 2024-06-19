@@ -542,7 +542,7 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 		},
 		Type: ActivityType.ExoticMission,
 		TopLevel: true,
-		Active: false,
+		Active: true,
 		Free: false,
 	},
 	DualDestiny: {
@@ -602,7 +602,7 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 		},
 		Type: ActivityType.ExoticMission,
 		TopLevel: true,
-		Active: false,
+		Active: true,
 		Free: false,
 	},
 	TheWhisper: {

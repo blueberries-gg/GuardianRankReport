@@ -98,6 +98,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			DestinyComponentType.Characters,
 			DestinyComponentType.CharacterActivities, // Access to Activities
 			DestinyComponentType.Records, //Emblems and collections
+			DestinyComponentType.SocialCommendations,
 		],
 		destinyMembershipId: destinyMembershipId.toString(),
 		membershipType: membershipType,
