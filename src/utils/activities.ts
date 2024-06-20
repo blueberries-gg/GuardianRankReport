@@ -5,7 +5,6 @@ import { DestinyActivity, Dungeons, ExoticMissions, Raids, ScoredNightFalls } fr
 import { ModeType } from "../enums/ModeType";
 import { StringsKeysOf } from "./common";
 
-
 // Activities as of manifest 226232.24.06.12.1730-3-bnet.55913
 interface _IBaseActivity {
 	Modes: { [key in StringsKeysOf<typeof ModeType>]?: number[] };
@@ -131,6 +130,7 @@ export interface IDisplayActivity {
 	hasSolo?: boolean;
 	hasSoloFlawless?: boolean;
 	isActive: boolean;
+	dataInitialized: boolean;
 }
 
 export const mapDungeons: { [key in keyof typeof Dungeons]: IActivity } = {
@@ -256,8 +256,8 @@ export const mapDungeons: { [key in keyof typeof Dungeons]: IActivity } = {
 export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 	CrotasEnd: {
 		Modes: {
-			Contest: [156253568],
-			/*Superior Swordplay*/ Normal: [4179289725, ],
+			Contest: [156253568] /*Superior Swordplay*/,
+			Normal: [4179289725],
 			Master: [1507509200],
 		},
 		Type: ActivityType.Raid,
@@ -316,8 +316,8 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 
 	KingsFall: {
 		Modes: {
-			Contest: [1063970578],
-			/*Regicide*/ Normal: [1374392663, 2897223272],
+			Contest: [1063970578] /*Regicide*/,
+			 Normal: [1374392663, 2897223272],
 			Master: [2964135793, 3257594522],
 		},
 
@@ -498,8 +498,8 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 
 	VaultOfGlass: {
 		Modes: {
-			Contest: [1485585878],
-			/*Tempo's Edge*/ Guided: [3711931140],
+			Contest: [1485585878] /*Tempo's Edge*/ ,
+			Guided: [3711931140],
 			Normal: [3881495763],
 			Master: [1681562271, 3022541210],
 		},
@@ -548,7 +548,7 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 	},
 	DualDestiny: {
 		Modes: {
-			Normal:[2162125410]
+			Normal: [2162125410],
 		},
 		Type: ActivityType.ExoticMission,
 		TopLevel: true,
@@ -557,8 +557,8 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 	},
 	Excision: {
 		Modes: {
-			Grandmaster:[3794571135],
-			Normal: [2657428132, 1512617309]
+			Grandmaster: [3794571135],
+			Normal: [2657428132, 1512617309],
 		},
 		Type: ActivityType.ExoticMission,
 		TopLevel: true,

@@ -20,7 +20,7 @@ export const DungeonsEn: { [key in keyof typeof Dungeons]: string } = {
 	GraspOfAvarice: "Grasp Of Avarice",
 	PitOfHeresy: "Pit Of Heresy",
 	Prophecy: "Prophecy",
-	SpireOfTheWatcher: "SpireOfTheWatcher",
+	SpireOfTheWatcher: "Spire Of The Watcher",
 	TheShatteredThrone: "The Shattered Throne",
 	WarlordsRuin: "Warlord's Ruin",
 };
