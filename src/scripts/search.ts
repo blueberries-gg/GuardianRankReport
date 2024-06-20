@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
 		let users = await GetPlayerInformation(inputUsername?.value || "");
 		playerSearchLoading!.style.visibility = "collapse";
 		users.sort((x, y) => x.name.localeCompare(y.name));
-		if (users.length == 1) {
+		if (users.length === 1) {
 			const params = new URLSearchParams();
 			params.set("id", users[0].bungieNetMembershipId);
 			params.set("type", users[0].membershipType.toString());

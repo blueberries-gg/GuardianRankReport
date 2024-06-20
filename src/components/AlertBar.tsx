@@ -1,14 +1,14 @@
+import { useStore } from "@nanostores/solid";
 import { mergeProps } from "solid-js";
-interface Props {
-	title: string;
-	body: string;
-  show: boolean;
-}
+import { healthStatusReason, healthStatus, DestinyEnabled, healthStatusTitle } from "../stores/destinyPlayerData";
 
-export default function(props: Props) {
-  const merged = mergeProps({ title: "", body: "", show:false }, props);
+export default function() {
+	const $healthStatusReason = useStore(healthStatusReason);
+	const $healthStatus = useStore(healthStatus);
+	const $DestinyEnabled = useStore(DestinyEnabled);
+	const $healthStatusTitle = useStore(healthStatusTitle);
 
-  return <dialog open={merged.show}>
-    {merged.title} {merged.body}
+  return <dialog open={!$healthStatus() || !$DestinyEnabled()}>
+    {$healthStatusTitle()} {$healthStatusReason()}
       </dialog>
 }

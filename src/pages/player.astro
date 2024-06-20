@@ -3,45 +3,13 @@ import { useStore } from "@nanostores/solid";
 import PlayerBadge from "../components/PlayerBadge.astro";
 import SearchBar from "../components/SearchBar.astro";
 import Layout from "../layouts/Layout.astro";
+import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } from "../components/DisplayActivities.tsx";
 ---
 
 <Layout title="Guardian Rank Report">
 	<script>
 		import { GetInformationForMember } from "../stores/destinyPlayerData";
-		import { BungieMembershipType } from "bungie-api-ts/destiny2";
-		import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
-		import { KeysOf } from "../utils/common";
-		import { IDisplayActivity, mapActivities, mapDungeons, mapRaids, mapScoredNightFalls, mapExoticMissions } from "../utils/activities";
-		import { ActivityType } from "../enums/ActivityType";
-		import { ModeType } from "../enums/ModeType";
-		import { Raids } from "../enums/DestinyActivity";
-		import { Dungeons } from "../enums/DestinyActivity";
-		import { ExoticMissions } from "../enums/DestinyActivity";
-		import { ScoredNightFalls } from "../enums/DestinyActivity";
 
-		function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) {
-			let displayActivitiesStrings: string[] = [];
-			displayActivities.forEach((displayActivity) => {
-				let details = `${activitiesEN[displayActivity.Activity]}\n`;
-				if (displayActivity.hasSeal != undefined) details += `Seal ${displayActivity.hasSeal}\n`;
-
-				if (displayActivity.hasSoloFlawless != undefined) details += `Solo Flawless ${displayActivity.hasSoloFlawless}\n`;
-				if (displayActivity.hasSolo != undefined) details += `Solo ${displayActivity.hasSolo}\n`;
-				if (displayActivity.hasFlawless != undefined) details += `Flawless ${displayActivity.hasFlawless}\n`;
-
-				if (displayActivity.UncompleteObjectives != undefined)
-					details += `Pending ${displayActivity.UncompleteObjectives.length} of ${mapActivities[displayActivity.Activity].SealObjectives?.length}\n`;
-				displayActivity.Completions.forEach((contributors, mode) => {
-					if (contributors.size >= 1) {
-						if (Object.values(ModeType).includes(mode)) details += `${ModeTypeEN[mode as KeysOf<typeof ModeType>]}\n`;
-						details += `Completions: ${Array.from(contributors.values()).reduce((p, a) => p + a, 0)}\nContributors: ${JSON.stringify(Object.fromEntries(contributors))}\n`;
-					}
-				});
-				displayActivitiesStrings.push(details);
-			});
-			//displayActivitiesStrings.map((x) => console.log(x));
-			return displayActivitiesStrings;
-		}
 		window.addEventListener("DOMContentLoaded", async () => {
 			const url = new URL(window.location.href);
 			const params = new URLSearchParams(url.search);
@@ -49,53 +17,28 @@ import Layout from "../layouts/Layout.astro";
 			const membershipTypeName = "type";
 			const bungieNetMembershipId = params.get(bungieNetMembershipIdName);
 			const membershipType = params.get(membershipTypeName);
-
-			let activityCompletions = await GetInformationForMember(bungieNetMembershipId!, parseInt(membershipType!));
-			let activityCompletionsArray = Array.from(activityCompletions.values());
-			// .sort((x, y) => x.Activity.localeCompare(y.Activity))
-			// .sort((x, y) => mapActivities[x.Activity].Type - mapActivities[y.Activity].Type);
-
-			document.querySelector<HTMLInputElement>(`#raids`)!.value = GetPrintableActivityInfo(
-				activityCompletionsArray
-					.filter((x) => mapRaids[x.Activity as KeysOf<typeof Raids>]?.Type !== undefined)
-					.sort((x, y) => x.Activity.localeCompare(y.Activity))
-			).join("\n");
-			document.querySelector<HTMLInputElement>(`#dungeons`)!.value = GetPrintableActivityInfo(
-				activityCompletionsArray
-					.filter((x) => mapDungeons[x.Activity as KeysOf<typeof Dungeons>]?.Type !== undefined)
-					.sort((x, y) => x.Activity.localeCompare(y.Activity))
-			).join("\n");
-			document.querySelector<HTMLInputElement>(`#exoticMissions`)!.value = GetPrintableActivityInfo(
-				activityCompletionsArray
-					.filter((x) => mapExoticMissions[x.Activity as KeysOf<typeof ExoticMissions>]?.Type !== undefined)
-					.sort((x, y) => x.Activity.localeCompare(y.Activity))
-			).join("\n");
-			document.querySelector<HTMLInputElement>(`#gms`)!.value = GetPrintableActivityInfo(
-				activityCompletionsArray
-					.filter((x) => mapScoredNightFalls[x.Activity as KeysOf<typeof ScoredNightFalls>]?.Type !== undefined)
-					.sort((x, y) => x.Activity.localeCompare(y.Activity))
-			).join("\n");
+			GetInformationForMember(bungieNetMembershipId!, parseInt(membershipType!));
 		});
 	</script>
 	<main>
 		<SearchBar />
 		<PlayerBadge />
-		<div style="display: flex;color:white">
-			<div style="height: 93vh; width:34vw; display: flex; flex-direction:column">
-				<label for="raids">Raids</label>
-				<textarea id="raids" style="height: 100%;"></textarea>
+		<div style="color:white; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif">
+			<div style="display: flex; flex-direction:column">
+				<h1>Raids</h1>
+				<SolidRaids client:load />
 			</div>
-			<div style="height: 93vh; width:22vw; display: flex; flex-direction:column">
-				<label for="dungeons">Dungeons</label>
-				<textarea id="dungeons" style="height: 100%;"></textarea>
+			<div style="display: flex; flex-direction:column">
+				<h1>Dungeons</h1>
+				<SolidDungeons client:load />
 			</div>
-			<div style="height: 93vh; width:22vw; display: flex; flex-direction:column">
-				<label for="exoticMissions">Exotic Missions</label>
-				<textarea id="exoticMissions" style="height: 100%;"></textarea>
+			<div style="display: flex; flex-direction:column">
+				<h1>Exotic Missions</h1>
+				<SolidExoticMissions client:load />
 			</div>
-			<div style="height: 93vh; width:22vw; display: flex; flex-direction:column">
-				<label for="gms">GM's</label>
-				<textarea id="gms" style="height: 100%;"></textarea>
+			<div style="display: flex; flex-direction:column">
+				<h1>GM's</h1>
+				<SolidGrandMasters client:load />
 			</div>
 		</div>
 	</main>

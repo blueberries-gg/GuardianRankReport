@@ -103,7 +103,7 @@ interface _IActivityScoredNightfall extends _IBaseActivity {
 	FlawlessHash?: never;
 }
 
-type IActivity =
+export type IActivity =
 	| _IActivityGenericSeal
 	| _IActivityRaidWithSeal
 	| _IActivityDungeonWithSeal
@@ -120,6 +120,7 @@ export interface IActivityAndMode {
 
 export interface IDisplayActivity {
 	Activity: keyof typeof DestinyActivity;
+	Type: keyof typeof ActivityType;
 	Completions: Map<
 		StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>,
 		Map<StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>, number>
@@ -951,10 +952,10 @@ function _getMapActivitesAndModeByHash(activitiesFilter: { [key in keyof typeof 
 				modeHashes!.forEach((m) => {
 					let mode = modeName as StringsKeysOf<typeof ModeType>;
 					let modeType = ModeType[modeName as StringsKeysOf<typeof ModeType>];
-					if (modeType == ModeType.Contest || modeType == ModeType.Guided || modeType == ModeType.NormalLegacy)
+					if (modeType === ModeType.Contest || modeType === ModeType.Guided || modeType === ModeType.NormalLegacy)
 						// This modes should be considered Normal for clear calculations
 						mode = ModeType[ModeType.Normal] as StringsKeysOf<typeof ModeType>;
-					if (modeType == ModeType.Legend || modeType == ModeType.Heroic)
+					if (modeType === ModeType.Legend || modeType === ModeType.Heroic)
 						// Legend should be considered Master for clear calculations
 						mode = ModeType[ModeType.Master] as StringsKeysOf<typeof ModeType>;
 					_mapActivitiesAndModeByHash!.set(m, {

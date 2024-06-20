@@ -4,8 +4,8 @@ interface Props {
 }
 
 const { title } = Astro.props;
-import { StatusBar } from "../components/StatusBar";
-import {GetPlayerInformation} from "../stores/destinyPlayerData"
+import AlertBar from "../components/AlertBar";
+import { GetPlayerInformation } from "../stores/destinyPlayerData";
 ---
 
 <!doctype html>
@@ -19,7 +19,7 @@ import {GetPlayerInformation} from "../stores/destinyPlayerData"
 		<title>{title}</title>
 	</head>
 	<body>
-		<StatusBar client:only="solid"/>
+		<AlertBar client:only="solid" />
 		<slot />
 	</body>
 </html>
@@ -28,12 +28,7 @@ import {GetPlayerInformation} from "../stores/destinyPlayerData"
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
 	}
 	html {
 		background: #13151a;

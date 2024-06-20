@@ -1,5 +1,3 @@
-import { StringsKeysOf } from "../utils/common";
-
 export enum ExoticMissions {
 	Avalon = "Avalon",
 	DualDestiny = "DualDestiny",
@@ -11,7 +9,7 @@ export enum ExoticMissions {
 	TheWhisper = "TheWhisper",
 	VoxObscura = "VoxObscura",
 	ZeroHour = "ZeroHour",
-} 
+}
 export enum Raids {
 	CrotasEnd = "CrotasEnd",
 	CrownOfSorrow = "CrownOfSorrow",
@@ -53,7 +51,7 @@ export enum ScoredNightFalls {
 	Broodhold = "Broodhold",
 	DefiantBattlegroundCosmodrome = "DefiantBattlegroundCosmodrome",
 	DefiantBattlegroundEDZ = "DefiantBattlegroundEDZ",
-	DefiantBattlegroundOrbitalPrison= "DefiantBattlegroundOrbitalPrison",
+	DefiantBattlegroundOrbitalPrison = "DefiantBattlegroundOrbitalPrison",
 	ExodusCrash = "ExodusCrash",
 	FallenSABER = "FallenSABER",
 	HeistBattlegroundEuropa = "HeistBattlegroundEuropa",
@@ -83,6 +81,18 @@ export enum ScoredNightFalls {
 	WardenOfNothing = "WardenOfNothing",
 }
 
+export const ActiveScoredNightFalls = [
+	ScoredNightFalls.TheGlassway as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.WardenOfNothing as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.TheDisgraced as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.FallenSABER as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.Liminality as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.ExodusCrash as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.DefiantBattlegroundCosmodrome as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.TheInsightTerminus as keyof typeof ScoredNightFalls,
+	ScoredNightFalls.TheDevilsLair as keyof typeof ScoredNightFalls,
+];
+
 export const DestinyActivity = {
 	...Dungeons,
 	...Raids,
@@ -90,7 +100,7 @@ export const DestinyActivity = {
 	...ExoticMissions,
 };
 
-export type DestinyActivity = Dungeons | Raids | ScoredNightFalls | ExoticMissions ;
+export type DestinyActivity = Dungeons | Raids | ScoredNightFalls | ExoticMissions;
 
 //export const DestinyActivity = { ...ExoticMissions, ...Raids, ...Dungeons, ...ScoredNightFalls };
 //export const DestinyActivity = Object.assign({}, ExoticMissions, Raids, Dungeons, ScoredNightFalls); // also work

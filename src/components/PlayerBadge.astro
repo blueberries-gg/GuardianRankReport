@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 
 <div
 	id="playerBadge"
-	style=`height:96px; margin:10px 20px; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; user-select: none; aspect-ratio : 474/96; background-image:url(${unavailableSecondaryIcon.src}); min-width: 0;`>
+	style=`background-repeat: no-repeat; height:96px; margin:10px 20px; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; user-select: none; aspect-ratio : 474/96; background-image:url(${unavailableSecondaryIcon.src}); min-width: 0;`>
 	<div id="playerBadgeContent" style="height:100%; margin-left: 87px; margin-right: 3px; display: flex;  flex-direction: column;">
 		<div style="min-width: 0; max-width: fit-content; user-select: all; padding: 0 10px; margin: 0 -10px;"
 			><span id="badgeFullName" title="guardian#-1" style="font-size: 20pt; display: flex; user-select: text;"
@@ -156,31 +156,30 @@ import { Icon } from "astro-icon/components";
 	import { ranksEN } from "../utils/enumStrings";
 
 	// Listen to changes in the store, and show/hide the dialog accordingly
-	CurrentPlayerProfile.subscribe((profile) => {
-		if (profile.hasInfo) {
-			document.getElementById("playerBadge")!.style.backgroundImage = `url(${BASE_BUNGIE_URL}${profile.character.emblemBackgroundPath})`;
+	CurrentPlayerProfile.subscribe((profile, _, changedKey) => {
+		if (changedKey === "info") {
+			document.getElementById("playerBadge")!.style.backgroundImage = `url(${BASE_BUNGIE_URL}${profile.info.LatestCharacter.emblemBackgroundPath})`;
 
-			document.getElementById("badgeName")!.innerHTML = profile.info.bungieGlobalDisplayName;
-			document.getElementById("badgeCode")!.innerHTML = `${("000" + profile.info.bungieGlobalDisplayNameCode).slice(-4)}`;
+			document.getElementById("badgeName")!.innerHTML = profile.info.UserCard.bungieGlobalDisplayName;
+			document.getElementById("badgeCode")!.innerHTML = `${("000" + profile.info.UserCard.bungieGlobalDisplayNameCode).slice(-4)}`;
 			document.getElementById("badgeFullName")!.title =
-				`${profile.info.bungieGlobalDisplayName}#${("000" + profile.info.bungieGlobalDisplayNameCode).slice(-4)}`;
+				`${profile.info.UserCard.bungieGlobalDisplayName}#${("000" + profile.info.UserCard.bungieGlobalDisplayNameCode).slice(-4)}`;
 
-			GetDestinyInventoryItemDefinitionEntityDefinition(profile.character.emblemHash).then(
+			GetDestinyInventoryItemDefinitionEntityDefinition(profile.info.LatestCharacter.emblemHash).then(
 				(r) => (document.getElementById("playerBadge")!.title = r?.displayProperties.name ?? "Unknwon Emblem")
 			);
-			document.getElementById(`actualRank${profile.renewedGuardianRank}`)!.style.display = "flex";
-			document.getElementById("actualBadgeRankText")!.innerHTML = document.getElementById("acualBadgeRank")!.title = ranksEN[profile.renewedGuardianRank];
+			document.getElementById(`actualRank${profile.info.RenewedGuardianRank}`)!.style.display = "flex";
+			document.getElementById("actualBadgeRankText")!.innerHTML = document.getElementById("acualBadgeRank")!.title =
+				ranksEN[profile.info.RenewedGuardianRank];
 			document.getElementById("badgeRankSeparatorCurrent")!.style.visibility = "visible";
 
-			document.getElementById(`rank${profile.currentGuardianRank}`)!.style.display = "flex";
-			document.getElementById("badgeRankText")!.innerHTML = document.getElementById("badgeRank")!.title = ranksEN[profile.currentGuardianRank];
+			document.getElementById(`rank${profile.info.CurrentGuardianRank}`)!.style.display = "flex";
+			document.getElementById("badgeRankText")!.innerHTML = document.getElementById("badgeRank")!.title = ranksEN[profile.info.CurrentGuardianRank];
 			document.getElementById("badgeRankSeparator")!.style.visibility = "visible";
 
-			document.getElementById(`highestRank${profile.lifetimeHighestGuardianRank}`)!.style.display = "flex";
+			document.getElementById(`highestRank${profile.info.LifetimeHighestGuardianRank}`)!.style.display = "flex";
 			document.getElementById("highestBadgeRankText")!.innerHTML = document.getElementById("highestBadgeRank")!.title =
-				ranksEN[profile.lifetimeHighestGuardianRank];
-
-			console.log(profile);
+				ranksEN[profile.info.LifetimeHighestGuardianRank];
 		}
 	});
 </script>
