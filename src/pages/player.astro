@@ -23,23 +23,42 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 	<main>
 		<SearchBar />
 		<PlayerBadge />
-		<div style="color:white; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif">
-			<div style="display: flex; flex-direction:column">
+		<div class="content">
+		<div style="color:white; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-direction: column;">
+			<div style="display: flex; flex-direction:column; margin: auto">
 				<h1>Raids</h1>
 				<SolidRaids client:load />
 			</div>
-			<div style="display: flex; flex-direction:column">
+			<div style="display: flex; flex-direction:column; margin: auto">
 				<h1>Dungeons</h1>
 				<SolidDungeons client:load />
 			</div>
-			<div style="display: flex; flex-direction:column">
+			<div style="display: flex; flex-direction:column; margin: auto">
 				<h1>Exotic Missions</h1>
 				<SolidExoticMissions client:load />
 			</div>
-			<div style="display: flex; flex-direction:column">
+			<div style="display: flex; flex-direction:column; margin: auto">
 				<h1>GM's</h1>
 				<SolidGrandMasters client:load />
 			</div>
-		</div>
+		</div></div>
 	</main>
 </Layout>
+
+
+<style>
+	main {
+		margin: auto;
+		width: 800px;
+		max-width: 100%;
+	}
+	.content {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+</style>
