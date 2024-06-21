@@ -309,7 +309,8 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		}
 		activityCompletions.set(activityKey, displayActivity);
 	});
-	activityCompletions.forEach((displayActivity,key) => {
+	CurrentPlayerProfile.setKey("activities", activityCompletions);
+	activityCompletions.forEach((displayActivity,) => {
 		if (displayActivity.dataInitialized == false) {
 			let activityKey = displayActivity.Activity;
 			const currentActivity = mapActivities[activityKey];
@@ -340,9 +341,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			}
 			displayActivity.dataInitialized = true;
 		}
-		activityCompletions.set(key, displayActivity)
 	})
-	CurrentPlayerProfile.setKey("activities", activityCompletions);
 	return activityCompletions;
 };
 

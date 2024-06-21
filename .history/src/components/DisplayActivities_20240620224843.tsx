@@ -6,9 +6,6 @@ import { DestinyActivity } from "../enums/DestinyActivity";
 import { IDisplayActivity, mapActivities } from "../utils/activities";
 import { activitiesEN } from "../utils/enumStrings";
 import { BASE_BUNGIE_URL } from "../utils/common";
-import complete from "../resources/complete.png";
-import missing from "../resources/missing.png";
-
 
 let element: Element;
 // function FilterTypeActive(activities: Map<keyof typeof DestinyActivity, IDisplayActivity>, activityType: ActivityType, active: boolean) {
@@ -38,10 +35,10 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th></th>
 					<th></th>
 					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Solo</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Solo Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;"></th>
+					<th style="text-align: center; vertical-align: middle;">Solo</th>
+					<th style="text-align: center; vertical-align: middle;">Flawless</th>
+					<th style="text-align: center; vertical-align: middle;">Solo Flawless</th>
+					<th style="text-align: center; vertical-align: middle;"></th>
 				</tr>
 			);
 		case ActivityType.ExoticMission:
@@ -58,8 +55,8 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th></th>
 					<th></th>
 					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;"></th>
+					<th style="text-align: center; vertical-align: middle;">Flawless</th>
+					<th style="text-align: center; vertical-align: middle;"></th>
 				</tr>
 			);
 		case ActivityType.ScoredNightFall:
@@ -82,10 +79,10 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 			<td>
 				<Show when={mapActivities[props.item.Activity].SoloHash !== undefined}>
 					<Show when={props.item.hasSolo == false}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:red"></div>
 					</Show>
 					<Show when={props.item.hasSolo == true}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:green"></div>
 					</Show>
 					<Show when={props.item.hasSolo == undefined}>
 						<div style="margin: auto; width: fit-content;">
@@ -97,10 +94,10 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 			<td>
 				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
 					<Show when={props.item.hasFlawless == false}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:red"></div>
 					</Show>
 					<Show when={props.item.hasFlawless == true}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:green"></div>
 					</Show>
 					<Show when={props.item.hasFlawless == undefined}>
 						<div style="margin: auto; width: fit-content;">
@@ -112,10 +109,10 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 			<td>
 				<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
 					<Show when={props.item.hasSoloFlawless == false}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:red"></div>
 					</Show>
 					<Show when={props.item.hasSoloFlawless == true}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:green"></div>
 					</Show>
 					<Show when={props.item.hasSoloFlawless == undefined}>
 						<div style="margin: auto; width: fit-content;">
@@ -125,12 +122,12 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 				</Show>
 			</td>
 			<td>
-				<Show when={mapActivities[props.item.Activity].SealHash !== undefined}>
-					<Show when={props.item.hasSeal == false && mapActivities[props.item.Activity].Active == true}>
-						<img style="width:25px; vertical-align: middle;" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealIncompleteImage}`} title={`${props.item.IncompleteObjectives?.length ?? -1} triumphs missing`}></img>
+				<Show when={mapActivities[props.item.Activity].SealHash !== undefined && mapActivities[props.item.Activity].Active == true}>
+					<Show when={props.item.hasSeal == false}>
+						<img style="width:25px" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealIncompleteImage}`} title={`${props.item.IncompleteObjectives?.length ?? -1} triumphs missing`}></img>
 					</Show>
 					<Show when={props.item.hasSeal == true}>
-						<img style="width:25px; vertical-align: middle;" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealCompleteImage}`} title="Seal Acquired!"></img>
+						<img style="width:25px" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealCompleteImage}`} title="Seal Acquired!"></img>
 					</Show>
 					<Show when={props.item.hasSeal == undefined}>
 						<div style="margin: auto; width: fit-content;">
@@ -151,10 +148,10 @@ function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
 			<td>
 				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
 					<Show when={props.item.hasFlawless == false}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:red"></div>
 					</Show>
 					<Show when={props.item.hasFlawless == true}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+						<div style="margin: auto; height: 10px;;width: 10px; background:green"></div>
 					</Show>
 					<Show when={props.item.hasFlawless === undefined}>
 						<div style="margin: auto; width: fit-content;">
@@ -164,13 +161,12 @@ function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
 				</Show>
 			</td>
 			<td>
-				<Show when={mapActivities[props.item.Activity].SealHash !== undefined}>
-					<Show when={props.item.hasSeal == false && mapActivities[props.item.Activity].Active == true}>
-						<img style="width:25px; vertical-align: middle;" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealIncompleteImage}`} title={`${props.item.IncompleteObjectives?.length ?? -1} triumphs missing`}></img>
+				<Show when={mapActivities[props.item.Activity].SealHash !== undefined && mapActivities[props.item.Activity].Active == true}>
+					<Show when={props.item.hasSeal == false}>
+						<img style="width:25px" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealIncompleteImage}`} title={`${props.item.IncompleteObjectives?.length ?? -1} triumphs missing`}></img>
 					</Show>
 					<Show when={props.item.hasSeal == true}>
-
-						<img style="width:25px; vertical-align: middle;" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealCompleteImage}`} title="Seal Acquired!"></img>
+						<img style="width:25px" src={`${BASE_BUNGIE_URL}${mapActivities[props.item.Activity].SealCompleteImage}`} title="Seal Acquired!"></img>
 					</Show>
 					<Show when={props.item.hasSeal == undefined}>
 						<div style="margin: auto; width: fit-content;">

@@ -1,3 +1,26 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "cSpell.words": [
+        "astro",
+        "Atraks",
+        "bnet",
+        "Broodhold",
+        "Bungie",
+        "Cosmodrome",
+        "Crota",
+        "Crotas",
+        "Glassway",
+        "Justicar",
+        "Lightblade",
+        "Liminality",
+        "nanostores",
+        "Nezarec",
+        "ovrd",
+        "Phanteon",
+        "Rhulk",
+        "Savathûn's",
+        "Savathuns",
+        "Starcrossed",
+        "Unranked"
+    ]
 }

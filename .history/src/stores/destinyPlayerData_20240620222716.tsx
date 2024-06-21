@@ -190,7 +190,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 	const activityCompletions: Map<keyof typeof DestinyActivity, IDisplayActivity> = new Map(emptyDisplayActivities);
 
 	aggregateActivities.forEach((value, key) => {
-		if (value === 0) return;
+		//if (value === 0) return;
 
 		const activityAndMode = mapActivitiesAndModeByHash.get(key)!;
 		let activityKey = activityAndMode.Activity;
@@ -201,7 +201,6 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			activityKey = DestinyActivity[currentActivity.ParentActivity!] as StringsKeysOf<typeof DestinyActivity>;
 			TopLevelActivity = mapActivities[activityKey];
 		}
-
 
 		let displayActivity = activityCompletions.get(activityKey);
 		const activityType = mapActivities[activityAndMode.Activity].Type;
@@ -299,7 +298,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			displayActivity.dataInitialized = true;
 		}
 		if (currentActivity.TopLevel) {
-			const ModeCompletionMap = displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<StringsKeysOf<typeof ModeType>, number>();
+			const ModeCompletionMap =  displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<StringsKeysOf<typeof ModeType>, number>();
 			ModeCompletionMap.set(activityAndMode.UnderlyingMode, (ModeCompletionMap.get(activityAndMode.UnderlyingMode) ?? 0) + value);
 			displayActivity.Completions.set(activityAndMode.Mode, ModeCompletionMap);
 		} else {
@@ -309,39 +308,6 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		}
 		activityCompletions.set(activityKey, displayActivity);
 	});
-	activityCompletions.forEach((displayActivity,key) => {
-		if (displayActivity.dataInitialized == false) {
-			let activityKey = displayActivity.Activity;
-			const currentActivity = mapActivities[activityKey];
-			let TopLevelActivity = currentActivity;
-
-			if (!currentActivity.TopLevel) {
-				activityKey = DestinyActivity[currentActivity.ParentActivity!] as StringsKeysOf<typeof DestinyActivity>;
-				TopLevelActivity = mapActivities[activityKey];
-			}
-			if (TopLevelActivity.SealHash != undefined) {
-				displayActivity.hasSeal = false;
-			}
-
-			if (TopLevelActivity.FlawlessHash != undefined) {
-				displayActivity.hasFlawless = false
-			}
-
-			if (TopLevelActivity.SoloFlawlessHash != undefined) {
-				displayActivity.hasSoloFlawless = false;
-			}
-
-			if (TopLevelActivity.SoloHash != undefined) {
-				displayActivity.hasSolo = false;
-			}
-
-			if (TopLevelActivity.SealObjectives != undefined) {
-				displayActivity.IncompleteObjectives = TopLevelActivity.SealObjectives;
-			}
-			displayActivity.dataInitialized = true;
-		}
-		activityCompletions.set(key, displayActivity)
-	})
 	CurrentPlayerProfile.setKey("activities", activityCompletions);
 	return activityCompletions;
 };

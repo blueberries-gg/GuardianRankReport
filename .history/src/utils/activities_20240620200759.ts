@@ -98,6 +98,7 @@ interface _IActivityExoticMission extends _IBaseActivity {
 	SubActivities?: never;
 	Active: boolean;
 	Free: boolean;
+
 	SealHash?: never;
 	SealObjectives?: never;
 	SoloHash?: never;
@@ -163,6 +164,7 @@ export const mapDungeons: { [key in keyof typeof Dungeons]: IActivity } = {
 		FlawlessHash: 1506696941,
 		Active: true,
 		Free: false,
+
 	},
 
 	GhostsOfTheDeep: {
@@ -352,6 +354,7 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 			Normal: [1374392663, 2897223272],
 			Master: [2964135793, 3257594522],
 		},
+
 		Type: ActivityType.Raid,
 		TopLevel: true,
 		PresentationNode: 2613142083,
@@ -389,11 +392,14 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 	Leviathan: {
 		Modes: {
 			Normal: [2693136600, 2693136601, 2693136602, 2693136603, 2693136604, 2693136605],
+
 			Prestige: [
 				1685065161, 1800508819, 2449714930, 3446541099, 3857338478, 3879860661, 3912437239, 417231112, 4206123728, 508802457, 757116822, 771164842,
 			],
+
 			Guided: [1699948563, 1875726950, 287649202, 3916343513, 4039317196, 89727599],
 		},
+
 		Type: ActivityType.Raid,
 		TopLevel: true,
 		Active: false,

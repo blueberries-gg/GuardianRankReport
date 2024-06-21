@@ -38,10 +38,10 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th></th>
 					<th></th>
 					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Solo</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Flawless</th>
+					<th style="text-align: center; vertical-align: middle;">Solo</th>
+					<th style="text-align: center; vertical-align: middle;">Flawless</th>
 					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Solo Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;"></th>
+					<th style="text-align: center; vertical-align: middle;"></th>
 				</tr>
 			);
 		case ActivityType.ExoticMission:
@@ -58,8 +58,8 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th></th>
 					<th></th>
 					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;"></th>
+					<th style="text-align: center; vertical-align: middle;">Flawless</th>
+					<th style="text-align: center; vertical-align: middle;"></th>
 				</tr>
 			);
 		case ActivityType.ScoredNightFall:
