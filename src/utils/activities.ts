@@ -124,7 +124,7 @@ export interface IDisplayActivity {
 		StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>,
 		Map<StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>, number>
 	>;
-	UncompleteObjectives?: number[];
+	IncompleteObjectives?: number[];
 	hasSeal?: boolean;
 	hasFlawless?: boolean;
 	hasSolo?: boolean;
@@ -243,7 +243,6 @@ export const mapDungeons: { [key in keyof typeof Dungeons]: IActivity } = {
 		},
 		Type: ActivityType.Dungeon,
 		TopLevel: true,
-
 		SealHash: 1142693639,
 		SealObjectives: [131896889, 2905044529, 1631738192, 2093999292, 588582033, 4010412130, 822588172, 4288088327, 2438176321, 1342446533],
 		SoloHash: 2905044529,
@@ -944,14 +943,14 @@ export const mapActivities: { [key in keyof typeof DestinyActivity]: IActivity }
 
 let _mapActivitiesAndModeByHash: Map<number, IActivityAndMode> | undefined = undefined;
 
-function _getMapActivitesAndModeByHash(activitiesFilter: { [key in keyof typeof DestinyActivity]: IActivity }) {
+function _getMapActivitiesAndModeByHash(activitiesFilter: { [key in keyof typeof DestinyActivity]: IActivity }) {
 	if (_mapActivitiesAndModeByHash == undefined) {
 		_mapActivitiesAndModeByHash = new Map<number, IActivityAndMode>();
 		Object.entries(activitiesFilter).flatMap(([activityName, activity]) =>
 			Object.entries(activity.Modes).flatMap(([modeName, modeHashes]) =>
 				modeHashes!.forEach((m) => {
 					let mode = modeName as StringsKeysOf<typeof ModeType>;
-					let modeType = ModeType[modeName as StringsKeysOf<typeof ModeType>];
+					const modeType = ModeType[mode];
 					if (modeType === ModeType.Contest || modeType === ModeType.Guided || modeType === ModeType.NormalLegacy)
 						// This modes should be considered Normal for clear calculations
 						mode = ModeType[ModeType.Normal] as StringsKeysOf<typeof ModeType>;
@@ -970,4 +969,4 @@ function _getMapActivitesAndModeByHash(activitiesFilter: { [key in keyof typeof 
 	return _mapActivitiesAndModeByHash;
 }
 
-export const mapActivitiesAndModeByHash: Map<number, IActivityAndMode> = _getMapActivitesAndModeByHash(mapActivities);
+export const mapActivitiesAndModeByHash: Map<number, IActivityAndMode> = _getMapActivitiesAndModeByHash(mapActivities);

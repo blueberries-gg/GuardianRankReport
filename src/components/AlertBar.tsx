@@ -1,5 +1,4 @@
 import { useStore } from "@nanostores/solid";
-import { mergeProps } from "solid-js";
 import { healthStatusReason, healthStatus, DestinyEnabled, healthStatusTitle } from "../stores/destinyPlayerData";
 
 export default function() {

@@ -3,7 +3,7 @@ import { navigate } from "astro:transitions/client";
 
 window.addEventListener("DOMContentLoaded", () => {
 	const inputUsername = document.querySelector<HTMLInputElement>(`#searchInputUsername`);
-	const buttonUsernname = document.querySelector<HTMLInputElement>(`#searchButtontUsername`);
+	const buttonUsername = document.querySelector<HTMLInputElement>(`#searchButtonUsername`);
 	const listUsernames = document.querySelector<HTMLInputElement>(`#players`);
 	const playerSearchLoading = document.querySelector<HTMLElement>(`#playerSearchLoading`);
 
@@ -14,17 +14,17 @@ window.addEventListener("DOMContentLoaded", () => {
 	const query = params.get(queryParamName);
 
 	inputUsername?.addEventListener("keyup", (e) => {
-		if (e.key === "Enter") buttonUsernname?.dispatchEvent(new Event("click", { bubbles: true }));
+		if (e.key === "Enter") buttonUsername?.dispatchEvent(new Event("click", { bubbles: true }));
 	});
-	inputUsername?.addEventListener("input", (e) => {
-		var inputSelection = document.querySelector<HTMLOptionElement>(`#players option[value='${inputUsername.value}']`)?.text;
+	inputUsername?.addEventListener("input", () => {
+		const inputSelection = document.querySelector<HTMLOptionElement>(`#players option[value='${inputUsername.value}']`)?.text;
 		if (inputSelection != undefined) {
 			navigate(inputSelection);
 		}
 	});
-	buttonUsernname?.addEventListener("click", async (e) => {
+	buttonUsername?.addEventListener("click", async () => {
 		playerSearchLoading!.style.visibility = "visible";
-		let users = await GetPlayerInformation(inputUsername?.value || "");
+		const users = await GetPlayerInformation(inputUsername?.value || "");
 		playerSearchLoading!.style.visibility = "collapse";
 		users.sort((x, y) => x.name.localeCompare(y.name));
 		if (users.length === 1) {
@@ -35,9 +35,9 @@ window.addEventListener("DOMContentLoaded", () => {
 		} else {
 			if (listUsernames?.hasChildNodes()) listUsernames.replaceChildren();
 			users.forEach(function (item) {
-				let option = document.createElement("option");
+				const option = document.createElement("option");
 
-				let params = new URLSearchParams();
+				const params = new URLSearchParams();
 				params.set("id", item.bungieNetMembershipId);
 				params.set("type", item.membershipType.toString());
 

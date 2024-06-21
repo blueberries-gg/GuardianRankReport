@@ -1,4 +1,4 @@
-import { atom, map, MapStore, WritableAtom } from "nanostores";
+import { atom, map, MapStore } from "nanostores";
 import {
 	BungieMembershipType,
 	DestinyComponentType,
@@ -6,11 +6,7 @@ import {
 	DestinyProfileResponse,
 	HttpClientConfig,
 	ServerResponse,
-	HttpClient,
-	getDestinyManifest,
-	DestinyGameVersions,
 	getHistoricalStatsForAccount,
-	DestinyHistoricalStatsPerCharacter,
 	DestinyStatsGroupType,
 	DestinyHistoricalStatsAccountResult,
 	getDestinyAggregateActivityStats,
@@ -21,10 +17,8 @@ import {
 	getDestinyEntityDefinition,
 	DestinyInventoryItemDefinition,
 } from "bungie-api-ts/destiny2";
-import { OwnsExpansion } from "../utils/Profiles";
-import { IsDestinyResponseValid, StringsKeysOf, MapSetIntersection, ReorderMap, filterObject, objectAsEntry, Entry } from "../utils/common";
-import { IActivity, IActivityAndMode, IDisplayActivity, mapActivities, mapActivitiesAndModeByHash, mapRaids } from "../utils/activities";
-import { ModeTypeEN, activitiesEN } from "../utils/enumStrings";
+import { IsDestinyResponseValid, StringsKeysOf, filterObject } from "../utils/common";
+import { IActivity, IDisplayActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/activities";
 import { ExactSearchRequest, UserInfoCard, UserSearchPrefixRequest, searchByGlobalNamePost } from "bungie-api-ts/user";
 import { getCommonSettings, getGlobalAlerts } from "bungie-api-ts/core";
 import { ActiveScoredNightFalls, DestinyActivity } from "../enums/DestinyActivity";
@@ -44,12 +38,12 @@ export interface PlayerInfo {
 	activities: Map<keyof typeof DestinyActivity, IDisplayActivity>;
 }
 
-let mapCurrentActiveActivities = new Map<string, IActivity>(Object.entries(filterObject(mapActivities, ([, v]) => v.Active == true))) as Map<
+const mapCurrentActiveActivities = new Map<string, IActivity>(Object.entries(filterObject(mapActivities, ([, v]) => v.Active == true))) as Map<
 	keyof typeof DestinyActivity,
 	IActivity
 >;
-let currentActiveActivities = Array.from(mapCurrentActiveActivities.keys());
-let emptyDisplayActivities = new Map<keyof typeof DestinyActivity, IDisplayActivity>();
+const currentActiveActivities = Array.from(mapCurrentActiveActivities.keys());
+const emptyDisplayActivities = new Map<keyof typeof DestinyActivity, IDisplayActivity>();
 currentActiveActivities.forEach((k) => {
 	emptyDisplayActivities.set(k, {
 		Activity: k,
@@ -77,10 +71,10 @@ export const healthStatusReason = atom("No alert for the moment, you should not 
 export const healthStatusTitle = atom("Error");
 
 async function $http(config: HttpClientConfig) {
-	let url = new URL(config.url);
+	const url = new URL(config.url);
 	url.search = new URLSearchParams(config.params).toString();
 
-	let headers: HeadersInit = {};
+	const headers: HeadersInit = {};
 	headers["X-API-Key"] = import.meta.env.PUBLIC_BUNGIE_API_KEY;
 
 	return await fetch(url, {
@@ -96,33 +90,33 @@ async function $http(config: HttpClientConfig) {
 }
 
 export const GetInformationForMember = async (destinyMembershipId: bigint | string, membershipType: BungieMembershipType | number) => {
-	let allResponsesGood: boolean = true;
-	let DeletedCharacters: string[] = [];
-	let Characters: string[] = [];
+	//let allResponsesGood: boolean = true;
+	//let DeletedCharacters: string[] = [];
+	//let Characters: string[] = [];
 	let AllCharacters: string[] = [];
 
-	let HisoricalCharacterResponse: Promise<void | ServerResponse<DestinyHistoricalStatsAccountResult>> = getHistoricalStatsForAccount($http, {
+	const HistoricalCharacterResponse: Promise<void | ServerResponse<DestinyHistoricalStatsAccountResult>> = getHistoricalStatsForAccount($http, {
 		destinyMembershipId: destinyMembershipId.toString(),
 		membershipType: membershipType,
 		groups: [DestinyStatsGroupType.None],
 	}).then((r) => {
 		if (IsDestinyResponseValid(r, getBungieErrorMessage)) {
-			DeletedCharacters = r.Response.characters.filter((c) => c.deleted).map((c) => c.characterId);
-			Characters = r.Response.characters.filter((c) => !c.deleted).map((c) => c.characterId);
+			//DeletedCharacters = r.Response.characters.filter((c) => c.deleted).map((c) => c.characterId);
+			//Characters = r.Response.characters.filter((c) => !c.deleted).map((c) => c.characterId);
 			AllCharacters = r.Response.characters.map((c) => c.characterId);
-		} else allResponsesGood = false;
+		} // else allResponsesGood = false;
 	});
 
-	let ownedAcivities: Set<number>;
-	let activeActivities: Map<number, IActivityAndMode>;
-	let allActiveActivities: Set<number>;
+	//let ownedActivities: Set<number>;
+	//let activeActivities: Map<number, IActivityAndMode>;
+	//let allActiveActivities: Set<number>;
 	let records: {
 		[key: number]: DestinyRecordComponent;
 	};
 	let CharacterRecords: {
 		[key: number]: DestinyRecordComponent;
 	}[];
-	let profileInfoResponse: Promise<void | ServerResponse<DestinyProfileResponse>> = getProfile($http, {
+	const profileInfoResponse: Promise<void | ServerResponse<DestinyProfileResponse>> = getProfile($http, {
 		components: [
 			DestinyComponentType.Profiles,
 			DestinyComponentType.Characters,
@@ -139,28 +133,29 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				LatestCharacter: Object.values(r.Response.characters.data!).sort((x, y) => y!.dateLastPlayed.localeCompare(x!.dateLastPlayed))[0]!,
 				CurrentGuardianRank: r.Response.profile.data!.currentGuardianRank,
 				LifetimeHighestGuardianRank: r.Response.profile.data!.lifetimeHighestGuardianRank,
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				RenewedGuardianRank: (r.Response.profile.data! as any).renewedGuardianRank,
 			});
 			//Characters = profileInfoResponse.Response.profile.data!.characterIds;
-			let activeDestinyActivities = r.Response.profile
-				.data!.characterIds.map((character) => r.Response.characterActivities.data![character].availableActivities)
-				.flatMap((activityArray) => activityArray);
-			allActiveActivities = new Set(activeDestinyActivities.map((activity) => activity.activityHash));
-			ownedAcivities = new Set(activeDestinyActivities.filter((a) => a.canLead || a.canJoin).map((activity) => activity.activityHash));
-			activeActivities = MapSetIntersection(allActiveActivities, mapActivitiesAndModeByHash);
+			//const activeDestinyActivities = r.Response.profile
+			//	.data!.characterIds.map((character) => r.Response.characterActivities.data![character].availableActivities)
+			//	.flatMap((activityArray) => activityArray);
+			//allActiveActivities = new Set(activeDestinyActivities.map((activity) => activity.activityHash));
+			//ownedActivities = new Set(activeDestinyActivities.filter((a) => a.canLead || a.canJoin).map((activity) => activity.activityHash));
+			//activeActivities = MapSetIntersection(allActiveActivities, mapActivitiesAndModeByHash);
 			records = r.Response.profileRecords.data!.records;
 			CharacterRecords = Object.values(r.Response.characterRecords.data!).map((x) => x.records);
-		} else allResponsesGood = false;
+		} //else allResponsesGood = false;
 	});
 
 	await profileInfoResponse;
-	await HisoricalCharacterResponse;
+	await HistoricalCharacterResponse;
 
 	let allAggregateActivitiesArray: {
 		hash: number;
 		activityCompletions: number;
 	}[] = [];
-	let allAggregateActivitiesArrayPromises = AllCharacters.map((character) => {
+	const allAggregateActivitiesArrayPromises = AllCharacters.map((character) => {
 		return getDestinyAggregateActivityStats($http, {
 			characterId: character,
 			destinyMembershipId: destinyMembershipId.toString(),
@@ -168,10 +163,10 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		});
 	});
 
-	let allAggregateActivitiesArrayResponses = await Promise.all(allAggregateActivitiesArrayPromises);
+	const allAggregateActivitiesArrayResponses = await Promise.all(allAggregateActivitiesArrayPromises);
 	allAggregateActivitiesArrayResponses.forEach((aggregateActivityResponse) => {
 		if (IsDestinyResponseValid(aggregateActivityResponse, getBungieErrorMessage)) {
-			let aggregateActivity = aggregateActivityResponse.Response.activities
+			const aggregateActivity = aggregateActivityResponse.Response.activities
 				.filter((a) => mapActivitiesAndModeByHash.has(a.activityHash))
 				.map((a) => {
 					return {
@@ -182,33 +177,33 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			allAggregateActivitiesArray = allAggregateActivitiesArray.concat(aggregateActivity);
 		}
 	});
-	let allAggregateActivitiesHashes = [...new Set(allAggregateActivitiesArray.map((a) => a.hash))];
-	let aggregateActivities = new Map<number, number>();
+	const allAggregateActivitiesHashes = [...new Set(allAggregateActivitiesArray.map((a) => a.hash))];
+	const aggregateActivities = new Map<number, number>();
 	allAggregateActivitiesHashes.forEach((hash) => {
-		let total = allAggregateActivitiesArray
+		const total = allAggregateActivitiesArray
 			.filter((a) => a.hash === hash)
 			.map((a) => a.activityCompletions)
 			.reduce((p, a) => p + a, 0);
 		aggregateActivities.set(hash, total);
 	});
 
-	let activityCompletions: Map<keyof typeof DestinyActivity, IDisplayActivity> = new Map(emptyDisplayActivities);
+	const activityCompletions: Map<keyof typeof DestinyActivity, IDisplayActivity> = new Map(emptyDisplayActivities);
 
 	aggregateActivities.forEach((value, key) => {
 		if (value === 0) return;
 
-		let activityAndMode = mapActivitiesAndModeByHash.get(key)!;
+		const activityAndMode = mapActivitiesAndModeByHash.get(key)!;
 		let activityKey = activityAndMode.Activity;
-		let currentActivity = mapActivities[activityKey];
-		let TopLeveActivity = currentActivity;
+		const currentActivity = mapActivities[activityKey];
+		let TopLevelActivity = currentActivity;
 
 		if (!currentActivity.TopLevel) {
 			activityKey = DestinyActivity[currentActivity.ParentActivity!] as StringsKeysOf<typeof DestinyActivity>;
-			TopLeveActivity = mapActivities[activityKey];
+			TopLevelActivity = mapActivities[activityKey];
 		}
 
 		let displayActivity = activityCompletions.get(activityKey);
-		let activityType = mapActivities[activityAndMode.Activity].Type;
+		const activityType = mapActivities[activityAndMode.Activity].Type;
 
 		if (displayActivity == undefined) {
 			displayActivity = {
@@ -220,8 +215,8 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			};
 		}
 		if (displayActivity.dataInitialized == false) {
-			if (TopLeveActivity.SealHash != undefined) {
-				let sealHash = TopLeveActivity.SealHash;
+			if (TopLevelActivity.SealHash != undefined) {
+				const sealHash = TopLevelActivity.SealHash;
 				let record = records[sealHash];
 				CharacterRecords.forEach((characterRecords) => {
 					if (record == undefined) record = characterRecords[sealHash];
@@ -230,8 +225,8 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				displayActivity.hasSeal = (record.state & DestinyRecordState.CanEquipTitle) !== 0;
 			}
 
-			if (TopLeveActivity.FlawlessHash != undefined) {
-				let flawlessHash = TopLeveActivity.FlawlessHash;
+			if (TopLevelActivity.FlawlessHash != undefined) {
+				const flawlessHash = TopLevelActivity.FlawlessHash;
 				let record = records[flawlessHash];
 				CharacterRecords.forEach((characterRecords) => {
 					if (record == undefined) record = characterRecords[flawlessHash];
@@ -243,8 +238,8 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				);
 			}
 
-			if (TopLeveActivity.SoloFlawlessHash != undefined) {
-				let flawlessHash = TopLeveActivity.SoloFlawlessHash;
+			if (TopLevelActivity.SoloFlawlessHash != undefined) {
+				const flawlessHash = TopLevelActivity.SoloFlawlessHash;
 				let record = records[flawlessHash];
 				CharacterRecords.forEach((characterRecords) => {
 					if (record == undefined) record = characterRecords[flawlessHash];
@@ -256,8 +251,8 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				);
 			}
 
-			if (TopLeveActivity.SoloHash != undefined) {
-				let flawlessHash = TopLeveActivity.SoloHash;
+			if (TopLevelActivity.SoloHash != undefined) {
+				const flawlessHash = TopLevelActivity.SoloHash;
 				let record = records[flawlessHash];
 				CharacterRecords.forEach((characterRecords) => {
 					if (record == undefined) record = characterRecords[flawlessHash];
@@ -269,10 +264,10 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				);
 			}
 
-			if (TopLeveActivity.SealObjectives != undefined) {
-				let undefinedSealRecords = TopLeveActivity.SealObjectives?.filter((x) => records[x] == undefined);
-				let definedSealRecords = TopLeveActivity.SealObjectives?.filter((x) => records[x] != undefined);
-				let uncompleteSealRecords = definedSealRecords.filter(
+			if (TopLevelActivity.SealObjectives != undefined) {
+				let undefinedSealRecords = TopLevelActivity.SealObjectives?.filter((x) => records[x] == undefined);
+				let definedSealRecords = TopLevelActivity.SealObjectives?.filter((x) => records[x] != undefined);
+				let incompleteSealRecords = definedSealRecords.filter(
 					(x) =>
 						(records[x].state & DestinyRecordState.RecordRedeemed) === 0 &&
 						((records[x].state & DestinyRecordState.RewardUnavailable) !== 0
@@ -282,7 +277,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				CharacterRecords.forEach((characterRecords) => {
 					definedSealRecords = undefinedSealRecords.filter((x) => characterRecords[x] != undefined);
 					undefinedSealRecords = undefinedSealRecords.filter((x) => characterRecords[x] == undefined);
-					uncompleteSealRecords = uncompleteSealRecords.concat(
+					incompleteSealRecords = incompleteSealRecords.concat(
 						definedSealRecords.filter(
 							(x) =>
 								(characterRecords[x].state & DestinyRecordState.RecordRedeemed) === 0 &&
@@ -292,8 +287,8 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 						)
 					);
 				});
-				uncompleteSealRecords = uncompleteSealRecords.concat(undefinedSealRecords);
-				displayActivity.UncompleteObjectives = uncompleteSealRecords;
+				incompleteSealRecords = incompleteSealRecords.concat(undefinedSealRecords);
+				displayActivity.IncompleteObjectives = incompleteSealRecords;
 			}
 
 			if (activityType === ActivityType.Raid || activityType === ActivityType.Dungeon || activityType === ActivityType.ExoticMission) {
@@ -303,11 +298,11 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 			displayActivity.dataInitialized = true;
 		}
 		if (currentActivity.TopLevel) {
-			let ModeCompletionMap =  displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<StringsKeysOf<typeof ModeType>, number>();
+			const ModeCompletionMap =  displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<StringsKeysOf<typeof ModeType>, number>();
 			ModeCompletionMap.set(activityAndMode.UnderlyingMode, (ModeCompletionMap.get(activityAndMode.UnderlyingMode) ?? 0) + value);
 			displayActivity.Completions.set(activityAndMode.Mode, ModeCompletionMap);
 		} else {
-			let ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<StringsKeysOf<typeof DestinyActivity>, number>();
+			const ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<StringsKeysOf<typeof DestinyActivity>, number>();
 			ModeCompletionMap.set(activityAndMode.Activity, (ModeCompletionMap.get(activityAndMode.Activity) ?? 0) + value);
 			displayActivity.Completions.set(activityKey, ModeCompletionMap);
 		}
@@ -318,21 +313,21 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 };
 
 export const GetPlayerInformation = async (name: string) => {
-	let namesplit = name.split("#");
-	if (namesplit.length === 1) {
+	const nameSplit = name.split("#");
+	if (nameSplit.length === 1) {
 		return await GetPlayerByPrefix(name);
-	} else return await GetPlayerByFullName(namesplit[0], parseInt(namesplit[1], 10));
+	} else return await GetPlayerByFullName(nameSplit[0], parseInt(nameSplit[1], 10));
 };
 
 export const GetDestinyInventoryItemDefinitionEntityDefinition = async (hashIdentifier: number) => {
-	let definition = await getDestinyEntityDefinition($http, { entityType: "DestinyInventoryItemDefinition", hashIdentifier });
+	const definition = await getDestinyEntityDefinition($http, { entityType: "DestinyInventoryItemDefinition", hashIdentifier });
 	if (IsDestinyResponseValid(definition, getBungieErrorMessage)) {
 		return definition.Response as DestinyInventoryItemDefinition;
 	}
 };
 
 async function GetPlayerByFullName(name: string, code: number) {
-	let usersResponse = await searchDestinyPlayerByBungieName($http, { membershipType: BungieMembershipType.All }, {
+	const usersResponse = await searchDestinyPlayerByBungieName($http, { membershipType: BungieMembershipType.All }, {
 		displayName: name,
 		displayNameCode: code,
 	} as ExactSearchRequest);
@@ -360,7 +355,7 @@ async function GetPlayerByPrefix(name: string) {
 	}[] = [];
 
 	while (hasMore) {
-		let usersResponse = await searchByGlobalNamePost($http, { page: pageNumber }, {
+		const usersResponse = await searchByGlobalNamePost($http, { page: pageNumber }, {
 			displayNamePrefix: name,
 		} as UserSearchPrefixRequest);
 
@@ -384,20 +379,20 @@ async function GetPlayerByPrefix(name: string) {
 	return users;
 }
 
-async function getHealhStatus() {
-	let destinySettings = await getCommonSettings($http);
+async function getHealthStatus() {
+	const destinySettings = await getCommonSettings($http);
 	let destinyEnabled = false;
 	if (IsDestinyResponseValid(destinySettings, getBungieErrorMessage)) destinyEnabled = destinySettings.Response.systems["Destiny2"].enabled;
 	if (!destinyEnabled) {
 		healthStatusReason.set("Destiny is offline");
-		let globalAlert = getGlobalAlerts($http, {});
+		const globalAlert = getGlobalAlerts($http, {});
 		if (IsDestinyResponseValid(destinySettings, getBungieErrorMessage)) healthStatusReason.set((await globalAlert).Response[0].AlertHtml);
 		healthStatus.set(false);
 	}
 	DestinyEnabled.set(destinyEnabled);
 }
 
-function getBungieErrorMessage(response: ServerResponse<any>) {
+function getBungieErrorMessage<T>(response: ServerResponse<T>) {
 	if ((response.ErrorCode as number) === -1) healthStatusTitle.set(`Internal Error(${response.ErrorStatus})`);
 	else healthStatusTitle.set(`Bungie(${response.ErrorStatus})`);
 
@@ -405,12 +400,12 @@ function getBungieErrorMessage(response: ServerResponse<any>) {
 	healthStatus.set(false);
 }
 export const gp = async () => {
-	getHealhStatus();
+	getHealthStatus();
 	//console.log(await GetPlayerInformation("icicle"));
 	await GetInformationForMember(4611686018475976486n, BungieMembershipType.TigerSteam);
 	//await GetInformationForMember(4611686018527458332n, BungieMembershipType.TigerSteam);
 };
-async function FetchSuccess(r: Response | undefined): Promise<any> {
+async function FetchSuccess<T>(r: Response | undefined): Promise<T> {
 	if (DestinyEnabled.get()) {
 		healthStatusReason.set("");
 		healthStatusTitle.set("");
@@ -419,6 +414,7 @@ async function FetchSuccess(r: Response | undefined): Promise<any> {
 	return await r?.json();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function FetchErrorProcess(e: Error): Promise<any> {
 	return new Promise((resolve) => {
 		resolve({ ErrorCode: -1, Message: e.message, ErrorStatus: "FetchError" });

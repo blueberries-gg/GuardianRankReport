@@ -6,11 +6,11 @@ import { DestinyActivity } from "../enums/DestinyActivity";
 import { IDisplayActivity, mapActivities } from "../utils/activities";
 import { activitiesEN } from "../utils/enumStrings";
 
-function FilterTypeActive(activities: Map<keyof typeof DestinyActivity, IDisplayActivity>, activityType: ActivityType, active: boolean) {
-	return Array.from(
-		new Map([...activities].filter(([k, v]) => v.Type === (ActivityType[activityType] as keyof typeof ActivityType) && v.isActive == active)).values()
-	);
-}
+// function FilterTypeActive(activities: Map<keyof typeof DestinyActivity, IDisplayActivity>, activityType: ActivityType, active: boolean) {
+// 	return Array.from(
+// 		new Map([...activities].filter(([k, v]) => v.Type === (ActivityType[activityType] as keyof typeof ActivityType) && v.isActive == active)).values()
+// 	);
+// }
 function FilterActive(activities: IDisplayActivity[], active: boolean) {
 	return activities.filter((x) => x.isActive == active);
 }
@@ -21,7 +21,7 @@ function FilterType(activities: IDisplayActivity[], activityType: ActivityType) 
 
 function getCompletions(activity: IDisplayActivity) {
 	let totalCompletions = 0;
-	activity.Completions.forEach((value, activity) => value.forEach((x, act) => (totalCompletions += x)));
+	activity.Completions.forEach((value,) => value.forEach((x,) => (totalCompletions += x)));
 	return totalCompletions;
 }
 
@@ -184,14 +184,14 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 					<GetDisplayListHeader activityType={props.activityType} />
 				</thead>
 				<tbody>
-					<For each={active}>{(item, index) => <GetDisplayItems item={item} activityType={props.activityType} />}</For>
+					<For each={active}>{(item,) => <GetDisplayItems item={item} activityType={props.activityType} />}</For>
 					<Show when={props.displayInactive && inactive.length > 0}>
 						<tr>
 							<td></td> <td style="padding-top:10px; text-align:right; font-weight: bold;">Legacy</td>
 							<td style="padding-top:10px;" colspan="100%"><div style="height: 1px; background: gray">
 								</div></td>
 						</tr>
-						<For each={inactive}>{(item, index) => <GetDisplayItems item={item} activityType={props.activityType} />}</For>
+						<For each={inactive}>{(item,) => <GetDisplayItems item={item} activityType={props.activityType} />}</For>
 					</Show>
 				</tbody>
 			</table>

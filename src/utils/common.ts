@@ -7,7 +7,7 @@ export const BASE_BUNGIE_URL = "https://www.bungie.net/";
 
 export type StringsKeysOf<T> = keyof T & string;
 
-export function IsDestinyResponseValid(response: ServerResponse<any>, errorCallback: (response: ServerResponse<any>) => void) {
+export function IsDestinyResponseValid(response: ServerResponse<unknown>, errorCallback: (response: ServerResponse<unknown>) => void) {
 	if (response.ErrorCode === 0 || response.ErrorCode === 1) return true;
 	errorCallback(response);
 	return false;
@@ -31,7 +31,7 @@ export function filterObject<T extends object>(obj: T, fn: (entry: Entry<T>, i: 
 }
 
 export function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) {
-	let displayActivitiesStrings: string[] = [];
+	const displayActivitiesStrings: string[] = [];
 	displayActivities.forEach((displayActivity) => {
 		let details = `${activitiesEN[displayActivity.Activity]}\n`;
 		if (displayActivity.hasSeal != undefined) details += `Seal ${displayActivity.hasSeal}\n`;
@@ -40,8 +40,8 @@ export function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) 
 		if (displayActivity.hasSolo != undefined) details += `Solo ${displayActivity.hasSolo}\n`;
 		if (displayActivity.hasFlawless != undefined) details += `Flawless ${displayActivity.hasFlawless}\n`;
 
-		if (displayActivity.UncompleteObjectives != undefined)
-			details += `Pending ${displayActivity.UncompleteObjectives.length} of ${mapActivities[displayActivity.Activity].SealObjectives?.length}\n`;
+		if (displayActivity.IncompleteObjectives != undefined)
+			details += `Pending ${displayActivity.IncompleteObjectives.length} of ${mapActivities[displayActivity.Activity].SealObjectives?.length}\n`;
 		displayActivity.Completions.forEach((contributors, mode) => {
 			if (contributors.size >= 1) {
 				if (Object.values(ModeType).includes(mode)) details += `${ModeTypeEN[mode as StringsKeysOf<typeof ModeType>]}\n`;
@@ -54,7 +54,7 @@ export function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) 
 	return displayActivitiesStrings;
 }
 export function MapIntersection<K, V>(First: Map<K, V>, Second: Map<K, V>) {
-	var result = new Map<K, V>();
+	const result = new Map<K, V>();
 
 	if (First.size > Second.size) {
 		Second.forEach((v, k) => {
@@ -70,7 +70,7 @@ export function MapIntersection<K, V>(First: Map<K, V>, Second: Map<K, V>) {
 }
 
 export function MapSetIntersection<K, V>(set: Set<K>, map: Map<K, V>) {
-	var result = new Map<K, V>();
+	const result = new Map<K, V>();
 
 	if (set.size > map.size) {
 		map.forEach((v, k) => {
