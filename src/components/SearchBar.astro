@@ -1,9 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 ---
-<div style="display: flex;">
-	<div style="display: flex; margin: 5px auto">
-		<input id="searchInputUsername" list="players" class="inputText"  placeholder="Search player" />
+<div style="display: flex; margin: 5px auto 0 auto">
+	<div style="display: flex;">
+		<input id="searchInputUsername" list="players" class="inputText"  placeholder="Search player"/>
 		<datalist id="players"> </datalist>
 		<div id="playerSearchLoading" style="display: flex; height: auto;width: auto;visibility: collapse">
 			<Icon name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " />
@@ -28,7 +28,6 @@ import { Icon } from "astro-icon/components";
             outline: 3px solid;
             padding: 12px;
             padding-bottom: 11px;
-            margin-bottom: 6px;
             border-width: 1px;
             text-align: left;
 
@@ -38,6 +37,7 @@ import { Icon } from "astro-icon/components";
             color: #d2d2d2;
             border-color: #949494;
             transition: outline-offset 0.08s cubic-bezier(0.69, 0, 0, 1) 0.125s, outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s, border-color 0.125s cubic-bezier(0.69, 0, 0, 1), color 0.125s cubic-bezier(0.69, 0, 0, 1), background-color 0.125s cubic-bezier(0.69, 0, 0, 1);
+            border-radius: 0px;
         }
 
     
@@ -55,7 +55,6 @@ import { Icon } from "astro-icon/components";
             outline: 3px solid;
             padding: 12px;
             padding-bottom: 11px;
-            margin-bottom: 6px;
             border-width: 1px;
 			font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif;
             text-align: left;
@@ -66,6 +65,7 @@ import { Icon } from "astro-icon/components";
             color: #d2d2d2;
             border-color: #949494;
             transition: outline-offset 0.08s cubic-bezier(0.69, 0, 0, 1) 0.125s, outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s, border-color 0.125s cubic-bezier(0.69, 0, 0, 1), color 0.125s cubic-bezier(0.69, 0, 0, 1), background-color 0.125s cubic-bezier(0.69, 0, 0, 1);
+            border-radius: 0px;
         }
 
         .menuButton:hover {

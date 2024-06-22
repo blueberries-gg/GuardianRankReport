@@ -24,30 +24,38 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		<SearchBar />
 		<PlayerBadge />
 		<div class="content">
-			<div style="color:white; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-direction: column;">
-				<div style="display: flex; flex-direction:column; margin: auto">
-					<h1>Raids</h1>
-					<SolidRaids client:load>
-						<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-					</SolidRaids>
+			<div style="color:white; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<h2 style="margin-block: 0px;">Raids</h2>
+						<SolidRaids client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
+						</SolidRaids>
+					</div>
 				</div>
-				<div style="display: flex; flex-direction:column; margin: auto">
-					<h1>Dungeons</h1>
-					<SolidDungeons client:load>
-						<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-					</SolidDungeons>
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<h2 style="margin-block: 0px;">Dungeons</h2>
+						<SolidDungeons client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
+						</SolidDungeons>
+					</div>
 				</div>
-				<div style="display: flex; flex-direction:column; margin: auto">
-					<h1>Exotic Missions</h1>
-					<SolidExoticMissions client:load>
-						<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-					</SolidExoticMissions>
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<h2 style="margin-block: 0px;">Exotic Missions</h2>
+						<SolidExoticMissions client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
+						</SolidExoticMissions>
+					</div>
 				</div>
-				<div style="display: flex; flex-direction:column; margin: auto">
-					<h1>GMs</h1>
-					<SolidGrandMasters client:load>
-						<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-					</SolidGrandMasters>
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<h2 style="margin-block: 0px;">Grandmaster Nightfalls</h2>
+						<SolidGrandMasters client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
+						</SolidGrandMasters>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -55,19 +63,25 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		width: 800px;
-		max-width: 100%;
+	.activityGroup {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.activityGroupCard {
+		margin: 0 auto;
+		padding: 10px;
+		background-color: #ffffff0f;
+		border-radius: 10px;
+
 	}
 	.content {
 		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
+		width: 900px;
+		max-width: 100%;
 		min-width: 430px;
 		color: white;
-		font-size: 20px;
-		line-height: 1.6;
+		/* font-size: 20px; */
 	}
 </style>

@@ -24,6 +24,22 @@ interface _IBaseActivity {
 	FlawlessHash?: number;
 }
 
+export const getNormalLike = function (activity: _IBaseActivity): number[] {
+	const normal = activity.Modes[ModeType[ModeType.Normal] as keyof typeof ModeType] || [];
+	const contest = activity.Modes[ModeType[ModeType.Contest] as keyof typeof ModeType] || [];
+	const guided = activity.Modes[ModeType[ModeType.Guided] as keyof typeof ModeType] || [];
+	const normalLegacy = activity.Modes[ModeType[ModeType.NormalLegacy] as keyof typeof ModeType] || [];
+	return [...normal, ...contest, ...guided, ...normalLegacy];
+}
+
+export const getMasterLike = function (activity: _IBaseActivity): number[] {
+	const master = activity.Modes[ModeType[ModeType.Master] as keyof typeof ModeType] || [];
+	const legend = activity.Modes[ModeType[ModeType.Legend] as keyof typeof ModeType] || [];
+	const heroic = activity.Modes[ModeType[ModeType.Heroic] as keyof typeof ModeType] || [];
+	const grandmaster = activity.Modes[ModeType[ModeType.Grandmaster] as keyof typeof ModeType] || [];
+	return [...master, ...legend, ...heroic, ...grandmaster];
+}
+
 interface _IActivityGenericSeal extends _IBaseActivity {
 	SubActivities: DestinyActivity[];
 	Active: boolean;

@@ -3,11 +3,13 @@ import { useStore } from "@nanostores/solid";
 import { CurrentPlayerProfile } from "../stores/destinyPlayerData";
 import { ActivityType } from "../enums/ActivityType";
 import { DestinyActivity } from "../enums/DestinyActivity";
-import { IDisplayActivity, mapActivities } from "../utils/activities";
+import { getNormalLike, getMasterLike, IDisplayActivity, mapActivities } from "../utils/activities";
 import { activitiesEN } from "../utils/enumStrings";
-import { BASE_BUNGIE_URL } from "../utils/common";
+import { BASE_BUNGIE_URL, StringsKeysOf } from "../utils/common";
 import complete from "../resources/complete.png";
+import completeGold from "../resources/completeGold.png";
 import missing from "../resources/missing.png";
+import { ModeType } from "../enums/ModeType";
 
 
 let element: Element;
@@ -30,44 +32,58 @@ function getCompletions(activity: IDisplayActivity) {
 	return totalCompletions;
 }
 
+function getNormalCompletions(activity: IDisplayActivity) {
+	let totalCompletions = 0;
+	activity.Completions.get(ModeType[ModeType.Normal] as StringsKeysOf<typeof ModeType>)?.forEach((x,) => (totalCompletions += x));
+	return totalCompletions;
+}
+
+function getMasterCompletions(activity: IDisplayActivity) {
+	let totalCompletions = 0;
+	activity.Completions.get(ModeType[ModeType.Master] as StringsKeysOf<typeof ModeType>)?.forEach((x,) => (totalCompletions += x));
+	return totalCompletions;
+}
+
 function GetDisplayListHeader(props: { activityType: ActivityType }) {
 	switch (props.activityType) {
 		case ActivityType.Dungeon:
 			return (
-				<tr>
+				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Solo</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Solo Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;"></th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Solo</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 51pt;">Solo Flawless</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
 				</tr>
 			);
 		case ActivityType.ExoticMission:
 			return (
-				<tr>
+				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
 				</tr>
 			);
 		case ActivityType.Raid:
 			return (
-				<tr>
+				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;"></th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 51pt;">Flawless</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
 				</tr>
 			);
 		case ActivityType.ScoredNightFall:
 			return (
-				<tr>
+				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 65pt;">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
 				</tr>
 			);
 	}
@@ -75,10 +91,17 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 
 function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 	return (
-		<tr>
+		<tr style="height:30px">
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;">{getCompletions(props.item)}</td>
+			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>
+				{getCompletions(props.item)}
+			</td>
+			<td style="text-align: center;">
+				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
+					{getMasterCompletions(props.item)}
+				</Show>
+			</td>
 			<td>
 				<Show when={mapActivities[props.item.Activity].SoloHash !== undefined}>
 					<Show when={props.item.hasSolo == false}>
@@ -96,32 +119,33 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 			</td>
 			<td>
 				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
-					<Show when={props.item.hasFlawless == false}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
-					</Show>
-					<Show when={props.item.hasFlawless == true}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
-					</Show>
 					<Show when={props.item.hasFlawless == undefined}>
 						<div style="margin: auto; width: fit-content;">
 							{element}
 						</div>
 					</Show>
-				</Show>
-			</td>
-			<td>
-				<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
-					<Show when={props.item.hasSoloFlawless == false}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+					<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
+						<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == false}>
+							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+						</Show>
+						<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == true}>
+							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${completeGold.src}`}></img></div>
+						</Show>
+						<Show when={props.item.hasSoloFlawless == true}>
+							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+						</Show>
 					</Show>
-					<Show when={props.item.hasSoloFlawless == true}>
-						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+					<Show when={mapActivities[props.item.Activity].SoloFlawlessHash == undefined}>
+						<Show when={mapActivities[props.item.Activity].FlawlessHash != undefined}>
+							<Show when={props.item.hasFlawless == false}>
+								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+							</Show>
+							<Show when={props.item.hasFlawless == true}>
+								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+							</Show>
+						</Show>
 					</Show>
-					<Show when={props.item.hasSoloFlawless == undefined}>
-						<div style="margin: auto; width: fit-content;">
-							{element}
-						</div>
-					</Show>
+
 				</Show>
 			</td>
 			<td>
@@ -144,10 +168,15 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 }
 function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
 	return (
-		<tr>
+		<tr style="height:30px">
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;">{getCompletions(props.item)}</td>
+			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>{getCompletions(props.item)}</td>
+			<td style="text-align: center;">
+				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
+					{getMasterCompletions(props.item)}
+				</Show>
+			</td>
 			<td>
 				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
 					<Show when={props.item.hasFlawless == false}>
@@ -184,16 +213,21 @@ function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
 }
 function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
 	return (
-		<tr>
+		<tr style="height:30px">
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;">{getCompletions(props.item)}</td>
+			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>{getCompletions(props.item)}</td>
+			<td style="text-align: center;">
+				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
+					{getMasterCompletions(props.item)}
+				</Show>
+			</td>
 		</tr>
 	);
 }
 function GetDisplayItemScoredNightFall(props: { item: IDisplayActivity }) {
 	return (
-		<tr>
+		<tr style="height:30px">
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
 			<td style="text-align: center;">{getCompletions(props.item)}</td>
@@ -227,7 +261,7 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 				<tbody>
 					<For each={active}>{(item,) => <GetDisplayItems item={item} activityType={props.activityType} />}</For>
 					<Show when={props.displayInactive && inactive.length > 0}>
-						<tr>
+						<tr style="height:30px">
 							<td></td> <td style="padding-top:10px; text-align:right; font-weight: bold;">Legacy</td>
 							<td style="padding-top:10px;" colspan="100%"><div style="height: 1px; background: gray">
 							</div></td>
