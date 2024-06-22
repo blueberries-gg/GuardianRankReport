@@ -239,6 +239,18 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 				);
 			}
 
+			if (TopLevelActivity.MasterFlawlessHash != undefined) {
+				const masterFlawlessHash = TopLevelActivity.MasterFlawlessHash;
+				let record = records[masterFlawlessHash];
+				CharacterRecords.forEach((characterRecords) => {
+					if (record == undefined) record = characterRecords[masterFlawlessHash];
+				});
+
+				displayActivity.hasMasterFlawless = !(
+					(record.state & DestinyRecordState.RecordRedeemed) === 0 &&
+					((record.state & DestinyRecordState.RewardUnavailable) !== 0 ? true : (record.state & DestinyRecordState.ObjectiveNotCompleted) !== 0)
+				);
+			}
 			if (TopLevelActivity.SoloFlawlessHash != undefined) {
 				const flawlessHash = TopLevelActivity.SoloFlawlessHash;
 				let record = records[flawlessHash];
@@ -329,6 +341,10 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 
 			if (TopLevelActivity.SoloFlawlessHash != undefined) {
 				displayActivity.hasSoloFlawless = false;
+			}
+
+			if (TopLevelActivity.MasterFlawlessHash != undefined) {
+				displayActivity.hasMasterFlawless = false;
 			}
 
 			if (TopLevelActivity.SoloHash != undefined) {

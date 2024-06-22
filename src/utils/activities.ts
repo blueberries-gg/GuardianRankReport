@@ -5,24 +5,6 @@ import { DestinyActivity, Dungeons, ExoticMissions, Raids, ScoredNightFalls } fr
 import { ModeType } from "../enums/ModeType";
 import { StringsKeysOf } from "./common";
 
-// Activities as of manifest 226232.24.06.12.1730-3-bnet.55913
-interface _IBaseActivity {
-	Modes: { [key in StringsKeysOf<typeof ModeType>]?: number[] };
-	SubActivities?: DestinyActivity[];
-	ParentActivity?: DestinyActivity | undefined;
-	TopLevel: boolean;
-	Type: ActivityType;
-	Active?: boolean;
-	Free?: boolean;
-	PresentationNode?: number;
-	SealCompleteImage?: string;
-	SealIncompleteImage?: string;
-	SealHash?: number;
-	SealObjectives?: number[];
-	SoloHash?: number;
-	SoloFlawlessHash?: number;
-	FlawlessHash?: number;
-}
 
 export const getNormalLike = function (activity: _IBaseActivity): number[] {
 	const normal = activity.Modes[ModeType[ModeType.Normal] as keyof typeof ModeType] || [];
@@ -40,104 +22,125 @@ export const getMasterLike = function (activity: _IBaseActivity): number[] {
 	return [...master, ...legend, ...heroic, ...grandmaster];
 }
 
-interface _IActivityGenericSeal extends _IBaseActivity {
+// Activities as of manifest 226232.24.06.12.1730-3-bnet.55913
+interface _IBaseActivity {
+	Type: ActivityType;
+	Modes: { [key in StringsKeysOf<typeof ModeType>]?: number[] };
+	Active?: boolean;
+	Free: boolean;
+
+	TopLevel: boolean;
+	ParentActivity?: DestinyActivity | undefined;
+	SubActivities?: DestinyActivity[];
+
+	PresentationNode?: number;
+	SealCompleteImage?: string;
+	SealIncompleteImage?: string;
+	SealHash?: number;
+	SealObjectives?: number[];
+
+	FlawlessHash?: number;
+	MasterFlawlessHash?: number;
+
+	SoloFlawlessHash?: number;
+	SoloHash?: number;
+}
+
+interface _IActivityParentSeal extends _IBaseActivity {
 	SubActivities: DestinyActivity[];
-	Active: boolean;
-	Free: boolean;
+
 	PresentationNode: number;
 	SealCompleteImage: string;
 	SealIncompleteImage: string;
 	SealHash: number;
 	SealObjectives: number[];
-	SoloHash?: never;
-	SoloFlawlessHash?: never;
+
 	FlawlessHash?: never;
+	MasterFlawlessHash?: never;
+
+	SoloFlawlessHash?: never;
+	SoloHash?: never;
 }
-interface _IActivityRaidNoSeal extends _IBaseActivity {
-	Type: ActivityType.Raid;
+
+interface _IActivityNoSeal extends _IBaseActivity {
 	SubActivities?: never;
-	Active: false;
-	Free: boolean;
+
 	PresentationNode?: never;
 	SealCompleteImage?: never;
 	SealIncompleteImage?: never;
 	SealHash?: never;
 	SealObjectives?: never;
-	SoloHash?: never;
-	SoloFlawlessHash?: never;
+
 	FlawlessHash?: never;
-}
-interface _IActivityRaidWithSeal extends _IBaseActivity {
-	Type: ActivityType.Raid;
-	SubActivities?: never;
-	Active: boolean;
-	Free: boolean;
-	PresentationNode: number;
-	SealCompleteImage: string;
-	SealIncompleteImage: string;
-	SealHash: number;
-	SealObjectives: number[];
-	SoloHash?: never;
+	MasterFlawlessHash?: never;
+
 	SoloFlawlessHash?: never;
-	FlawlessHash: number;
+	SoloHash?: never;
 }
-interface _IActivityDungeonWithSeal extends _IBaseActivity {
-	Type: ActivityType.Dungeon;
+interface _IActivityFlawlessSeal extends _IBaseActivity {
 	SubActivities?: never;
-	Active: boolean;
-	Free: boolean;
 	PresentationNode: number;
 	SealCompleteImage: string;
 	SealIncompleteImage: string;
 	SealHash: number;
 	SealObjectives: number[];
-	SoloHash: number;
-	SoloFlawlessHash: number;
+
 	FlawlessHash: number;
+	MasterFlawlessHash?: never;
+
+	SoloFlawlessHash?: never;
+	SoloHash?: never;
 }
-interface _IActivityDungeonNoSeal extends _IBaseActivity {
-	Type: ActivityType.Dungeon;
+interface _IActivitySoloFlawlessSeal extends _IBaseActivity {
 	SubActivities?: never;
-	Active: boolean;
-	Free: boolean;
+	PresentationNode: number;
+	SealCompleteImage: string;
+	SealIncompleteImage: string;
+	SealHash: number;
+	SealObjectives: number[];
+
+	FlawlessHash: number;
+	MasterFlawlessHash?: never;
+
+	SoloFlawlessHash: number;
+	SoloHash: number;
+}
+interface _IActivitySoloFlawless extends _IBaseActivity {
+	SubActivities?: never;
 	PresentationNode?: never;
 	SealCompleteImage?: never;
 	SealIncompleteImage?: never;
 	SealHash?: never;
 	SealObjectives?: never;
-	SoloHash: number;
-	SoloFlawlessHash: number;
+
 	FlawlessHash: number;
+	MasterFlawlessHash?: never;
+
+	SoloFlawlessHash: number;
+	SoloHash: number;
 }
-interface _IActivityExoticMission extends _IBaseActivity {
-	Type: ActivityType.ExoticMission;
+interface _IActivityMasterFlawlessSolo extends _IBaseActivity {
 	SubActivities?: never;
-	Active: boolean;
-	Free: boolean;
+	PresentationNode?: never;
+	SealCompleteImage?: never;
+	SealIncompleteImage?: never;
 	SealHash?: never;
 	SealObjectives?: never;
-	SoloHash?: never;
+
+	FlawlessHash: number;
+	MasterFlawlessHash: number;
+
 	SoloFlawlessHash?: never;
-	FlawlessHash?: never;
-}
-interface _IActivityScoredNightfall extends _IBaseActivity {
-	Type: ActivityType.ScoredNightFall;
-	SubActivities?: never;
-	SealHash?: never;
-	SealObjectives?: never;
-	SoloHash?: never;
-	SoloFlawlessHash?: never;
-	FlawlessHash?: never;
+	SoloHash: number;
 }
 
 export type IActivity =
-	| _IActivityGenericSeal
-	| _IActivityRaidWithSeal
-	| _IActivityDungeonWithSeal
-	| _IActivityRaidNoSeal
-	| _IActivityDungeonNoSeal
-	| _IActivityExoticMission
-	| _IActivityScoredNightfall;
+	| _IActivityParentSeal
+	| _IActivityNoSeal
+	| _IActivityFlawlessSeal
+	| _IActivitySoloFlawless
+	| _IActivitySoloFlawlessSeal
+	| _IActivityMasterFlawlessSolo;
 
 export interface IActivityAndMode {
 	Activity: keyof typeof DestinyActivity;
@@ -155,6 +158,7 @@ export interface IDisplayActivity {
 	IncompleteObjectives?: number[];
 	hasSeal?: boolean;
 	hasFlawless?: boolean;
+	hasMasterFlawless?: boolean;
 	hasSolo?: boolean;
 	hasSoloFlawless?: boolean;
 	isActive: boolean;
@@ -609,6 +613,9 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 		TopLevel: true,
 		Active: true,
 		Free: false,
+		// FlawlessHash: 3271224950,
+		// MasterFlawlessHash: 1589025252,
+		// SoloHash: 1967189514,
 	},
 	DualDestiny: {
 		Modes: {
@@ -681,6 +688,9 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 		TopLevel: true,
 		Active: true,
 		Free: true,
+		FlawlessHash: 222099560,
+		SoloFlawlessHash: 432190114,
+		SoloHash: 3051225076,
 	},
 
 	VoxObscura: {
@@ -706,6 +716,9 @@ export const mapExoticMissions: { [key in keyof typeof ExoticMissions]: IActivit
 		TopLevel: true,
 		Active: true,
 		Free: true,
+		FlawlessHash: 2966008051,
+		SoloFlawlessHash: 1626830599,
+		SoloHash: 748425411,
 	},
 };
 export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IActivity } = {
@@ -715,6 +728,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	BattlegroundBehemoth: {
@@ -723,6 +737,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	BattlegroundFoothold: {
@@ -731,6 +746,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	BattlegroundHailstone: {
@@ -739,6 +755,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	BattlegroundOracle: {
@@ -747,6 +764,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	BirthplaceOfTheVile: {
@@ -755,6 +773,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	Broodhold: {
@@ -763,6 +782,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	DefiantBattlegroundCosmodrome: {
@@ -771,6 +791,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 	DefiantBattlegroundEDZ: {
 		Modes: {
@@ -778,6 +799,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 	DefiantBattlegroundOrbitalPrison: {
 		Modes: {
@@ -785,6 +807,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 	ExodusCrash: {
 		Modes: {
@@ -792,6 +815,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	FallenSABER: {
@@ -800,6 +824,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	HeistBattlegroundEuropa: {
@@ -808,6 +833,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	HeistBattlegroundMars: {
@@ -816,6 +842,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	HeistBattlegroundMoon: {
@@ -824,6 +851,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	HyperNetCurrent: {
@@ -832,6 +860,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	LakeOfShadows: {
@@ -840,12 +869,14 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	Liminality: {
 		Modes: { Grandmaster: [1700470403, 2099835168] },
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 	LegendPsiOpsBattlegroundCosmodrome: {
 		Modes: {
@@ -853,6 +884,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	ProvingGrounds: {
@@ -861,6 +893,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	PsiOpsBattlegroundEDZ: {
@@ -869,6 +902,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	PsiOpsBattlegroundMoon: {
@@ -877,6 +911,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	SavathunsSong: {
@@ -885,6 +920,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	StrangeTerrain: {
@@ -893,6 +929,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheArmsDealer: {
@@ -901,6 +938,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheCorrupted: {
@@ -909,6 +947,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheDevilsLair: {
@@ -917,6 +956,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheDisgraced: {
@@ -925,6 +965,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheFesteringCore: {
@@ -933,6 +974,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheGlassway: {
@@ -941,6 +983,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheHollowedLair: {
@@ -949,6 +992,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheInsightTerminus: {
@@ -957,6 +1001,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheInvertedSpire: {
@@ -965,6 +1010,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheLightblade: {
@@ -973,6 +1019,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TheScarletKeep: {
@@ -981,6 +1028,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	TreeOfProbabilities: {
@@ -989,6 +1037,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 
 	WardenOfNothing: {
@@ -997,6 +1046,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,
+		Free: true,
 	},
 };
 export const mapActivities: { [key in keyof typeof DestinyActivity]: IActivity } = {

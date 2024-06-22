@@ -3,7 +3,7 @@ import { useStore } from "@nanostores/solid";
 import { CurrentPlayerProfile } from "../stores/destinyPlayerData";
 import { ActivityType } from "../enums/ActivityType";
 import { DestinyActivity } from "../enums/DestinyActivity";
-import { getNormalLike, getMasterLike, IDisplayActivity, mapActivities } from "../utils/activities";
+import { getMasterLike, IDisplayActivity, mapActivities } from "../utils/activities";
 import { activitiesEN } from "../utils/enumStrings";
 import { BASE_BUNGIE_URL, StringsKeysOf } from "../utils/common";
 import complete from "../resources/complete.png";
@@ -65,6 +65,8 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th></th>
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Solo</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 60pt;">Advanced Flawless</th>
 				</tr>
 			);
 		case ActivityType.Raid:
@@ -145,7 +147,6 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 							</Show>
 						</Show>
 					</Show>
-
 				</Show>
 			</td>
 			<td>
@@ -221,6 +222,64 @@ function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
 					{getMasterCompletions(props.item)}
 				</Show>
+			</td>
+			<td>
+				<Show when={mapActivities[props.item.Activity].SoloHash !== undefined}>
+					<Show when={props.item.hasSolo == false}>
+						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+					</Show>
+					<Show when={props.item.hasSolo == true}>
+						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+					</Show>
+					<Show when={props.item.hasSolo == undefined}>
+						<div style="margin: auto; width: fit-content;">
+							{element}
+						</div>
+					</Show>
+				</Show>
+			</td>
+			<td>
+
+				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
+					<Show when={props.item.hasFlawless === undefined}>
+						<div style="margin: auto; width: fit-content;">
+							{element}
+						</div>
+					</Show>
+					<Show when={mapActivities[props.item.Activity].MasterFlawlessHash !== undefined}>
+						<Show when={props.item.hasMasterFlawless === false && props.item.hasFlawless === false}>
+							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+						</Show>
+						<Show when={props.item.hasMasterFlawless === false && props.item.hasFlawless === true}>
+							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${completeGold.src}`}></img></div>
+						</Show>
+						<Show when={props.item.hasMasterFlawless === true}>
+							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+						</Show>
+					</Show>
+					<Show when={mapActivities[props.item.Activity].MasterFlawlessHash === undefined}>
+						<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
+							<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == false}>
+								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+							</Show>
+							<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == true}>
+								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${completeGold.src}`}></img></div>
+							</Show>
+							<Show when={props.item.hasSoloFlawless == true}>
+								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+							</Show>
+						</Show>
+						<Show when={mapActivities[props.item.Activity].SoloFlawlessHash === undefined}>
+							<Show when={props.item.hasFlawless == false}>
+								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
+							</Show>
+							<Show when={props.item.hasSoloFlawless == true}>
+								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
+							</Show>
+						</Show>
+					</Show>
+				</Show>
+
 			</td>
 		</tr>
 	);
