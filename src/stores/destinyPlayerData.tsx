@@ -39,14 +39,15 @@ export interface PlayerInfo {
 }
 
 const mapCurrentActiveActivities = new Map<string, IActivity>(Object.entries(filterObject(mapActivities, ([, v]) => v.Active == true))) as Map<
-	keyof typeof DestinyActivity,
+	StringsKeysOf<typeof DestinyActivity>,
 	IActivity
 >;
-const currentActiveActivities = Array.from(mapCurrentActiveActivities.keys());
-const emptyDisplayActivities = new Map<keyof typeof DestinyActivity, IDisplayActivity>();
+const currentActiveActivities = Array.from(mapCurrentActiveActivities.keys());//.sort((x)=> DestinyActivity[x]);
+
+const emptyDisplayActivities = new Map<StringsKeysOf<typeof DestinyActivity>, IDisplayActivity>();
 currentActiveActivities.forEach((k) => {
-	emptyDisplayActivities.set(k, {
-		Activity: k,
+	emptyDisplayActivities.set(k as StringsKeysOf<typeof DestinyActivity>, {
+		Activity: k as StringsKeysOf<typeof DestinyActivity>,
 		Type: ActivityType[mapActivities[k]!.Type] as keyof typeof ActivityType,
 		Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
 		isActive: true,
@@ -198,7 +199,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		let TopLevelActivity = currentActivity;
 
 		if (!currentActivity.TopLevel) {
-			activityKey = DestinyActivity[currentActivity.ParentActivity!] as StringsKeysOf<typeof DestinyActivity>;
+			activityKey = currentActivity.ParentActivity!;
 			TopLevelActivity = mapActivities[activityKey];
 		}
 
@@ -321,14 +322,14 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		}
 		activityCompletions.set(activityKey, displayActivity);
 	});
-	activityCompletions.forEach((displayActivity,key) => {
+	activityCompletions.forEach((displayActivity, key) => {
 		if (displayActivity.dataInitialized == false) {
 			let activityKey = displayActivity.Activity;
 			const currentActivity = mapActivities[activityKey];
 			let TopLevelActivity = currentActivity;
 
 			if (!currentActivity.TopLevel) {
-				activityKey = DestinyActivity[currentActivity.ParentActivity!] as StringsKeysOf<typeof DestinyActivity>;
+				activityKey = currentActivity.ParentActivity!;
 				TopLevelActivity = mapActivities[activityKey];
 			}
 			if (TopLevelActivity.SealHash != undefined) {

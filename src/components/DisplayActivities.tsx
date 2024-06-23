@@ -44,6 +44,12 @@ function getMasterCompletions(activity: IDisplayActivity) {
 	return totalCompletions;
 }
 
+function getGrandMasterCompletions(activity: IDisplayActivity) {
+	let totalCompletions = 0;
+	activity.Completions.get(ModeType[ModeType.Grandmaster] as StringsKeysOf<typeof ModeType>)?.forEach((x,) => (totalCompletions += x));
+	return totalCompletions;
+}
+
 function GetDisplayListHeader(props: { activityType: ActivityType }) {
 	switch (props.activityType) {
 		case ActivityType.Dungeon:
@@ -220,7 +226,7 @@ function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
 			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>{getCompletions(props.item)}</td>
 			<td style="text-align: center;">
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{getMasterCompletions(props.item)}
+					{getMasterCompletions(props.item) + getGrandMasterCompletions(props.item)}
 				</Show>
 			</td>
 			<td>
@@ -308,7 +314,8 @@ function GetDisplayItems(props: { item: IDisplayActivity; activityType: Activity
 }
 
 function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity, IDisplayActivity>; activityType: ActivityType; displayInactive: boolean }) {
-	const activityOfType = FilterType(Array.from(props.activities.values()), props.activityType);
+	const activities = Array.from(props.activities.values()).sort((x,y)=>DestinyActivity[x.Activity] - DestinyActivity[y.Activity])
+	const activityOfType = FilterType(activities, props.activityType);
 	const active = FilterActive(activityOfType, true);
 	const inactive = FilterActive(activityOfType, false);
 	return (

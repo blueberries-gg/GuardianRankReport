@@ -30,8 +30,8 @@ interface _IBaseActivity {
 	Free: boolean;
 
 	TopLevel: boolean;
-	ParentActivity?: DestinyActivity | undefined;
-	SubActivities?: DestinyActivity[];
+	ParentActivity?: StringsKeysOf<typeof DestinyActivity> | undefined;
+	SubActivities?: StringsKeysOf<typeof DestinyActivity>[];
 
 	PresentationNode?: number;
 	SealCompleteImage?: string;
@@ -47,7 +47,7 @@ interface _IBaseActivity {
 }
 
 interface _IActivityParentSeal extends _IBaseActivity {
-	SubActivities: DestinyActivity[];
+	SubActivities: StringsKeysOf<typeof DestinyActivity>[];
 
 	PresentationNode: number;
 	SealCompleteImage: string;
@@ -143,13 +143,13 @@ export type IActivity =
 	| _IActivityMasterFlawlessSolo;
 
 export interface IActivityAndMode {
-	Activity: keyof typeof DestinyActivity;
+	Activity: StringsKeysOf<typeof DestinyActivity>;
 	Mode: StringsKeysOf<typeof ModeType>;
 	UnderlyingMode: StringsKeysOf<typeof ModeType>;
 }
 
 export interface IDisplayActivity {
-	Activity: keyof typeof DestinyActivity;
+	Activity: StringsKeysOf<typeof DestinyActivity>;
 	Type: keyof typeof ActivityType;
 	Completions: Map<
 		StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>,
@@ -447,10 +447,10 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 	Pantheon: {
 		Modes: {},
 		SubActivities: [
-			DestinyActivity.PhanteonAtraksSovereign,
-			DestinyActivity.PhanteonOryxExalted,
-			DestinyActivity.PhanteonRhulkIndomitable,
-			DestinyActivity.PhanteonNezarecSublime,
+			Raids[Raids.PhanteonAtraksSovereign] as StringsKeysOf<typeof DestinyActivity>,
+			Raids[Raids.PhanteonOryxExalted] as StringsKeysOf<typeof DestinyActivity>,
+			Raids[Raids.PhanteonRhulkIndomitable] as StringsKeysOf<typeof DestinyActivity>,
+			Raids[Raids.PhanteonNezarecSublime] as StringsKeysOf<typeof DestinyActivity>,
 		],
 		Type: ActivityType.Raid,
 		TopLevel: true,
@@ -469,7 +469,7 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 		},
 		Type: ActivityType.Raid,
 		TopLevel: false,
-		ParentActivity: DestinyActivity.Pantheon,
+		ParentActivity: Raids[Raids.Pantheon] as StringsKeysOf<typeof DestinyActivity>,
 		Active: false,
 		Free: true,
 	},
@@ -480,7 +480,7 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 		},
 		Type: ActivityType.Raid,
 		TopLevel: false,
-		ParentActivity: DestinyActivity.Pantheon,
+		ParentActivity: Raids[Raids.Pantheon] as StringsKeysOf<typeof DestinyActivity>,
 		Active: false,
 		Free: true,
 	},
@@ -491,7 +491,7 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 		},
 		Type: ActivityType.Raid,
 		TopLevel: false,
-		ParentActivity: DestinyActivity.Pantheon,
+		ParentActivity: Raids[Raids.Pantheon] as StringsKeysOf<typeof DestinyActivity>,
 		Active: false,
 		Free: true,
 	},
@@ -502,7 +502,7 @@ export const mapRaids: { [key in keyof typeof Raids]: IActivity } = {
 		},
 		Type: ActivityType.Raid,
 		TopLevel: false,
-		ParentActivity: DestinyActivity.Pantheon,
+		ParentActivity: Raids[Raids.Pantheon] as StringsKeysOf<typeof DestinyActivity>,
 		Active: false,
 		Free: true,
 	},
@@ -1049,7 +1049,7 @@ export const mapScoredNightFalls: { [key in keyof typeof ScoredNightFalls]: IAct
 		Free: true,
 	},
 };
-export const mapActivities: { [key in keyof typeof DestinyActivity]: IActivity } = {
+export const mapActivities: { [key in StringsKeysOf<typeof DestinyActivity>]: IActivity } = {
 	...mapDungeons,
 	...mapRaids,
 	...mapExoticMissions,
@@ -1058,7 +1058,7 @@ export const mapActivities: { [key in keyof typeof DestinyActivity]: IActivity }
 
 let _mapActivitiesAndModeByHash: Map<number, IActivityAndMode> | undefined = undefined;
 
-function _getMapActivitiesAndModeByHash(activitiesFilter: { [key in keyof typeof DestinyActivity]: IActivity }) {
+function _getMapActivitiesAndModeByHash(activitiesFilter: { [key in StringsKeysOf<typeof DestinyActivity>]: IActivity }) {
 	if (_mapActivitiesAndModeByHash == undefined) {
 		_mapActivitiesAndModeByHash = new Map<number, IActivityAndMode>();
 		Object.entries(activitiesFilter).flatMap(([activityName, activity]) =>
