@@ -144,17 +144,69 @@ import { Icon } from "astro-icon/components";
 				<span id="highestBadgeRankText" style="margin: auto; margin-left:2px; font-size: 12pt; letter-spacing: 0.18pt;"></span>
 			</div>
 		</div>
-		<div id="badgeExtraRank" style="color: white; height:21px; display:flex;width: fit-content;"
+		<div id="badgeExtraRank" style="color: white; height:21px; display:flex;width: fit-content; margin: auto 0"
 			><span id="badgeExtraRankText" style="margin: auto 0px;" title="blueberry rank"></span></div
 		>
 	</div>
 </div>
 
 <script>
-	import { CurrentPlayerProfile, GetDestinyInventoryItemDefinitionEntityDefinition } from "../stores/destinyPlayerData";
+	import { CurrentPlayerProfile, GetDestinyInventoryItemDefinitionEntityDefinition, PlayerInfo } from "../stores/destinyPlayerData";
 	import { BASE_BUNGIE_URL } from "../utils/common";
-	import { ranksEN } from "../utils/enumStrings";
+	import { ranksEN, AbsoluteRankEN } from "../utils/enumStrings";
+	import { AbsoluteRank } from "../enums/AbsoluteRank";
+	import { DestinyActivity } from "../enums/DestinyActivity";
+	import { mapActivities } from "../utils/activities";
 
+	import { ActivityType } from "../enums/ActivityType";
+	import {
+		getNormalCompletions,
+		getCompletions,
+		getMasterCompletions,
+		getGrandMasterCompletions,
+		FilterType,
+		FilterActive,
+		getActiveActivityComplete,
+	} from "../utils/ActivityCalculations";
+
+	function GetAbsoluteRank(profile: PlayerInfo): AbsoluteRank {
+		const activities = Array.from(profile.activities.values()).sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity]);
+		const allRaids = FilterType(activities, ActivityType.Raid);
+		const activeRaids = FilterActive(allRaids, true);
+		const activeSealRaids =  activeRaids.filter((x)=>mapActivities[x.Activity].SealHash != undefined);
+		const activeSealRaidsCompleted =  activeSealRaids.filter((x)=>x.hasSeal == true).length;
+		//const inactiveRaids = FilterActive(allRaids, false);
+
+		const allDungeons = FilterType(activities, ActivityType.Dungeon);
+		const activeDungeons = FilterActive(allDungeons, true);
+		const activeSealDungeons =  activeDungeons.filter((x)=>mapActivities[x.Activity].SealHash != undefined);
+		const activeSealDungeonsCompleted =  activeSealDungeons.filter((x)=>x.hasSeal == true).length;
+
+		//const inactiveDungeons = FilterActive(allDungeons, false);
+
+		const activeRaidsCompleted = getActiveActivityComplete(activeRaids);
+		const activeDungeonCompleted = getActiveActivityComplete(activeDungeons);
+
+		let currentRank = AbsoluteRank.Untested;
+
+
+		if (activeSealRaidsCompleted == activeSealRaids.length || activeSealDungeonsCompleted == activeSealDungeons.length) {
+			currentRank = AbsoluteRank.Platinum;
+		} else
+		if (activeRaidsCompleted == activeRaids.length && activeDungeonCompleted == activeDungeons.length) {
+			currentRank = AbsoluteRank.Diamond;
+		} else if (activeRaidsCompleted == activeRaids.length || activeDungeonCompleted == activeDungeons.length) {
+			currentRank = AbsoluteRank.Gold;
+		} else if (activeRaidsCompleted > 3 && activeDungeonCompleted > 2) {
+			currentRank = AbsoluteRank.Silver;
+		} else if (activeRaidsCompleted > 0 && activeDungeonCompleted > 0) {
+			currentRank = AbsoluteRank.Bronze;
+		} else if (activeRaidsCompleted > 0 || activeDungeonCompleted > 0) {
+			currentRank = AbsoluteRank.Copper;
+		}
+
+		return currentRank;
+	}
 	// Listen to changes in the store, and show/hide the dialog accordingly
 	CurrentPlayerProfile.subscribe((profile, _, changedKey) => {
 		if (changedKey === "info") {
@@ -180,6 +232,10 @@ import { Icon } from "astro-icon/components";
 			document.getElementById(`highestRank${profile.info.LifetimeHighestGuardianRank}`)!.style.display = "flex";
 			document.getElementById("highestBadgeRankText")!.innerHTML = document.getElementById("highestBadgeRank")!.title =
 				ranksEN[profile.info.LifetimeHighestGuardianRank];
+		}
+		if (changedKey == "activities") {
+			document.getElementById("badgeExtraRankText")!.innerHTML = document.getElementById("badgeExtraRankText")!.title =
+				AbsoluteRankEN[GetAbsoluteRank(profile)];
 		}
 	});
 </script>

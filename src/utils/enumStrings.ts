@@ -1,3 +1,4 @@
+import { AbsoluteRank } from "../enums/AbsoluteRank";
 import { DestinyActivity, Dungeons, ExoticMissions, Raids, ScoredNightFalls } from "../enums/DestinyActivity";
 import { ModeType } from "../enums/ModeType";
 
@@ -99,18 +100,30 @@ export const ExoticMissionsEn: { [key in keyof typeof ExoticMissions]: string } 
 
 export const activitiesEN: { [key in keyof typeof DestinyActivity]: string } = { ...DungeonsEn, ...RaidsEn, ...ScoredNightFallsEn, ...ExoticMissionsEn };
 
-export const ranksEN: {[key in number]: string} ={
-	0:"Unranked",
-	1:"New Light",
-	2:"Explorer",
-	3:"Initiate",
-	4:"Scout",
-	5:"Adventurer",
-	6:"Veteran",
-	7:"Elite",
-	8:"Justicar",
-	9:"Vanquisher",
-	10:"Exemplar",
-	11:"Paragon",
+export const ranksEN: { [key in number]: string } = {
+	0: "Unranked",
+	1: "New Light",
+	2: "Explorer",
+	3: "Initiate",
+	4: "Scout",
+	5: "Adventurer",
+	6: "Veteran",
+	7: "Elite",
+	8: "Justicar",
+	9: "Vanquisher",
+	10: "Exemplar",
+	11: "Paragon",
 
+}
+
+export const AbsoluteRankEN: { [key in AbsoluteRank]: string } = {
+	[AbsoluteRank.Untested]: "Untested",
+	[AbsoluteRank.Copper]: "Copper",
+	[AbsoluteRank.Bronze]: "Bronze",
+	[AbsoluteRank.Silver]: "Silver",
+	[AbsoluteRank.Gold]: "Gold",
+	[AbsoluteRank.Diamond]: "Diamond",
+	[AbsoluteRank.Platinum]: "Platinum",
+	[AbsoluteRank.Adept]: "Adept",
+	[AbsoluteRank.Ascendant]: "Ascendant"
 }
