@@ -1,4 +1,4 @@
-import { For, Show } from "solid-js";
+import { For, Match, Show, Switch } from "solid-js";
 import { useStore } from "@nanostores/solid";
 import { CurrentPlayerProfile } from "../stores/destinyPlayerData";
 import { ActivityType } from "../enums/ActivityType";
@@ -26,6 +26,14 @@ function FilterType(activities: IDisplayActivity[], activityType: ActivityType) 
 	return activities.filter((x) => x.Type == (ActivityType[activityType] as keyof typeof ActivityType));
 }
 
+function getActiveActivityComplete(activities: IDisplayActivity[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized)
+		complete = activities.filter((x) => getCompletions(x) > 0).length
+
+	return (complete < 0) ? "?" : complete.toString();
+}
 function getCompletions(activity: IDisplayActivity) {
 	let totalCompletions = 0;
 	activity.Completions.forEach((value,) => value.forEach((x,) => (totalCompletions += x)));
@@ -300,39 +308,78 @@ function GetDisplayItemScoredNightFall(props: { item: IDisplayActivity }) {
 	);
 }
 
-function GetDisplayItems(props: { item: IDisplayActivity; activityType: ActivityType }) {
-	switch (props.activityType) {
-		case ActivityType.Dungeon:
-			return GetDisplayItemDungeon(props);
-		case ActivityType.ExoticMission:
-			return GetDisplayItemExoticMission(props);
-		case ActivityType.Raid:
-			return GetDisplayItemRaid(props);
-		case ActivityType.ScoredNightFall:
-			return GetDisplayItemScoredNightFall(props);
-	}
-}
 
 function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity, IDisplayActivity>; activityType: ActivityType; displayInactive: boolean }) {
-	const activities = Array.from(props.activities.values()).sort((x,y)=>DestinyActivity[x.Activity] - DestinyActivity[y.Activity])
+	const activities = Array.from(props.activities.values()).sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity])
 	const activityOfType = FilterType(activities, props.activityType);
 	const active = FilterActive(activityOfType, true);
 	const inactive = FilterActive(activityOfType, false);
 	return (
 		<div>
-			<table>
+			<div style="display: flex;">
+				<h2 style="margin-block: 0px;">
+					<Switch>
+						<Match when={props.activityType == ActivityType.Raid}>
+							Raids
+						</Match>
+						<Match when={props.activityType == ActivityType.Dungeon}>
+							Dungeons
+						</Match>
+						<Match when={props.activityType == ActivityType.ExoticMission}>
+							Exotic Missions
+						</Match>
+						<Match when={props.activityType == ActivityType.ScoredNightFall}>
+							Grandmaster Nightfalls
+						</Match>
+					</Switch>
+				</h2>
+				<h3 style="margin-block: 0px; margin: auto 0 auto auto">{getActiveActivityComplete(active)}/{active.length}</h3>
+			</div>
+
+			<table style="margin: auto">
 				<thead>
 					<GetDisplayListHeader activityType={props.activityType} />
 				</thead>
 				<tbody>
-					<For each={active}>{(item,) => <GetDisplayItems item={item} activityType={props.activityType} />}</For>
+					<For each={active}>{(item,) =>
+						<Switch>
+							<Match when={props.activityType == ActivityType.Raid}>
+								{GetDisplayItemRaid({ item: item })}
+							</Match>
+							<Match when={props.activityType == ActivityType.Dungeon}>
+								{GetDisplayItemDungeon({ item: item })}
+
+							</Match>
+							<Match when={props.activityType == ActivityType.ExoticMission}>
+								{GetDisplayItemExoticMission({ item: item })}
+							</Match>
+							<Match when={props.activityType == ActivityType.ScoredNightFall}>
+								{GetDisplayItemScoredNightFall({ item: item })}
+							</Match>
+						</Switch>
+					}</For>
 					<Show when={props.displayInactive && inactive.length > 0}>
 						<tr style="height:30px">
 							<td></td> <td style="padding-top:10px; text-align:right; font-weight: bold;">Legacy</td>
 							<td style="padding-top:10px;" colspan="100%"><div style="height: 1px; background: gray">
 							</div></td>
 						</tr>
-						<For each={inactive}>{(item,) => <GetDisplayItems item={item} activityType={props.activityType} />}</For>
+						<For each={inactive}>{(item,) =>
+							<Switch>
+								<Match when={props.activityType == ActivityType.Raid}>
+									{GetDisplayItemRaid({ item: item })}
+								</Match>
+								<Match when={props.activityType == ActivityType.Dungeon}>
+									{GetDisplayItemDungeon({ item: item })}
+								</Match>
+								<Match when={props.activityType == ActivityType.ExoticMission}>
+									{GetDisplayItemExoticMission({ item: item })}
+								</Match>
+								<Match when={props.activityType == ActivityType.ScoredNightFall}>
+									{GetDisplayItemScoredNightFall({ item: item })}
+								</Match>
+							</Switch>
+						}</For>
 					</Show>
 				</tbody>
 			</table>
@@ -343,20 +390,30 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 export function SolidRaids(props: { loading: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
 	element = props.loading;
-	return <>{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Raid, displayInactive: true })}</>;
+	return <>
+		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Raid, displayInactive: true })}
+	</>;
 }
 export function SolidDungeons(props: { loading: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
 	element = props.loading;
-	return <>{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Dungeon, displayInactive: true })}</>;
+	return <>
+		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Dungeon, displayInactive: true })}
+	</>;
 }
 export function SolidExoticMissions(props: { loading: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
 	element = props.loading;
-	return <>{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ExoticMission, displayInactive: true })}</>;
+	return <>
+
+		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ExoticMission, displayInactive: true })}
+	</>;
 }
 export function SolidGrandMasters(props: { loading: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
 	element = props.loading;
-	return <>{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ScoredNightFall, displayInactive: false })}</>;
+	return <>
+
+		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ScoredNightFall, displayInactive: false })}
+	</>;
 }

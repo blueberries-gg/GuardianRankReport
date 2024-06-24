@@ -23,9 +23,9 @@ window.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 	buttonUsername?.addEventListener("click", async () => {
-		playerSearchLoading!.style.visibility = "visible";
+		playerSearchLoading!.style.display = "flex";
 		const users = await GetPlayerInformation(inputUsername?.value || "");
-		playerSearchLoading!.style.visibility = "collapse";
+		playerSearchLoading!.style.display = "none";
 		users.sort((x, y) => x.name.localeCompare(y.name));
 		if (users.length === 1) {
 			const params = new URLSearchParams();

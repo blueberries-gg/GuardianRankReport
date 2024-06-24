@@ -32,16 +32,16 @@ export enum Dungeons {
 }
 
 export enum ExoticMissions {
-	Avalon = 200,
-	DualDestiny,
-	Excision,
+	TheWhisper = 200,
+	ZeroHour,
 	Harbinger,
 	Presage,
-	SeraphsShield,
-	Starcrossed,
-	TheWhisper,
 	VoxObscura,
-	ZeroHour,
+	SeraphsShield,
+	Avalon,
+	Starcrossed,
+	Excision,
+	DualDestiny,
 }
 
 

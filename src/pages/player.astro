@@ -27,7 +27,6 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			<div style="color:white; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
 				<div class="activityGroup">
 					<div class="activityGroupCard">
-						<h2 style="margin-block: 0px;">Raids</h2>
 						<SolidRaids client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
 						</SolidRaids>
@@ -35,7 +34,6 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				</div>
 				<div class="activityGroup">
 					<div class="activityGroupCard">
-						<h2 style="margin-block: 0px;">Dungeons</h2>
 						<SolidDungeons client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
 						</SolidDungeons>
@@ -43,7 +41,6 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				</div>
 				<div class="activityGroup">
 					<div class="activityGroupCard">
-						<h2 style="margin-block: 0px;">Grandmaster Nightfalls</h2>
 						<SolidGrandMasters client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
 						</SolidGrandMasters>
@@ -52,7 +49,6 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 
 				<div class="activityGroup">
 					<div class="activityGroupCard">
-						<h2 style="margin-block: 0px;">Exotic Missions</h2>
 						<SolidExoticMissions client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
 						</SolidExoticMissions>
@@ -69,20 +65,20 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
+		margin: 0 auto;
+		min-width: 474px;
+		max-width: calc(50% - 5px);
 	}
 
 	.activityGroupCard {
-		margin: 0 auto;
 		padding: 10px;
 		background-color: #ffffff0f;
 		border-radius: 10px;
-
 	}
 	.content {
 		margin: auto;
-		width: 900px;
+		width: 960px;
 		max-width: 100%;
-		min-width: 476px;
 		color: white;
 		/* font-size: 20px; */
 	}
