@@ -173,15 +173,18 @@ import { Icon } from "astro-icon/components";
 		const activities = Array.from(profile.activities.values()).sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity]);
 		const allRaids = FilterType(activities, ActivityType.Raid);
 		const activeRaids = FilterActive(allRaids, true);
-		const activeSealRaids =  activeRaids.filter((x)=>mapActivities[x.Activity].SealHash != undefined);
-		const activeSealRaidsCompleted =  activeSealRaids.filter((x)=>x.hasSeal == true).length;
+		const activeSealRaids = activeRaids.filter((x) => mapActivities[x.Activity].SealHash != undefined);
+		const activeSealRaidsCompleted = activeSealRaids.filter((x) => x.hasSeal == true).length;
+		const activeFlawlessRaids = activeRaids.filter((x) => mapActivities[x.Activity].FlawlessHash != undefined);
+		const activeFlawlessRaidsCompleted = activeFlawlessRaids.filter((x) => x.hasFlawless == true).length;
 		//const inactiveRaids = FilterActive(allRaids, false);
 
 		const allDungeons = FilterType(activities, ActivityType.Dungeon);
 		const activeDungeons = FilterActive(allDungeons, true);
-		const activeSealDungeons =  activeDungeons.filter((x)=>mapActivities[x.Activity].SealHash != undefined);
-		const activeSealDungeonsCompleted =  activeSealDungeons.filter((x)=>x.hasSeal == true).length;
-
+		const activeSealDungeons = activeDungeons.filter((x) => mapActivities[x.Activity].SealHash != undefined);
+		const activeSealDungeonsCompleted = activeSealDungeons.filter((x) => x.hasSeal == true).length;
+		const activeSoloFlawlessDungeons = activeRaids.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined);
+		const activeSoloFlawlessDungeonsCompleted = activeSoloFlawlessDungeons.filter((x) => x.hasSoloFlawless == true).length;
 		//const inactiveDungeons = FilterActive(allDungeons, false);
 
 		const activeRaidsCompleted = getActiveActivityComplete(activeRaids);
@@ -189,11 +192,13 @@ import { Icon } from "astro-icon/components";
 
 		let currentRank = AbsoluteRank.Untested;
 
-
-		if (activeSealRaidsCompleted == activeSealRaids.length || activeSealDungeonsCompleted == activeSealDungeons.length) {
+		if (activeFlawlessRaidsCompleted == activeFlawlessRaids.length && activeSoloFlawlessDungeonsCompleted == activeSoloFlawlessDungeons.length) {
+			currentRank = AbsoluteRank.Ascendant;
+		} else if (activeSealRaidsCompleted == activeSealRaids.length && activeSealDungeonsCompleted == activeSealDungeons.length) {
+			currentRank = AbsoluteRank.Adept;
+		} else if (activeSealRaidsCompleted == activeSealRaids.length || activeSealDungeonsCompleted == activeSealDungeons.length) {
 			currentRank = AbsoluteRank.Platinum;
-		} else
-		if (activeRaidsCompleted == activeRaids.length && activeDungeonCompleted == activeDungeons.length) {
+		} else if (activeRaidsCompleted == activeRaids.length && activeDungeonCompleted == activeDungeons.length) {
 			currentRank = AbsoluteRank.Diamond;
 		} else if (activeRaidsCompleted == activeRaids.length || activeDungeonCompleted == activeDungeons.length) {
 			currentRank = AbsoluteRank.Gold;
