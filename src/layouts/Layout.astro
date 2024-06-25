@@ -12,11 +12,35 @@ import { GetPlayerInformation } from "../stores/destinyPlayerData";
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=474" />
+		<script is:inline>
+			let viewport = document.querySelector("meta[name=viewport]");
+			let newViewport = document.createElement("meta");
+			newViewport.setAttribute("name", "viewport");
+			if (screen.width >= 474) {
+				newViewport.setAttribute("content", "width=device-width, initial-scale=1.0");
+			} else {
+				newViewport.setAttribute("content", "width=474");
+			}
+			viewport.parentNode.removeChild(viewport);
+			document.head.appendChild(newViewport);
+			
+			screen.orientation.addEventListener("change", (event) => {
+				let viewport = document.querySelector("meta[name=viewport]");
+				let newViewport = document.createElement("meta");
+				newViewport.setAttribute("name", "viewport");
+				if (screen.width >= 474) {
+					newViewport.setAttribute("content", "width=device-width, initial-scale=1.0");
+				} else {
+					newViewport.setAttribute("content", "width=474");
+				}
+				viewport.parentNode.removeChild(viewport);
+				document.head.appendChild(newViewport);
+			});
+		</script>
 		<meta name="description" content="Guardian Rank Report" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href=`favicon.svg` />
 		<meta name="generator" content={Astro.generator} />
-
 		<title>{title}</title>
 	</head>
 	<body>
@@ -41,7 +65,6 @@ import { GetPlayerInformation } from "../stores/destinyPlayerData";
 	}
 	html {
 		background: #13151a;
-		min-width: 474px;
 	}
 
 	body {

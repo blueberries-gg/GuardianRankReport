@@ -11,8 +11,8 @@ import completeGold from "../resources/completeGold.png";
 import missing from "../resources/missing.png";
 import { getNormalCompletions, getCompletions, getMasterCompletions, getGrandMasterCompletions, FilterType, FilterActive, getActiveActivityComplete } from "../utils/ActivityCalculations";
 
-function ActivityCompletionsToString(complete: number){
-	return (complete< 0) ? "?" : complete.toString()
+function ActivityCompletionsToString(complete: number) {
+	return (complete < 0) ? "?" : complete.toString()
 }
 
 let element: Element;
@@ -39,6 +39,7 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Solo</th>
 					<th style="text-align: center; vertical-align: middle; max-width: 60pt;">Advanced Flawless</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
 				</tr>
 			);
 		case ActivityType.Raid:
@@ -58,6 +59,7 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th></th>
 					<th></th>
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
 				</tr>
 			);
 	}
@@ -316,12 +318,58 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 							</Match>
 						</Switch>
 					}</For>
-					<Show when={props.displayInactive && inactive.length > 0}>
-						<tr style="height:30px">
-							<td></td> <td style="padding-top:10px; text-align:right; font-weight: bold;">Legacy</td>
-							<td style="padding-top:10px;" colspan="100%"><div style="height: 1px; background: gray">
-							</div></td>
-						</tr>
+				</tbody>
+
+				<Show when={props.displayInactive && inactive.length > 0}>
+					<tr style="height:30px">
+						<td></td>
+						<td style="padding-top:10px; text-align:right; font-weight: bold;">Legacy</td>
+						<Switch>
+							<Match when={props.activityType == ActivityType.Raid}>
+								<td style="padding-top:10px;" colspan="3">
+									<div style="height: 1px; background: gray">
+									</div>
+								</td>
+							</Match>
+							<Match when={props.activityType == ActivityType.Dungeon}>
+								<td style="padding-top:10px;" colspan="4">
+									<div style="height: 1px; background: gray">
+									</div>
+								</td>
+							</Match>
+							<Match when={props.activityType == ActivityType.ExoticMission}>
+								<td style="padding-top:10px;" colspan="4">
+									<div style="height: 1px; background: gray">
+									</div>
+								</td>
+							</Match>
+							<Match when={props.activityType == ActivityType.ScoredNightFall}>
+								<td style="padding-top:10px;" colspan="1">
+									<div style="height: 1px; background: gray">
+									</div>
+								</td>
+							</Match>
+						</Switch>
+						<td id={`${ActivityType[props.activityType]}-CollapseButton`} style="text-align:center;" onclick={
+							() => {
+								const element = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`);
+								const collapseButton = document.getElementById(`${ActivityType[props.activityType]}-CollapseButton`);
+
+								console.log(element);
+								if (element!.style.display == 'none') {
+									element!.style.display = "table-row-group"
+									collapseButton!.innerHTML = '&#9650';
+								}
+								else {
+									element!.style.display = "none"
+									collapseButton!.innerHTML = '&#9660';
+								}
+							}
+						}>
+							&#9660
+						</td>
+					</tr>
+					<tbody id={`${ActivityType[props.activityType]}-LegacyTable`} style="display: none">
 						<For each={inactive}>{(item,) =>
 							<Switch>
 								<Match when={props.activityType == ActivityType.Raid}>
@@ -338,8 +386,8 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 								</Match>
 							</Switch>
 						}</For>
-					</Show>
-				</tbody>
+					</tbody>
+				</Show>
 			</table>
 		</div>
 	);
