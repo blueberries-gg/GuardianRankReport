@@ -166,7 +166,7 @@ import { Icon } from "astro-icon/components";
 		getGrandMasterCompletions,
 		FilterType,
 		FilterActive,
-		getActiveActivityComplete,
+		getActivityTypeCountComplete,
 	} from "../utils/ActivityCalculations";
 
 	function GetAbsoluteRank(profile: PlayerInfo): AbsoluteRank {
@@ -187,8 +187,8 @@ import { Icon } from "astro-icon/components";
 		const activeSoloFlawlessDungeonsCompleted = activeSoloFlawlessDungeons.filter((x) => x.hasSoloFlawless == true).length;
 		//const inactiveDungeons = FilterActive(allDungeons, false);
 
-		const activeRaidsCompleted = getActiveActivityComplete(activeRaids);
-		const activeDungeonCompleted = getActiveActivityComplete(activeDungeons);
+		const activeRaidsCompleted = getActivityTypeCountComplete(activeRaids);
+		const activeDungeonCompleted = getActivityTypeCountComplete(activeDungeons);
 
 		let currentRank = AbsoluteRank.Untested;
 
