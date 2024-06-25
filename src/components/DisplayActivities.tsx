@@ -9,7 +9,7 @@ import { BASE_BUNGIE_URL } from "../utils/common";
 import complete from "../resources/complete.png";
 import completeGold from "../resources/completeGold.png";
 import missing from "../resources/missing.png";
-import { getNormalCompletions, getCompletions, getMasterCompletions, getGrandMasterCompletions, FilterType, FilterActive, getActiveActivityComplete } from "../utils/ActivityCalculations";
+import { getNormalCompletions, getCompletions, getMasterCompletions, getGrandMasterCompletions, FilterType, FilterActive, getActivityTypeCountComplete, getActivityTypeTotalCompletions } from "../utils/ActivityCalculations";
 
 function ActivityCompletionsToString(complete: number) {
 	return (complete < 0) ? "?" : complete.toString()
@@ -293,7 +293,9 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 						</Match>
 					</Switch>
 				</h2>
-				<h3 style="margin-block: 0px; margin: auto 0 auto auto">{ActivityCompletionsToString(getActiveActivityComplete(active))}/{active.length}</h3>
+				<h3 style="margin-block: 0px; margin: auto 0 auto 5px">{`(${ActivityCompletionsToString(getActivityTypeTotalCompletions(active))} clears)`}</h3>
+
+				<h3 style="margin-block: 0px; margin: auto 0 auto auto">{ActivityCompletionsToString(getActivityTypeCountComplete(active))}/{active.length}</h3>
 			</div>
 
 			<table style="margin: auto">

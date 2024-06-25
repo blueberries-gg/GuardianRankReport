@@ -14,7 +14,7 @@ export function FilterActive(activities: IDisplayActivity[], active: boolean) {
 export function FilterType(activities: IDisplayActivity[], activityType: ActivityType) {
 	return activities.filter((x) => x.Type == (ActivityType[activityType] as keyof typeof ActivityType));
 }
-export function getActiveActivityComplete(activities: IDisplayActivity[]) {
+export function getActivityTypeCountComplete(activities: IDisplayActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized)
@@ -22,6 +22,18 @@ export function getActiveActivityComplete(activities: IDisplayActivity[]) {
 
 	return complete;
 }
+
+
+export function getActivityTypeTotalCompletions(activities: IDisplayActivity[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized) {
+		complete = 0;
+		activities.map((x) => complete += getCompletions(x));
+	}
+	return complete;
+}
+
 export function getCompletions(activity: IDisplayActivity) {
 	let totalCompletions = 0;
 	activity.Completions.forEach((value) => value.forEach((x) => (totalCompletions += x)));
