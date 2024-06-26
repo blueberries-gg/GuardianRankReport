@@ -2,15 +2,13 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<div style="display: flex; margin: 5px auto 0 auto">
-	<div style="display: flex; gap:5px">
-		<input id="searchInputUsername" list="players" class="inputText" placeholder="Search player" />
-		<datalist id="players"> </datalist>
-		<div id="playerSearchLoading" style="display: none; height: auto;width: auto;">
-			<Icon name="spinner" style="height: auto;width: auto; margin:auto; color: white; " is:inline />
-		</div>
-		<button id="searchButtonUsername" class="menuButton">Search</button>
+<div style="display: flex; gap:5px; margin-block: auto;">
+	<input id="searchInputUsername" list="players" class="inputText" placeholder="Search player" />
+	<datalist id="players"> </datalist>
+	<div id="playerSearchLoading" style="display: none; height: auto;width: auto;">
+		<Icon name="spinner" style="height: auto;width: auto; margin:auto; color: white; opacity:50%;" is:inline />
 	</div>
+	<button id="searchButtonUsername" class="menuButton">Search</button>
 </div>
 
 <script src="../scripts/search.ts"></script>

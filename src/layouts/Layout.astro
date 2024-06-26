@@ -6,6 +6,7 @@ interface Props {
 const { title } = Astro.props;
 import AlertBar from "../components/AlertBar";
 import { GetPlayerInformation } from "../stores/destinyPlayerData";
+import SearchBar from "../components/SearchBar.astro";
 ---
 
 <!doctype html>
@@ -14,18 +15,7 @@ import { GetPlayerInformation } from "../stores/destinyPlayerData";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=474" />
 		<script is:inline>
-			let viewport = document.querySelector("meta[name=viewport]");
-			let newViewport = document.createElement("meta");
-			newViewport.setAttribute("name", "viewport");
-			if (screen.width >= 474) {
-				newViewport.setAttribute("content", "width=device-width, initial-scale=1.0");
-			} else {
-				newViewport.setAttribute("content", "width=474");
-			}
-			viewport.parentNode.removeChild(viewport);
-			document.head.appendChild(newViewport);
-			
-			screen.orientation.addEventListener("change", (event) => {
+			function checkViewPort() {
 				let viewport = document.querySelector("meta[name=viewport]");
 				let newViewport = document.createElement("meta");
 				newViewport.setAttribute("name", "viewport");
@@ -36,7 +26,9 @@ import { GetPlayerInformation } from "../stores/destinyPlayerData";
 				}
 				viewport.parentNode.removeChild(viewport);
 				document.head.appendChild(newViewport);
-			});
+			}
+			screen.orientation.addEventListener("change", checkViewPort);
+			window.addEventListener("resize", checkViewPort);
 		</script>
 		<meta name="description" content="Guardian Rank Report" />
 		<link rel="icon" type="image/svg+xml" href=`favicon.svg` />
@@ -44,11 +36,28 @@ import { GetPlayerInformation } from "../stores/destinyPlayerData";
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<header style="display: flex; background: #454b58; padding-inline: 5px; border-bottom: solid 12px #797980;">
+			<div style="margin-block: auto; flex-direction: row;" class="content">
+				<div style="flex-grow: 1; display: flex;">
+					<a class="logo" href="https://www.blueberries.gg/">
+						<img
+							src="https://www.blueberries.gg/wp-content/uploads/2023/10/New-BlueberriesGG-logo-Small.png"
+							alt="BlueberriesGG"
+							class="logo-img"
+						/>
+					</a>
+				</div>
+
+				<SearchBar />
+			</div>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer>
+			<AlertBar client:only="solid" />
+		</footer>
 	</body>
-	<footer>
-		<AlertBar client:only="solid" />
-	</footer>
 </html>
 <style is:global>
 	/* :root {
@@ -59,15 +68,36 @@ import { GetPlayerInformation } from "../stores/destinyPlayerData";
 	} */
 
 	main {
-		display: flex;
-		flex-direction: column;
-		gap: 15px;
+		background: #3f3f46;
+		background: radial-gradient(circle at center top, #3f3f46 0, #0b0b0f 1080px);
+		min-height: calc(100vh - 71px);
 	}
 	html {
-		background: #13151a;
+		background: #0b0b0f;
 	}
 
 	body {
 		margin: 0;
+	}
+
+	.logo {
+		height: 30px;
+		margin-block: auto;
+	}
+	.logo-img {
+		display: block;
+		width: auto;
+		height: 100%;
+	}
+	.content {
+		margin: auto;
+		width: 960px;
+		max-width: 100%;
+		color: white;
+		/* font-size: 20px; */
+		padding-block: 10px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 	}
 </style>

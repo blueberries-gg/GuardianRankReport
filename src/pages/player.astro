@@ -20,44 +20,43 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			GetInformationForMember(bungieNetMembershipId!, parseInt(membershipType!));
 		});
 	</script>
-	<main>
-		<SearchBar />
-		<PlayerBadge />
 		<div class="content">
-			<div style="color:white; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
-				<div class="activityGroup">
-					<div class="activityGroupCard">
-						<SolidRaids client:load>
-							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-						</SolidRaids>
+			<PlayerBadge />
+			<div>
+				<div
+					style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
+					<div class="activityGroup">
+						<div class="activityGroupCard">
+							<SolidRaids client:load>
+								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+							</SolidRaids>
+						</div>
 					</div>
-				</div>
-				<div class="activityGroup">
-					<div class="activityGroupCard">
-						<SolidDungeons client:load>
-							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-						</SolidDungeons>
+					<div class="activityGroup">
+						<div class="activityGroupCard">
+							<SolidDungeons client:load>
+								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+							</SolidDungeons>
+						</div>
 					</div>
-				</div>
-				<div class="activityGroup">
-					<div class="activityGroupCard">
-						<SolidGrandMasters client:load>
-							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-						</SolidGrandMasters>
+					<div class="activityGroup">
+						<div class="activityGroupCard">
+							<SolidGrandMasters client:load>
+								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+							</SolidGrandMasters>
+						</div>
 					</div>
-				</div>
 
-				<div class="activityGroup">
-					<div class="activityGroupCard">
-						<SolidExoticMissions client:load>
-							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; " is:inline />
-						</SolidExoticMissions>
+					<div class="activityGroup">
+						<div class="activityGroupCard">
+							<SolidExoticMissions client:load>
+								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+							</SolidExoticMissions>
+						</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
-	</main>
 </Layout>
 
 <style>
@@ -69,17 +68,26 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		min-width: 474px;
 		max-width: calc(50% - 5px);
 	}
-
 	.activityGroupCard {
-		padding: 10px;
-		background-color: #ffffff0f;
-		border-radius: 10px;
+		outline: 2px solid;
+		outline-offset: 4px;
+		outline-color: transparent;
+		color: #d2d2d2;
+		transition:
+			outline-offset 0.08s cubic-bezier(0.69, 0, 0, 1) 0.125s,
+			outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s,
+			border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
+			color 0.125s cubic-bezier(0.69, 0, 0, 1),
+			background-color 0.125s cubic-bezier(0.69, 0, 0, 1);
 	}
-	.content {
-		margin: auto;
-		width: 960px;
-		max-width: 100%;
-		color: white;
-		/* font-size: 20px; */
+	.activityGroupCard:hover {
+		background: #ffffff2f;
+		outline-color: #d8d8d8;
+		outline-offset: 2px;
+		transition:
+			outline-offset 0.05s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+			outline-color 0.15s linear 0.05s,
+			color 0.05s linear 0.15s;
 	}
+
 </style>

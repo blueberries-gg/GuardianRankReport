@@ -275,110 +275,47 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 	const active = FilterActive(activityOfType, true);
 	const inactive = FilterActive(activityOfType, false);
 	return (
-		<div>
-			<div style="display: flex;">
-				<h2 style="margin-block: 0px;">
-					<Switch>
-						<Match when={props.activityType == ActivityType.Raid}>
-							Raids
-						</Match>
-						<Match when={props.activityType == ActivityType.Dungeon}>
-							Dungeons
-						</Match>
-						<Match when={props.activityType == ActivityType.ExoticMission}>
-							Exotic Missions
-						</Match>
-						<Match when={props.activityType == ActivityType.ScoredNightFall}>
-							Grandmaster Nightfalls
-						</Match>
-					</Switch>
-				</h2>
-				<h3 style="margin-block: 0px; margin: auto 0 auto 5px">{`(${ActivityCompletionsToString(getActivityTypeTotalCompletions(active))} clears)`}</h3>
-
-				<h3 style="margin-block: 0px; margin: auto 0 auto auto">{ActivityCompletionsToString(getActivityTypeCountComplete(active))}/{active.length}</h3>
+		<div style="">
+			<div style="background: #ffffff1A; padding: 10px; border-bottom: solid 2px currentcolor;">
+				<div style="display: flex;">
+					<span style="margin: auto; font-size: 16pt; letter-spacing: 4pt">
+						<Switch>
+							<Match when={props.activityType == ActivityType.Raid}>
+								RAIDS
+							</Match>
+							<Match when={props.activityType == ActivityType.Dungeon}>
+								DUNGEONS
+							</Match>
+							<Match when={props.activityType == ActivityType.ExoticMission}>
+								EXOTIC MISSIONS
+							</Match>
+							<Match when={props.activityType == ActivityType.ScoredNightFall}>
+								GRANDMASTER NIGHTFALLS
+							</Match>
+						</Switch>
+					</span>
+				</div>
 			</div>
+			<div style="background: #ffffff0C; padding: 10px;">
+				<div style="display: flex;">
+					<span style="margin-block: 0px; margin: auto 0 auto 5px; font-size: 14pt">{`Overall clears: ${ActivityCompletionsToString(getActivityTypeTotalCompletions(active))}`}</span>
 
-			<table style="margin: auto">
-				<thead>
-					<GetDisplayListHeader activityType={props.activityType} />
-				</thead>
-				<tbody>
-					<For each={active}>{(item,) =>
-						<Switch>
-							<Match when={props.activityType == ActivityType.Raid}>
-								{GetDisplayItemRaid({ item: item })}
-							</Match>
-							<Match when={props.activityType == ActivityType.Dungeon}>
-								{GetDisplayItemDungeon({ item: item })}
+					<span style="margin-block: 0px; margin: auto 0 auto auto; font-size: 14pt">{`${ActivityCompletionsToString(getActivityTypeCountComplete(active))}/${active.length} done`}</span>
 
-							</Match>
-							<Match when={props.activityType == ActivityType.ExoticMission}>
-								{GetDisplayItemExoticMission({ item: item })}
-							</Match>
-							<Match when={props.activityType == ActivityType.ScoredNightFall}>
-								{GetDisplayItemScoredNightFall({ item: item })}
-							</Match>
-						</Switch>
-					}</For>
-				</tbody>
-
-				<Show when={props.displayInactive && inactive.length > 0}>
-					<tr style="height:30px">
-						<td></td>
-						<td style="padding-top:10px; text-align:right; font-weight: bold;">Legacy</td>
-						<Switch>
-							<Match when={props.activityType == ActivityType.Raid}>
-								<td style="padding-top:10px;" colspan="3">
-									<div style="height: 1px; background: gray">
-									</div>
-								</td>
-							</Match>
-							<Match when={props.activityType == ActivityType.Dungeon}>
-								<td style="padding-top:10px;" colspan="4">
-									<div style="height: 1px; background: gray">
-									</div>
-								</td>
-							</Match>
-							<Match when={props.activityType == ActivityType.ExoticMission}>
-								<td style="padding-top:10px;" colspan="4">
-									<div style="height: 1px; background: gray">
-									</div>
-								</td>
-							</Match>
-							<Match when={props.activityType == ActivityType.ScoredNightFall}>
-								<td style="padding-top:10px;" colspan="1">
-									<div style="height: 1px; background: gray">
-									</div>
-								</td>
-							</Match>
-						</Switch>
-						<td id={`${ActivityType[props.activityType]}-CollapseButton`} style="text-align:center;" onclick={
-							() => {
-								const element = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`);
-								const collapseButton = document.getElementById(`${ActivityType[props.activityType]}-CollapseButton`);
-
-								console.log(element);
-								if (element!.style.display == 'none') {
-									element!.style.display = "table-row-group"
-									collapseButton!.innerHTML = '&#9650';
-								}
-								else {
-									element!.style.display = "none"
-									collapseButton!.innerHTML = '&#9660';
-								}
-							}
-						}>
-							&#9660
-						</td>
-					</tr>
-					<tbody id={`${ActivityType[props.activityType]}-LegacyTable`} style="display: none">
-						<For each={inactive}>{(item,) =>
+				</div>
+				<table style="margin: auto; font-size: 12pt">
+					<thead>
+						<GetDisplayListHeader activityType={props.activityType} />
+					</thead>
+					<tbody style="color: white">
+						<For each={active}>{(item,) =>
 							<Switch>
 								<Match when={props.activityType == ActivityType.Raid}>
 									{GetDisplayItemRaid({ item: item })}
 								</Match>
 								<Match when={props.activityType == ActivityType.Dungeon}>
 									{GetDisplayItemDungeon({ item: item })}
+
 								</Match>
 								<Match when={props.activityType == ActivityType.ExoticMission}>
 									{GetDisplayItemExoticMission({ item: item })}
@@ -389,37 +326,101 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 							</Switch>
 						}</For>
 					</tbody>
-				</Show>
-			</table>
+
+					<Show when={props.displayInactive && inactive.length > 0}>
+						<tr style="height:30px; padding-top:5px; font-weight: bold;">
+							<td></td>
+							<Switch>
+								<Match when={props.activityType == ActivityType.Raid}>
+									<td style="border-bottom-style: solid 1px;" colspan="4">
+										Legacy
+									</td>
+								</Match>
+								<Match when={props.activityType == ActivityType.Dungeon}>
+									<td style="border-bottom-style: solid 1px;" colspan="5">
+										Legacy
+									</td>
+								</Match>
+								<Match when={props.activityType == ActivityType.ExoticMission}>
+									<td style="border-bottom-style: solid 1px;" colspan="5">
+										Legacy
+									</td>
+								</Match>
+								<Match when={props.activityType == ActivityType.ScoredNightFall}>
+									<td style="border-bottom-style: solid 1px;" colspan="2">
+										Legacy
+									</td>
+								</Match>
+							</Switch>
+							<td id={`${ActivityType[props.activityType]}-CollapseButton`} style="text-align:center; padding-top:5px; cursor:pointer;" onclick={
+								() => {
+									const element = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`);
+									const collapseButton = document.getElementById(`${ActivityType[props.activityType]}-CollapseButton`);
+
+									console.log(element);
+									if (element!.style.display == 'none') {
+										element!.style.display = "table-row-group"
+										collapseButton!.innerHTML = '&#9650';
+									}
+									else {
+										element!.style.display = "none"
+										collapseButton!.innerHTML = '&#9660';
+									}
+								}
+							}>
+								&#9660
+							</td>
+						</tr>
+						<tbody id={`${ActivityType[props.activityType]}-LegacyTable`} style="display: none">
+							<For each={inactive}>{(item,) =>
+								<Switch>
+									<Match when={props.activityType == ActivityType.Raid}>
+										{GetDisplayItemRaid({ item: item })}
+									</Match>
+									<Match when={props.activityType == ActivityType.Dungeon}>
+										{GetDisplayItemDungeon({ item: item })}
+									</Match>
+									<Match when={props.activityType == ActivityType.ExoticMission}>
+										{GetDisplayItemExoticMission({ item: item })}
+									</Match>
+									<Match when={props.activityType == ActivityType.ScoredNightFall}>
+										{GetDisplayItemScoredNightFall({ item: item })}
+									</Match>
+								</Switch>
+							}</For>
+						</tbody>
+					</Show>
+				</table>
+			</div>
 		</div>
 	);
 }
 
-export function SolidRaids(props: { loading: Element }) {
+export function SolidRaids(props: { loading?: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
-	element = props.loading;
+	element = props.loading!;
 	return <>
 		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Raid, displayInactive: true })}
 	</>;
 }
-export function SolidDungeons(props: { loading: Element }) {
+export function SolidDungeons(props: { loading?: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
-	element = props.loading;
+	element = props.loading!;
 	return <>
 		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Dungeon, displayInactive: true })}
 	</>;
 }
-export function SolidExoticMissions(props: { loading: Element }) {
+export function SolidExoticMissions(props: { loading?: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
-	element = props.loading;
+	element = props.loading!;
 	return <>
 
 		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ExoticMission, displayInactive: true })}
 	</>;
 }
-export function SolidGrandMasters(props: { loading: Element }) {
+export function SolidGrandMasters(props: { loading?: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
-	element = props.loading;
+	element = props.loading!;
 	return <>
 
 		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ScoredNightFall, displayInactive: false })}

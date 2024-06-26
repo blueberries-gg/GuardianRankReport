@@ -84,7 +84,7 @@ async function $http(config: HttpClientConfig) {
 		headers: headers,
 		credentials: "include",
 		mode: "cors",
-		referrerPolicy: "origin-when-cross-origin",
+		referrerPolicy: "origin",
 	})
 		.then(FetchSuccess, FetchErrorProcess)
 		.catch(FetchErrorProcess);
@@ -430,7 +430,7 @@ async function GetPlayerByPrefix(name: string) {
 	return users;
 }
 
-async function getHealthStatus() {
+export const getHealthStatus = async () => {
 	const destinySettings = await getCommonSettings($http);
 	let destinyEnabled = false;
 	if (IsDestinyResponseValid(destinySettings, getBungieErrorMessage)) destinyEnabled = destinySettings.Response.systems["Destiny2"].enabled;
@@ -441,7 +441,7 @@ async function getHealthStatus() {
 		healthStatus.set(false);
 	}
 	DestinyEnabled.set(destinyEnabled);
-}
+};
 
 function getBungieErrorMessage<T>(response: ServerResponse<T>) {
 	if ((response.ErrorCode as number) === -1) healthStatusTitle.set(`Internal Error(${response.ErrorStatus})`);
@@ -450,12 +450,7 @@ function getBungieErrorMessage<T>(response: ServerResponse<T>) {
 	healthStatusReason.set(`${response.Message}`);
 	healthStatus.set(false);
 }
-export const gp = async () => {
-	getHealthStatus();
-	//console.log(await GetPlayerInformation("icicle"));
-	await GetInformationForMember(4611686018475976486n, BungieMembershipType.TigerSteam);
-	//await GetInformationForMember(4611686018527458332n, BungieMembershipType.TigerSteam);
-};
+
 async function FetchSuccess<T>(r: Response | undefined): Promise<T> {
 	if (DestinyEnabled.get()) {
 		healthStatusReason.set("");
