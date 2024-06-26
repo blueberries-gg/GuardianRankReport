@@ -60,9 +60,6 @@ import SearchBar from "../components/SearchBar.astro";
 	</body>
 </html>
 
-<script >
-document.addEventListener("touchstart", function() {}, true);
-</script>
 <style is:global>
 	/* :root {
 		--accent: 136, 58, 234;
@@ -103,5 +100,19 @@ document.addEventListener("touchstart", function() {}, true);
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	.completions-table {
+		margin: auto;
+		font-size: 12pt;
+		border-collapse: collapse;
+		position: relative;
+	}
+	.completions-table-empty-tr::before {
+		content: "";
+		position: absolute; /* absolute positioned */
+		width: 100%; /* span the entire table */
+		border-bottom: solid 1px;
+		width: 100% !important;
 	}
 </style>

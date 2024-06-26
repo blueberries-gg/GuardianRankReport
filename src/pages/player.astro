@@ -20,43 +20,43 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			GetInformationForMember(bungieNetMembershipId!, parseInt(membershipType!));
 		});
 	</script>
-		<div class="content">
-			<PlayerBadge />
-			<div>
-				<div
-					style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
-					<div class="activityGroup">
-						<div class="activityGroupCard">
-							<SolidRaids client:load>
-								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
-							</SolidRaids>
-						</div>
+	<div class="content">
+		<PlayerBadge />
+		<div>
+			<div
+				style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<SolidRaids client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+						</SolidRaids>
 					</div>
-					<div class="activityGroup">
-						<div class="activityGroupCard">
-							<SolidDungeons client:load>
-								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
-							</SolidDungeons>
-						</div>
+				</div>
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<SolidDungeons client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+						</SolidDungeons>
 					</div>
-					<div class="activityGroup">
-						<div class="activityGroupCard">
-							<SolidGrandMasters client:load>
-								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
-							</SolidGrandMasters>
-						</div>
+				</div>
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<SolidGrandMasters client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+						</SolidGrandMasters>
 					</div>
+				</div>
 
-					<div class="activityGroup">
-						<div class="activityGroupCard">
-							<SolidExoticMissions client:load>
-								<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
-							</SolidExoticMissions>
-						</div>
+				<div class="activityGroup">
+					<div class="activityGroupCard">
+						<SolidExoticMissions client:load>
+							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
+						</SolidExoticMissions>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 </Layout>
 
 <style>
@@ -69,6 +69,8 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		max-width: calc(50% - 5px);
 		cursor: default;
 		user-select: none;
+		-webkit-user-select: none;
+		-webkit-touch-callout: none;
 	}
 	.activityGroupCard {
 		outline: 2px solid;
@@ -82,7 +84,19 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			color 0.125s cubic-bezier(0.69, 0, 0, 1),
 			background-color 0.125s cubic-bezier(0.69, 0, 0, 1);
 	}
-	.activityGroupCard:hover {
+	@media (hover: hover) {
+		.activityGroupCard:hover .activityGroupCard:active {
+			background: #ffffff2f;
+			outline-color: #d8d8d8;
+			outline-offset: 2px;
+			transition:
+				outline-offset 0.05s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+				outline-color 0.15s linear 0.05s,
+				color 0.05s linear 0.15s;
+		}
+	}
+
+	.activityGroupCard.touch-hover {
 		background: #ffffff2f;
 		outline-color: #d8d8d8;
 		outline-offset: 2px;
@@ -91,5 +105,38 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			outline-color 0.15s linear 0.05s,
 			color 0.05s linear 0.15s;
 	}
-
 </style>
+
+<script>
+	let cardNames = document.getElementsByClassName("activityGroupCard");
+
+	for (let i = 0; i < cardNames.length; i++) {
+		const touchTarget = (e: Event) => {
+			let el = cardNames.item(i)!;
+			let className = "touch-hover";
+			if (e.type == "touchend") {
+				if (el.classList) {
+					el.classList.remove(className);
+				} else {
+					const classes = el.className.split(" ");
+					const existingIndex = classes.indexOf(className);
+					if (existingIndex >= 0) classes.splice(existingIndex, 1);
+					el.className = classes.join(" ");
+				}
+			} else {
+				if (el.classList) {
+					el.classList.add(className);
+				} else {
+					const classes = el.className.split(" ");
+					const existingIndex = classes.indexOf(className);
+
+					if (existingIndex < 0) classes.push(className);
+
+					el.className = classes.join(" ");
+				}
+			}
+		};
+		cardNames.item(i)!.addEventListener("touchstart", touchTarget, true);
+		cardNames.item(i)!.addEventListener("touchend", touchTarget, true);
+	}
+</script>

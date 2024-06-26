@@ -210,7 +210,7 @@ function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
 				</Show>
 			</td>
 			<td>
-			<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
+				<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
 					<Show when={props.item.hasSoloFlawless == undefined}>
 						<div style="margin: auto; width: fit-content;">
 							{element}
@@ -276,7 +276,7 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 				<div style="display: flex;">
 					<span style="margin-block: 0px; margin: auto 0 auto 5px; font-size: 14pt">{``}</span>
 				</div>
-				<table style="margin: auto; font-size: 12pt; border-collapse: collapse">
+				<table class="completions-table">
 					<thead>
 						<GetDisplayListHeader activityType={props.activityType} />
 					</thead>
@@ -298,7 +298,8 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 								</Match>
 							</Switch>
 						}</For>
-						<tr style="height:1px; border-bottom: solid 1px;"></tr>
+						<tr style="height:1px; " class="completions-table-empty-tr">
+						</tr>
 						<tr style="height:30px;">
 							<td></td>
 							<td>Total</td>
@@ -355,11 +356,20 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 								</Match>
 							</Switch>
 							<td id={`${ActivityType[props.activityType]}-CollapseButton`} style="text-align:center; padding-top:5px; cursor:pointer;" onclick={
-								() => {
+								(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									const elementGroupCard = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`)!.closest(".activityGroupCard")!;
+									const el = elementGroupCard
+									const className = "touch-hover";
+									if (el.classList) {
+										el.classList.add(className);
+										setTimeout(() => el.classList.remove(className), 400);
+									}
+
+
 									const element = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`);
 									const collapseButton = document.getElementById(`${ActivityType[props.activityType]}-CollapseButton`);
-
-									console.log(element);
 									if (element!.style.display == 'none') {
 										element!.style.display = "table-row-group"
 										collapseButton!.innerHTML = '&#9650';
