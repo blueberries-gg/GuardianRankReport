@@ -14,17 +14,15 @@ export function FilterActive(activities: IDisplayActivity[], active: boolean) {
 export function FilterType(activities: IDisplayActivity[], activityType: ActivityType) {
 	return activities.filter((x) => x.Type == (ActivityType[activityType] as keyof typeof ActivityType));
 }
-export function getActivityTypeCountComplete(activities: IDisplayActivity[]) {
+export function getActivitiesCountComplete(activities: IDisplayActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized)
 		complete = activities.filter((x) => getCompletions(x) > 0).length;
-
 	return complete;
 }
 
-
-export function getActivityTypeTotalCompletions(activities: IDisplayActivity[]) {
+export function getActivitiesTotalCompletions(activities: IDisplayActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
@@ -34,23 +32,89 @@ export function getActivityTypeTotalCompletions(activities: IDisplayActivity[]) 
 	return complete;
 }
 
+export function getActivitiesMasterCompletions(activities: IDisplayActivity[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized) {
+		complete = 0;
+		activities.map((x) => complete += getMasterCompletions(x));
+	}
+	return complete;
+}
+
+export function getActivitiesSealCompletions(activities: IDisplayActivity[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized) {
+		complete = activities.filter(x => x.hasSeal).length;
+	}
+	return complete;
+}
+
+
+export function getActivitiesFlawlessCompletions(activities: IDisplayActivity[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized) {
+		complete = activities.filter(x => x.hasFlawless === true).length;
+	}
+	return complete;
+}
+
+export function getActivitiesSoloCompletions(activities: IDisplayActivity[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized) {
+		complete = activities.filter(x => x.hasSolo === true).length;
+	}
+	return complete;
+}
+
+export function getActivitiesSoloFlawlessCompletions(activities: IDisplayActivity[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized) {
+		complete = activities.filter(x => x.hasSoloFlawless === true).length;
+	}
+	return complete;
+}
+
 export function getCompletions(activity: IDisplayActivity) {
-	let totalCompletions = 0;
-	activity.Completions.forEach((value) => value.forEach((x) => (totalCompletions += x)));
-	return totalCompletions;
+	const initialized = activity.dataInitialized;
+	let complete = -1;
+	if (initialized) {
+		complete = 0
+		activity.Completions.forEach((value) => value.forEach((x) => (complete += x)));
+
+	}
+	return complete;
 }
 export function getNormalCompletions(activity: IDisplayActivity) {
-	let totalCompletions = 0;
-	activity.Completions.get(ModeType[ModeType.Normal] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (totalCompletions += x));
-	return totalCompletions;
+	const initialized = activity.dataInitialized;
+	let complete = -1;
+	if (initialized) {
+		complete = 0
+		activity.Completions.get(ModeType[ModeType.Normal] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
+
+	}
+	return complete;
 }
 export function getMasterCompletions(activity: IDisplayActivity) {
-	let totalCompletions = 0;
-	activity.Completions.get(ModeType[ModeType.Master] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (totalCompletions += x));
-	return totalCompletions;
+	const initialized = activity.dataInitialized;
+	let complete = -1;
+	if (initialized) {
+		complete = 0
+		activity.Completions.get(ModeType[ModeType.Master] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
+	}
+	return complete;
 }
 export function getGrandMasterCompletions(activity: IDisplayActivity) {
-	let totalCompletions = 0;
-	activity.Completions.get(ModeType[ModeType.Grandmaster] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (totalCompletions += x));
-	return totalCompletions;
+
+	const initialized = activity.dataInitialized;
+	let complete = -1;
+	if (initialized) {
+		complete = 0
+		activity.Completions.get(ModeType[ModeType.Grandmaster] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
+	}
+	return complete;
 }

@@ -7,12 +7,11 @@ import { getMasterLike, IDisplayActivity, mapActivities } from "../utils/activit
 import { activitiesEN } from "../utils/enumStrings";
 import { BASE_BUNGIE_URL } from "../utils/common";
 import complete from "../resources/complete.png";
-import completeGold from "../resources/completeGold.png";
 import missing from "../resources/missing.png";
-import { getNormalCompletions, getCompletions, getMasterCompletions, getGrandMasterCompletions, FilterType, FilterActive, getActivityTypeCountComplete, getActivityTypeTotalCompletions } from "../utils/ActivityCalculations";
+import { getNormalCompletions, getCompletions, getMasterCompletions, getGrandMasterCompletions, FilterType, FilterActive, getActivitiesTotalCompletions, getActivitiesMasterCompletions, getActivitiesSealCompletions, getActivitiesFlawlessCompletions, getActivitiesSoloCompletions, getActivitiesSoloFlawlessCompletions } from "../utils/ActivityCalculations";
 
-function ActivityCompletionsToString(complete: number) {
-	return (complete < 0) ? "?" : complete.toString()
+function ActivityCompletionsToString(complete: number, enabled: boolean) {
+	return enabled ? ((complete < 0) ? "?" : complete.toString()) : "";
 }
 
 let element: Element;
@@ -23,11 +22,11 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Solo</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 51pt;">Solo Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Master Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Solo</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 51pt; font-size: 10pt">Solo Flawless</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
 		case ActivityType.ExoticMission:
@@ -35,11 +34,11 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Solo</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 60pt;">Advanced Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Master Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Solo</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 60pt; font-size: 10pt">Solo Flawless</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
 		case ActivityType.Raid:
@@ -47,10 +46,10 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Master Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 51pt;">Flawless</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Master Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 51pt; font-size: 10pt">Flawless</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
 		case ActivityType.ScoredNightFall:
@@ -58,24 +57,27 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 				<tr style="height:30px">
 					<th></th>
 					<th></th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;">Total Clears</th>
-					<th style="text-align: center; vertical-align: middle; max-width: 45pt;"></th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
 	}
 }
 
 function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
+	const totalCompletions = getCompletions(props.item);
+	const enabled = totalCompletions != 0;
+	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style="height:30px">
+		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
 			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>
-				{getCompletions(props.item)}
+				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
 			<td style="text-align: center;">
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{getMasterCompletions(props.item)}
+					{ActivityCompletionsToString(getMasterCompletions(props.item), enabled)}
 				</Show>
 			</td>
 			<td>
@@ -94,32 +96,17 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 				</Show>
 			</td>
 			<td>
-				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
-					<Show when={props.item.hasFlawless == undefined}>
+				<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
+					<Show when={props.item.hasSoloFlawless == undefined}>
 						<div style="margin: auto; width: fit-content;">
 							{element}
 						</div>
 					</Show>
-					<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
-						<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == false}>
-							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
-						</Show>
-						<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == true}>
-							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${completeGold.src}`}></img></div>
-						</Show>
-						<Show when={props.item.hasSoloFlawless == true}>
-							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
-						</Show>
+					<Show when={props.item.hasSoloFlawless == false}>
+						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
 					</Show>
-					<Show when={mapActivities[props.item.Activity].SoloFlawlessHash == undefined}>
-						<Show when={mapActivities[props.item.Activity].FlawlessHash != undefined}>
-							<Show when={props.item.hasFlawless == false}>
-								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
-							</Show>
-							<Show when={props.item.hasFlawless == true}>
-								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
-							</Show>
-						</Show>
+					<Show when={props.item.hasSoloFlawless == true}>
+						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
 					</Show>
 				</Show>
 			</td>
@@ -142,14 +129,19 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 	);
 }
 function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
+	const totalCompletions = getCompletions(props.item);
+	const enabled = totalCompletions != 0;
+	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style="height:30px">
+		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>{getCompletions(props.item)}</td>
+			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>
+				{ActivityCompletionsToString(totalCompletions, enabled)}
+			</td>
 			<td style="text-align: center;">
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{getMasterCompletions(props.item)}
+					{ActivityCompletionsToString(getMasterCompletions(props.item), enabled)}
 				</Show>
 			</td>
 			<td>
@@ -187,14 +179,19 @@ function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
 	);
 }
 function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
+	const totalCompletions = getCompletions(props.item);
+	const enabled = totalCompletions != 0;
+	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style="height:30px">
+		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>{getCompletions(props.item)}</td>
+			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>
+				{ActivityCompletionsToString(totalCompletions, enabled)}
+			</td>
 			<td style="text-align: center;">
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{getMasterCompletions(props.item) + getGrandMasterCompletions(props.item)}
+					{ActivityCompletionsToString(getMasterCompletions(props.item) + getGrandMasterCompletions(props.item), enabled)}
 				</Show>
 			</td>
 			<td>
@@ -213,57 +210,34 @@ function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
 				</Show>
 			</td>
 			<td>
-
-				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
-					<Show when={props.item.hasFlawless === undefined}>
+			<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
+					<Show when={props.item.hasSoloFlawless == undefined}>
 						<div style="margin: auto; width: fit-content;">
 							{element}
 						</div>
 					</Show>
-					<Show when={mapActivities[props.item.Activity].MasterFlawlessHash !== undefined}>
-						<Show when={props.item.hasMasterFlawless === false && props.item.hasFlawless === false}>
-							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
-						</Show>
-						<Show when={props.item.hasMasterFlawless === false && props.item.hasFlawless === true}>
-							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${completeGold.src}`}></img></div>
-						</Show>
-						<Show when={props.item.hasMasterFlawless === true}>
-							<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
-						</Show>
+					<Show when={props.item.hasSoloFlawless == false}>
+						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
 					</Show>
-					<Show when={mapActivities[props.item.Activity].MasterFlawlessHash === undefined}>
-						<Show when={mapActivities[props.item.Activity].SoloFlawlessHash !== undefined}>
-							<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == false}>
-								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
-							</Show>
-							<Show when={props.item.hasSoloFlawless == false && props.item.hasFlawless == true}>
-								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${completeGold.src}`}></img></div>
-							</Show>
-							<Show when={props.item.hasSoloFlawless == true}>
-								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
-							</Show>
-						</Show>
-						<Show when={mapActivities[props.item.Activity].SoloFlawlessHash === undefined}>
-							<Show when={props.item.hasFlawless == false}>
-								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${missing.src}`}></img></div>
-							</Show>
-							<Show when={props.item.hasSoloFlawless == true}>
-								<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
-							</Show>
-						</Show>
+					<Show when={props.item.hasSoloFlawless == true}>
+						<div style="margin: auto; width: 20px;  height: 20px; vertical-align: middle;"><img style="width: 100%;  height: 100%;" src={`${complete.src}`}></img></div>
 					</Show>
 				</Show>
-
 			</td>
 		</tr>
 	);
 }
 function GetDisplayItemScoredNightFall(props: { item: IDisplayActivity }) {
+	const totalCompletions = getCompletions(props.item);
+	const enabled = totalCompletions != 0;
+	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style="height:30px">
+		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
 			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;">{getCompletions(props.item)}</td>
+			<td style="text-align: center;">
+				{ActivityCompletionsToString(totalCompletions, enabled)}
+			</td>
 		</tr>
 	);
 }
@@ -278,32 +252,31 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 		<div style="">
 			<div style="background: #ffffff1A; padding: 10px; border-bottom: solid 2px currentcolor;">
 				<div style="display: flex;">
-					<span style="margin: auto; font-size: 16pt; letter-spacing: 4pt">
-						<Switch>
-							<Match when={props.activityType == ActivityType.Raid}>
-								RAIDS
-							</Match>
-							<Match when={props.activityType == ActivityType.Dungeon}>
-								DUNGEONS
-							</Match>
-							<Match when={props.activityType == ActivityType.ExoticMission}>
-								EXOTIC MISSIONS
-							</Match>
-							<Match when={props.activityType == ActivityType.ScoredNightFall}>
-								GRANDMASTER NIGHTFALLS
-							</Match>
-						</Switch>
-					</span>
+					<div style="margin: auto; padding-top: 3pt;">
+						<span style="font-size: 16pt; letter-spacing: 4pt;">
+							<Switch>
+								<Match when={props.activityType == ActivityType.Raid}>
+									RAIDS
+								</Match>
+								<Match when={props.activityType == ActivityType.Dungeon}>
+									DUNGEONS
+								</Match>
+								<Match when={props.activityType == ActivityType.ExoticMission}>
+									EXOTIC MISSIONS
+								</Match>
+								<Match when={props.activityType == ActivityType.ScoredNightFall}>
+									GRANDMASTER NIGHTFALLS
+								</Match>
+							</Switch>
+						</span>
+					</div>
 				</div>
 			</div>
-			<div style="background: #ffffff0C; padding: 10px;">
+			<div style="background: #ffffff0C; padding-block: 20px;padding-inline: 10px;">
 				<div style="display: flex;">
-					<span style="margin-block: 0px; margin: auto 0 auto 5px; font-size: 14pt">{`Overall clears: ${ActivityCompletionsToString(getActivityTypeTotalCompletions(active))}`}</span>
-
-					<span style="margin-block: 0px; margin: auto 0 auto auto; font-size: 14pt">{`${ActivityCompletionsToString(getActivityTypeCountComplete(active))}/${active.length} done`}</span>
-
+					<span style="margin-block: 0px; margin: auto 0 auto 5px; font-size: 14pt">{``}</span>
 				</div>
-				<table style="margin: auto; font-size: 12pt">
+				<table style="margin: auto; font-size: 12pt; border-collapse: collapse">
 					<thead>
 						<GetDisplayListHeader activityType={props.activityType} />
 					</thead>
@@ -325,10 +298,39 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 								</Match>
 							</Switch>
 						}</For>
+						<tr style="height:1px; border-bottom: solid 1px;"></tr>
+						<tr style="height:30px;">
+							<td></td>
+							<td>Total</td>
+							<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesTotalCompletions(active), true)}</td>
+							<Switch>
+								<Match when={props.activityType == ActivityType.Raid}>
+									<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesMasterCompletions(active), true)}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].FlawlessHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSealCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
+								</Match>
+								<Match when={props.activityType == ActivityType.Dungeon}>
+									<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesMasterCompletions(active), true)}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSealCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
+								</Match>
+								<Match when={props.activityType == ActivityType.ExoticMission}>
+									<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesMasterCompletions(active), true)}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
+									<td style="text-align: center;"></td>
+								</Match>
+								<Match when={props.activityType == ActivityType.ScoredNightFall}>
+									<td style="text-align: center;"></td>
+								</Match>
+							</Switch>
+						</tr>
 					</tbody>
 
 					<Show when={props.displayInactive && inactive.length > 0}>
-						<tr style="height:30px; padding-top:5px; font-weight: bold;">
+						<tr style="height:5px;"></tr>
+						<tr style="height:30px; font-weight: bold;">
 							<td></td>
 							<Switch>
 								<Match when={props.activityType == ActivityType.Raid}>
