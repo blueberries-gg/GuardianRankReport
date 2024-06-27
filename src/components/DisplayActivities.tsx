@@ -244,7 +244,7 @@ function GetDisplayItemScoredNightFall(props: { item: IDisplayActivity }) {
 
 
 function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity, IDisplayActivity>; activityType: ActivityType; displayInactive: boolean }) {
-	const activities = Array.from(props.activities.values()).sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity])
+	const activities = Array.from(props.activities.values()).sort((x, y) => DestinyActivity[y.Activity] - DestinyActivity[x.Activity])
 	const activityOfType = FilterType(activities, props.activityType);
 	const active = FilterActive(activityOfType, true);
 	const inactive = FilterActive(activityOfType, false);

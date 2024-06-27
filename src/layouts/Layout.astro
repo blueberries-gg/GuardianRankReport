@@ -27,6 +27,7 @@ import SearchBar from "../components/SearchBar.astro";
 				viewport.parentNode.removeChild(viewport);
 				document.head.appendChild(newViewport);
 			}
+			checkViewPort();
 			screen.orientation.addEventListener("change", checkViewPort);
 			window.addEventListener("resize", checkViewPort);
 		</script>
