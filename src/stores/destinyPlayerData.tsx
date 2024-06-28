@@ -3,7 +3,6 @@ import {
 	BungieMembershipType,
 	DestinyComponentType,
 	getProfile,
-	DestinyProfileResponse,
 	HttpClientConfig,
 	ServerResponse,
 	getHistoricalStatsForAccount,
@@ -115,7 +114,7 @@ function GetRecordConsideredComplete(record: DestinyRecordComponent) {
 	);
 }
 
-function CalculatePlayerCompletions(aggregatePlayerActivitiesCompletions: { hash: number; activityCompletions: number; }[], records: { [key: number]: DestinyRecordComponent; }, CharacterRecords: { [key: number]: DestinyRecordComponent; }[]) {
+function CalculateAggregatePlayerCompletions(aggregatePlayerActivitiesCompletions: { hash: number; activityCompletions: number; }[], records: { [key: number]: DestinyRecordComponent; }, CharacterRecords: { [key: number]: DestinyRecordComponent; }[]) {
 	const aggregateActivitiesHashes = [...new Set(aggregatePlayerActivitiesCompletions.map((a) => a.hash))];
 
 	const activitiesCompletions = new Map<number, number>();
@@ -243,56 +242,7 @@ function CalculatePlayerCompletions(aggregatePlayerActivitiesCompletions: { hash
 	return playerCompletions;
 }
 
-export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint | string, membershipType: BungieMembershipType | number) => {
-	let AllCharacters: string[] = [];
-
-	const HistoricalCharacterResponse: Promise<void | ServerResponse<DestinyHistoricalStatsAccountResult>> = getHistoricalStatsForAccount($http, {
-		destinyMembershipId: destinyMembershipId.toString(),
-		membershipType: membershipType,
-		groups: [DestinyStatsGroupType.None],
-	}).then((r) => {
-		if (IsDestinyResponseValid(r, GetBungieErrorMessage)) {
-			AllCharacters = r.Response.characters.map((c) => c.characterId);
-		}
-	});
-
-	let ProfileRecords: { [key: number]: DestinyRecordComponent; };
-	let CharacterRecords: {
-		[key: number]: DestinyRecordComponent;
-	}[];
-	const profileInfoResponse: Promise<void | ServerResponse<DestinyProfileResponse>> = getProfile($http, {
-		components: [
-			DestinyComponentType.Profiles,
-			DestinyComponentType.Characters,
-			DestinyComponentType.CharacterActivities, // Access to Activities
-			DestinyComponentType.Records, //Emblems and collections
-			DestinyComponentType.SocialCommendations,
-		],
-		destinyMembershipId: destinyMembershipId.toString(),
-		membershipType: membershipType,
-	}).then(async (r) => {
-		if (IsDestinyResponseValid(r, GetBungieErrorMessage)) {
-			CurrentPlayerProfile.setKey("info", {
-				UserCard: r.Response.profile.data!.userInfo,
-				LatestCharacter: Object.values(r.Response.characters.data!).sort((x, y) => y!.dateLastPlayed.localeCompare(x!.dateLastPlayed))[0]!,
-				CurrentGuardianRank: r.Response.profile.data!.currentGuardianRank,
-				LifetimeHighestGuardianRank: r.Response.profile.data!.lifetimeHighestGuardianRank,
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				RenewedGuardianRank: (r.Response.profile.data! as any).renewedGuardianRank,
-			});
-			// const availableDestinyActivities = r.Response.profile.data!.characterIds.map((character) => r.Response.characterActivities.data![character].availableActivities)
-			// 	.flatMap((activityArray) => activityArray);
-			// allAvailableActivities = new Set(availableDestinyActivities.map((activity) => activity.activityHash));
-			// ownedActivities = new Set(availableDestinyActivities.filter((a) => a.canLead || a.canJoin).map((activity) => activity.activityHash));
-			// availableOwnedActivities = MapSetIntersection(allAvailableActivities, mapActivitiesAndModeByHash);
-			ProfileRecords = r.Response.profileRecords.data!.records;
-			CharacterRecords = Object.values(r.Response.characterRecords.data!).map((x) => x.records);
-		}
-	});
-
-	await profileInfoResponse;
-	await HistoricalCharacterResponse;
-
+async function GetPlayerCharactersCompletions(AllCharacters: string[], destinyMembershipId: string | bigint, membershipType: number, ProfileRecords: { [key: number]: DestinyRecordComponent; }, CharacterRecords: { [key: number]: DestinyRecordComponent; }[]) {
 	const aggregateActivitiesCompletionsPromises = AllCharacters.map((character) => {
 		return getDestinyAggregateActivityStats($http, {
 			characterId: character,
@@ -302,7 +252,6 @@ export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint |
 	});
 
 	const aggregateActivitiesCompletionsResponses = await Promise.all(aggregateActivitiesCompletionsPromises);
-
 
 	let aggregatePlayerActivitiesCompletions: {
 		hash: number;
@@ -323,7 +272,70 @@ export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint |
 		}
 	});
 
-	const playerCompletions: Map<keyof typeof DestinyActivity, IPlayerActivity> = CalculatePlayerCompletions(aggregatePlayerActivitiesCompletions, ProfileRecords!, CharacterRecords!);
+	const playerCompletions: Map<keyof typeof DestinyActivity, IPlayerActivity> = CalculateAggregatePlayerCompletions(aggregatePlayerActivitiesCompletions, ProfileRecords!, CharacterRecords!);
+	return playerCompletions;
+}
+
+async function GetAllCharacters(destinyMembershipId: bigint | string, membershipType: BungieMembershipType) {
+	let AllCharacters: string[] = [];
+
+	const HistoricalCharacterResponse: Promise<void | ServerResponse<DestinyHistoricalStatsAccountResult>> = getHistoricalStatsForAccount($http, {
+		destinyMembershipId: destinyMembershipId.toString(),
+		membershipType: membershipType,
+		groups: [DestinyStatsGroupType.None],
+	}).then((r) => {
+		if (IsDestinyResponseValid(r, GetBungieErrorMessage)) {
+			AllCharacters = r.Response.characters.map((c) => c.characterId);
+		}
+	});
+	await HistoricalCharacterResponse;
+
+	return AllCharacters;
+}
+
+export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint | string, membershipType: BungieMembershipType | number) => {
+	const AllCharactersPromise = GetAllCharacters(destinyMembershipId, membershipType);
+
+	let ProfileRecords: { [key: number]: DestinyRecordComponent; };
+	let CharacterRecords: {
+		[key: number]: DestinyRecordComponent;
+	}[];
+
+	const DestinyProfileResponsePromise = getProfile($http, {
+		components: [
+			DestinyComponentType.Profiles,
+			DestinyComponentType.Characters,
+			DestinyComponentType.CharacterActivities, // Access to Activities
+			DestinyComponentType.Records, //Emblems and collections
+			DestinyComponentType.SocialCommendations,
+		],
+		destinyMembershipId: destinyMembershipId.toString(),
+		membershipType: membershipType,
+	});
+
+	const PlayerProfile = await DestinyProfileResponsePromise;
+
+	if (IsDestinyResponseValid(PlayerProfile, GetBungieErrorMessage)) {
+		CurrentPlayerProfile.setKey("info", {
+			UserCard: PlayerProfile.Response.profile.data!.userInfo,
+			LatestCharacter: Object.values(PlayerProfile.Response.characters.data!).sort((x, y) => y!.dateLastPlayed.localeCompare(x!.dateLastPlayed))[0]!,
+			CurrentGuardianRank: PlayerProfile.Response.profile.data!.currentGuardianRank,
+			LifetimeHighestGuardianRank: PlayerProfile.Response.profile.data!.lifetimeHighestGuardianRank,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			RenewedGuardianRank: (PlayerProfile.Response.profile.data! as any).renewedGuardianRank,
+		});
+		// const availableDestinyActivities = r.Response.profile.data!.characterIds.map((character) => r.Response.characterActivities.data![character].availableActivities)
+		// 	.flatMap((activityArray) => activityArray);
+		// allAvailableActivities = new Set(availableDestinyActivities.map((activity) => activity.activityHash));
+		// ownedActivities = new Set(availableDestinyActivities.filter((a) => a.canLead || a.canJoin).map((activity) => activity.activityHash));
+		// availableOwnedActivities = MapSetIntersection(allAvailableActivities, mapActivitiesAndModeByHash);
+		ProfileRecords = PlayerProfile.Response.profileRecords.data!.records;
+		CharacterRecords = Object.values(PlayerProfile.Response.characterRecords.data!).map((x) => x.records);
+	}
+
+	const AllCharacters: string[] = await AllCharactersPromise;
+
+	const playerCompletions = await GetPlayerCharactersCompletions(AllCharacters, destinyMembershipId, membershipType, ProfileRecords!, CharacterRecords!);
 	CurrentPlayerProfile.setKey("activities", playerCompletions);
 	return playerCompletions;
 };
