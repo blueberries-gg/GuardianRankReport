@@ -1,37 +1,35 @@
 import { CurrentPlayerProfile, GetDestinyInventoryItemDefinitionEntityDefinition, PlayerInfo } from "../stores/destinyPlayerData";
 import { BASE_BUNGIE_URL } from "../utils/common";
-import { ranksEN, AbsoluteRankEN } from "../utils/enumStrings";
-import { AbsoluteRank } from "../enums/AbsoluteRank";
-import { DestinyActivity } from "../enums/DestinyActivity";
-import { mapActivities } from "../utils/activities";
+import {  AbsoluteRankString } from "../utils/enums/strings/en/AbsoluteRank";
+import { AbsoluteRank } from "../utils/enums/AbsoluteRank";
+import { DestinyActivity } from "../utils/enums/DestinyActivities";
+import { mapActivities } from "../utils/destinyActivities/activities";
 
-import { ActivityType } from "../enums/ActivityType";
-import {
-    FilterType,
-    FilterActive,
-    getActivitiesCountComplete,
-} from "../utils/ActivityCalculations";
+import { ActivityType } from "../utils/enums/ActivityType";
+
+import { GuardianRanksString } from "../utils/enums/strings/en/GuardianRank";
+import { PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesCountComplete } from "../utils/PlayerActivityCalculations";
 
 function GetAbsoluteRank(profile: PlayerInfo): AbsoluteRank {
     const activities = Array.from(profile.activities.values()).sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity]);
-    const allRaids = FilterType(activities, ActivityType.Raid);
-    const activeRaids = FilterActive(allRaids, true);
+    const allRaids = PlayerActivitiesFilterType(activities, ActivityType.Raid);
+    const activeRaids = PlayerActivitiesFilterActive(allRaids, true);
     const activeSealRaids = activeRaids.filter((x) => mapActivities[x.Activity].SealHash != undefined);
     const activeSealRaidsCompleted = activeSealRaids.filter((x) => x.hasSeal == true).length;
     const activeFlawlessRaids = activeRaids.filter((x) => mapActivities[x.Activity].FlawlessHash != undefined);
     const activeFlawlessRaidsCompleted = activeFlawlessRaids.filter((x) => x.hasFlawless == true).length;
     //const inactiveRaids = FilterActive(allRaids, false);
 
-    const allDungeons = FilterType(activities, ActivityType.Dungeon);
-    const activeDungeons = FilterActive(allDungeons, true);
+    const allDungeons = PlayerActivitiesFilterType(activities, ActivityType.Dungeon);
+    const activeDungeons = PlayerActivitiesFilterActive(allDungeons, true);
     const activeSealDungeons = activeDungeons.filter((x) => mapActivities[x.Activity].SealHash != undefined);
     const activeSealDungeonsCompleted = activeSealDungeons.filter((x) => x.hasSeal == true).length;
     const activeSoloFlawlessDungeons = activeRaids.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined);
     const activeSoloFlawlessDungeonsCompleted = activeSoloFlawlessDungeons.filter((x) => x.hasSoloFlawless == true).length;
     //const inactiveDungeons = FilterActive(allDungeons, false);
 
-    const activeRaidsCompleted = getActivitiesCountComplete(activeRaids);
-    const activeDungeonCompleted = getActivitiesCountComplete(activeDungeons);
+    const activeRaidsCompleted = GetPlayerActivitiesCountComplete(activeRaids);
+    const activeDungeonCompleted = GetPlayerActivitiesCountComplete(activeDungeons);
 
     let currentRank = AbsoluteRank.Untested;
 
@@ -70,19 +68,19 @@ CurrentPlayerProfile.subscribe((profile, _, changedKey) => {
         );
         document.getElementById(`actualRank${profile.info.RenewedGuardianRank}`)!.style.display = "flex";
         document.getElementById("actualBadgeRankText")!.innerHTML = document.getElementById("actualBadgeRank")!.title =
-            ranksEN[profile.info.RenewedGuardianRank];
+            GuardianRanksString[profile.info.RenewedGuardianRank];
         document.getElementById("badgeRankSeparatorCurrent")!.style.visibility = "visible";
 
         document.getElementById(`rank${profile.info.CurrentGuardianRank}`)!.style.display = "flex";
-        document.getElementById("badgeRankText")!.innerHTML = document.getElementById("badgeRank")!.title = ranksEN[profile.info.CurrentGuardianRank];
+        document.getElementById("badgeRankText")!.innerHTML = document.getElementById("badgeRank")!.title = GuardianRanksString[profile.info.CurrentGuardianRank];
         document.getElementById("badgeRankSeparator")!.style.visibility = "visible";
 
         document.getElementById(`highestRank${profile.info.LifetimeHighestGuardianRank}`)!.style.display = "flex";
         document.getElementById("highestBadgeRankText")!.innerHTML = document.getElementById("highestBadgeRank")!.title =
-            ranksEN[profile.info.LifetimeHighestGuardianRank];
+            GuardianRanksString[profile.info.LifetimeHighestGuardianRank];
     }
     if (changedKey == "activities") {
         document.getElementById("badgeExtraRankText")!.innerHTML = document.getElementById("badgeExtraRankText")!.title =
-            AbsoluteRankEN[GetAbsoluteRank(profile)];
+            AbsoluteRankString[GetAbsoluteRank(profile)];
     }
 });

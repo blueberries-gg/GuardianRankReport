@@ -17,13 +17,13 @@ import {
 	getDestinyEntityDefinition,
 	DestinyInventoryItemDefinition,
 } from "bungie-api-ts/destiny2";
-import { IsDestinyResponseValid, StringsKeysOf, filterObject } from "../utils/common";
-import { IActivity, IDisplayActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/activities";
+import { IsDestinyResponseValid, StringsKeysOf, FilterObject } from "../utils/common";
+import { IActivity, IPlayerActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/destinyActivities/activities";
 import { ExactSearchRequest, UserInfoCard, UserSearchPrefixRequest, searchByGlobalNamePost } from "bungie-api-ts/user";
 import { getCommonSettings, getGlobalAlerts } from "bungie-api-ts/core";
-import { ActiveScoredNightFalls, DestinyActivity } from "../enums/DestinyActivity";
-import { ModeType } from "../enums/ModeType";
-import { ActivityType } from "../enums/ActivityType";
+import { ActiveScoredNightFalls, DestinyActivity } from "../utils/enums/DestinyActivities";
+import { ModeType } from "../utils/enums/ModeType";
+import { ActivityType } from "../utils/enums/ActivityType";
 
 export interface PlayerBadgeData {
 	UserCard: UserInfoCard;
@@ -35,16 +35,16 @@ export interface PlayerBadgeData {
 
 export interface PlayerInfo {
 	info: PlayerBadgeData;
-	activities: Map<keyof typeof DestinyActivity, IDisplayActivity>;
+	activities: Map<keyof typeof DestinyActivity, IPlayerActivity>;
 }
 
-const mapCurrentActiveActivities = new Map<string, IActivity>(Object.entries(filterObject(mapActivities, ([, v]) => v.Active == true))) as Map<
+const mapCurrentActiveActivities = new Map<string, IActivity>(Object.entries(FilterObject(mapActivities, ([, v]) => v.Active == true))) as Map<
 	StringsKeysOf<typeof DestinyActivity>,
 	IActivity
 >;
 const currentActiveActivities = Array.from(mapCurrentActiveActivities.keys());//.sort((x)=> DestinyActivity[x]);
 
-const emptyDisplayActivities = new Map<StringsKeysOf<typeof DestinyActivity>, IDisplayActivity>();
+const emptyDisplayActivities = new Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity>();
 currentActiveActivities.forEach((k) => {
 	emptyDisplayActivities.set(k as StringsKeysOf<typeof DestinyActivity>, {
 		Activity: k as StringsKeysOf<typeof DestinyActivity>,
@@ -188,7 +188,7 @@ export const GetInformationForMember = async (destinyMembershipId: bigint | stri
 		aggregateActivities.set(hash, total);
 	});
 
-	const activityCompletions: Map<keyof typeof DestinyActivity, IDisplayActivity> = new Map(emptyDisplayActivities);
+	const activityCompletions: Map<keyof typeof DestinyActivity, IPlayerActivity> = new Map(emptyDisplayActivities);
 
 	aggregateActivities.forEach((value, key) => {
 		if (value === 0) return;

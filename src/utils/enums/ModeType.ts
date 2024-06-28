@@ -4,7 +4,7 @@ export enum ModeType {
 	Heroic,
 	Legend,
 	Master,
-	Grandmaster,
+	GrandMaster,
 	Contest,
 	Prestige,
 	Other,

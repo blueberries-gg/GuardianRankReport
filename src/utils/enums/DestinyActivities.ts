@@ -1,4 +1,4 @@
-export enum Raids {
+export enum DestinyRaid {
 	Leviathan = 0,
 	LeviathanEaterOfWorlds,
 	LeviathanSpireOfStars,
@@ -20,7 +20,7 @@ export enum Raids {
 	SalvationsEdge,
 }
 
-export enum Dungeons {
+export enum DestinyDungeon {
 	TheShatteredThrone = 100,
 	PitOfHeresy,
 	Prophecy,
@@ -31,7 +31,7 @@ export enum Dungeons {
 	WarlordsRuin,
 }
 
-export enum ExoticMissions {
+export enum DestinyExoticMission {
 	TheWhisper = 200,
 	ZeroHour,
 	Harbinger,
@@ -44,8 +44,7 @@ export enum ExoticMissions {
 	DualDestiny,
 }
 
-
-export enum ScoredNightFalls {
+export enum DestinyGrandMasterNightFall {
 	AGardenWorld = 300,
 	BattlegroundBehemoth,
 	BattlegroundFoothold,
@@ -85,24 +84,23 @@ export enum ScoredNightFalls {
 	WardenOfNothing,
 }
 
-
 export const ActiveScoredNightFalls = [
-	ScoredNightFalls[ScoredNightFalls.TheGlassway] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.WardenOfNothing] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.TheDisgraced] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.FallenSABER] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.Liminality] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.ExodusCrash] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.DefiantBattlegroundCosmodrome] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.TheInsightTerminus] as keyof typeof ScoredNightFalls,
-	ScoredNightFalls[ScoredNightFalls.TheDevilsLair] as keyof typeof ScoredNightFalls,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheGlassway] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.WardenOfNothing] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheDisgraced] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.FallenSABER] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.Liminality] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.ExodusCrash] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.DefiantBattlegroundCosmodrome] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheInsightTerminus] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheDevilsLair] as keyof typeof DestinyGrandMasterNightFall,
 ];
 
 export const DestinyActivity = {
-	...Raids,
-	...Dungeons,
-	...ExoticMissions,
-	...ScoredNightFalls,
+	...DestinyRaid,
+	...DestinyDungeon,
+	...DestinyExoticMission,
+	...DestinyGrandMasterNightFall,
 };
 
-export type DestinyActivity = Dungeons | Raids | ScoredNightFalls | ExoticMissions;
+export type DestinyActivity = DestinyDungeon | DestinyRaid | DestinyGrandMasterNightFall | DestinyExoticMission;

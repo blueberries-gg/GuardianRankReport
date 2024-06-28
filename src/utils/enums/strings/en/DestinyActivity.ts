@@ -1,21 +1,6 @@
-import { AbsoluteRank } from "../enums/AbsoluteRank";
-import { DestinyActivity, Dungeons, ExoticMissions, Raids, ScoredNightFalls } from "../enums/DestinyActivity";
-import { ModeType } from "../enums/ModeType";
+import { DestinyDungeon, DestinyRaid, DestinyGrandMasterNightFall, DestinyExoticMission, DestinyActivity } from "../../DestinyActivities";
 
-export const ModeTypeEN: { [key in keyof typeof ModeType]: string } = {
-	Grandmaster: "Grandmaster",
-	Normal: "Normal",
-	Legend: "Legend",
-	Master: "Master",
-	Contest: "Contest",
-	Prestige: "Prestige",
-	NormalLegacy: "Normal (Legacy)",
-	Other: "Other",
-	Guided: "Guided Games",
-	Heroic: "Heroic",
-};
-
-export const DungeonsEn: { [key in keyof typeof Dungeons]: string } = {
+export const DungeonsEn: { [key in keyof typeof DestinyDungeon]: string } = {
 	Duality: "Duality",
 	GhostsOfTheDeep: "Ghosts of the Deep",
 	GraspOfAvarice: "Grasp Of Avarice",
@@ -25,7 +10,7 @@ export const DungeonsEn: { [key in keyof typeof Dungeons]: string } = {
 	TheShatteredThrone: "The Shattered Throne",
 	WarlordsRuin: "Warlord's Ruin",
 };
-export const RaidsEn: { [key in keyof typeof Raids]: string } = {
+export const RaidsEn: { [key in keyof typeof DestinyRaid]: string } = {
 	CrotasEnd: "Crota's End",
 	CrownOfSorrow: "Crown of Sorrow",
 	DeepStoneCrypt: "Deep Stone Crypt",
@@ -46,7 +31,7 @@ export const RaidsEn: { [key in keyof typeof Raids]: string } = {
 	VaultOfGlass: "Vault of Glass",
 	VowOfTheDisciple: "Vow of the Disciple",
 };
-export const ScoredNightFallsEn: { [key in keyof typeof ScoredNightFalls]: string } = {
+export const ScoredNightFallsEn: { [key in keyof typeof DestinyGrandMasterNightFall]: string } = {
 	AGardenWorld: "A Garden World",
 	BattlegroundBehemoth: "Battleground: Behemoth",
 	BattlegroundFoothold: "Battleground: Foothold",
@@ -85,7 +70,7 @@ export const ScoredNightFallsEn: { [key in keyof typeof ScoredNightFalls]: strin
 	TreeOfProbabilities: "Tree of Probabilities",
 	WardenOfNothing: "Warden of Nothing",
 };
-export const ExoticMissionsEn: { [key in keyof typeof ExoticMissions]: string } = {
+export const ExoticMissionsEn: { [key in keyof typeof DestinyExoticMission]: string } = {
 	Avalon: "//node.ovrd.AVALON//",
 	DualDestiny: "Dual Destiny",
 	Excision: "Excision",
@@ -98,32 +83,4 @@ export const ExoticMissionsEn: { [key in keyof typeof ExoticMissions]: string } 
 	ZeroHour: "Zero Hour",
 };
 
-export const activitiesEN: { [key in keyof typeof DestinyActivity]: string } = { ...DungeonsEn, ...RaidsEn, ...ScoredNightFallsEn, ...ExoticMissionsEn };
-
-export const ranksEN: { [key in number]: string } = {
-	0: "Unranked",
-	1: "New Light",
-	2: "Explorer",
-	3: "Initiate",
-	4: "Scout",
-	5: "Adventurer",
-	6: "Veteran",
-	7: "Elite",
-	8: "Justicar",
-	9: "Vanquisher",
-	10: "Exemplar",
-	11: "Paragon",
-
-}
-
-export const AbsoluteRankEN: { [key in AbsoluteRank]: string } = {
-	[AbsoluteRank.Untested]: "Untested",
-	[AbsoluteRank.Copper]: "Copper",
-	[AbsoluteRank.Bronze]: "Bronze",
-	[AbsoluteRank.Silver]: "Silver",
-	[AbsoluteRank.Gold]: "Gold",
-	[AbsoluteRank.Diamond]: "Diamond",
-	[AbsoluteRank.Platinum]: "Platinum",
-	[AbsoluteRank.Adept]: "Adept",
-	[AbsoluteRank.Ascendant]: "Ascendant"
-}
+export const DestinyActivityString: { [key in keyof typeof DestinyActivity]: string } = { ...DungeonsEn, ...RaidsEn, ...ScoredNightFallsEn, ...ExoticMissionsEn };

@@ -1,0 +1,312 @@
+import { ActivityType } from "../enums/ActivityType";
+import { DestinyRaid } from "../enums/DestinyActivities";
+import { StringsKeysOf } from "../common";
+import { IActivity } from "./activities";
+
+export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivity } = {
+	CrotasEnd: {
+		Modes: {
+			Contest: [156253568] /*Superior Swordplay*/,
+			Normal: [4179289725],
+			Master: [1507509200],
+		},
+		Type: ActivityType.Raid,
+		PresentationNode: 238107129,
+		SealCompleteImage: "/common/destiny2_content/icons/34af91f1cfc2358ca3c813e8a8a0bb5a.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/392fff0b6391ac1a8acf12ebf8189da1.png",
+		TopLevel: true,
+		SealHash: 865076293,
+		SealObjectives: [
+			116345475, 1334890488, 1447905713, 1510515137, 1732432755, 1896685129, 2045739672, 2237801267, 2259810484, 2487544289, 295018272, 3702810582,
+			3922046691, 4259447007, 680822308, 710681626, 752641838, 942933865,
+		],
+		FlawlessHash: 2572383496,
+		Active: true,
+		Free: true,
+	},
+
+	CrownOfSorrow: {
+		Modes: {
+			Normal: [3333172150, 960175301],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		Active: false,
+		Free: true,
+	},
+
+	DeepStoneCrypt: {
+		Modes: {
+			Normal: [3976949817, 910380154],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 2960810718,
+		SealCompleteImage: "/common/destiny2_content/icons/ad2541fdf939dbd13f497c7730ebb7fb.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/7c75ee483c5ead72bb214d23d53f6b47.png",
+		SealHash: 540377256,
+		SealObjectives: [
+			1277450448, 134885948, 1487317889, 22094034, 2530940166, 3185876102, 3200831458, 3323713181, 337542929, 3504856768, 3771160417, 3834307795,
+			3875695735, 4216504853, 513707022, 518342793, 564366615, 64856166, 992355976,
+		],
+		FlawlessHash: 3560923614,
+		Active: true,
+		Free: false,
+	},
+
+	GardenOfSalvation: {
+		Modes: {
+			Normal: [1042180643, 2497200493, 3458480158, 3845997235],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 1827854727,
+		SealCompleteImage: "/common/destiny2_content/icons/73145145af7557234148e93a9f504518.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/12fe6f9d691705cc1ed0ebf16576f74a.png",
+		SealHash: 2909250963,
+		SealObjectives: [
+			1221037312, 1922270325, 2191554152, 2381358572, 2571794337, 277137394, 3427328428, 3719309782, 3804486505, 3860668859, 3866024089, 3949104239,
+			4105510833, 44547560, 521675034, 637935773,
+		],
+		FlawlessHash: 1522774125,
+		Active: true,
+		Free: false,
+	},
+
+	KingsFall: {
+		Modes: {
+			Contest: [1063970578] /*Regicide*/,
+			Normal: [1374392663, 2897223272],
+			Master: [2964135793, 3257594522],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 2613142083,
+		SealCompleteImage: "/common/destiny2_content/icons/1be2de95099f3b1fc8495b6eddde9024.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/9c88f0eb2197a6bcc7bf98ffd6148906.png",
+		SealHash: 3910736783,
+		SealObjectives: [
+			4268824781, 3047702042, 1594888684, 70932677, 1760261415, 3666607158, 3147255355, 1329091971, 279569799, 1937728407, 3984168074, 3455875964,
+			3293215595, 2840536766, 292491321, 4104207016, 2341906351, 3191912777, 3685101448, 3388215749, 2120297138,
+		],
+		FlawlessHash: 1360511082,
+		Active: true,
+		Free: true,
+	},
+
+	LastWish: {
+		Modes: {
+			Normal: [2122313384, 2214608156, 2214608157],
+			Guided: [1661734046],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 1486062207,
+		SealCompleteImage: "/common/destiny2_content/icons/9457a85d386aff3a5170287bf24b3ae2.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/423b959c92f0eef246eb90148028e602.png",
+		SealHash: 1384029371,
+		SealObjectives: [
+			1359055399, 1711136422, 1847670729, 2756328801, 2826160801, 3000516033, 3234595894, 342038729, 3448775736, 3533973498, 380332968, 4078980921,
+			623283604, 628370196, 717856991, 989244596,
+		],
+		FlawlessHash: 380332968,
+		Active: true,
+		Free: false,
+	},
+	Leviathan: {
+		Modes: {
+			Normal: [2693136600, 2693136601, 2693136602, 2693136603, 2693136604, 2693136605],
+			Prestige: [
+				1685065161, 1800508819, 2449714930, 3446541099, 3857338478, 3879860661, 3912437239, 417231112, 4206123728, 508802457, 757116822, 771164842,
+			],
+			Guided: [1699948563, 1875726950, 287649202, 3916343513, 4039317196, 89727599],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		Active: false,
+		Free: true,
+	},
+
+	LeviathanEaterOfWorlds: {
+		Modes: {
+			Guided: [2164432138],
+			Normal: [3089205900],
+			Prestige: [809170886],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		Active: false,
+		Free: true,
+	},
+
+	LeviathanSpireOfStars: {
+		Modes: {
+			Guided: [3004605630],
+			Normal: [119944200],
+			Prestige: [3213556450],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		Active: false,
+		Free: true,
+	},
+
+	Pantheon: {
+		Modes: {},
+		SubActivities: [
+			DestinyRaid[DestinyRaid.PhanteonAtraksSovereign] as StringsKeysOf<typeof DestinyRaid>,
+			DestinyRaid[DestinyRaid.PhanteonOryxExalted] as StringsKeysOf<typeof DestinyRaid>,
+			DestinyRaid[DestinyRaid.PhanteonRhulkIndomitable] as StringsKeysOf<typeof DestinyRaid>,
+			DestinyRaid[DestinyRaid.PhanteonNezarecSublime] as StringsKeysOf<typeof DestinyRaid>,
+		],
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 3492865493,
+		SealCompleteImage: "/common/destiny2_content/icons/0b3457fbac5cd3a9cc8ee1fef34155c4.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/719e25fe621fce179b3fd23a6d7f58dc.png",
+		SealHash: 3137935313,
+		SealObjectives: [894827020, 1837704669, 2003855362, 1174708723, 2009395391, 2009395388, 2009395389, 2009395386, 2732129877, 2732129876],
+		Active: false,
+		Free: true,
+	},
+
+	PhanteonAtraksSovereign: {
+		Modes: {
+			Normal: [4169648179],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: false,
+		ParentActivity: DestinyRaid[DestinyRaid.Pantheon] as StringsKeysOf<typeof DestinyRaid>,
+		Active: false,
+		Free: true,
+	},
+
+	PhanteonNezarecSublime: {
+		Modes: {
+			Normal: [4169648182],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: false,
+		ParentActivity: DestinyRaid[DestinyRaid.Pantheon] as StringsKeysOf<typeof DestinyRaid>,
+		Active: false,
+		Free: true,
+	},
+
+	PhanteonOryxExalted: {
+		Modes: {
+			Normal: [4169648176],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: false,
+		ParentActivity: DestinyRaid[DestinyRaid.Pantheon] as StringsKeysOf<typeof DestinyRaid>,
+		Active: false,
+		Free: true,
+	},
+
+	PhanteonRhulkIndomitable: {
+		Modes: {
+			Normal: [4169648177],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: false,
+		ParentActivity: DestinyRaid[DestinyRaid.Pantheon] as StringsKeysOf<typeof DestinyRaid>,
+		Active: false,
+		Free: true,
+	},
+
+	RootOfNightmares: {
+		Modes: {
+			Normal: [2381413764],
+			Master: [2918919505],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 1976056830,
+		SealCompleteImage: "/common/destiny2_content/icons/0460df1df9f38c4c12813a126bca98d3.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/9e037b198dfce46642d5eff0dfe97eb9.png",
+		SealHash: 2889189256,
+		SealObjectives: [
+			1160810407, 1247482413, 139617739, 1470555531, 1982000933, 2084487708, 210713679, 2656634354, 2764233436, 2778920213, 31076871, 3778413954,
+			391307104, 4149006431, 4162933187, 4270724598, 4293716153, 499953236, 674616608, 921507736,
+		],
+		FlawlessHash: 397062446,
+		Active: true,
+		Free: false,
+	},
+
+	SalvationsEdge: {
+		Modes: {
+			Normal: [1541433876],
+			Contest: [2192826039],
+			Master: [4129614942],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 334829503,
+		SealCompleteImage: "/common/destiny2_content/icons/d5b4d5163d7b60a73ef9f98c6e73753a.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/8eee2f16af5263e6b921085ad175b0ef.png",
+		SealHash: 1382005115,
+		SealObjectives: [
+			1001835628, 1311861933, 1538747266, 1568864289, 1728165205, 1843442132, 2062070439, 2174160579, 2203607979, 2238088494, 2307589343, 2487240675,
+			2705769344, 3123571268, 3202450274, 4098731599, 4266339619, 4283220514, 61627171, 632048942, 819153082, 870477756,
+		],
+		FlawlessHash: 3553593767,
+		Active: true,
+		Free: false,
+	},
+
+	ScourgeOfThePast: {
+		Modes: {
+			Normal: [2812525063, 548750096],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		Active: false,
+		Free: true,
+	},
+
+	VaultOfGlass: {
+		Modes: {
+			Contest: [1485585878] /*Tempo's Edge*/,
+			Guided: [3711931140],
+			Normal: [3881495763],
+			Master: [1681562271, 3022541210],
+		},
+
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 3734352323,
+		SealCompleteImage: "/common/destiny2_content/icons/7dfda29f41a56fe2a6eebc4cb7c27d19.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/94edf120e003752ca323ff795f2e68d8.png",
+		SealHash: 4141971983,
+		SealObjectives: [
+			1024875083, 1129667036, 154213552, 1803186219, 1888851130, 1961032859, 1983700615, 2464700601, 2592913942, 2782679117, 3106039192, 3114569402,
+			3790077074, 3890225317, 3903615031, 3969659747, 4170123161, 578313932, 706596766, 787552349, 874956966, 932039090, 991121189,
+		],
+		FlawlessHash: 2750088202,
+		Active: true,
+		Free: true,
+	},
+
+	VowOfTheDisciple: {
+		Modes: {
+			Guided: [4156879541],
+			Other: [2906950631],
+			Normal: [1441982566],
+			Master: [3889634515, 4217492330],
+		},
+		Type: ActivityType.Raid,
+		TopLevel: true,
+		PresentationNode: 2886738008,
+		SealCompleteImage: "/common/destiny2_content/icons/86d0ef0bc0cecf529c44fb592d3aebd0.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/6fa1163f2dcada1875be9421a7d147eb.png",
+		SealHash: 1971228746,
+		SealObjectives: [
+			1053120087, 1120467498, 146328065, 1673084356, 1682546621, 1729647218, 1959737632, 2006434999, 2168422218, 2383291155, 3330343477, 3620246150,
+			3950568572, 3991904123, 4241035147, 486676807, 610864524, 801186532, 990479197,
+		],
+		FlawlessHash: 4019717242,
+		Active: true,
+		Free: false,
+	},
+};

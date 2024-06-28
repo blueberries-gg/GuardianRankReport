@@ -1,48 +1,48 @@
-import { ActivityType } from "../enums/ActivityType";
-import { ModeType } from "../enums/ModeType";
-import { IDisplayActivity } from "./activities"
+import { ActivityType } from "./enums/ActivityType";
+import { ModeType } from "./enums/ModeType";
+import { IPlayerActivity } from "./destinyActivities/activities"
 import { StringsKeysOf } from "./common"
 
-// function FilterTypeActive(activities: Map<keyof typeof DestinyActivity, IDisplayActivity>, activityType: ActivityType, active: boolean) {
+// function FilterTypeActive(activities: Map<keyof typeof DestinyActivity, IPlayerActivity>, activityType: ActivityType, active: boolean) {
 // 	return Array.from(
 // 		new Map([...activities].filter(([k, v]) => v.Type == (ActivityType[activityType] as keyof typeof ActivityType) && v.isActive == active)).values()
 // 	);
 // }
-export function FilterActive(activities: IDisplayActivity[], active: boolean) {
+export function PlayerActivitiesFilterActive(activities: IPlayerActivity[], active: boolean) {
 	return activities.filter((x) => x.isActive == active);
 }
-export function FilterType(activities: IDisplayActivity[], activityType: ActivityType) {
+export function PlayerActivitiesFilterType(activities: IPlayerActivity[], activityType: ActivityType) {
 	return activities.filter((x) => x.Type == (ActivityType[activityType] as keyof typeof ActivityType));
 }
-export function getActivitiesCountComplete(activities: IDisplayActivity[]) {
+export function GetPlayerActivitiesCountComplete(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized)
-		complete = activities.filter((x) => getCompletions(x) > 0).length;
+		complete = activities.filter((x) => GetPlayerActivityCompletions(x) > 0).length;
 	return complete;
 }
 
-export function getActivitiesTotalCompletions(activities: IDisplayActivity[]) {
+export function GetPlayerActivitiesTotalCompletions(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
 		complete = 0;
-		activities.map((x) => complete += getCompletions(x));
+		activities.map((x) => complete += GetPlayerActivityCompletions(x));
 	}
 	return complete;
 }
 
-export function getActivitiesMasterCompletions(activities: IDisplayActivity[]) {
+export function GetPlayerActivitiesMasterCompletions(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
 		complete = 0;
-		activities.map((x) => complete += getMasterCompletions(x));
+		activities.map((x) => complete += GetPlayerActivityMasterCompletions(x));
 	}
 	return complete;
 }
 
-export function getActivitiesSealCompletions(activities: IDisplayActivity[]) {
+export function GetPlayerActivitiesSealCompletions(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
@@ -51,8 +51,7 @@ export function getActivitiesSealCompletions(activities: IDisplayActivity[]) {
 	return complete;
 }
 
-
-export function getActivitiesFlawlessCompletions(activities: IDisplayActivity[]) {
+export function GetPlayerActivitiesFlawlessCompletions(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
@@ -61,7 +60,7 @@ export function getActivitiesFlawlessCompletions(activities: IDisplayActivity[])
 	return complete;
 }
 
-export function getActivitiesSoloCompletions(activities: IDisplayActivity[]) {
+export function GetPlayerActivitiesSoloCompletions(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
@@ -70,7 +69,7 @@ export function getActivitiesSoloCompletions(activities: IDisplayActivity[]) {
 	return complete;
 }
 
-export function getActivitiesSoloFlawlessCompletions(activities: IDisplayActivity[]) {
+export function GetPlayerActivitiesSoloFlawlessCompletions(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
@@ -79,7 +78,7 @@ export function getActivitiesSoloFlawlessCompletions(activities: IDisplayActivit
 	return complete;
 }
 
-export function getCompletions(activity: IDisplayActivity) {
+export function GetPlayerActivityCompletions(activity: IPlayerActivity) {
 	const initialized = activity.dataInitialized;
 	let complete = -1;
 	if (initialized) {
@@ -89,7 +88,7 @@ export function getCompletions(activity: IDisplayActivity) {
 	}
 	return complete;
 }
-export function getNormalCompletions(activity: IDisplayActivity) {
+export function GetPlayerActivityNormalCompletions(activity: IPlayerActivity) {
 	const initialized = activity.dataInitialized;
 	let complete = -1;
 	if (initialized) {
@@ -99,7 +98,7 @@ export function getNormalCompletions(activity: IDisplayActivity) {
 	}
 	return complete;
 }
-export function getMasterCompletions(activity: IDisplayActivity) {
+export function GetPlayerActivityMasterCompletions(activity: IPlayerActivity) {
 	const initialized = activity.dataInitialized;
 	let complete = -1;
 	if (initialized) {
@@ -108,13 +107,13 @@ export function getMasterCompletions(activity: IDisplayActivity) {
 	}
 	return complete;
 }
-export function getGrandMasterCompletions(activity: IDisplayActivity) {
+export function GetPlayerActivitiesGrandMasterCompletions(activity: IPlayerActivity) {
 
 	const initialized = activity.dataInitialized;
 	let complete = -1;
 	if (initialized) {
 		complete = 0
-		activity.Completions.get(ModeType[ModeType.Grandmaster] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
+		activity.Completions.get(ModeType[ModeType.GrandMaster] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
 	}
 	return complete;
 }

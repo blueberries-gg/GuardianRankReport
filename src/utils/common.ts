@@ -1,7 +1,4 @@
 import { ServerResponse } from "bungie-api-ts/destiny2";
-import { ModeTypeEN, activitiesEN } from "./enumStrings";
-import { IDisplayActivity, mapActivities } from "./activities";
-import { ModeType } from "../enums/ModeType";
 
 export const BASE_BUNGIE_URL = "https://www.bungie.net/";
 
@@ -22,37 +19,14 @@ export type Entry<T> = {
 }[keyof T];
 
 
-export function objectAsEntry<T extends object>(obj: T) {
+export function ObjectAsEntry<T extends object>(obj: T) {
 	return (Object.entries(obj) as Entry<T>[])
 
 }
-export function filterObject<T extends object>(obj: T, fn: (entry: Entry<T>, i: number, arr: Entry<T>[]) => boolean) {
+export function FilterObject<T extends object>(obj: T, fn: (entry: Entry<T>, i: number, arr: Entry<T>[]) => boolean) {
 	return Object.fromEntries((Object.entries(obj) as Entry<T>[]).filter(fn)) as Partial<T>;
 }
 
-export function GetPrintableActivityInfo(displayActivities: IDisplayActivity[]) {
-	const displayActivitiesStrings: string[] = [];
-	displayActivities.forEach((displayActivity) => {
-		let details = `${activitiesEN[displayActivity.Activity]}\n`;
-		if (displayActivity.hasSeal != undefined) details += `Seal ${displayActivity.hasSeal}\n`;
-
-		if (displayActivity.hasSoloFlawless != undefined) details += `Solo Flawless ${displayActivity.hasSoloFlawless}\n`;
-		if (displayActivity.hasSolo != undefined) details += `Solo ${displayActivity.hasSolo}\n`;
-		if (displayActivity.hasFlawless != undefined) details += `Flawless ${displayActivity.hasFlawless}\n`;
-
-		if (displayActivity.IncompleteObjectives != undefined)
-			details += `Pending ${displayActivity.IncompleteObjectives.length} of ${mapActivities[displayActivity.Activity].SealObjectives?.length}\n`;
-		displayActivity.Completions.forEach((contributors, mode) => {
-			if (contributors.size >= 1) {
-				if (Object.values(ModeType).includes(mode)) details += `${ModeTypeEN[mode as StringsKeysOf<typeof ModeType>]}\n`;
-				details += `Completions: ${Array.from(contributors.values()).reduce((p, a) => p + a, 0)}\nContributors: ${JSON.stringify(Object.fromEntries(contributors))}\n`;
-			}
-		});
-		displayActivitiesStrings.push(details);
-	});
-	//displayActivitiesStrings.map((x) => console.log(x));
-	return displayActivitiesStrings;
-}
 export function MapIntersection<K, V>(First: Map<K, V>, Second: Map<K, V>) {
 	const result = new Map<K, V>();
 

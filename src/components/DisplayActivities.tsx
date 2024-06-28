@@ -1,14 +1,14 @@
 import { For, Match, Show, Switch } from "solid-js";
 import { useStore } from "@nanostores/solid";
 import { CurrentPlayerProfile } from "../stores/destinyPlayerData";
-import { ActivityType } from "../enums/ActivityType";
-import { DestinyActivity } from "../enums/DestinyActivity";
-import { getMasterLike, IDisplayActivity, mapActivities } from "../utils/activities";
-import { activitiesEN } from "../utils/enumStrings";
+import { ActivityType } from "../utils/enums/ActivityType";
+import { DestinyActivity } from "../utils/enums/DestinyActivities";
+import { getMasterLike, IPlayerActivity, mapActivities } from "../utils/destinyActivities/activities";
 import { BASE_BUNGIE_URL } from "../utils/common";
-import complete from "../resources/complete.png";
-import missing from "../resources/missing.png";
-import { getNormalCompletions, getCompletions, getMasterCompletions, getGrandMasterCompletions, FilterType, FilterActive, getActivitiesTotalCompletions, getActivitiesMasterCompletions, getActivitiesSealCompletions, getActivitiesFlawlessCompletions, getActivitiesSoloCompletions, getActivitiesSoloFlawlessCompletions } from "../utils/ActivityCalculations";
+import complete from "../resources/images/complete.png";
+import missing from "../resources/images/missing.png";
+import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity";
+import { GetPlayerActivityCompletions, GetPlayerActivityNormalCompletions, GetPlayerActivityMasterCompletions, GetPlayerActivitiesGrandMasterCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions } from "../utils/PlayerActivityCalculations";
 
 function ActivityCompletionsToString(complete: number, enabled: boolean) {
 	return enabled ? ((complete < 0) ? "?" : complete.toString()) : "";
@@ -64,20 +64,20 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 	}
 }
 
-function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
-	const totalCompletions = getCompletions(props.item);
+function GetDisplayItemDungeon(props: { item: IPlayerActivity }) {
+	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
 		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
-			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>
+			<td>{DestinyActivityString[props.item.Activity]}</td>
+			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
 				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
 			<td style="text-align: center;">
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{ActivityCompletionsToString(getMasterCompletions(props.item), enabled)}
+					{ActivityCompletionsToString(GetPlayerActivityMasterCompletions(props.item), enabled)}
 				</Show>
 			</td>
 			<td>
@@ -128,20 +128,20 @@ function GetDisplayItemDungeon(props: { item: IDisplayActivity }) {
 		</tr>
 	);
 }
-function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
-	const totalCompletions = getCompletions(props.item);
+function GetDisplayItemRaid(props: { item: IPlayerActivity }) {
+	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
 		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
-			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>
+			<td>{DestinyActivityString[props.item.Activity]}</td>
+			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
 				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
 			<td style="text-align: center;">
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{ActivityCompletionsToString(getMasterCompletions(props.item), enabled)}
+					{ActivityCompletionsToString(GetPlayerActivityMasterCompletions(props.item), enabled)}
 				</Show>
 			</td>
 			<td>
@@ -178,20 +178,20 @@ function GetDisplayItemRaid(props: { item: IDisplayActivity }) {
 		</tr>
 	);
 }
-function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
-	const totalCompletions = getCompletions(props.item);
+function GetDisplayItemExoticMission(props: { item: IPlayerActivity }) {
+	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
 		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
-			<td>{activitiesEN[props.item.Activity]}</td>
-			<td style="text-align: center;" title={getNormalCompletions(props.item).toString()}>
+			<td>{DestinyActivityString[props.item.Activity]}</td>
+			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
 				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
 			<td style="text-align: center;">
 				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{ActivityCompletionsToString(getMasterCompletions(props.item) + getGrandMasterCompletions(props.item), enabled)}
+					{ActivityCompletionsToString(GetPlayerActivityMasterCompletions(props.item) + GetPlayerActivitiesGrandMasterCompletions(props.item), enabled)}
 				</Show>
 			</td>
 			<td>
@@ -227,14 +227,14 @@ function GetDisplayItemExoticMission(props: { item: IDisplayActivity }) {
 		</tr>
 	);
 }
-function GetDisplayItemScoredNightFall(props: { item: IDisplayActivity }) {
-	const totalCompletions = getCompletions(props.item);
+function GetDisplayItemScoredNightFall(props: { item: IPlayerActivity }) {
+	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
 		<tr style={`height:30px; opacity:${opacity}`}>
 			<td></td>
-			<td>{activitiesEN[props.item.Activity]}</td>
+			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;">
 				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
@@ -243,11 +243,16 @@ function GetDisplayItemScoredNightFall(props: { item: IDisplayActivity }) {
 }
 
 
-function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity, IDisplayActivity>; activityType: ActivityType; displayInactive: boolean }) {
-	const activities = Array.from(props.activities.values()).sort((x, y) => DestinyActivity[y.Activity] - DestinyActivity[x.Activity])
-	const activityOfType = FilterType(activities, props.activityType);
-	const active = FilterActive(activityOfType, true);
-	const inactive = FilterActive(activityOfType, false);
+function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity, IPlayerActivity>; activityType: ActivityType; displayInactive: boolean }) {
+	const activities = Array.from(props.activities.values());
+	if (props.activityType != ActivityType.ScoredNightFall)
+		activities.sort((x, y) => DestinyActivity[y.Activity] - DestinyActivity[x.Activity]);
+	else
+		activities.sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity]);
+
+	const activityOfType = PlayerActivitiesFilterType(activities, props.activityType);
+	const active = PlayerActivitiesFilterActive(activityOfType, true);
+	const inactive = PlayerActivitiesFilterActive(activityOfType, false);
 	return (
 		<div style="">
 			<div style="background: #ffffff1A; padding: 10px; border-bottom: solid 2px currentcolor;">
@@ -303,23 +308,23 @@ function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity
 						<tr style="height:30px;">
 							<td></td>
 							<td>Total</td>
-							<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesTotalCompletions(active), true)}</td>
+							<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesTotalCompletions(active), true)}</td>
 							<Switch>
 								<Match when={props.activityType == ActivityType.Raid}>
-									<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesMasterCompletions(active), true)}</td>
-									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].FlawlessHash != undefined).length}`}</td>
-									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSealCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
+									<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesMasterCompletions(active), true)}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].FlawlessHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSealCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
 								</Match>
 								<Match when={props.activityType == ActivityType.Dungeon}>
-									<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesMasterCompletions(active), true)}</td>
-									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
-									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
-									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSealCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
+									<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesMasterCompletions(active), true)}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSealCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
 								</Match>
 								<Match when={props.activityType == ActivityType.ExoticMission}>
-									<td style="text-align: center;">{ActivityCompletionsToString(getActivitiesMasterCompletions(active), true)}</td>
-									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
-									<td style="text-align: center;">{`${ActivityCompletionsToString(getActivitiesSoloFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
+									<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesMasterCompletions(active), true)}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
+									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloFlawlessCompletions(active), true)}/${active.filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
 									<td style="text-align: center;"></td>
 								</Match>
 								<Match when={props.activityType == ActivityType.ScoredNightFall}>
