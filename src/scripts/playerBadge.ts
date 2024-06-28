@@ -1,4 +1,4 @@
-import { CurrentPlayerProfile, GetDestinyInventoryItemDefinitionEntityDefinition, PlayerInfo } from "../stores/destinyPlayerData";
+import { CurrentPlayerProfile, GetDestinyInventoryItemDefinitionEntityDefinition, PlayerActivityDetails } from "../stores/destinyPlayerData";
 import { BASE_BUNGIE_URL } from "../utils/common";
 import {  AbsoluteRankString } from "../utils/enums/strings/en/AbsoluteRank";
 import { AbsoluteRank } from "../utils/enums/AbsoluteRank";
@@ -10,7 +10,7 @@ import { ActivityType } from "../utils/enums/ActivityType";
 import { GuardianRanksString } from "../utils/enums/strings/en/GuardianRank";
 import { PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesCountComplete } from "../utils/PlayerActivityCalculations";
 
-function GetAbsoluteRank(profile: PlayerInfo): AbsoluteRank {
+function GetAbsoluteRank(profile: PlayerActivityDetails): AbsoluteRank {
     const activities = Array.from(profile.activities.values()).sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity]);
     const allRaids = PlayerActivitiesFilterType(activities, ActivityType.Raid);
     const activeRaids = PlayerActivitiesFilterActive(allRaids, true);

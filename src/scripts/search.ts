@@ -1,4 +1,4 @@
-import { GetPlayerInformation } from "../stores/destinyPlayerData";
+import { GetMembershipPlayerInformation } from "../stores/destinyPlayerData";
 import { navigate } from "astro:transitions/client";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 	buttonUsername?.addEventListener("click", async () => {
 		playerSearchLoading!.style.display = "flex";
-		const users = await GetPlayerInformation(inputUsername?.value || "");
+		const users = await GetMembershipPlayerInformation(inputUsername?.value || "");
 		playerSearchLoading!.style.display = "none";
 		users.sort((x, y) => x.name.localeCompare(y.name));
 		if (users.length === 1) {

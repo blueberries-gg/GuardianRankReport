@@ -243,7 +243,7 @@ function GetDisplayItemScoredNightFall(props: { item: IPlayerActivity }) {
 }
 
 
-function DisplayActivities(props: { activities: Map<keyof typeof DestinyActivity, IPlayerActivity>; activityType: ActivityType; displayInactive: boolean }) {
+function GetDisplayPlayerActivities(props: { activities: Map<keyof typeof DestinyActivity, IPlayerActivity>; activityType: ActivityType; displayInactive: boolean }) {
 	const activities = Array.from(props.activities.values());
 	if (props.activityType != ActivityType.ScoredNightFall)
 		activities.sort((x, y) => DestinyActivity[y.Activity] - DestinyActivity[x.Activity]);
@@ -417,14 +417,14 @@ export function SolidRaids(props: { loading?: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
 	element = props.loading!;
 	return <>
-		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Raid, displayInactive: true })}
+		{GetDisplayPlayerActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Raid, displayInactive: true })}
 	</>;
 }
 export function SolidDungeons(props: { loading?: Element }) {
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
 	element = props.loading!;
 	return <>
-		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Dungeon, displayInactive: true })}
+		{GetDisplayPlayerActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.Dungeon, displayInactive: true })}
 	</>;
 }
 export function SolidExoticMissions(props: { loading?: Element }) {
@@ -432,7 +432,7 @@ export function SolidExoticMissions(props: { loading?: Element }) {
 	element = props.loading!;
 	return <>
 
-		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ExoticMission, displayInactive: true })}
+		{GetDisplayPlayerActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ExoticMission, displayInactive: true })}
 	</>;
 }
 export function SolidGrandMasters(props: { loading?: Element }) {
@@ -440,6 +440,6 @@ export function SolidGrandMasters(props: { loading?: Element }) {
 	element = props.loading!;
 	return <>
 
-		{DisplayActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ScoredNightFall, displayInactive: false })}
+		{GetDisplayPlayerActivities({ activities: $CurrentPlayerProfile().activities, activityType: ActivityType.ScoredNightFall, displayInactive: false })}
 	</>;
 }
