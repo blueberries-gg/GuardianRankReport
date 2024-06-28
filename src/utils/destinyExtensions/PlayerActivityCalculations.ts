@@ -1,19 +1,16 @@
-import { ActivityType } from "./enums/ActivityType";
-import { ModeType } from "./enums/ModeType";
-import { IPlayerActivity } from "./destinyActivities/activities"
-import { StringsKeysOf } from "./common"
+import { ActivityType } from "../enums/ActivityType";
+import { ModeType } from "../enums/ModeType";
+import { IPlayerActivity } from "../destinyActivities/activities"
+import { StringsKeysOf } from "../common"
 
-// function FilterTypeActive(activities: Map<keyof typeof DestinyActivity, IPlayerActivity>, activityType: ActivityType, active: boolean) {
-// 	return Array.from(
-// 		new Map([...activities].filter(([k, v]) => v.Type == (ActivityType[activityType] as keyof typeof ActivityType) && v.isActive == active)).values()
-// 	);
-// }
 export function PlayerActivitiesFilterActive(activities: IPlayerActivity[], active: boolean) {
 	return activities.filter((x) => x.isActive == active);
 }
+
 export function PlayerActivitiesFilterType(activities: IPlayerActivity[], activityType: ActivityType) {
 	return activities.filter((x) => x.Type == (ActivityType[activityType] as keyof typeof ActivityType));
 }
+
 export function GetPlayerActivitiesCountComplete(activities: IPlayerActivity[]) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
@@ -88,6 +85,7 @@ export function GetPlayerActivityCompletions(activity: IPlayerActivity) {
 	}
 	return complete;
 }
+
 export function GetPlayerActivityNormalCompletions(activity: IPlayerActivity) {
 	const initialized = activity.dataInitialized;
 	let complete = -1;
@@ -98,6 +96,7 @@ export function GetPlayerActivityNormalCompletions(activity: IPlayerActivity) {
 	}
 	return complete;
 }
+
 export function GetPlayerActivityMasterCompletions(activity: IPlayerActivity) {
 	const initialized = activity.dataInitialized;
 	let complete = -1;
@@ -107,6 +106,7 @@ export function GetPlayerActivityMasterCompletions(activity: IPlayerActivity) {
 	}
 	return complete;
 }
+
 export function GetPlayerActivitiesGrandMasterCompletions(activity: IPlayerActivity) {
 
 	const initialized = activity.dataInitialized;

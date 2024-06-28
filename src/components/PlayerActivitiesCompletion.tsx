@@ -4,11 +4,11 @@ import { CurrentPlayerProfile } from "../stores/destinyPlayerData";
 import { ActivityType } from "../utils/enums/ActivityType";
 import { DestinyActivity } from "../utils/enums/DestinyActivities";
 import { getMasterLike, IPlayerActivity, mapActivities } from "../utils/destinyActivities/activities";
-import { BASE_BUNGIE_URL } from "../utils/common";
 import complete from "../resources/images/complete.png";
 import missing from "../resources/images/missing.png";
 import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity";
-import { GetPlayerActivityCompletions, GetPlayerActivityNormalCompletions, GetPlayerActivityMasterCompletions, GetPlayerActivitiesGrandMasterCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions } from "../utils/PlayerActivityCalculations";
+import { GetPlayerActivityCompletions, GetPlayerActivityNormalCompletions, GetPlayerActivityMasterCompletions, GetPlayerActivitiesGrandMasterCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions } from "../utils/destinyExtensions/PlayerActivityCalculations";
+import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
 
 function ActivityCompletionsToString(complete: number, enabled: boolean) {
 	return enabled ? ((complete < 0) ? "?" : complete.toString()) : "";

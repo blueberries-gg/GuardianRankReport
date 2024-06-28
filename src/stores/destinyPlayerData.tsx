@@ -16,14 +16,15 @@ import {
 	getDestinyEntityDefinition,
 	DestinyInventoryItemDefinition,
 } from "bungie-api-ts/destiny2";
-import { IsDestinyResponseValid, StringsKeysOf } from "../utils/common";
-import { IPlayerActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/destinyActivities/activities";
 import { ExactSearchRequest, UserInfoCard, UserSearchPrefixRequest, searchByGlobalNamePost } from "bungie-api-ts/user";
 import { getCommonSettings, getGlobalAlerts } from "bungie-api-ts/core";
-import { ActiveScoredNightFalls, DestinyActivity } from "../utils/enums/DestinyActivities";
+import { DestinyActivity } from "../utils/enums/DestinyActivities";
 import { ModeType } from "../utils/enums/ModeType";
 import { ActivityType } from "../utils/enums/ActivityType";
-import { ActiveActivities } from "../utils/destinyActivities/activeActivities";
+import { ActiveActivities, ActiveScoredNightFalls } from "../utils/destinyActivities/activeActivities";
+import { StringsKeysOf } from "../utils/common";
+import { IPlayerActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/destinyActivities/activities";
+import { IsDestinyResponseValid } from "../utils/destinyExtensions/APIExtensions";
 
 export interface PlayerBadgeData {
 	UserCard: UserInfoCard;
@@ -393,10 +394,10 @@ async function GetPlayerMembershipsByPrefix(name: string) {
 	return users;
 }
 
-export const GetMembershipPlayerInformation = async (name: string) => {
-	const nameSplit = name.split("#");
+export const GetMembershipPlayerInformation = async (query: string) => {
+	const nameSplit = query.split("#");
 	if (nameSplit.length === 1) {
-		return await GetPlayerMembershipsByPrefix(name);
+		return await GetPlayerMembershipsByPrefix(query);
 	} else return await GetPlayerMembershipByFullName(nameSplit[0], parseInt(nameSplit[1], 10));
 };
 
