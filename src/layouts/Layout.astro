@@ -5,7 +5,6 @@ interface Props {
 
 const { title } = Astro.props;
 import AlertBar from "../components/AlertBar";
-import { GetMembershipPlayerInformation } from "../stores/destinyPlayerData";
 import SearchBar from "../components/SearchBar.astro";
 ---
 
@@ -32,13 +31,14 @@ import SearchBar from "../components/SearchBar.astro";
 			window.addEventListener("resize", checkViewPort);
 		</script>
 		<meta name="description" content="Guardian Rank Report" />
-		<link rel="icon" type="image/svg+xml" href=`favicon.svg` />
+		<link rel="icon" type="image/png" href=`${import.meta.env.BASE_URL}/favicon.png` />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet">
 	</head>
 	<body>
-		<header style="display: flex; background: #454b58; padding-inline: 5px; border-bottom: solid 12px #797980;">
-			<div style="margin-block: auto; flex-direction: row;" class="content">
+		<header style="display: flex; height:80px">
+			<div style="margin-block: auto; flex-direction: row;" class="header-container">
 				<div style="flex-grow: 1; display: flex;">
 					<a class="logo" href="https://www.blueberries.gg/">
 						<img
@@ -47,8 +47,10 @@ import SearchBar from "../components/SearchBar.astro";
 							class="logo-img"
 						/>
 					</a>
+					<div class="navbar-link-container">
+						<a class="navbar-link">Example Link</a>							
+					</div>
 				</div>
-
 				<SearchBar />
 			</div>
 		</header>
@@ -61,6 +63,11 @@ import SearchBar from "../components/SearchBar.astro";
 	</body>
 </html>
 
+<style>
+	@import url('https://fonts.cdnfonts.com/css/open-sans');
+</style>
+
+
 <style is:global>
 	/* :root {
 		--accent: 136, 58, 234;
@@ -72,24 +79,66 @@ import SearchBar from "../components/SearchBar.astro";
 	main {
 		background: #3f3f46;
 		background: radial-gradient(circle at center top, #3f3f46 0, #0b0b0f 1080px);
+		background: #0f0606; /*#3f3f46;*/
+		/*background: radial-gradient(circle at center top, #737D7D40 0, #73737D00 480px);*/
 		min-height: calc(100vh - 71px);
 	}
 	html {
-		background: #0b0b0f;
+		background: #0f0606; /*#0b0b0f;*/
 	}
 
 	body {
 		margin: 0;
 	}
 
+	.header-container {
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+	@media only screen and (max-width: 474px) {
+		.header-container {
+			width: 9 5%;
+		}
+	}
 	.logo {
-		height: 30px;
+		height: 40px;
 		margin-block: auto;
 	}
 	.logo-img {
 		display: block;
 		width: auto;
 		height: 100%;
+	}
+
+
+	.navbar-link-container {
+		margin-block: auto;
+		margin-left: auto;
+		margin-right: 0;
+		padding: 10px;
+	}
+
+	.navbar-link {
+		font-size: 15px;
+		line-height: 16px;
+		font-weight: 600;
+		color: #fff;
+		font-family:
+			open sans,
+			Helvetica,
+			Arial,
+			Lucida,
+			sans-serif;
+		-webkit-transition: 0.5s;
+		transition: 0.5s;
+
+	}
+
+	.navbar-link:hover {
+		color: #7782ff;
 	}
 	.content {
 		margin: auto;
