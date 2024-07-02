@@ -1,6 +1,8 @@
+import { StringsKeysOf } from "../common";
 import { ActivityType } from "../enums/ActivityType";
 import { DestinyExoticMission } from "../enums/DestinyActivities";
 import { IActivity } from "./activities";
+import { ExoticDrop } from "./exoticDrops";
 
 export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExoticMission]: IActivity } = {
 	Avalon: {
@@ -91,7 +93,6 @@ export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExotic
 		SoloFlawlessHash: 432190114,
 		SoloHash: 3051225076,
 	},
-
 	VoxObscura: {
 		Modes: {
 			Normal: [2668737148, 901429423],
@@ -103,7 +104,6 @@ export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExotic
 		Active: true,
 		Free: false,
 	},
-
 	ZeroHour: {
 		Modes: {
 			Normal: [3361746271],
@@ -120,3 +120,69 @@ export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExotic
 		SoloHash: 748425411,
 	},
 };
+
+export const ExoticMissionExoticDrops: ExoticDrop[] = [
+	{
+		collectibleHash: 2629609052,
+		itemHash: 3118061005,
+		icon: "/common/destiny2_content/icons/735baec8c23ff1416ae6a8c72c729432.jpg",
+		hasCatalyst: true,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.Avalon] as StringsKeysOf<typeof DestinyExoticMission>,
+	},
+	/*{
+		collectibleHash: 653763964,
+		itemHash: 3856705927,
+		icon: "/common/destiny2_content/icons/cef1290d58a2d94d1437e1e569fa7996.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.Harbinger] as StringsKeysOf<typeof DestinyExoticMission>,
+	},*/
+	{
+		collectibleHash: 3324472233,
+		collectibleHashes: [3324472233,2143216566,3723101298],
+		itemHash: 2188764214,
+		icon: "/common/destiny2_content/icons/cfc2c246cfd404d749fffbfe3ae3dfec.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.Presage] as StringsKeysOf<typeof DestinyExoticMission>,
+	},
+	{
+		collectibleHash: 1161231112,
+		collectibleHashes: [1161231112,760708739],
+		itemHash: 1473821207,
+		icon: "/common/destiny2_content/icons/040a104defcc7011b570886e3ec3c73f.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.SeraphsShield] as StringsKeysOf<typeof DestinyExoticMission>,
+	},
+	{
+		collectibleHash: 3826612761,
+		collectibleHashes: [3826612761,221021254],
+		itemHash: 2910326942,
+		icon: "/common/destiny2_content/icons/6b47d872840188bc913d6307fa537c3c.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.Starcrossed] as StringsKeysOf<typeof DestinyExoticMission>,
+	},
+	{
+		collectibleHash: 1763610692,
+		collectibleHashes: [1763610692,545218287,3875807583],
+		itemHash: 1891561814,
+		icon: "/common/destiny2_content/icons/e47c31826843f6fd0aa863eac6fd093e.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.TheWhisper] as StringsKeysOf<typeof DestinyExoticMission>,
+	},
+	{
+		collectibleHash: 360554695,
+		collectibleHashes: [360554695,2097871936,4028619088],
+		itemHash: 46125926,
+		icon: "/common/destiny2_content/icons/0824b34bb37e0bb7c32b91adf6dcb79e.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.VoxObscura] as StringsKeysOf<typeof DestinyExoticMission>,
+	},
+	{
+		collectibleHash: 360254771,
+		collectibleHashes: [360254771,449896716,2500286745],
+		itemHash: 3824673936,
+		icon: "/common/destiny2_content/icons/a1b6a5f3e52878610397249986300b23.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.ZeroHour] as StringsKeysOf<typeof DestinyExoticMission>,
+	},
+
+]

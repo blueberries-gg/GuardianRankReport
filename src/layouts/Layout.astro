@@ -48,7 +48,7 @@ import SearchBar from "../components/SearchBar.astro";
 						/>
 					</a>
 					<div class="navbar-link-container">
-						<a class="navbar-link">Example Link</a>							
+						<a class="navbar-link">Sample Link</a>							
 					</div>
 				</div>
 				<SearchBar />
@@ -139,6 +139,7 @@ import SearchBar from "../components/SearchBar.astro";
 			sans-serif;
 		-webkit-transition: 0.5s;
 		transition: 0.5s;
+		cursor: pointer;
 
 	}
 
@@ -165,9 +166,11 @@ import SearchBar from "../components/SearchBar.astro";
 	}
 	.completions-table-empty-tr::before {
 		content: "";
-		position: absolute; /* absolute positioned */
-		width: 100%; /* span the entire table */
-		border-bottom: solid 1px;
+		position: absolute;
 		width: 100% !important;
+	}
+
+	.completions-table-empty-tr-border::before {
+		border-bottom: solid 1px;
 	}
 </style>

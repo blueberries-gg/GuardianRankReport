@@ -59,7 +59,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 	</div>
 </Layout>
 
-<style>
+<style is:global>
 	.activityGroup {
 		display: flex;
 		flex-direction: column;
@@ -90,9 +90,9 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			outline-color: #d8d8d8;
 			outline-offset: 2px;
 			transition:
-				outline-offset calc(0 +0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
-				outline-color calc(0 +0.15)s linear 0.05s,
-				color calc(0 +0.05)s linear 0.15s;
+				outline-offset calc(0 + 0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+				outline-color calc(0 + 0.15)s linear 0.05s,
+				color calc(0 + 0.05)s linear 0.15s;
 				background-color calc(0 + 0)s;
 
 		}
@@ -103,43 +103,43 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		outline-color: #d8d8d8;
 		outline-offset: 2px;
 		transition:
-			outline-offset calc(0.25 +0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
-			outline-color calc(0.25 +0.15)s linear 0.05s,
-			color calc(0.25 +0.05)s linear 0.15s,
+			outline-offset calc(0.25 + 0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+			outline-color calc(0.25 + 0.15)s linear 0.05s,
+			color calc(0.25 + 0.05)s linear 0.15s,
 			background-color calc(0.25 + 0)s;
 	}
 }
 </style>
 
 <script>
-	const touchTarget = (e: Event) => {
+	const touchDocument = (e: Event) => {
 		const clicked = e.target! as Element;
-		const el = clicked.closest(".hoverable");
-		if (el == null) return;
+		const hoverableElement = clicked.closest(".hoverable");
+		if (hoverableElement == null) return;
 
 		let className = "touch-hover";
 		if (e.type == "touchend") {
-			if (el.classList) {
-				el.classList.remove(className);
+			if (hoverableElement.classList) {
+				hoverableElement.classList.remove(className);
 			} else {
-				const classes = el.className.split(" ");
+				const classes = hoverableElement.className.split(" ");
 				const existingIndex = classes.indexOf(className);
 				if (existingIndex >= 0) classes.splice(existingIndex, 1);
-				el.className = classes.join(" ");
+				hoverableElement.className = classes.join(" ");
 			}
 		} else {
-			if (el.classList) {
-				el.classList.add(className);
+			if (hoverableElement.classList) {
+				hoverableElement.classList.add(className);
 			} else {
-				const classes = el.className.split(" ");
+				const classes = hoverableElement.className.split(" ");
 				const existingIndex = classes.indexOf(className);
 
 				if (existingIndex < 0) classes.push(className);
 
-				el.className = classes.join(" ");
+				hoverableElement.className = classes.join(" ");
 			}
 		}
 	};
-	document.addEventListener("touchstart", touchTarget);
-	document.addEventListener("touchend", touchTarget);
+	document.addEventListener("touchstart", touchDocument);
+	document.addEventListener("touchend", touchDocument);
 </script>

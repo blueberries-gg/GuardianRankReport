@@ -15,6 +15,8 @@ import {
 	DestinyCharacterComponent,
 	getDestinyEntityDefinition,
 	DestinyInventoryItemDefinition,
+	DestinyCollectibleComponent,
+	DestinyCollectibleState,
 } from "bungie-api-ts/destiny2";
 import { ExactSearchRequest, UserInfoCard, UserSearchPrefixRequest, searchByGlobalNamePost } from "bungie-api-ts/user";
 import { getCommonSettings, getGlobalAlerts } from "bungie-api-ts/core";
@@ -25,6 +27,7 @@ import { ActiveActivities, ActiveScoredNightFalls } from "../utils/destinyActivi
 import { StringsKeysOf } from "../utils/common";
 import { IPlayerActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/destinyActivities/activities";
 import { IsDestinyResponseValid } from "../utils/destinyExtensions/APIExtensions";
+import { ExoticDrops } from "../utils/destinyActivities/exoticDrops";
 
 export interface PlayerBadgeData {
 	UserCard: UserInfoCard;
@@ -37,35 +40,39 @@ export interface PlayerBadgeData {
 export interface PlayerActivityDetails {
 	info: PlayerBadgeData;
 	activities: Map<keyof typeof DestinyActivity, IPlayerActivity>;
+	collectibles: number[];
 }
 
 const playerActivitiesCompletions = new Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity>();
-
-ActiveActivities.forEach((k) => {
-	playerActivitiesCompletions.set(k as StringsKeysOf<typeof DestinyActivity>, {
-		Activity: k as StringsKeysOf<typeof DestinyActivity>,
-		Type: ActivityType[mapActivities[k]!.Type] as keyof typeof ActivityType,
-		Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
-		isActive: true,
-		dataInitialized: false,
-	});
-});
-
-ActiveScoredNightFalls.forEach((k) => {
-	playerActivitiesCompletions.set(k, {
-		Activity: k,
-		Type: ActivityType[mapActivities[k]!.Type] as keyof typeof ActivityType,
-		Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
-		isActive: true,
-		dataInitialized: false,
-	});
-});
+GetBasePlayerActivitiesCompletions(playerActivitiesCompletions);
 
 export const healthStatus = atom(true);
 export const DestinyEnabled = atom(true);
-export const CurrentPlayerProfile: MapStore<PlayerActivityDetails> = map({ activities: playerActivitiesCompletions });
+export const CurrentPlayerProfile: MapStore<PlayerActivityDetails> = map({ activities: playerActivitiesCompletions, collectibles: [] });
 export const healthStatusReason = atom("No alert for the moment, you should not be seeing this");
 export const healthStatusTitle = atom("Error");
+
+function GetBasePlayerActivitiesCompletions(map: Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity>) {
+	ActiveActivities.forEach((k) => {
+		map.set(k as StringsKeysOf<typeof DestinyActivity>, {
+			Activity: k as StringsKeysOf<typeof DestinyActivity>,
+			Type: ActivityType[mapActivities[k]!.Type] as keyof typeof ActivityType,
+			Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
+			isActive: true,
+			dataInitialized: false,
+		});
+	});
+
+	ActiveScoredNightFalls.forEach((k) => {
+		map.set(k, {
+			Activity: k,
+			Type: ActivityType[mapActivities[k]!.Type] as keyof typeof ActivityType,
+			Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
+			isActive: true,
+			dataInitialized: false,
+		});
+	});
+}
 
 async function $http(config: HttpClientConfig) {
 	const url = new URL(config.url);
@@ -127,7 +134,9 @@ function CalculateAggregatePlayerCompletions(aggregatePlayerActivitiesCompletion
 		activitiesCompletions.set(hash, total);
 	});
 
-	const playerCompletions: Map<keyof typeof DestinyActivity, IPlayerActivity> = new Map(playerActivitiesCompletions);
+	const playerCompletions: Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity> = new Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity>();
+	GetBasePlayerActivitiesCompletions(playerCompletions);
+
 
 	activitiesCompletions.forEach((value, key) => {
 		if (value === 0) return;
@@ -293,6 +302,14 @@ async function GetAllCharacters(destinyMembershipId: bigint | string, membership
 
 	return AllCharacters;
 }
+ 
+function GetCollectiblesAcquired (collectibles: { [key: number]: DestinyCollectibleComponent; }, CharacterCollectibles: { [key: number]: DestinyCollectibleComponent; }[], collectibleHash: number){
+	let collectible = collectibles[collectibleHash];
+	CharacterCollectibles.forEach((characterRecords) => {
+		if (collectible == undefined) collectible = characterRecords[collectibleHash];
+	});
+
+	return (((collectible?.state ?? DestinyCollectibleState.NotAcquired) & DestinyCollectibleState.NotAcquired) == 0)}
 
 export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint | string, membershipType: BungieMembershipType | number) => {
 	const AllCharactersPromise = GetAllCharacters(destinyMembershipId, membershipType);
@@ -302,11 +319,17 @@ export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint |
 		[key: number]: DestinyRecordComponent;
 	}[];
 
+	let ProfileCollectibles: { [key: number]: DestinyCollectibleComponent; };
+	let CharacterCollectibles: {
+		[key: number]: DestinyCollectibleComponent;
+	}[];
+
 	const DestinyProfileResponsePromise = getProfile($http, {
 		components: [
 			DestinyComponentType.Profiles,
 			DestinyComponentType.Characters,
 			DestinyComponentType.CharacterActivities, // Access to Activities
+			DestinyComponentType.Collectibles,
 			DestinyComponentType.Records, //Emblems and collections
 			DestinyComponentType.SocialCommendations,
 		],
@@ -332,6 +355,13 @@ export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint |
 		// availableOwnedActivities = MapSetIntersection(allAvailableActivities, mapActivitiesAndModeByHash);
 		ProfileRecords = PlayerProfile.Response.profileRecords.data!.records;
 		CharacterRecords = Object.values(PlayerProfile.Response.characterRecords.data!).map((x) => x.records);
+
+		ProfileCollectibles = PlayerProfile.Response.profileCollectibles.data!.collectibles
+		CharacterCollectibles = Object.values(PlayerProfile.Response.characterCollectibles.data!).map((x) => x.collectibles);
+		 
+		const collectibleHashes = ExoticDrops.map((drop)=> drop.collectibleHash);	
+		const collectedExotics = collectibleHashes.filter((hash) => GetCollectiblesAcquired(ProfileCollectibles, CharacterCollectibles, hash));
+		CurrentPlayerProfile.setKey("collectibles",collectedExotics)
 	}
 
 	const AllCharacters: string[] = await AllCharactersPromise;
@@ -401,12 +431,16 @@ export const GetMembershipPlayerInformation = async (query: string) => {
 	} else return await GetPlayerMembershipByFullName(nameSplit[0], parseInt(nameSplit[1], 10));
 };
 
+
+
+
 export const GetDestinyInventoryItemDefinitionEntityDefinition = async (hashIdentifier: number) => {
 	const definition = await getDestinyEntityDefinition($http, { entityType: "DestinyInventoryItemDefinition", hashIdentifier });
 	if (IsDestinyResponseValid(definition, GetBungieErrorMessage)) {
 		return definition.Response as DestinyInventoryItemDefinition;
 	}
 };
+
 
 function GetBungieErrorMessage<T>(response: ServerResponse<T>) {
 	if ((response.ErrorCode as number) === -1) healthStatusTitle.set(`Internal Error(${response.ErrorStatus})`);
