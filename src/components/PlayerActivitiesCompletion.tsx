@@ -224,6 +224,7 @@ function GetDisplayItemExoticMission(props: { item: IPlayerActivity }) {
 					</Show>
 				</Show>
 			</td>
+			<td></td>
 		</tr>
 	);
 }
@@ -336,7 +337,20 @@ function GetDisplayPlayerActivities(props: { activities: Map<keyof typeof Destin
 
 					<Show when={props.displayInactive && inactive.length > 0}>
 						<tr style="height:5px;"></tr>
-						<tr style="height:30px; font-weight: bold;">
+						<tr style="height:30px; font-weight: bold; background:#FFFFFF1A; cursor:pointer;" onclick={
+								() => {
+									const element = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`);
+									const collapseButton = document.getElementById(`${ActivityType[props.activityType]}-CollapseButton`);
+									if (element!.style.display == 'none') {
+										element!.style.display = "table-row-group"
+										collapseButton!.innerHTML = '&#9650';
+									}
+									else {
+										element!.style.display = "none"
+										collapseButton!.innerHTML = '&#9660';
+									}
+								}
+							}>
 							<td></td>
 							<Switch>
 								<Match when={props.activityType == ActivityType.Raid}>
@@ -360,35 +374,11 @@ function GetDisplayPlayerActivities(props: { activities: Map<keyof typeof Destin
 									</td>
 								</Match>
 							</Switch>
-							<td id={`${ActivityType[props.activityType]}-CollapseButton`} style="text-align:center; padding-top:5px; cursor:pointer;" onclick={
-								(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									const elementGroupCard = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`)!.closest(".activityGroupCard")!;
-									const el = elementGroupCard
-									const className = "touch-hover";
-									if (el.classList) {
-										el.classList.add(className);
-										setTimeout(() => el.classList.remove(className), 400);
-									}
-
-
-									const element = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`);
-									const collapseButton = document.getElementById(`${ActivityType[props.activityType]}-CollapseButton`);
-									if (element!.style.display == 'none') {
-										element!.style.display = "table-row-group"
-										collapseButton!.innerHTML = '&#9650';
-									}
-									else {
-										element!.style.display = "none"
-										collapseButton!.innerHTML = '&#9660';
-									}
-								}
-							}>
+							<td id={`${ActivityType[props.activityType]}-CollapseButton`} style="text-align:center; padding-inline:5px;">
 								&#9660
 							</td>
 						</tr>
-						<tbody id={`${ActivityType[props.activityType]}-LegacyTable`} style="display: none">
+						<tbody id={`${ActivityType[props.activityType]}-LegacyTable`} style="display: none; background:#FFFFFF0D">
 							<For each={inactive}>{(item,) =>
 								<Switch>
 									<Match when={props.activityType == ActivityType.Raid}>

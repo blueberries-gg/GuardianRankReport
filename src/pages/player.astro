@@ -26,21 +26,21 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			<div
 				style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
 				<div class="activityGroup">
-					<div class="activityGroupCard">
+					<div class="activityGroupCard hoverable">
 						<SolidRaids client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidRaids>
 					</div>
 				</div>
 				<div class="activityGroup">
-					<div class="activityGroupCard">
+					<div class="activityGroupCard hoverable">
 						<SolidDungeons client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidDungeons>
 					</div>
 				</div>
 				<div class="activityGroup">
-					<div class="activityGroupCard">
+					<div class="activityGroupCard hoverable">
 						<SolidGrandMasters client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidGrandMasters>
@@ -48,7 +48,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				</div>
 
 				<div class="activityGroup">
-					<div class="activityGroupCard">
+					<div class="activityGroupCard hoverable">
 						<SolidExoticMissions client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidExoticMissions>
@@ -90,53 +90,56 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			outline-color: #d8d8d8;
 			outline-offset: 2px;
 			transition:
-				outline-offset 0.05s cubic-bezier(0.69, 0, 0, 1) 0.05s,
-				outline-color 0.15s linear 0.05s,
-				color 0.05s linear 0.15s;
+				outline-offset calc(0 +0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+				outline-color calc(0 +0.15)s linear 0.05s,
+				color calc(0 +0.05)s linear 0.15s;
+				background-color calc(0 + 0)s;
+
 		}
 	}
-
+	@media (hover: none) {
 	.activityGroupCard.touch-hover {
 		background: #ffffff2f;
 		outline-color: #d8d8d8;
 		outline-offset: 2px;
 		transition:
-			outline-offset 0.05s cubic-bezier(0.69, 0, 0, 1) 0.05s,
-			outline-color 0.15s linear 0.05s,
-			color 0.05s linear 0.15s;
+			outline-offset calc(0.25 +0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+			outline-color calc(0.25 +0.15)s linear 0.05s,
+			color calc(0.25 +0.05)s linear 0.15s,
+			background-color calc(0.25 + 0)s;
 	}
+}
 </style>
 
 <script>
-	let cardNames = document.getElementsByClassName("activityGroupCard");
+	const touchTarget = (e: Event) => {
+		const clicked = e.target! as Element;
+		const el = clicked.closest(".hoverable");
+		if (el == null) return;
 
-	for (let i = 0; i < cardNames.length; i++) {
-		const touchTarget = (e: Event) => {
-			let el = cardNames.item(i)!;
-			let className = "touch-hover";
-			if (e.type == "touchend") {
-				if (el.classList) {
-					el.classList.remove(className);
-				} else {
-					const classes = el.className.split(" ");
-					const existingIndex = classes.indexOf(className);
-					if (existingIndex >= 0) classes.splice(existingIndex, 1);
-					el.className = classes.join(" ");
-				}
+		let className = "touch-hover";
+		if (e.type == "touchend") {
+			if (el.classList) {
+				el.classList.remove(className);
 			} else {
-				if (el.classList) {
-					el.classList.add(className);
-				} else {
-					const classes = el.className.split(" ");
-					const existingIndex = classes.indexOf(className);
-
-					if (existingIndex < 0) classes.push(className);
-
-					el.className = classes.join(" ");
-				}
+				const classes = el.className.split(" ");
+				const existingIndex = classes.indexOf(className);
+				if (existingIndex >= 0) classes.splice(existingIndex, 1);
+				el.className = classes.join(" ");
 			}
-		};
-		cardNames.item(i)!.addEventListener("touchstart", touchTarget, true);
-		cardNames.item(i)!.addEventListener("touchend", touchTarget, true);
-	}
+		} else {
+			if (el.classList) {
+				el.classList.add(className);
+			} else {
+				const classes = el.className.split(" ");
+				const existingIndex = classes.indexOf(className);
+
+				if (existingIndex < 0) classes.push(className);
+
+				el.className = classes.join(" ");
+			}
+		}
+	};
+	document.addEventListener("touchstart", touchTarget);
+	document.addEventListener("touchend", touchTarget);
 </script>
