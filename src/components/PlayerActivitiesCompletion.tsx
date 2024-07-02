@@ -324,7 +324,7 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 					</div>
 				</div>
 			</div>
-			<div style="background: #ffffff0C; padding-block: 20px;padding-inline: 10px;">
+			<div style="background: #ffffff0C; padding-block: 10px;padding-inline: 10px;">
 				<div style="display: flex;">
 					<span style="margin-block: 0px; margin: auto 0 auto 5px; font-size: 14pt">{``}</span>
 				</div>
