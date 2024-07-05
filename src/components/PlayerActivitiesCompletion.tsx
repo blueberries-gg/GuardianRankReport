@@ -1,6 +1,6 @@
 import { createResource, createSignal, For, Match, Show, Suspense, Switch } from "solid-js";
 //import { useStore } from "@nanostores/solid";
-import { CurrentPlayerProfile, GetDestinyInventoryItemDefinitionEntityDefinition, PlayerActivityDetails } from "../stores/destinyPlayerData";
+import { CurrentPlayerProfile, PlayerActivityDetails } from "../stores/destinyPlayerData";
 import { ActivityType } from "../utils/enums/ActivityType";
 import { DestinyActivity } from "../utils/enums/DestinyActivities";
 import { getMasterLike, IPlayerActivity, mapActivities } from "../utils/destinyActivities/activities";
@@ -10,6 +10,7 @@ import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity
 import { GetPlayerActivityCompletions, GetPlayerActivityNormalCompletions, GetPlayerActivityMasterCompletions, GetPlayerActivitiesGrandMasterCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions } from "../utils/destinyExtensions/PlayerActivityCalculations";
 import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
 import { ExoticDrop, ExoticDrops } from "../utils/destinyActivities/exoticDrops";
+import { ExoticWeaponString } from "../utils/enums/strings/en/WeaponExotic";
 
 function ActivityCompletionsToString(complete: number, enabled: boolean) {
 	return enabled ? ((complete < 0) ? "?" : complete.toString()) : "";
@@ -472,12 +473,14 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 
 function GetExoticIcon(props: { item: ExoticDrop; grayscale: boolean }) {
 	const [profile] = createResource(async () => {
-		//return (await GetDestinyInventoryItemDefinitionEntityDefinition(props.item.itemHash))?.displayProperties.name ?? ""
-		return "";
+		//return (await GetDestinyInventoryItemDefinition(props.item.itemHash))?.displayProperties.name ?? ""
+		return ExoticWeaponString[props.item.exoticWeapon];
 	})
-	const appliedStyle = !props.grayscale ? "width:64px; vertical-align: middle; padding: 2px;" : "width:64px; vertical-align: middle; padding: 2px; filter: grayscale(1);";
-	return <> 
-		<img style={appliedStyle} src={`${BASE_BUNGIE_URL}${props.item.icon}`} title={profile()} class="activityGroupCard hoverable"></img>
+	const appliedStyle = !props.grayscale ? "" : "opacity: 0.25;";
+	return <>
+		<div title={profile()} class="destinyItem hoverable">
+			<img style={`width: 100%; height: 100%; ${appliedStyle}`} src={`${BASE_BUNGIE_URL}${props.item.icon}`} ></img>
+		</div>
 	</>
 }
 

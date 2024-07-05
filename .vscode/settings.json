@@ -9,12 +9,17 @@
         "Cosmodrome",
         "Crota",
         "Crotas",
+        "Gjallarhorn",
         "Glassway",
+        "Hawkmoon",
+        "Heartshadow",
         "hoverable",
         "Justicar",
         "Lightblade",
         "Liminality",
+        "Mythoclast",
         "nanostores",
+        "Necrochasm",
         "Nezarec",
         "ovrd",
         "Phanteon",
@@ -22,6 +27,8 @@
         "Savathûn's",
         "Savathuns",
         "Starcrossed",
-        "Unranked"
+        "Unranked",
+        "Vexcalibur",
+        "Xenophage"
     ]
 }

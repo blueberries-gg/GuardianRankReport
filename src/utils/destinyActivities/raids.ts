@@ -3,6 +3,7 @@ import { DestinyRaid } from "../enums/DestinyActivities";
 import { StringsKeysOf } from "../common";
 import { IActivity } from "./activities";
 import { ExoticDrop } from "./exoticDrops";
+import { ExoticWeapon } from "../enums/WeaponExotic";
 
 export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivity } = {
 	CrotasEnd: {
@@ -114,6 +115,7 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		Active: true,
 		Free: false,
 	},
+
 	Leviathan: {
 		Modes: {
 			Normal: [2693136600, 2693136601, 2693136602, 2693136603, 2693136604, 2693136605],
@@ -313,67 +315,77 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 };
 
 export const RaidExoticDrops: ExoticDrop[] = [
-    {
-        collectibleHash: 203521123,
-        itemHash: 1034055198,
-        icon: "/common/destiny2_content/icons/52e8bb636771f4731da3f73f06fcad04.jpg",
-        hasCatalyst: true,
-        sourceActivity: DestinyRaid[DestinyRaid.CrotasEnd] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 753200559,
-        itemHash: 2399110176,
-        icon: "/common/destiny2_content/icons/9caeff89015f02ad52e6fefe95398b01.jpg",
-        hasCatalyst: false,
-        sourceActivity: DestinyRaid[DestinyRaid.DeepStoneCrypt] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 1988948484,
-        itemHash: 4103414242,
-        icon: "/common/destiny2_content/icons/c6aa03536fd68b5fca5ad6b83ea0cf1e.jpg",
-        hasCatalyst: false,
-        sourceActivity: DestinyRaid[DestinyRaid.GardenOfSalvation] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 192937277,
-        itemHash: 1802135586,
-        icon: "/common/destiny2_content/icons/106a8a40a6e55b5ec5088a26d1ed979d.jpg",
-        hasCatalyst: true,
-        sourceActivity: DestinyRaid[DestinyRaid.KingsFall] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 199171385,
-        itemHash: 2069224589,
-        icon: "/common/destiny2_content/icons/51c53df606cca474dce3cadbf7d5ce28.jpg",
-        hasCatalyst: true,
-        sourceActivity: DestinyRaid[DestinyRaid.LastWish] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 2553509474,
-        itemHash: 3371017761,
-        icon: "/common/destiny2_content/icons/c9b4d65adcdfcadde871e5961ce912fb.jpg",
-        hasCatalyst: false,
-        sourceActivity: DestinyRaid[DestinyRaid.RootOfNightmares] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 3411864064,
-        itemHash: 3284383335,
-        icon: "/common/destiny2_content/icons/fe16110003f0cc75145eed012458a667.jpg",
-        hasCatalyst: false,
-        sourceActivity: DestinyRaid[DestinyRaid.SalvationsEdge] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 2300465938,
-        itemHash: 4289226715,
-        icon: "/common/destiny2_content/icons/111a10b59029fc6a9ca5e821267e6f6c.jpg",
-        hasCatalyst: true,
-        sourceActivity: DestinyRaid[DestinyRaid.VaultOfGlass] as StringsKeysOf<typeof DestinyRaid>,
-    },
-    {
-        collectibleHash: 2817568609,
-        itemHash: 3505113722,
-        icon: "/common/destiny2_content/icons/238ab90ba2f858ebb8a5a1797a13fdd4.jpg",
-        hasCatalyst: false,
-        sourceActivity: DestinyRaid[DestinyRaid.VowOfTheDisciple] as StringsKeysOf<typeof DestinyRaid>,
-    }
+	{
+		collectibleHash: 199171385,
+		itemHash: 2069224589,
+		icon: "/common/destiny2_content/icons/51c53df606cca474dce3cadbf7d5ce28.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyRaid[DestinyRaid.LastWish] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.OneThousandVoices] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHash: 1988948484,
+		itemHash: 4103414242,
+		icon: "/common/destiny2_content/icons/c6aa03536fd68b5fca5ad6b83ea0cf1e.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyRaid[DestinyRaid.GardenOfSalvation] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Divinity] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHash: 753200559,
+		itemHash: 2399110176,
+		icon: "/common/destiny2_content/icons/9caeff89015f02ad52e6fefe95398b01.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyRaid[DestinyRaid.DeepStoneCrypt] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.EyesOfTomorrow] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHash: 2300465938,
+		itemHash: 4289226715,
+		icon: "/common/destiny2_content/icons/111a10b59029fc6a9ca5e821267e6f6c.jpg",
+		hasCatalyst: true,
+		sourceActivity: DestinyRaid[DestinyRaid.VaultOfGlass] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.VexMythoclast] as StringsKeysOf<typeof ExoticWeapon>
+
+	},
+	{
+		collectibleHash: 2817568609,
+		itemHash: 3505113722,
+		icon: "/common/destiny2_content/icons/238ab90ba2f858ebb8a5a1797a13fdd4.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyRaid[DestinyRaid.VowOfTheDisciple] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.CollectiveObligation] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHash: 192937277,
+		itemHash: 1802135586,
+		icon: "/common/destiny2_content/icons/106a8a40a6e55b5ec5088a26d1ed979d.jpg",
+		hasCatalyst: true,
+		sourceActivity: DestinyRaid[DestinyRaid.KingsFall] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.TouchOfMalice] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHash: 2553509474,
+		itemHash: 3371017761,
+		icon: "/common/destiny2_content/icons/c9b4d65adcdfcadde871e5961ce912fb.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyRaid[DestinyRaid.RootOfNightmares] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.ConditionalFinality] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHash: 203521123,
+		itemHash: 1034055198,
+		icon: "/common/destiny2_content/icons/52e8bb636771f4731da3f73f06fcad04.jpg",
+		hasCatalyst: true,
+		sourceActivity: DestinyRaid[DestinyRaid.CrotasEnd] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Necrochasm] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHash: 3411864064,
+		itemHash: 3284383335,
+		icon: "/common/destiny2_content/icons/fe16110003f0cc75145eed012458a667.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyRaid[DestinyRaid.SalvationsEdge] as StringsKeysOf<typeof DestinyRaid>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Euphony] as StringsKeysOf<typeof ExoticWeapon>
+	}
 ];

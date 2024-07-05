@@ -1,4 +1,4 @@
-import { CurrentPlayerProfile, GetDestinyInventoryItemDefinitionEntityDefinition, PlayerActivityDetails } from "../stores/destinyPlayerData";
+import { CurrentPlayerProfile, GetDestinyInventoryItemDefinition, PlayerActivityDetails } from "../stores/destinyPlayerData";
 import { AbsoluteRankString } from "../utils/enums/strings/en/AbsoluteRank";
 import { AbsoluteRank } from "../utils/enums/AbsoluteRank";
 import { DestinyActivity } from "../utils/enums/DestinyActivities";
@@ -63,7 +63,7 @@ CurrentPlayerProfile.subscribe((profile, _, changedKey) => {
         document.getElementById("badgeFullName")!.title =
             `${profile.info.UserCard.bungieGlobalDisplayName}#${("000" + profile.info.UserCard.bungieGlobalDisplayNameCode).slice(-4)}`;
 
-        GetDestinyInventoryItemDefinitionEntityDefinition(profile.info.LatestCharacter.emblemHash).then(
+        GetDestinyInventoryItemDefinition(profile.info.LatestCharacter.emblemHash).then(
             (r) => (document.getElementById("playerBadge")!.title = r?.displayProperties.name ?? "Unknown Emblem")
         );
         document.getElementById(`actualRank${profile.info.RenewedGuardianRank}`)!.style.display = "flex";

@@ -434,7 +434,7 @@ export const GetMembershipPlayerInformation = async (query: string) => {
 
 
 
-export const GetDestinyInventoryItemDefinitionEntityDefinition = async (hashIdentifier: number) => {
+export const GetDestinyInventoryItemDefinition = async (hashIdentifier: number) => {
 	const definition = await getDestinyEntityDefinition($http, { entityType: "DestinyInventoryItemDefinition", hashIdentifier });
 	if (IsDestinyResponseValid(definition, GetBungieErrorMessage)) {
 		return definition.Response as DestinyInventoryItemDefinition;

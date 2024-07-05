@@ -108,6 +108,47 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			color calc(0.25 + 0.05)s linear 0.15s,
 			background-color calc(0.25 + 0)s;
 	}
+	}
+
+	.destinyItem {
+		outline: 2px solid;
+		outline-offset: 4px;
+		outline-color: transparent;
+		border-style: solid;
+		border-color: #b7b7b7;
+		border-width: 1.5px;
+		width:64px; 
+		height:64px; 
+
+		transition:
+			outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s,
+			border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
+			color 0.125s cubic-bezier(0.69, 0, 0, 1);
+	}
+	@media (hover: hover) {
+		.destinyItem:hover {
+			outline-color: #d8d8d8;
+			outline-offset: 2px;
+			border-color: #ffffff;
+			transition:
+				outline-offset calc(0 + 0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+				outline-color calc(0 + 0.15)s linear 0.05s,
+				border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
+				color calc(0 + 0.05)s linear 0.15s;
+
+		}
+	}
+	@media (hover: none) {
+	.destinyItem.touch-hover {
+		outline-color: #d8d8d8;
+			outline-offset: 2px;
+			border-color: #ffffff;
+		transition:
+			outline-offset calc(0.25 + 0.05)s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+			outline-color calc(0.25 + 0.15)s linear 0.05s,
+			border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
+			color calc(0.25 + 0.05)s linear 0.15s;
+	}
 }
 </style>
 

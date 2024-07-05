@@ -1,6 +1,7 @@
 import { StringsKeysOf } from "../common";
 import { ActivityType } from "../enums/ActivityType";
 import { DestinyDungeon } from "../enums/DestinyActivities";
+import { ExoticWeapon } from "../enums/WeaponExotic";
 import { IActivity } from "./activities";
 import { ExoticDrop } from "./exoticDrops";
 
@@ -137,26 +138,13 @@ export const DungeonsBaseDefinitions: { [key in keyof typeof DestinyDungeon]: IA
 };
 
 export const DungeonExoticDrops: ExoticDrop[] = [
-    {
-        collectibleHash: 467760883,
-        itemHash: 3664831848,
-        icon: "/common/destiny2_content/icons/94c6933727fa885fb2002a8c7aee5e42.jpg",
+	{
+        collectibleHash: 1660030044,
+        itemHash: 814876684,
+        icon: "/common/destiny2_content/icons/8e5d7a68305a0d1e53ccade9398c7e8b.jpg",
         hasCatalyst: false,
-        sourceActivity: DestinyDungeon[DestinyDungeon.Duality] as StringsKeysOf<typeof DestinyDungeon>,
-    },
-    {
-        collectibleHash: 161963863,
-        itemHash: 1441805468,
-        icon: "/common/destiny2_content/icons/4984c634a7d2eca3baafc000a121263d.jpg",
-        hasCatalyst: true,
-        sourceActivity: DestinyDungeon[DestinyDungeon.GhostsOfTheDeep] as StringsKeysOf<typeof DestinyDungeon>,
-    },
-    {
-        collectibleHash: 4027219968,
-        itemHash: 1363886209,
-        icon: "/common/destiny2_content/icons/b62083eed6a4708e581fc9a061bcc8e9.jpg",
-        hasCatalyst: true,
-        sourceActivity: DestinyDungeon[DestinyDungeon.GraspOfAvarice] as StringsKeysOf<typeof DestinyDungeon>,
+        sourceActivity: DestinyDungeon[DestinyDungeon.TheShatteredThrone] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.WishEnder] as StringsKeysOf<typeof ExoticWeapon>
     },
     {
         collectibleHash: 1258579677,
@@ -164,6 +152,23 @@ export const DungeonExoticDrops: ExoticDrop[] = [
         icon: "/common/destiny2_content/icons/de34570a93281dc201690cfd146e6d24.jpg",
         hasCatalyst: false,
         sourceActivity: DestinyDungeon[DestinyDungeon.PitOfHeresy] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Xenophage] as StringsKeysOf<typeof ExoticWeapon>
+    },
+	{
+        collectibleHash: 4027219968,
+        itemHash: 1363886209,
+        icon: "/common/destiny2_content/icons/b62083eed6a4708e581fc9a061bcc8e9.jpg",
+        hasCatalyst: true,
+        sourceActivity: DestinyDungeon[DestinyDungeon.GraspOfAvarice] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Gjallarhorn] as StringsKeysOf<typeof ExoticWeapon>
+    },
+    {
+        collectibleHash: 467760883,
+        itemHash: 3664831848,
+        icon: "/common/destiny2_content/icons/94c6933727fa885fb2002a8c7aee5e42.jpg",
+        hasCatalyst: false,
+        sourceActivity: DestinyDungeon[DestinyDungeon.Duality] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Heartshadow] as StringsKeysOf<typeof ExoticWeapon>
     },
     {
         collectibleHash: 3558330464,
@@ -171,13 +176,15 @@ export const DungeonExoticDrops: ExoticDrop[] = [
         icon: "/common/destiny2_content/icons/8c32410000243e6024130f755b23fbe6.jpg",
         hasCatalyst: true,
         sourceActivity: DestinyDungeon[DestinyDungeon.SpireOfTheWatcher] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.HierarchyOfNeeds] as StringsKeysOf<typeof ExoticWeapon>
     },
     {
-        collectibleHash: 1660030044,
-        itemHash: 814876684,
-        icon: "/common/destiny2_content/icons/8e5d7a68305a0d1e53ccade9398c7e8b.jpg",
-        hasCatalyst: false,
-        sourceActivity: DestinyDungeon[DestinyDungeon.TheShatteredThrone] as StringsKeysOf<typeof DestinyDungeon>,
+        collectibleHash: 161963863,
+        itemHash: 1441805468,
+        icon: "/common/destiny2_content/icons/4984c634a7d2eca3baafc000a121263d.jpg",
+        hasCatalyst: true,
+        sourceActivity: DestinyDungeon[DestinyDungeon.GhostsOfTheDeep] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.TheNavigator] as StringsKeysOf<typeof ExoticWeapon>
     },
     {
         collectibleHash: 3275654322,
@@ -185,5 +192,6 @@ export const DungeonExoticDrops: ExoticDrop[] = [
         icon: "/common/destiny2_content/icons/fcae8edcd35227d35fca0a108d831840.jpg",
         hasCatalyst: true,
         sourceActivity: DestinyDungeon[DestinyDungeon.WarlordsRuin] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.BuriedBloodline] as StringsKeysOf<typeof ExoticWeapon>
     },
 ]
