@@ -1,5 +1,5 @@
-import { GetMembershipPlayerInformation } from "../stores/destinyPlayerData";
 import { navigate } from "astro:transitions/client";
+import { GetMembershipPlayerInformation } from "../stores/destinyService";
 
 window.addEventListener("DOMContentLoaded", () => {
 	const inputUsername = document.querySelector<HTMLInputElement>(`#searchInputUsername`);
