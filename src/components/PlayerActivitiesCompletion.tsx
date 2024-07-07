@@ -11,6 +11,8 @@ import { GetPlayerActivityCompletions, GetPlayerActivityNormalCompletions, GetPl
 import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
 import { ExoticDrop, ExoticDrops } from "../utils/destinyActivities/exoticDrops";
 import { ExoticWeaponString } from "../utils/enums/strings/en/WeaponExotic";
+import { showModal } from "../scripts/fullScreenModal";
+import { requestedActivity } from "../stores/activityStore";
 
 function ActivityCompletionsToString(complete: number, enabled: boolean) {
 	return enabled ? ((complete < 0) ? "?" : complete.toString()) : "";
@@ -71,7 +73,7 @@ function GetDisplayItemDungeon(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style={`height:30px; opacity:${opacity}`}>
+		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
@@ -143,7 +145,7 @@ function GetDisplayItemRaid(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style={`height:30px; opacity:${opacity}`}>
+		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
@@ -196,7 +198,7 @@ function GetDisplayItemExoticMission(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style={`height:30px; opacity:${opacity}`}>
+		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
@@ -246,7 +248,7 @@ function GetDisplayItemScoredNightFall(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const opacity = enabled ? 1 : 0.5;
 	return (
-		<tr style={`height:30px; opacity:${opacity}`}>
+		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;">

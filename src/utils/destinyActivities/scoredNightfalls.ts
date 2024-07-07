@@ -161,7 +161,7 @@ export const ScoredNightFallsBaseDefinitions: { [key in keyof typeof DestinyGran
 	},
 	LegendPsiOpsBattlegroundCosmodrome: {
 		Modes: {
-			GrandMaster: [1387912492, 968118631, 3640623961],
+			GrandMaster: [1387912492, 968118631],
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,

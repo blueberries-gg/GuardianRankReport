@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+import ActivityModalContent from "../components/ActivityModalContent";
 import AlertBar from "../components/AlertBar";
 import SearchBar from "../components/SearchBar.astro";
 ---
@@ -34,7 +35,6 @@ import SearchBar from "../components/SearchBar.astro";
 		<link rel="icon" type="image/png" href=`${import.meta.env.BASE_URL}/favicon.png` />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet">
 	</head>
 	<body>
 		<header style="display: flex; height:80px; background: #0f0606;">
@@ -48,129 +48,275 @@ import SearchBar from "../components/SearchBar.astro";
 						/>
 					</a>
 					<div class="navbar-link-container">
-						<a class="navbar-link">Sample Link</a>							
+						<a class="navbar-link">Sample Link</a>
 					</div>
 				</div>
 				<SearchBar />
 			</div>
 		</header>
+
 		<main>
 			<slot />
 		</main>
-		<footer>
-			<AlertBar client:only="solid" />
-		</footer>
-	</body>
-</html>
+		<dialog id="dialogFullScreen" class="wideMessageDialog">
+			<div class="wideMessageContainer">
+				<div class="wideMessage">
+					<div class="wideMessageContent">
+						<div class="wideMessageContentElement">
+							<ActivityModalContent client:only />
+							<div class="wideMessageActions">
+								<form class="wideMessageContentElement" method="dialog">
+									<button id="close" aria-label="close" formnovalidate>close</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 
-<style>
-	@import url('https://fonts.cdnfonts.com/css/open-sans');
-</style>
+				<footer>
+					<AlertBar client:only="solid" />
+				</footer>
+			</div>
+		</dialog>
 
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+		</style>
+		<script src="../scripts/fullScreenModal"></script>
 
-<style is:global>
-	/* :root {
+		<script>
+			import { showModal } from "../scripts/fullScreenModal";
+			declare global {
+				interface Window {
+					showModal: any;
+				}
+			}
+			window.showModal = showModal;
+		</script>
+
+		<style>
+			.wideMessageContent {
+				max-height: 85vh;
+				background: linear-gradient(90deg, rgba(18, 18, 18, 0.55) 0%, rgba(18, 18, 18, 0.75) 50%, rgba(18, 18, 18, 0.55) 100%);
+				overflow: scroll;
+			}
+
+			.wideMessageDialog {
+				/* display: flex; */
+				position: fixed;
+				justify-content: center;
+				align-items: center;
+				max-width: 100%;
+				width: 100%;
+				max-height: 100%;
+				height: 100%;
+				margin: auto;
+				padding: 0;
+				border: none;
+				top: 0;
+				bottom: 0;
+				opacity: 0;
+				background-color: transparent;
+				transition: opacity 0.15s linear 0.15s;
+			}
+
+			.wideMessageDialog[open] {
+				height: 100%;
+				background-color: #00000038;
+				opacity: 1;
+				transition: opacity 0.25s linear;
+			}
+
+			.wideMessageDialog::backdrop {
+				border-top-color: currentColor;
+				border-top-width: 1px;
+				border-top-style: solid;
+				-webkit-backdrop-filter: blur(10px);
+				backdrop-filter: blur(10px);
+				box-shadow: 0px 0px 100px 100px rgba(0, 0, 0, 0.33);
+				transition: box-shadow 0s 0.3s;
+			}
+
+			.wideMessage {
+				margin: auto;
+				width: 100%;
+				color: white;
+				overflow-x: clip;
+			}
+			.wideMessageDialog .wideMessage::before {
+				height: 20px;
+				opacity: 0.5;
+				background-color: currentColor;
+				display: block;
+				content: "";
+			}
+
+			.wideMessageDialog[open]::backdrop {
+				box-shadow: 0px 0px 50px 100px rgba(0, 0, 0, 0);
+				transition: box-shadow 0.25s 0.25s linear;
+			}
+
+			.wideMessageDialog .wideMessageContentElement {
+				height: 90%;
+				opacity: 0;
+				transition: opacity 0.15s linear;
+			}
+
+			.wideMessageDialog[open] .wideMessageContentElement {
+				opacity: 1;
+				transition: opacity 0.2s linear 0.5s;
+			}
+
+			.wideMessageDialog .wideMessageContainer {
+				display: flex;
+				overflow-x: clip;
+				opacity: 0;
+				width: 0;
+				transform: scale(1, 0.7);
+				box-shadow: 0px 0px 100px 80px rgba(0, 0, 0, 0);
+				transition:
+					opacity 0s 0.3s,
+					width 0s 0.3s,
+					transform 0.15s linear 0.15s,
+					box-shadow 0.15s linear;
+			}
+
+			.wideMessageDialog[open] .wideMessageContainer {
+				opacity: 1;
+				width: 100%;
+				transform: scale(1);
+				position: absolute;
+				box-shadow: 0px 0px 100px 80px rgba(0, 0, 0, 0.5);
+				transition:
+					opacity 0.25s linear 0.25s,
+					width 0.125s linear 0.25s,
+					box-shadow 0.5s linear 0.5s,
+					position 0s;
+			}
+
+			.wideMessageActions {
+				height: 44px;
+				background: #030303bf;
+			}
+		</style>
+
+		<style is:global>
+			/* :root {
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101;
 		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
 	} */
 
-	main {
-		/*background: #0b0b0f;
+			main {
+				/*background: #0b0b0f;
 		background: radial-gradient(circle at center top, #3f3f46 0, #0b0b0f 1080px);
 		background: radial-gradient(circle at center top, #737D7D40 0, #73737D00 1080px);
 		*/
-		background: radial-gradient(circle at center top, #737D7D40 0, #73737D00 720px);
+				background: radial-gradient(circle at center top, #737d7d40 0, #73737d00 720px);
 
-		min-height: calc(100vh - 80px);
-	}
-	html {
-		background: #0b0b0f;
-		background: #0f0606;
-	}
+				min-height: calc(100vh - 80px);
+			}
+			html {
+				background: #0b0b0f;
+				background: #0f0606;
+			}
 
-	body {
-		margin: 0;
-		background: #1a1c1d;
+			body {
+				margin: 0;
+				background: #1a1c1d;
+			}
 
-	}
+			.header-container {
+				display: flex;
+				flex-direction: column;
+				width: 90%;
+				max-width: 1280px;
+				margin: 0 auto;
+			}
+			@media only screen and (max-width: 474px) {
+				.header-container {
+					width: 9 5%;
+				}
+			}
+			.logo {
+				height: 40px;
+				margin-block: auto;
+			}
+			.logo-img {
+				display: block;
+				width: auto;
+				height: 100%;
+			}
 
-	.header-container {
-		display: flex;
-		flex-direction: column;
-		width: 90%;
-		max-width: 1280px;
-		margin: 0 auto;
-	}
-	@media only screen and (max-width: 474px) {
-		.header-container {
-			width: 9 5%;
-		}
-	}
-	.logo {
-		height: 40px;
-		margin-block: auto;
-	}
-	.logo-img {
-		display: block;
-		width: auto;
-		height: 100%;
-	}
+			.navbar-link-container {
+				margin-block: auto;
+				margin-left: auto;
+				margin-right: 0;
+				padding: 10px;
+			}
 
+			.navbar-link {
+				font-size: 15px;
+				line-height: 16px;
+				font-weight: 600;
+				color: #fff;
+				font-family:
+					open sans,
+					Helvetica,
+					Arial,
+					Lucida,
+					sans-serif;
+				-webkit-transition: 0.5s;
+				transition: 0.5s;
+				cursor: pointer;
+			}
 
-	.navbar-link-container {
-		margin-block: auto;
-		margin-left: auto;
-		margin-right: 0;
-		padding: 10px;
-	}
+			.navbar-link:hover {
+				color: #7782ff;
+			}
+			.content {
+				margin: auto;
+				width: 1080px;
+				max-width: 100%;
+				color: white;
+				/* font-size: 20px; */
+				padding-block: 10px;
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+			}
 
-	.navbar-link {
-		font-size: 15px;
-		line-height: 16px;
-		font-weight: 600;
-		color: #fff;
-		font-family:
-			open sans,
-			Helvetica,
-			Arial,
-			Lucida,
-			sans-serif;
-		-webkit-transition: 0.5s;
-		transition: 0.5s;
-		cursor: pointer;
+			.completions-table {
+				margin: auto;
+				font-size: 12pt;
+				border-collapse: collapse;
+				position: relative;
+			}
+			.completions-table-empty-tr::before {
+				content: "";
+				position: absolute;
+				width: 100% !important;
+			}
 
-	}
+			.completions-table-empty-tr-border::before {
+				border-bottom: solid 1px;
+			}
 
-	.navbar-link:hover {
-		color: #7782ff;
-	}
-	.content {
-		margin: auto;
-		width: 1080px;
-		max-width: 100%;
-		color: white;
-		/* font-size: 20px; */
-		padding-block: 10px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.completions-table {
-		margin: auto;
-		font-size: 12pt;
-		border-collapse: collapse;
-		position: relative;
-	}
-	.completions-table-empty-tr::before {
-		content: "";
-		position: absolute;
-		width: 100% !important;
-	}
-
-	.completions-table-empty-tr-border::before {
-		border-bottom: solid 1px;
-	}
-</style>
+			.completions-table-row {
+				height: 30px;
+				cursor: pointer;
+			}
+			@media (hover: hover) {
+				.completions-table-row:hover {
+					background: #ffffff2f;
+				}
+			}
+			@media (hover: none) {
+				.completions-table-row.touch-hover {
+					background: #ffffff2f;
+				}
+			}
+		</style>
+	</body>
+</html>

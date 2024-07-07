@@ -1,5 +1,5 @@
 import { useStore } from "@nanostores/solid";
-import { healthStatusReason, healthStatus, DestinyEnabled, healthStatusTitle } from "../stores/destinyPlayerData";
+import { healthStatusReason, healthStatus, DestinyEnabled, healthStatusTitle } from "../stores/destinyService";
 
 export default function () {
 	const $healthStatusReason = useStore(healthStatusReason);
