@@ -32,12 +32,12 @@ export default function () {
 			<div
 				id="modalImage"
 				style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
-				<a class="image-zoom"
+				<a class="image-zoom" style="margin:auto"
 					href={WarlordsRuin.src}
 					data-pswp-width={WarlordsRuin.width}
 					data-pswp-height={WarlordsRuin.height}
 					target="_blank">
-					<img src={WarlordsRuin.src} style="width: 100%; margin:auto" />
+					<img src={WarlordsRuin.src} style="width: 100%;" />
 				</a>
 			</div>
 			<div style="width: 55vw; flex-grow: 6;">
