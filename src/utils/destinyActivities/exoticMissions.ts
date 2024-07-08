@@ -3,7 +3,7 @@ import { ActivityType } from "../enums/ActivityType";
 import { DestinyExoticMission } from "../enums/DestinyActivities";
 import { ExoticWeapon } from "../enums/WeaponExotic";
 import { IActivity } from "./activities";
-import { ExoticDrop } from "./exoticDrops";
+import { ExoticCollectible } from "./exoticDrops";
 
 export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExoticMission]: IActivity } = {
 	Avalon: {
@@ -122,10 +122,9 @@ export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExotic
 	},
 };
 
-export const ExoticMissionExoticDrops: ExoticDrop[] = [
+export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 
 	{
-		collectibleHash: 1763610692,
 		collectibleHashes: [1763610692,545218287,3875807583],
 		itemHash: 1891561814,
 		icon: "/common/destiny2_content/icons/e47c31826843f6fd0aa863eac6fd093e.jpg",
@@ -134,7 +133,6 @@ export const ExoticMissionExoticDrops: ExoticDrop[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.WhisperOfTheWorm] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHash: 360254771,
 		collectibleHashes: [360254771,449896716,2500286745],
 		itemHash: 3824673936,
 		icon: "/common/destiny2_content/icons/a1b6a5f3e52878610397249986300b23.jpg",
@@ -151,7 +149,6 @@ export const ExoticMissionExoticDrops: ExoticDrop[] = [
 		weaponExotic: WeaponExotics[WeaponExotics.Hawkmoon] as StringsKeysOf<typeof WeaponExotics>
 	},*/
 	{
-		collectibleHash: 3324472233,
 		collectibleHashes: [3324472233,2143216566,3723101298],
 		itemHash: 2188764214,
 		icon: "/common/destiny2_content/icons/cfc2c246cfd404d749fffbfe3ae3dfec.jpg",
@@ -160,7 +157,6 @@ export const ExoticMissionExoticDrops: ExoticDrop[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.DeadMansTale] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHash: 360554695,
 		collectibleHashes: [360554695,2097871936,4028619088],
 		itemHash: 46125926,
 		icon: "/common/destiny2_content/icons/0824b34bb37e0bb7c32b91adf6dcb79e.jpg",
@@ -169,7 +165,6 @@ export const ExoticMissionExoticDrops: ExoticDrop[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.DeadMessenger] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHash: 1161231112,
 		collectibleHashes: [1161231112,760708739],
 		itemHash: 1473821207,
 		icon: "/common/destiny2_content/icons/040a104defcc7011b570886e3ec3c73f.jpg",
@@ -178,7 +173,7 @@ export const ExoticMissionExoticDrops: ExoticDrop[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.RevisionZero] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHash: 2629609052,
+		collectibleHashes: [2629609052],
 		itemHash: 3118061005,
 		icon: "/common/destiny2_content/icons/735baec8c23ff1416ae6a8c72c729432.jpg",
 		hasCatalyst: true,
@@ -186,7 +181,6 @@ export const ExoticMissionExoticDrops: ExoticDrop[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.Vexcalibur] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHash: 3826612761,
 		collectibleHashes: [3826612761,221021254],
 		itemHash: 2910326942,
 		icon: "/common/destiny2_content/icons/6b47d872840188bc913d6307fa537c3c.jpg",

@@ -9,7 +9,7 @@ import missing from "../resources/images/missing.png";
 import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity";
 import { GetPlayerActivityCompletions, GetPlayerActivityNormalCompletions, GetPlayerActivityMasterCompletions, GetPlayerActivitiesGrandMasterCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions } from "../utils/destinyExtensions/PlayerActivityCalculations";
 import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
-import { ExoticDrop, ExoticDrops } from "../utils/destinyActivities/exoticDrops";
+import { ExoticCollectible, ExoticCollectibles } from "../utils/destinyActivities/exoticDrops";
 import { ExoticWeaponString } from "../utils/enums/strings/en/WeaponExotic";
 import { showModal } from "../scripts/fullScreenModal";
 import { requestedActivity } from "../stores/activityStore";
@@ -268,15 +268,15 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 	const [active, setActive] = createSignal(PlayerActivitiesFilterActive(activityOfType, true));
 	const [inactive, setInactive] = createSignal(PlayerActivitiesFilterActive(activityOfType, false));
 
-	const [ownedCollectibles, setOwnedCollectibles] = createSignal<ExoticDrop[]>();
-	const [unownedCollectibles, setUnownedCollectibles] = createSignal<ExoticDrop[]>();
+	const [ownedCollectibles, setOwnedCollectibles] = createSignal<ExoticCollectible[]>();
+	const [unownedCollectibles, setUnownedCollectibles] = createSignal<ExoticCollectible[]>();
 
 	function UpdateCollectibles(playerProfile: PlayerActivityDetails) {
 		const ownedCollectiblesHashes = playerProfile.collectibles;
-		const unownedCollectiblesHashes = ExoticDrops.filter((exotic) => playerProfile.collectibles.findIndex((hash) => exotic.collectibleHash == hash) == -1).map((x) => x.collectibleHash);
+		const unownedCollectiblesHashes = ExoticCollectibles.filter((exotic) => playerProfile.collectibles.findIndex((hash) => exotic.exoticWeapon == hash) == -1).flatMap((x) => x.exoticWeapon);
 
-		const ownedCollectibles = ownedCollectiblesHashes.map((hash) => ExoticDrops.find((exotic) => exotic.collectibleHash == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType);
-		const unownedCollectibles = unownedCollectiblesHashes.map((hash) => ExoticDrops.find((exotic) => exotic.collectibleHash == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType)
+		const ownedCollectibles = ownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType);
+		const unownedCollectibles = unownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType)
 
 		ownedCollectibles.sort((x, y) => DestinyActivity[y.sourceActivity] - DestinyActivity[x.sourceActivity]);
 		unownedCollectibles.sort((x, y) => DestinyActivity[y.sourceActivity] - DestinyActivity[x.sourceActivity]);
@@ -473,7 +473,7 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 	);
 }
 
-function GetExoticIcon(props: { item: ExoticDrop; grayscale: boolean }) {
+function GetExoticIcon(props: { item: ExoticCollectible; grayscale: boolean }) {
 	const [profile] = createResource(async () => {
 		//return (await GetDestinyInventoryItemDefinition(props.item.itemHash))?.displayProperties.name ?? ""
 		return ExoticWeaponString[props.item.exoticWeapon];

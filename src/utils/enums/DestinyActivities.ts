@@ -1,5 +1,5 @@
 export enum DestinyRaid {
-	Leviathan = 0,
+	Leviathan = 1,
 	LeviathanEaterOfWorlds,
 	LeviathanSpireOfStars,
 	LastWish,
@@ -21,7 +21,7 @@ export enum DestinyRaid {
 }
 
 export enum DestinyDungeon {
-	TheShatteredThrone = 100,
+	TheShatteredThrone = 101,
 	PitOfHeresy,
 	Prophecy,
 	GraspOfAvarice,
@@ -32,7 +32,7 @@ export enum DestinyDungeon {
 }
 
 export enum DestinyExoticMission {
-	TheWhisper = 200,
+	TheWhisper = 201,
 	ZeroHour,
 	Harbinger,
 	Presage,
@@ -45,7 +45,7 @@ export enum DestinyExoticMission {
 }
 
 export enum DestinyGrandMasterNightFall {
-	AGardenWorld = 300,
+	AGardenWorld = 301,
 	BattlegroundBehemoth,
 	BattlegroundFoothold,
 	BattlegroundHailstone,
@@ -83,12 +83,15 @@ export enum DestinyGrandMasterNightFall {
 	TreeOfProbabilities,
 	WardenOfNothing,
 }
-
+export enum DestinyGenericActivity {
+	None = 0,
+}
 export const DestinyActivity = {
+	...DestinyGenericActivity,
 	...DestinyRaid,
 	...DestinyDungeon,
 	...DestinyExoticMission,
 	...DestinyGrandMasterNightFall,
 };
 
-export type DestinyActivity = DestinyDungeon | DestinyRaid | DestinyGrandMasterNightFall | DestinyExoticMission;
+export type DestinyActivity =  DestinyGenericActivity | DestinyRaid | DestinyDungeon | DestinyExoticMission | DestinyGrandMasterNightFall ;

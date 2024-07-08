@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+import { Icon } from "astro-icon/components";
 import ActivityModalContent from "../components/ActivityModalContent";
 import AlertBar from "../components/AlertBar";
 import SearchBar from "../components/SearchBar.astro";
@@ -63,10 +64,18 @@ import SearchBar from "../components/SearchBar.astro";
 				<div class="wideMessage">
 					<div class="wideMessageContent">
 						<div class="wideMessageContentElement">
-							<ActivityModalContent client:only />
+							<div style="max-height: 85vh; height: 100%;">
+								<ActivityModalContent client:only />
+							</div>
 							<div class="wideMessageActions">
-								<form class="wideMessageContentElement" method="dialog">
-									<button id="close" aria-label="close" formnovalidate>close</button>
+								<form class="wideMessageContentElement" style="margin-inline: 70px; margin-left: auto; display: flex;" method="dialog">
+									<button id="close" aria-label="close" formnovalidate style="">
+										<Icon
+											name="escapeKey"
+											style="margin: auto;  width: 100%; height: 100%; background-color:#2f2f2f; border-radius: 20%;"
+										/>
+										<span style="margin: auto;">Dismiss</span>
+									</button>
 								</form>
 							</div>
 						</div>
@@ -96,9 +105,7 @@ import SearchBar from "../components/SearchBar.astro";
 
 		<style>
 			.wideMessageContent {
-				max-height: 85vh;
 				background: linear-gradient(90deg, rgba(18, 18, 18, 0.55) 0%, rgba(18, 18, 18, 0.75) 50%, rgba(18, 18, 18, 0.55) 100%);
-				overflow: scroll;
 			}
 
 			.wideMessageDialog {
@@ -197,6 +204,33 @@ import SearchBar from "../components/SearchBar.astro";
 			.wideMessageActions {
 				height: 44px;
 				background: #030303bf;
+				display: flex;
+			}
+			.wideMessageActions button {
+				margin: auto;
+				display: flex;
+				padding: 0;
+				border: none;
+				background: none;
+				color: white;
+				font-size: 18pt;
+				gap: 5px;
+				font-family: "Neue Haas Grotesk Text Pro", "Helvetica", "Arial", sans-serif;
+
+				outline: 3px solid;
+				outline-offset: 4px;
+				outline-color: transparent;
+				
+				transition:
+					outline-offset 0.08s cubic-bezier(0.69, 0, 0, 1) 0.125s,
+					outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s;
+			}
+			.wideMessageActions button:focus-visible {
+				outline-offset: 2px;
+				outline-color: #d9d9d9;
+				transition:
+					outline-offset 0.05s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+					outline-color 0.15s cubic-bezier(0.69, 0, 0, 1) 0s;
 			}
 		</style>
 

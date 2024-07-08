@@ -15,6 +15,7 @@ import {
 	DestinyInventoryItemDefinition,
 	DestinyCollectibleComponent,
 	DestinyCollectibleState,
+	DestinyRecordDefinition,
 } from "bungie-api-ts/destiny2";
 import { UserInfoCard, } from "bungie-api-ts/user";
 import { DestinyActivity } from "../utils/enums/DestinyActivities";
@@ -24,8 +25,9 @@ import { ActiveActivities, ActiveScoredNightFalls } from "../utils/destinyActivi
 import { StringsKeysOf } from "../utils/common";
 import { IPlayerActivity, mapActivities, mapActivitiesAndModeByHash } from "../utils/destinyActivities/activities";
 import { IsDestinyResponseValid } from "../utils/destinyExtensions/APIExtensions";
-import { ExoticDrops } from "../utils/destinyActivities/exoticDrops";
+import { ExoticCollectibles } from "../utils/destinyActivities/exoticDrops";
 import { $http, GetBungieErrorMessage } from "./destinyService";
+import { ExoticWeapon } from "../utils/enums/WeaponExotic";
 
 export interface PlayerBadgeData {
 	UserCard: UserInfoCard;
@@ -38,7 +40,7 @@ export interface PlayerBadgeData {
 export interface PlayerActivityDetails {
 	info: PlayerBadgeData;
 	activities: Map<keyof typeof DestinyActivity, IPlayerActivity>;
-	collectibles: number[];
+	collectibles: StringsKeysOf<typeof ExoticWeapon>[];
 }
 
 const playerActivitiesCompletions = new Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity>();
@@ -265,13 +267,21 @@ async function GetAllCharacters(destinyMembershipId: string | bigint, membership
 	return AllCharacters;
 }
  
-function GetCollectiblesAcquired (collectibles: { [key: number]: DestinyCollectibleComponent; }, CharacterCollectibles: { [key: number]: DestinyCollectibleComponent; }[], collectibleHash: number){
-	let collectible = collectibles[collectibleHash];
-	CharacterCollectibles.forEach((characterRecords) => {
-		if (collectible == undefined) collectible = characterRecords[collectibleHash];
+function GetCollectiblesAcquired (collectibles: { [key: number]: DestinyCollectibleComponent; }, CharacterCollectibles: { [key: number]: DestinyCollectibleComponent; }[], collectibleHashes: number[])
+{
+	let collectible: (DestinyCollectibleComponent | undefined);
+	collectibleHashes.forEach(collectibleHash => {
+		if (collectible == undefined)
+			collectible = collectibles[collectibleHash];
+		CharacterCollectibles.forEach((characterRecords) => {
+			if (collectible == undefined)
+				collectible = characterRecords[collectibleHash];
+		});
 	});
 
-	return (((collectible?.state ?? DestinyCollectibleState.NotAcquired) & DestinyCollectibleState.NotAcquired) == 0)}
+
+	return (((collectible?.state ?? DestinyCollectibleState.NotAcquired) & DestinyCollectibleState.NotAcquired) == 0)
+}
 
 export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint | string, membershipType: BungieMembershipType | number) => {
 	const AllCharactersPromise = GetAllCharacters(destinyMembershipId, membershipType);
@@ -321,8 +331,7 @@ export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint |
 		ProfileCollectibles = PlayerProfile.Response.profileCollectibles.data!.collectibles
 		CharacterCollectibles = Object.values(PlayerProfile.Response.characterCollectibles.data!).map((x) => x.collectibles);
 		 
-		const collectibleHashes = ExoticDrops.map((drop)=> drop.collectibleHash);	
-		const collectedExotics = collectibleHashes.filter((hash) => GetCollectiblesAcquired(ProfileCollectibles, CharacterCollectibles, hash));
+		const collectedExotics = ExoticCollectibles.filter((weapon) => GetCollectiblesAcquired(ProfileCollectibles, CharacterCollectibles, weapon.collectibleHashes)).map((x)=>x.exoticWeapon);
 		CurrentPlayerProfile.setKey("collectibles",collectedExotics)
 	}
 
@@ -337,5 +346,12 @@ export const GetDestinyInventoryItemDefinition = async (hashIdentifier: number) 
 	const definition = await getDestinyEntityDefinition($http, { entityType: "DestinyInventoryItemDefinition", hashIdentifier });
 	if (IsDestinyResponseValid(definition, GetBungieErrorMessage)) {
 		return definition.Response as DestinyInventoryItemDefinition;
+	}
+};
+
+export const GetDestinyRecordDefinition = async (hashIdentifier: number) => {
+	const definition = await getDestinyEntityDefinition($http, { entityType: "DestinyRecordDefinition", hashIdentifier });
+	if (IsDestinyResponseValid(definition, GetBungieErrorMessage)) {
+		return definition.Response as DestinyRecordDefinition;
 	}
 };

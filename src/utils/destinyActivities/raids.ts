@@ -2,7 +2,7 @@ import { ActivityType } from "../enums/ActivityType";
 import { DestinyRaid } from "../enums/DestinyActivities";
 import { StringsKeysOf } from "../common";
 import { IActivity } from "./activities";
-import { ExoticDrop } from "./exoticDrops";
+import { ExoticCollectible } from "./exoticDrops";
 import { ExoticWeapon } from "../enums/WeaponExotic";
 
 export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivity } = {
@@ -19,8 +19,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		TopLevel: true,
 		SealHash: 865076293,
 		SealObjectives: [
-			116345475, 1334890488, 1447905713, 1510515137, 1732432755, 1896685129, 2045739672, 2237801267, 2259810484, 2487544289, 295018272, 3702810582,
-			3922046691, 4259447007, 680822308, 710681626, 752641838, 942933865,
+			3922046691, 2045739672, 710681626, 116345475, 2487544289, 2259810484, 1510515137, 942933865, 3702810582, 1447905713, 1334890488, 4259447007,
+			680822308, 2237801267, 752641838, 1896685129, 1732432755, 295018272,
 		],
 		FlawlessHash: 2572383496,
 		Active: true,
@@ -48,8 +48,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		SealIncompleteImage: "/common/destiny2_content/icons/7c75ee483c5ead72bb214d23d53f6b47.png",
 		SealHash: 540377256,
 		SealObjectives: [
-			1277450448, 134885948, 1487317889, 22094034, 2530940166, 3185876102, 3200831458, 3323713181, 337542929, 3504856768, 3771160417, 3834307795,
-			3875695735, 4216504853, 513707022, 518342793, 564366615, 64856166, 992355976,
+			3504856768, 3185876102, 518342793, 564366615, 3834307795, 3200831458, 513707022, 3875695735, 992355976, 134885948, 3323713181, 22094034, 4216504853,
+			64856166, 3771160417, 337542929, 1277450448, 2530940166, 1487317889,
 		],
 		FlawlessHash: 3560923614,
 		Active: true,
@@ -67,8 +67,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		SealIncompleteImage: "/common/destiny2_content/icons/12fe6f9d691705cc1ed0ebf16576f74a.png",
 		SealHash: 2909250963,
 		SealObjectives: [
-			1221037312, 1922270325, 2191554152, 2381358572, 2571794337, 277137394, 3427328428, 3719309782, 3804486505, 3860668859, 3866024089, 3949104239,
-			4105510833, 44547560, 521675034, 637935773,
+			3866024089, 3804486505, 1221037312, 3427328428, 277137394, 2571794337, 1922270325, 3719309782, 4105510833, 637935773, 44547560, 2381358572,
+			3860668859, 2191554152, 3949104239, 521675034,
 		],
 		FlawlessHash: 1522774125,
 		Active: true,
@@ -108,8 +108,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		SealIncompleteImage: "/common/destiny2_content/icons/423b959c92f0eef246eb90148028e602.png",
 		SealHash: 1384029371,
 		SealObjectives: [
-			1359055399, 1711136422, 1847670729, 2756328801, 2826160801, 3000516033, 3234595894, 342038729, 3448775736, 3533973498, 380332968, 4078980921,
-			623283604, 628370196, 717856991, 989244596,
+			2756328801, 3533973498, 3000516033, 1847670729, 4078980921, 342038729, 3448775736, 1711136422, 380332968, 3234595894, 623283604, 2826160801,
+			989244596, 717856991, 1359055399, 628370196,
 		],
 		FlawlessHash: 380332968,
 		Active: true,
@@ -229,8 +229,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		SealIncompleteImage: "/common/destiny2_content/icons/9e037b198dfce46642d5eff0dfe97eb9.png",
 		SealHash: 2889189256,
 		SealObjectives: [
-			1160810407, 1247482413, 139617739, 1470555531, 1982000933, 2084487708, 210713679, 2656634354, 2764233436, 2778920213, 31076871, 3778413954,
-			391307104, 4149006431, 4162933187, 4270724598, 4293716153, 499953236, 674616608, 921507736,
+			674616608, 4270724598, 391307104, 4293716153, 1160810407, 4162933187, 2656634354, 31076871, 1982000933, 921507736, 139617739, 2084487708,
+			1470555531, 2778920213, 2764233436, 1247482413, 499953236, 210713679, 3778413954, 4149006431,
 		],
 		FlawlessHash: 397062446,
 		Active: true,
@@ -250,8 +250,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		SealIncompleteImage: "/common/destiny2_content/icons/8eee2f16af5263e6b921085ad175b0ef.png",
 		SealHash: 1382005115,
 		SealObjectives: [
-			1001835628, 1311861933, 1538747266, 1568864289, 1728165205, 1843442132, 2062070439, 2174160579, 2203607979, 2238088494, 2307589343, 2487240675,
-			2705769344, 3123571268, 3202450274, 4098731599, 4266339619, 4283220514, 61627171, 632048942, 819153082, 870477756,
+			1568864289, 2487240675, 1728165205, 819153082, 2238088494, 4283220514, 4266339619, 1001835628, 2174160579, 2307589343, 2705769344, 2062070439,
+			61627171, 632048942, 4098731599, 1538747266, 1311861933, 1843442132, 870477756, 2203607979, 3202450274, 3123571268,
 		],
 		FlawlessHash: 3553593767,
 		Active: true,
@@ -283,8 +283,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		SealIncompleteImage: "/common/destiny2_content/icons/94edf120e003752ca323ff795f2e68d8.png",
 		SealHash: 4141971983,
 		SealObjectives: [
-			1024875083, 1129667036, 154213552, 1803186219, 1888851130, 1961032859, 1983700615, 2464700601, 2592913942, 2782679117, 3106039192, 3114569402,
-			3790077074, 3890225317, 3903615031, 3969659747, 4170123161, 578313932, 706596766, 787552349, 874956966, 932039090, 991121189,
+			2782679117, 3114569402, 578313932, 932039090, 991121189, 1983700615, 2592913942, 1961032859, 3969659747, 874956966, 706596766, 4170123161,
+			1888851130, 787552349, 154213552, 3903615031, 1803186219, 2464700601, 3106039192, 1129667036, 1024875083, 3890225317, 3790077074,
 		],
 		FlawlessHash: 2750088202,
 		Active: true,
@@ -305,8 +305,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		SealIncompleteImage: "/common/destiny2_content/icons/6fa1163f2dcada1875be9421a7d147eb.png",
 		SealHash: 1971228746,
 		SealObjectives: [
-			1053120087, 1120467498, 146328065, 1673084356, 1682546621, 1729647218, 1959737632, 2006434999, 2168422218, 2383291155, 3330343477, 3620246150,
-			3950568572, 3991904123, 4241035147, 486676807, 610864524, 801186532, 990479197,
+			1729647218, 2168422218, 610864524, 3330343477, 2383291155, 1053120087, 3620246150, 4241035147, 1682546621, 1673084356, 146328065, 1959737632,
+			2006434999, 1120467498, 990479197, 801186532, 3991904123, 3950568572, 486676807,
 		],
 		FlawlessHash: 4019717242,
 		Active: true,
@@ -314,78 +314,77 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 	},
 };
 
-export const RaidExoticDrops: ExoticDrop[] = [
+export const RaidExoticDrops: ExoticCollectible[] = [
 	{
-		collectibleHash: 199171385,
+		collectibleHashes: [199171385],
 		itemHash: 2069224589,
 		icon: "/common/destiny2_content/icons/51c53df606cca474dce3cadbf7d5ce28.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyRaid[DestinyRaid.LastWish] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.OneThousandVoices] as StringsKeysOf<typeof ExoticWeapon>
+		exoticWeapon: ExoticWeapon[ExoticWeapon.OneThousandVoices] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 1988948484,
+		collectibleHashes: [1988948484],
 		itemHash: 4103414242,
 		icon: "/common/destiny2_content/icons/c6aa03536fd68b5fca5ad6b83ea0cf1e.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyRaid[DestinyRaid.GardenOfSalvation] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.Divinity] as StringsKeysOf<typeof ExoticWeapon>
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Divinity] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 753200559,
+		collectibleHashes: [753200559],
 		itemHash: 2399110176,
 		icon: "/common/destiny2_content/icons/9caeff89015f02ad52e6fefe95398b01.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyRaid[DestinyRaid.DeepStoneCrypt] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.EyesOfTomorrow] as StringsKeysOf<typeof ExoticWeapon>
+		exoticWeapon: ExoticWeapon[ExoticWeapon.EyesOfTomorrow] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 2300465938,
+		collectibleHashes: [2300465938],
 		itemHash: 4289226715,
 		icon: "/common/destiny2_content/icons/111a10b59029fc6a9ca5e821267e6f6c.jpg",
 		hasCatalyst: true,
 		sourceActivity: DestinyRaid[DestinyRaid.VaultOfGlass] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.VexMythoclast] as StringsKeysOf<typeof ExoticWeapon>
-
+		exoticWeapon: ExoticWeapon[ExoticWeapon.VexMythoclast] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 2817568609,
+		collectibleHashes: [2817568609],
 		itemHash: 3505113722,
 		icon: "/common/destiny2_content/icons/238ab90ba2f858ebb8a5a1797a13fdd4.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyRaid[DestinyRaid.VowOfTheDisciple] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.CollectiveObligation] as StringsKeysOf<typeof ExoticWeapon>
+		exoticWeapon: ExoticWeapon[ExoticWeapon.CollectiveObligation] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 192937277,
+		collectibleHashes: [192937277],
 		itemHash: 1802135586,
 		icon: "/common/destiny2_content/icons/106a8a40a6e55b5ec5088a26d1ed979d.jpg",
 		hasCatalyst: true,
 		sourceActivity: DestinyRaid[DestinyRaid.KingsFall] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.TouchOfMalice] as StringsKeysOf<typeof ExoticWeapon>
+		exoticWeapon: ExoticWeapon[ExoticWeapon.TouchOfMalice] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 2553509474,
+		collectibleHashes: [2553509474],
 		itemHash: 3371017761,
 		icon: "/common/destiny2_content/icons/c9b4d65adcdfcadde871e5961ce912fb.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyRaid[DestinyRaid.RootOfNightmares] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.ConditionalFinality] as StringsKeysOf<typeof ExoticWeapon>
+		exoticWeapon: ExoticWeapon[ExoticWeapon.ConditionalFinality] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 203521123,
+		collectibleHashes: [203521123],
 		itemHash: 1034055198,
 		icon: "/common/destiny2_content/icons/52e8bb636771f4731da3f73f06fcad04.jpg",
 		hasCatalyst: true,
 		sourceActivity: DestinyRaid[DestinyRaid.CrotasEnd] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.Necrochasm] as StringsKeysOf<typeof ExoticWeapon>
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Necrochasm] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 	{
-		collectibleHash: 3411864064,
+		collectibleHashes: [3411864064],
 		itemHash: 3284383335,
 		icon: "/common/destiny2_content/icons/fe16110003f0cc75145eed012458a667.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyRaid[DestinyRaid.SalvationsEdge] as StringsKeysOf<typeof DestinyRaid>,
-		exoticWeapon: ExoticWeapon[ExoticWeapon.Euphony] as StringsKeysOf<typeof ExoticWeapon>
-	}
+		exoticWeapon: ExoticWeapon[ExoticWeapon.Euphony] as StringsKeysOf<typeof ExoticWeapon>,
+	},
 ];

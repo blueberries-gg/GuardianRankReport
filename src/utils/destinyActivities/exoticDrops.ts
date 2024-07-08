@@ -5,9 +5,9 @@ import { DungeonExoticDrops } from "./dungeons";
 import { ExoticMissionExoticDrops } from "./exoticMissions";
 import { RaidExoticDrops } from "./raids";
 
-export interface ExoticDrop {
-    collectibleHash: number;
-    collectibleHashes?: number[];
+export interface ExoticCollectible {
+    //collectibleHash: number;
+    collectibleHashes: number[];
     itemHash: number;
     icon: string;
     hasCatalyst: boolean;
@@ -15,7 +15,7 @@ export interface ExoticDrop {
     exoticWeapon: StringsKeysOf<typeof ExoticWeapon>
 }
 
-export const ExoticDrops = [
+export const ExoticCollectibles = [
     ...RaidExoticDrops,
     ...DungeonExoticDrops,
     ...ExoticMissionExoticDrops,

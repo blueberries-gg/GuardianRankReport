@@ -174,6 +174,14 @@ export const mapActivities: { [key in StringsKeysOf<typeof DestinyActivity>]: IA
 	...RaidsBaseDefinitions,
 	...ExoticMissionsBaseDefinitions,
 	...ScoredNightFallsBaseDefinitions,
+	None:{
+		Modes: {},
+		Type: ActivityType.None,
+		TopLevel: true,
+		Active: false,
+		Free: false,
+	},
+
 };
 
 let _mapActivitiesAndModeByHash: Map<number, IActivityAndMode> | undefined = undefined;
