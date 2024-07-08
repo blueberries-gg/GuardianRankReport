@@ -12,7 +12,7 @@ export default function () {
 
 	return (
 		<div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100vw; overflow-y: auto; max-height: 85vh;">
-			<div style="width: 45vw; min-width: 480px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
+			<div style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
 				<img src={WarlordsRuin.src} style="width: 100%; margin:auto" />
 			</div>
 			<div style="width: 55vw; flex-grow: 6;">
