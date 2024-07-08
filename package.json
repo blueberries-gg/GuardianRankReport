@@ -18,8 +18,8 @@
     "astro-icon": "^1.1.0",
     "bungie-api-ts": "^5.1.0",
     "core-js": "^3.37.1",
-    "n": "^9.2.3",
     "nanostores": "^0.10.3",
+    "photoswipe": "^5.4.4",
     "prune": "^0.0.2",
     "solid-devtools": "^0.30.1",
     "solid-js": "^1.8.17"

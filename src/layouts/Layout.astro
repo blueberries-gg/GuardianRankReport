@@ -1,4 +1,4 @@
----
+f---
 interface Props {
 	title: string;
 }
@@ -220,7 +220,7 @@ import SearchBar from "../components/SearchBar.astro";
 				outline: 3px solid;
 				outline-offset: 4px;
 				outline-color: transparent;
-				
+
 				transition:
 					outline-offset 0.08s cubic-bezier(0.69, 0, 0, 1) 0.125s,
 					outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s;
@@ -232,6 +232,7 @@ import SearchBar from "../components/SearchBar.astro";
 					outline-offset 0.05s cubic-bezier(0.69, 0, 0, 1) 0.05s,
 					outline-color 0.15s cubic-bezier(0.69, 0, 0, 1) 0s;
 			}
+
 		</style>
 
 		<style is:global>
@@ -351,6 +352,11 @@ import SearchBar from "../components/SearchBar.astro";
 					background: #ffffff2f;
 				}
 			}
+
+			.image-zoom:focus-visible {
+				outline: none;
+				box-shadow: none;
+						}
 		</style>
 	</body>
 </html>

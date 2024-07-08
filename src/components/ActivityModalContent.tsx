@@ -3,17 +3,42 @@ import WarlordsRuin from "../resources/images/loot/WarlordsRuin.jpg";
 import { requestedActivity } from "../stores/activityStore";
 import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity";
 import { CurrentPlayerProfile, GetDestinyRecordDefinition } from "../stores/destinyPlayerData";
-import { For, Show, Suspense, createResource } from "solid-js";
+import { For, Show, Suspense, createEffect, createResource } from "solid-js";
 import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
+import PhotoSwipeLightbox from "photoswipe/lightbox";
+import "photoswipe/style.css";
 
 export default function () {
+	createEffect(() => {
+		const lightbox = new PhotoSwipeLightbox({
+			gallery: "#modalImage ",
+			children: "a",
+			pswpModule: () => import("photoswipe"),
+			imageClickAction: "zoom",
+			wheelToZoom: true,
+			secondaryZoomLevel: 2,
+		});
+		lightbox.init();
+		return () => {
+			lightbox.destroy();
+		};
+	}, []);
+
 	const $requestedActivity = useStore(requestedActivity);
 	const $CurrentPlayerProfile = useStore(CurrentPlayerProfile);
 
 	return (
 		<div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100vw; overflow-y: auto; max-height: 85vh;">
-			<div style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
-				<img src={WarlordsRuin.src} style="width: 100%; margin:auto" />
+			<div
+				id="modalImage"
+				style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
+				<a class="image-zoom"
+					href={WarlordsRuin.src}
+					data-pswp-width={WarlordsRuin.width}
+					data-pswp-height={WarlordsRuin.height}
+					target="_blank">
+					<img src={WarlordsRuin.src} style="width: 100%; margin:auto" />
+				</a>
 			</div>
 			<div style="width: 55vw; flex-grow: 6;">
 				<div style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; font-size: 16pt;">
@@ -27,10 +52,23 @@ export default function () {
 						</div>
 					</div>
 					<div style="padding: 15px;">
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!</p>
-						<p>Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?</p>
-						<p>Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.</p>
-						<p>Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis
+							nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!
+						</p>
+						<p>
+							Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic
+							animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?
+						</p>
+						<p>
+							Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem,
+							iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis
+							neque.
+						</p>
+						<p>
+							Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere
+							molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?
+						</p>
 						<Show
 							when={
 								($CurrentPlayerProfile().activities.get($requestedActivity())?.IncompleteObjectives?.length ?? 0) > 0 &&
@@ -81,7 +119,10 @@ function GetRecordDetails(props: { hash: number }) {
 	return (
 		<>
 			<div title={record()?.name ?? "Loading"} style="display: flex; width: fit-content;">
-				<img src={`${BASE_BUNGIE_URL}${record()?.icon}`} style="height: 32px; margin-block: auto; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;" />
+				<img
+					src={`${BASE_BUNGIE_URL}${record()?.icon}`}
+					style="height: 32px; margin-block: auto; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;"
+				/>
 				<div style="margin-block: auto; margin-left: 10px; display: flex; flex-direction: column">
 					<span>{record()?.name ?? "Loading missing triumph"}</span>
 					<span style="font-size: 12pt;">{record()?.description ?? "Loading missing triumph"}</span>

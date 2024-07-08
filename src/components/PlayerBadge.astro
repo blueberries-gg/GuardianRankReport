@@ -4,15 +4,12 @@ import unavailableSecondaryIcon from "../resources/images/unavailableSecondaryIc
 import { Icon } from "astro-icon/components";
 ---
 
-<div
-	id="playerBadge"
-	style=`background-repeat: no-repeat; height:96px; margin: auto; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; user-select: none; -webkit-user-select: none;	-webkit-touch-callout: none; aspect-ratio : 474/96; background-image:url(${unavailableSecondaryIcon.src}); min-width: 0;`>
-	<div id="playerBadgeContent" style="height:100%; display: flex;  flex-direction: column; padding: 6px 3px 6px 87px;">
-		<div style="min-width: 0; max-width: fit-content; user-select: all; -webkit-user-select: none; -webkit-touch-callout: none; padding: 0 10px; margin: 0 -10px;"
-			><span id="badgeFullName" title="guardian#-001" style="font-size: 20pt; display: flex; user-select: text; -webkit-user-select: text;"
-				><span id="badgeName" style="color:white;overflow: clip; text-overflow: ellipsis; text-wrap: nowrap; flex-shrink: 1; min-width: 0;"
-					>guardian</span
-				><span style="color:#58ccff;">#</span><span id="badgeCode" style="color:lightgray;">-001</span
+<div id="playerBadge" class="playerBadge">
+	<div id="playerBadgeContent" class="playerBadgeContent">
+		<div class="playerBadgeUsername"
+			><span id="badgeFullName" title="guardian#-001" class="playerBadgeUsernameFull"
+				><span id="badgeName" class="playerBadgeName">guardian</span><span style="color:#58ccff;">#</span><span id="badgeCode" style="color:lightgray;"
+					>-001</span
 				><!--This span is only to avoid selecting the last element, when triple clicking-->
 				<span></span></span
 			></div
@@ -151,3 +148,45 @@ import { Icon } from "astro-icon/components";
 </div>
 
 <script src="../scripts/playerBadge.ts"></script>
+
+<style>
+	.playerBadge {
+		background-repeat: no-repeat;
+		height: 96px;
+		margin: auto;
+		font-family: "Neue Haas Grotesk Text Pro", "Helvetica", "Arial", sans-serif;
+		user-select: none;
+		-webkit-user-select: none;
+		aspect-ratio: 474/96;
+		background-image: url(${unavailableSecondaryIcon.src});
+		min-width: 0;
+	}
+	.playerBadgeContent {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		padding: 6px 3px 6px 87px;
+	}
+	.playerBadgeUsername {
+		min-width: 0;
+		max-width: fit-content;
+		user-select: all;
+		-webkit-user-select: none;
+		padding: 0 10px;
+		margin: 0 -10px;
+	}
+
+	.playerBadgeUsernameFull {
+		font-size: 20pt;
+		display: flex;
+		user-select: text;
+		-webkit-user-select: text;
+	}
+	.playerBadgeName {
+		color: white;
+		overflow: clip;
+		text-overflow: ellipsis;
+		flex-shrink: 1;
+		min-width: 0;
+	}
+</style>
