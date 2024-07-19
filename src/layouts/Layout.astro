@@ -8,7 +8,7 @@ import { Icon } from "astro-icon/components";
 import ActivityModalContent from "../components/ActivityModalContent";
 import AlertBar from "../components/AlertBar";
 import SearchBar from "../components/SearchBar.astro";
-import logo from "../resources/images/logo.png"
+import logo from "../resources/images/logo.png";
 import { Image } from "astro:assets";
 ---
 
@@ -44,8 +44,7 @@ import { Image } from "astro:assets";
 			<div style="margin-block: auto; flex-direction: row;" class="header-container">
 				<div style="flex-grow: 1; display: flex;">
 					<a class="logo" href="https://www.blueberries.gg/">
-						<Image src={logo} alt="BlueberriesGG" class="logo-img"
-						/>
+						<Image src={logo} alt="BlueberriesGG" class="logo-img" />
 					</a>
 					<div class="navbar-link-container">
 						<a class="navbar-link">Sample Link</a>
@@ -231,7 +230,6 @@ import { Image } from "astro:assets";
 					outline-offset 0.05s cubic-bezier(0.69, 0, 0, 1) 0.05s,
 					outline-color 0.15s cubic-bezier(0.69, 0, 0, 1) 0s;
 			}
-
 		</style>
 
 		<style is:global>
@@ -324,7 +322,7 @@ import { Image } from "astro:assets";
 			.completions-table {
 				margin: auto;
 				font-size: 12pt;
-				border-collapse: collapse;
+				border-spacing: 0px 4px;
 				position: relative;
 			}
 			.completions-table-empty-tr::before {
@@ -340,22 +338,49 @@ import { Image } from "astro:assets";
 			.completions-table-row {
 				height: 30px;
 				cursor: pointer;
+				outline: 2px solid;
+				outline-offset: 4px;
+				outline-color: transparent;
+				border-style: solid;
+				border-width: 0px;
+				transition:
+					outline-offset 0.08s cubic-bezier(0.69, 0, 0, 1) 0.125s,
+					outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s,
+					border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
+					background-color 0.125s cubic-bezier(0.69, 0, 0, 1);
 			}
+
 			@media (hover: hover) {
-				.completions-table-row:hover {
+				.completions-table-row.hoverable:hover {
 					background: #ffffff2f;
+					outline-color: #d8d8d8;
+					outline-offset: 2px;
+					border-color: #ffffff;
+					transition:
+						outline-offset calc(0 + 0.05) s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+						outline-color calc(0 + 0.15) s linear 0.05s,
+						border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
+						color calc(0 + 0.05) s linear 0.15s;
 				}
 			}
 			@media (hover: none) {
-				.completions-table-row.touch-hover {
+				.completions-table-row.hoverable.touch-hover {
 					background: #ffffff2f;
+					outline-color: #d8d8d8;
+					outline-offset: 2px;
+					border-color: #ffffff;
+					transition:
+						outline-offset calc(0 + 0.05) s cubic-bezier(0.69, 0, 0, 1) 0.05s,
+						outline-color calc(0 + 0.15) s linear 0.05s,
+						border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
+						color calc(0 + 0.05) s linear 0.15s;
 				}
 			}
 
 			.image-zoom:focus-visible {
 				outline: none;
 				box-shadow: none;
-						}
+			}
 		</style>
 	</body>
 </html>

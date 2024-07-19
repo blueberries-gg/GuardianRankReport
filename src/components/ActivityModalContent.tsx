@@ -1,5 +1,4 @@
 import { useStore } from "@nanostores/solid";
-import WarlordsRuin from "../resources/images/loot/WarlordsRuin.jpg";
 import { requestedActivity } from "../stores/activityStore";
 import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity";
 import { CurrentPlayerProfile, GetDestinyRecordDefinition } from "../stores/destinyPlayerData";
@@ -7,6 +6,7 @@ import { For, Show, Suspense, createEffect, createResource } from "solid-js";
 import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
+import { DestinyActivityDetails } from "../utils/destinyActivities/activityDetails";
 
 export default function () {
 	createEffect(() => {
@@ -32,12 +32,14 @@ export default function () {
 			<div
 				id="modalImage"
 				style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
-				<a class="image-zoom" style="margin:auto"
-					href={WarlordsRuin.src}
-					data-pswp-width={WarlordsRuin.width}
-					data-pswp-height={WarlordsRuin.height}
+				<a
+					class="image-zoom"
+					style="margin:auto"
+					href={DestinyActivityDetails[$requestedActivity()].image}
+					data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
+					data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
 					target="_blank">
-					<img src={WarlordsRuin.src} style="width: 100%;" />
+					<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
 				</a>
 			</div>
 			<div style="width: 55vw; flex-grow: 6;">
@@ -52,23 +54,7 @@ export default function () {
 						</div>
 					</div>
 					<div style="padding: 15px;">
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis
-							nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!
-						</p>
-						<p>
-							Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic
-							animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?
-						</p>
-						<p>
-							Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem,
-							iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis
-							neque.
-						</p>
-						<p>
-							Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere
-							molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?
-						</p>
+						<For each={DestinyActivityDetails[$requestedActivity()].description}>{(item) => <p>{item}</p>}</For>
 						<Show
 							when={
 								($CurrentPlayerProfile().activities.get($requestedActivity())?.IncompleteObjectives?.length ?? 0) > 0 &&
@@ -104,6 +90,11 @@ export default function () {
 									</For>
 								</div>
 							</div>
+						</Show>
+
+						<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
+							<br></br>
+							<a href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">Check more info!</a>
 						</Show>
 					</div>
 				</div>

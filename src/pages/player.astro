@@ -26,21 +26,21 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			<div
 				style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
 				<div class="activityGroup">
-					<div class="activityGroupCard hoverable">
+					<div class="activityGroupCard">
 						<SolidRaids client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidRaids>
 					</div>
 				</div>
 				<div class="activityGroup">
-					<div class="activityGroupCard hoverable">
+					<div class="activityGroupCard">
 						<SolidDungeons client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidDungeons>
 					</div>
 				</div>
 				<div class="activityGroup">
-					<div class="activityGroupCard hoverable">
+					<div class="activityGroupCard">
 						<SolidGrandMasters client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidGrandMasters>
@@ -48,7 +48,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				</div>
 
 				<div class="activityGroup">
-					<div class="activityGroupCard hoverable">
+					<div class="activityGroupCard">
 						<SolidExoticMissions client:load>
 							<Icon slot="loading" name="spinner" style="height: auto;width: auto; margin:auto 5px; color: white; opacity:50%;" is:inline />
 						</SolidExoticMissions>
@@ -84,7 +84,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			background-color 0.125s cubic-bezier(0.69, 0, 0, 1);
 	}
 	@media (hover: hover) {
-		.activityGroupCard:hover {
+		.activityGroupCard.hoverable:hover {
 			background: #ffffff2f;
 			outline-color: #d8d8d8;
 			outline-offset: 2px;
@@ -97,7 +97,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		}
 	}
 	@media (hover: none) {
-	.activityGroupCard.touch-hover {
+	.activityGroupCard.hoverable.touch-hover {
 		background: #ffffff2f;
 		outline-color: #d8d8d8;
 		outline-offset: 2px;
@@ -120,12 +120,15 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		height:64px; 
 
 		transition:
+			outline-offset 0.08s cubic-bezier(0.69, 0, 0, 1) 0.125s,
 			outline-color 0.13s cubic-bezier(0.69, 0, 0, 1) 0.125s,
 			border-color 0.125s cubic-bezier(0.69, 0, 0, 1),
-			color 0.125s cubic-bezier(0.69, 0, 0, 1);
+			color 0.125s cubic-bezier(0.69, 0, 0, 1),
+			background-color 0.125s cubic-bezier(0.69, 0, 0, 1);
 	}
+	
 	@media (hover: hover) {
-		.destinyItem:hover {
+		.destinyItem.hoverable:hover {
 			outline-color: #d8d8d8;
 			outline-offset: 2px;
 			border-color: #ffffff;
@@ -138,7 +141,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		}
 	}
 	@media (hover: none) {
-	.destinyItem.touch-hover {
+	.destinyItem.hoverable.touch-hover {
 		outline-color: #d8d8d8;
 			outline-offset: 2px;
 			border-color: #ffffff;

@@ -71,9 +71,9 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 function GetDisplayItemDungeon(props: { item: IPlayerActivity }) {
 	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
-	const opacity = enabled ? 1 : 0.5;
+	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
@@ -143,9 +143,9 @@ function GetDisplayItemDungeon(props: { item: IPlayerActivity }) {
 function GetDisplayItemRaid(props: { item: IPlayerActivity }) {
 	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
-	const opacity = enabled ? 1 : 0.5;
+	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
@@ -196,9 +196,9 @@ function GetDisplayItemRaid(props: { item: IPlayerActivity }) {
 function GetDisplayItemExoticMission(props: { item: IPlayerActivity }) {
 	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
-	const opacity = enabled ? 1 : 0.5;
+	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
@@ -246,9 +246,9 @@ function GetDisplayItemExoticMission(props: { item: IPlayerActivity }) {
 function GetDisplayItemScoredNightFall(props: { item: IPlayerActivity }) {
 	const totalCompletions = GetPlayerActivityCompletions(props.item);
 	const enabled = totalCompletions != 0;
-	const opacity = enabled ? 1 : 0.5;
+	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`opacity:${opacity};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;">
@@ -457,14 +457,14 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 					<For each={unownedCollectibles()}>
 						{(item,) =>
 							<Suspense >
-								<GetExoticIcon item={item} grayscale={true}></GetExoticIcon >
+								<GetExoticIcon item={item} acquired={true}></GetExoticIcon >
 							</Suspense>
 						}
 					</For>
 					<For each={ownedCollectibles()}>
 						{(item,) =>
 							<Suspense >
-								<GetExoticIcon item={item} grayscale={false}></GetExoticIcon >
+								<GetExoticIcon item={item} acquired={false}></GetExoticIcon >
 							</Suspense>}
 					</For>
 				</div>
@@ -473,14 +473,14 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 	);
 }
 
-function GetExoticIcon(props: { item: ExoticCollectible; grayscale: boolean }) {
+function GetExoticIcon(props: { item: ExoticCollectible; acquired: boolean }) {
 	const [profile] = createResource(async () => {
 		//return (await GetDestinyInventoryItemDefinition(props.item.itemHash))?.displayProperties.name ?? ""
 		return ExoticWeaponString[props.item.exoticWeapon];
 	})
-	const appliedStyle = !props.grayscale ? "" : "opacity: 0.25;";
+	const appliedStyle = !props.acquired ? "" : "opacity: 0.25;";
 	return <>
-		<div title={profile()} class="destinyItem hoverable">
+		<div title={profile()} style="cursor: pointer;" class="destinyItem hoverable" onclick={() => { requestedActivity.set(props.item.sourceActivity); showModal(); }}>
 			<img style={`width: 100%; height: 100%; ${appliedStyle}`} src={`${BASE_BUNGIE_URL}${props.item.icon}`} ></img>
 		</div>
 	</>

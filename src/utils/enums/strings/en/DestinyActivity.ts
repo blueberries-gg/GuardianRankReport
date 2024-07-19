@@ -83,4 +83,7 @@ export const ExoticMissionsEn: { [key in keyof typeof DestinyExoticMission]: str
 	ZeroHour: "Zero Hour",
 };
 
-export const DestinyActivityString: { [key in keyof typeof DestinyActivity]: string } = { ...DungeonsEn, ...RaidsEn, ...ScoredNightFallsEn, ...ExoticMissionsEn };
+export const DestinyActivityString: { [key in keyof typeof DestinyActivity]: string } = {
+	...DungeonsEn, ...RaidsEn, ...ScoredNightFallsEn, ...ExoticMissionsEn,
+	None: ""
+};
