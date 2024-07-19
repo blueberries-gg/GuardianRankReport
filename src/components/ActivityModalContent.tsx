@@ -7,6 +7,8 @@ import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 import { DestinyActivityDetails } from "../utils/destinyActivities/activityDetails";
+import { mapActivities } from "../utils/destinyActivities/activities";
+import { ActivityType } from "../utils/enums/ActivityType";
 
 export default function () {
 	createEffect(() => {
@@ -95,6 +97,11 @@ export default function () {
 						<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
 							<br></br>
 							<a href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">Check more info!</a>
+						</Show>
+
+						<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
+							<br></br>
+							<a href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank">Check more info!</a>
 						</Show>
 					</div>
 				</div>
