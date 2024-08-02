@@ -10,7 +10,9 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 	<script>
 		import { GetPlayerRelevantInformation, CurrentPlayerProfile } from "../stores/destinyPlayerData";
 		import html2canvas from "html2canvas";
-		let playerInfoProimise: Promise<boolean>;
+		import Toastify from 'toastify-js'
+		import "toastify-js/src/toastify.css"
+		let playerInfoPromise: Promise<boolean>;
 		window.addEventListener("DOMContentLoaded", async () => {
 			const url = new URL(window.location.href);
 			const params = new URLSearchParams(url.search);
@@ -18,15 +20,15 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			const membershipTypeName = "type";
 			const bungieNetMembershipId = params.get(bungieNetMembershipIdName);
 			const membershipType = params.get(membershipTypeName);
-			playerInfoProimise = GetPlayerRelevantInformation(bungieNetMembershipId!,parseInt(membershipType!));
+			playerInfoPromise = GetPlayerRelevantInformation(bungieNetMembershipId!,parseInt(membershipType!));
 		});
 		const button = document.querySelector("[data-screenshot-button]")!;
 
 		async function download(event: Event) {
-			if (playerInfoProimise == undefined || button.innerHTML == "...") return;
+			if (playerInfoPromise == undefined || button.innerHTML == "...") return;
 
 			button.innerHTML = "...";
-			await playerInfoProimise;
+			await playerInfoPromise;
 
 			const baseCanvas = await html2canvas(document.querySelector("#main-content")!, {allowTaint: true, backgroundColor: "#1a1c1d", useCORS: true, windowWidth: 1080, logging: false});
 			const canvas = document.createElement("canvas");
@@ -38,13 +40,30 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			canvasctx.drawImage((document.getElementById("logo") as HTMLImageElement)!, 3, canvas.height - 64);
 
 			//const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-			const image = canvas.toDataURL();
-			const imageDownloadElement = document.createElement("a");
+			const image = canvas.toDataURL('image/png');
+			//const imageDownloadElement = document.createElement("a");
 			//const UserInfo = CurrentPlayerProfile.get().info.UserCard;
 			//imageDownloadElement.setAttribute("download",`${UserInfo.bungieGlobalDisplayName}#${("000" + UserInfo.bungieGlobalDisplayNameCode).slice(-4)}.png`);
-			imageDownloadElement.setAttribute("href", image);
-			imageDownloadElement.setAttribute("target", "_blank");
-			imageDownloadElement.click();
+			//imageDownloadElement.setAttribute("href", image);
+			//imageDownloadElement.setAttribute("target", "_blank");
+			//imageDownloadElement.click();
+			canvas.toBlob(function(blob) { 
+				const item = new ClipboardItem({ "image/png": blob! });
+				navigator.clipboard.write([item]); 
+			});
+			Toastify({
+				text: "Copied to Clipboard!",
+				duration: 3000,
+				close: false,
+				gravity: "bottom", // `top` or `bottom`
+				position: "center",
+				stopOnFocus: true, // Prevents dismissing of toast on hover
+				style: {
+					color: '#FFFFFF',
+					background: "#0F0F0F",
+					"border-radius": "40px"
+				},
+			}).showToast();
 			button.innerHTML = "Share";
 		}
 		button.addEventListener("click", (event) => download(event));
