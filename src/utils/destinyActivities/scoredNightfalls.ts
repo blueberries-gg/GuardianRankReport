@@ -153,12 +153,6 @@ export const ScoredNightFallsBaseDefinitions: { [key in keyof typeof DestinyGran
 		Free: true,
 	},
 
-	Liminality: {
-		Modes: { GrandMaster: [1700470403, 2099835168] },
-		Type: ActivityType.ScoredNightFall,
-		TopLevel: true,
-		Free: true,
-	},
 	LegendPsiOpsBattlegroundCosmodrome: {
 		Modes: {
 			GrandMaster: [1387912492, 968118631],
@@ -168,6 +162,13 @@ export const ScoredNightFallsBaseDefinitions: { [key in keyof typeof DestinyGran
 		Free: true,
 	},
 
+	Liminality: {
+		Modes: { GrandMaster: [1700470403, 2099835168] },
+		Type: ActivityType.ScoredNightFall,
+		TopLevel: true,
+		Free: true,
+	},
+	
 	ProvingGrounds: {
 		Modes: {
 			GrandMaster: [2103025315, 3418624832],

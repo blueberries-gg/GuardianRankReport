@@ -1,5 +1,21 @@
 import { DestinyActivity } from "../enums/DestinyActivities";
 import WarlordsRuin from "../../resources/images/loot/WarlordsRuin.jpg";
+import TheShatteredThrone from "../../resources/images/loot/TheShatteredThrone.jpg";
+import PitOfHeresy from "../../resources/images/loot/PitOfHeresy.jpg";
+import Prophecy from "../../resources/images/loot/Prophecy.jpg";
+import GraspOfAvarice from "../../resources/images/loot/GraspOfAvarice.jpg";
+import Duality from "../../resources/images/loot/Duality.jpg";
+import SpireOfTheWatcher from "../../resources/images/loot/SpireOfTheWatcher.jpg";
+import GhostsOfTheDeep from "../../resources/images/loot/GhostsOfTheDeep.jpg";
+import LastWish from "../../resources/images/loot/LastWish.png";
+import GardenOfSalvation from "../../resources/images/loot/GardenOfSalvation.jpg";
+import DeepStoneCrypt from "../../resources/images/loot/DeepStoneCrypt.jpg";
+import VaultOfGlass from "../../resources/images/loot/VaultOfGlass.jpg";
+import VowOfTheDisciple from "../../resources/images/loot/VowOfTheDisciple.jpg";
+import KingsFall from "../../resources/images/loot/KingsFall.jpg";
+import RootOfNightmares from "../../resources/images/loot/RootOfNightmares.jpg";
+import CrotasEnd from "../../resources/images/loot/CrotasEnd.jpg";
+import SalvationsEdge from "../../resources/images/loot/SalvationsEdge.jpg";
 import lootPlaceholder from "../../resources/images/lootPlaceholder.png";
 
 
@@ -8,658 +24,495 @@ export const DestinyActivityDetails: {
 } = {
 	AGardenWorld: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Help Osiris cut back an out-of-control Vex Mind.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/rituals_a_garden_world.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	BattlegroundBehemoth: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Empress Caiatl has deployed a tank fortress to Nessus and opened an invitation to survivors of the Red Legion to vie for a seat on her War Council. Vanquish the Cabal and prove yourself in glorious combat against her Chosen.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/nessus_battleground_behemoth.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	BattlegroundFoothold: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "In an act of vengeance for the destruction of their homeworld, the Cabal have struck out against a Hive nest dug deep into the Cosmodrome. Use this opportunity to hit the Cabal hard and show them that humanity will not back down.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/cosmodrome_battleground_foothold.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	BattlegroundHailstone: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "In a bid to earn Empress Caiatl's favor, a Cabal force has descended on Europa to scour the icy moon for relics of the Golden Age including the secrets of the Exo contained in the Deep Stone Crypt. Travel to Europa and put a stop to this operation.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/europa_battleground_hailstone.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	BattlegroundOracle: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "A group of former Red Legion Psions are communing with Vex prediction engines deep within Nessus. They seek to gain tactical insights by analyzing simulations of future events against their own psychic foresight. Eliminate this threat before they can deliver their intelligence to Empress Caiatl.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/nessus_battleground_oracle.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	BirthplaceOfTheVile: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Aided by the Witness, the Scorn have gained the power to break into the Throne World through areas the Light cannot touch. Beat them back.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_birthplace.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	Broodhold: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Eradicate a Hive infestation seething in the depths of the Tangled Shore.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_virgo.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	DefiantBattlegroundCosmodrome: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Rescue captives from a Shadow Legion Pyramid outpost in the Cosmodrome.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_20_battleground_turnabout.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	DefiantBattlegroundEDZ: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Rescue captives from a Shadow Legion Pyramid outpost in the EDZ.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_20_battleground_exeter.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	DefiantBattlegroundOrbitalPrison: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Rescue captives from a Shadow Legion prison in near-Earth orbit.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_20_battleground_bulkhead.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	ExodusCrash: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Purge the Vex and Fallen, who have overrun the Exodus Black crash site.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_exodus_crash.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	FallenSABER: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Enter Rasputin's bunker in the Cosmodrome and discover the source of the security breach.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/cosmodrome_fallen_saber.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	HeistBattlegroundEuropa: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Brave the cold winds of Europa to reclaim fragments of a hidden submind's code from the depths of Bray Exoscience.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_19_battleground_europa.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	HeistBattlegroundMars: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Blitz the BrayTech Futurescape campus on Mars to repossess fragments of the submind Charlemagne's code.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_19_battleground_polaris.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	HeistBattlegroundMoon: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Infiltrate the Seraph bunker tucked under the dust of the Moon to reclaim fragments of the submind Malahayati's code.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_19_battleground_luna.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	HyperNetCurrent: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Stop the Shadow Legion from bringing down Neomuna's defenses.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/lightfall_strike_plunger.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	LakeOfShadows: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            //"Stem the tide of Taken flowing into the European Dead Zone from beneath the waves.",
+            "Purge the European Dead Zone of the Taken and Shadow Legion forces threatening to overtake the Reservoir and poison the precious water it holds.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_lake_of_shadows.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	LegendPsiOpsBattlegroundCosmodrome: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "The Lucent Hive are using stolen Guardian Light for some wicked purpose. Breach their stronghold and uncover their plot.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/battleground_nestegg_s16.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	Liminality: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Carve your way through a treacherous mountain pass teeming with Lucent Hive and Taken.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_pickaxe.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	ProvingGrounds: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Defeat Caiatl's Chosen aboard the Land Tank, Halphas Electus, on Nessus.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/nessus_proving_grounds.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	PsiOpsBattlegroundEDZ: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Guardians have recently gone missing in the EDZ. Investigate their disappearances and hunt down the Lucent Hive responsible.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/battleground_chainsaw_s16.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	PsiOpsBattlegroundMoon: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "The Lucent Hive have opened a portal between Savathûn's throne world and the Scarlet Keep. Break up the portal ritual, and prevent a full-scale invasion of Earth.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/battleground_trespass_s16.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	SavathunsSong: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Delve deep into the Hive-infested Arcology in search of missing fireteams.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_savanthuns_song.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	StrangeTerrain: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Defeat Nokris before he completes his ritual.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_nokris.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheArmsDealer: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            //"Shut down the operations of an ironmonger providing weapons to the Red Legion.",
+            "Stifle the legacy of a notorious ironmonger providing weapons to the Shadow Legion.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_the_arms_dealer.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheCorrupted: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Hunt down one of Queen Mara's most trusted advisors and free her from Taken possession.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_gemini.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheDevilsLair: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Enter into the Devils' Lair and weaken the Fallen presence within the Cosmodrome.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/cosmodrome_devils_lair.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheDisgraced: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Defeat the shamed Hive Wizard Navôta in the Cosmodrome.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/cosmodrome-strike-gantry.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheFesteringCore: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Descend into the heart of Io's Pyramidion and root out a burgeoning infestation.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_the_festering_core.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheGlassway: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Prevent ancient and powerful Vex from escaping the Glassway on Europa.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/europa-strike-blackbird.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheHollowedLair: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "The Fanatic has returned. Take him down and finish the job you started.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_taurus.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheInsightTerminus: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Break into the ancient Vex installation.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_glee.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheInvertedSpire: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "End the Red Legion expedition that's ripped open the planet's surface.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_inverted_spire.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheLightblade: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Recover an artifact from a monument to Oryx, located deep in the swamps of Savathûn's throne world.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_lightblade.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheScarletKeep: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Investigate the recently erected Scarlet Keep and discover its dark purpose.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_the_scarlet_keep.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TreeOfProbabilities: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Contain a rampant army of Red Legion within the Infinite Forest.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/rituals_tree_of_probabilities.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	WardenOfNothing: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Help the Drifter restore order at the Prison of Elders.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/strike_aries.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheWhisper: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Investigate a Taken anomaly deep beneath the surface of Io.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/whisper.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	ZeroHour: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Race against the clock to stop House Salvation agents from stealing a dangerous weapon from the Old Tower.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/zero-hour.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	Harbinger: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Embody the will of the Traveler and hunt those who would serve the Darkness.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/edz_exotic_harbinger.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	Presage: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Jump coordinates matching an errant distress signal.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/exotic_quest_presage.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	VoxObscura: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Despite the Vanguard's recent victories, a dissident Psion faction continues to release Darkness-inspired propaganda. Return to Mars and learn how far the conspiracy goes.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/exotic_mission_chrome.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	SeraphsShield: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Infiltrate Seraph Station in Earth's orbit to plant a virus in the Warsat network.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
-        link: "https://www.blueberries.gg/weapons/root-of-nightmares-loot-table/"
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_19_exotic_mission.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
+        link: ""
     },
 	Avalon: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Investigate a Vex network node in the EDZ that has been overwritten with a single word: AVALON.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/season_20_mission_avalon.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	Starcrossed: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Within the Black Garden, the Sol Divisive toil endlessly, systematically shutting down potential futures. With Riven's blessing, it's time to shut them down.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/mission_starcrossed.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	Excision: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Join your fellow Guardians to unmake the Witness once and for all.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/fistbump.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	DualDestiny: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Two Guardians enter the depths of the Pale Heart in search of power…",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/double_agents.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	TheShatteredThrone: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Strike back at the curse that plagues the Dreaming City.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: TheShatteredThrone.src,
+        imageWidth: TheShatteredThrone.width,
+        imageHeight: TheShatteredThrone.height,
         link: "https://www.blueberries.gg/weapons/shattered-throne-loot-table/"
     },
 	PitOfHeresy: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Deep beneath Sorrow's Harbor, the Hive keep their darkest secrets.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: PitOfHeresy.src,
+        imageWidth: PitOfHeresy.width,
+        imageHeight: PitOfHeresy.height,
         link: "https://www.blueberries.gg/weapons/pit-of-heresy-loot-table/"
     },
 	Prophecy: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Enter the realm of the Nine and ask the question: \"What is the nature of the Darkness?\"",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: Prophecy.src,
+        imageWidth: Prophecy.width,
+        imageHeight: Prophecy.height,
         link: "https://www.blueberries.gg/weapons/destiny-2-prophecy-loot/"
     },
 	GraspOfAvarice: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "A cautionary tale for adventurers willing to trade their humanity for riches.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: GraspOfAvarice.src,
+        imageWidth: GraspOfAvarice.width,
+        imageHeight: GraspOfAvarice.height,
         link: "https://www.blueberries.gg/weapons/grasp-of-avarice-loot/"
     },
 	Duality: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Dive into the depths of the exiled emperor's mind in search of dark secrets.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: Duality.src,
+        imageWidth: Duality.width,
+        imageHeight: Duality.height,
         link: "https://www.blueberries.gg/weapons/duality-loot-table/"
     },
 	SpireOfTheWatcher: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Machinations run wild in this dust-ridden ruin. Bring them to heel.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: SpireOfTheWatcher.src,
+        imageWidth: SpireOfTheWatcher.width,
+        imageHeight: SpireOfTheWatcher.height,
         link: "https://www.blueberries.gg/weapons/spire-of-the-watcher-loot/"
     },
 	GhostsOfTheDeep: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Drown in the deep, or rise from it.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: GhostsOfTheDeep.src,
+        imageWidth: GhostsOfTheDeep.width,
+        imageHeight: GhostsOfTheDeep.height,
         link: "https://www.blueberries.gg/weapons/ghosts-of-the-deep-loot/"
     },
 	WarlordsRuin: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Nestled deep in the mountains of the EDZ, Scorn lay claim to a Dark Age castle containing dangerous relics, and a blighted vengeance festers in the dirt.",
         ],
         image: WarlordsRuin.src,
         imageWidth: WarlordsRuin.width,
@@ -668,230 +521,173 @@ export const DestinyActivityDetails: {
     },
 	Leviathan: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "\"Grow fat from strength.\"",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/raid_gluttony.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	LeviathanEaterOfWorlds: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "\"In the belly of the beast.\"",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/raids_leviathan_eater_of_worlds.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	LeviathanSpireOfStars: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "On the wings of Icarus.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/raid_greed.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	LastWish: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "\"The opportunity of a lifetime.\"",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: LastWish.src,
+        imageWidth: LastWish.width,
+        imageHeight: LastWish.height,
         link: "https://www.blueberries.gg/weapons/destiny-2-last-wish-loot-table/"
     },
 	ScourgeOfThePast: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Beneath the ruins of the Last City lies the Black Armory's most precious vault, now under siege by Siviks and his crew, the Kell's Scourge.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/raids.1305rh0093145r13t5hn10tnz.raid_sunset.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	CrownOfSorrow: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Grow [weak] with [pride].",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/raid_eclipse.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	GardenOfSalvation: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "\"The Garden calls out to you.\"",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: GardenOfSalvation.src,
+        imageWidth: GardenOfSalvation.width,
+        imageHeight: GardenOfSalvation.height,
         link: "https://www.blueberries.gg/weapons/garden-of-salvation-loot-table/"
     },
 	DeepStoneCrypt: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "The chains of legacy must be broken.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: DeepStoneCrypt.src,
+        imageWidth: DeepStoneCrypt.width,
+        imageHeight: DeepStoneCrypt.height,
         link: "https://www.blueberries.gg/weapons/destiny-2-deep-stone-crypt-loot/"
     },
 	VaultOfGlass: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Beneath Venus, evil stirs…",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: VaultOfGlass.src,
+        imageWidth: VaultOfGlass.width,
+        imageHeight: VaultOfGlass.height,
         link: "https://www.blueberries.gg/weapons/vault-of-glass-loot/"
     },
 	VowOfTheDisciple: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "The disciple beckons…",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: VowOfTheDisciple.src,
+        imageWidth: VowOfTheDisciple.width,
+        imageHeight: VowOfTheDisciple.height,
         link: "https://www.blueberries.gg/weapons/vow-of-the-disciple-loot-table/"
     },
 	KingsFall: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Long live the King…",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: KingsFall.src,
+        imageWidth: KingsFall.width,
+        imageHeight: KingsFall.height,
         link: "https://www.blueberries.gg/weapons/kings-fall-loot-table/"
     },
 	RootOfNightmares: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "A sinister threat has taken root.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: RootOfNightmares.src,
+        imageWidth: RootOfNightmares.width,
+        imageHeight: RootOfNightmares.height,
         link: "https://www.blueberries.gg/weapons/root-of-nightmares-loot-table/"
     },
 	CrotasEnd: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "He waits in the dark below.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: CrotasEnd.src,
+        imageWidth: CrotasEnd.width,
+        imageHeight: CrotasEnd.height,
         link: "https://www.blueberries.gg/weapons/crotas-end-loot/"
     },
 	Pantheon: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/pantheon_golgoroth.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	PhanteonAtraksSovereign: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/pantheon_golgoroth.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	PhanteonOryxExalted: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/pantheon_golgoroth.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	PhanteonRhulkIndomitable: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/pantheon_golgoroth.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	PhanteonNezarecSublime: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: "https://www.bungie.net/img/destiny_content/pgcr/pantheon_golgoroth.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 	SalvationsEdge: {
         description: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti perferendis porro ab quia. Officia dicta beatae, quo sunt nobis nisi placeat tenetur sapiente harum. Consequuntur labore dolorum voluptate inventore iste nulla numquam consequatur dicta possimus!",
-            "Dolorem suscipit quos repudiandae. Nisi nesciunt alias perspiciatis animi! Sequi non ex debitis in sit eum dignissimos velit hic animi quos saepe tempore, beatae eos explicabo recusandae nisi libero facere ipsum dolores iure a deserunt?",
-            "Unde, voluptas molestiae perferendis maxime atque culpa sed autem sequi earum quia repellat laboriosam illo voluptatum voluptatem, iusto et cumque libero! Similique optio sit fugit! Eaque, qui doloremque. Accusantium asperiores maxime corrupti provident veritatis neque.",
-            "Quibusdam iusto, quo velit ut quidem sapiente perferendis suscipit dolorum ab consectetur voluptatum quaerat quas magni facere molestiae incidunt deleniti vel qui tempora! Officiis iure quos sit molestiae totam eum porro repellat laborum consequuntur nihil?",
+            "Free the Light.",
         ],
-        image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        image: SalvationsEdge.src,
+        imageWidth: SalvationsEdge.width,
+        imageHeight: SalvationsEdge.height,
         link: "https://www.blueberries.gg/weapons/salvations-edge-loot-table/"
     },
 	None: {
@@ -900,8 +696,8 @@ export const DestinyActivityDetails: {
             "Nothing should show by default, unless client messes with javascript",
        ],
         image: lootPlaceholder.src,
-        imageWidth: lootPlaceholder.width,
-        imageHeight: lootPlaceholder.height,
+        imageWidth: 1280,
+        imageHeight: 720,
         link: ""
     },
 };
