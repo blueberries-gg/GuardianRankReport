@@ -24,6 +24,21 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		});
 		const button = document.querySelector("[data-screenshot-button]")!;
 
+
+		// Async/await method replacing toBlob() callback
+		async function getBlobFromCanvas(canvas : HTMLCanvasElement) {
+		return new Promise<Blob>((resolve, reject) => {
+			canvas.toBlob((blob) => {
+			if (blob) {
+				resolve(blob);
+			} else {
+				reject(new Error("Canvas toBlob failed"));
+			}
+			});
+		});
+		}
+
+
 		button.addEventListener("click", async (event) => {
 			if (playerInfoPromise == undefined || button.innerHTML == "...") return;
 
@@ -40,16 +55,14 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			canvasctx.drawImage((document.getElementById("logo") as HTMLImageElement)!, 3, canvas.height - 64);
 
 			//const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-			const image = canvas.toDataURL('image/png');
-			const item = new ClipboardItem({
-				'image/png': (async () => {
-				const response = await fetch(image)
-				return await response.blob()
-				})(),
-			});
-			await navigator.clipboard.write([item]);
-
-			Toastify({
+			// Copy canvas to blob
+			try {
+				const blob = await getBlobFromCanvas(canvas);
+				// Create ClipboardItem with blob and it's type, and add to an array
+				const data = [new ClipboardItem({ [blob.type]: blob })];
+				// Write the data to the clipboard
+				await navigator.clipboard.write(data);
+				Toastify({
 				text: "Copied to Clipboard!",
 				duration: 3000,
 				close: false,
@@ -62,6 +75,21 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 					"border-radius": "40px"
 				},
 			}).showToast();
+			} catch (error) {
+				Toastify({
+				text: JSON.stringify(error),
+				duration: 3000,
+				close: false,
+				gravity: "bottom", // `top` or `bottom`
+				position: "center",
+				stopOnFocus: true, // Prevents dismissing of toast on hover
+				style: {
+					color: '#FFFFFF',
+					background: "#0F0F0F",
+					"border-radius": "40px"
+				},
+			}).showToast();
+			}
 			button.innerHTML = "Share";
 		}
 		);
