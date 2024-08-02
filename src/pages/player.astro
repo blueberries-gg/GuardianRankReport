@@ -24,9 +24,9 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		});
 		const button = document.querySelector("[data-screenshot-button]")!;
 
-		async function download(event: Event) {
+		button.addEventListener("click", async (event) => {
 			if (playerInfoPromise == undefined || button.innerHTML == "...") return;
-
+			
 			button.innerHTML = "...";
 			await playerInfoPromise;
 
@@ -64,9 +64,8 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 					"border-radius": "40px"
 				},
 			}).showToast();
-			button.innerHTML = "Share";
-		}
-		button.addEventListener("click", (event) => download(event));
+			button.innerHTML = "Share";}
+		);
 
 	</script>
 	<div class="content">
