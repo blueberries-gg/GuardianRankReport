@@ -37,11 +37,13 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			canvasctx.globalAlpha = 0.5;
 			canvasctx.drawImage((document.getElementById("logo") as HTMLImageElement)!, 3, canvas.height - 64);
 
-			const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+			//const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+			const image = canvas.toDataURL();
 			const imageDownloadElement = document.createElement("a");
-			const UserInfo = CurrentPlayerProfile.get().info.UserCard;
-			imageDownloadElement.setAttribute("download",`${UserInfo.bungieGlobalDisplayName}#${("000" + UserInfo.bungieGlobalDisplayNameCode).slice(-4)}.png`);
+			//const UserInfo = CurrentPlayerProfile.get().info.UserCard;
+			//imageDownloadElement.setAttribute("download",`${UserInfo.bungieGlobalDisplayName}#${("000" + UserInfo.bungieGlobalDisplayNameCode).slice(-4)}.png`);
 			imageDownloadElement.setAttribute("href", image);
+			imageDownloadElement.setAttribute("target", "_blank");
 			imageDownloadElement.click();
 			button.innerHTML = "Share";
 		}
