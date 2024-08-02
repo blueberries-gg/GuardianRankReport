@@ -304,7 +304,7 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 	})
 
 	return (
-		<div style="">
+		<div style="width: 100%">
 			<div style="background: #ffffff1A; padding: 10px; border-bottom: solid 2px currentcolor;">
 				<div style="display: flex;">
 					<div style="margin: auto; padding-top: 3pt;">
@@ -488,25 +488,17 @@ function GetExoticIcon(props: { item: ExoticCollectible; acquired: boolean }) {
 
 export function SolidRaids(props: { loading?: Element }) {
 	element = props.loading!;
-	return <>
-		<GetDisplayPlayerActivities activityType={ActivityType.Raid} displayInactive={true}></GetDisplayPlayerActivities>
-	</>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.Raid} displayInactive={true}></GetDisplayPlayerActivities>;
 }
 export function SolidDungeons(props: { loading?: Element }) {
 	element = props.loading!;
-	return <>
-		<GetDisplayPlayerActivities activityType={ActivityType.Dungeon} displayInactive={true}></GetDisplayPlayerActivities>
-	</>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.Dungeon} displayInactive={true}></GetDisplayPlayerActivities>;
 }
 export function SolidExoticMissions(props: { loading?: Element }) {
 	element = props.loading!;
-	return <>
-		<GetDisplayPlayerActivities activityType={ActivityType.ExoticMission} displayInactive={true}></GetDisplayPlayerActivities>
-	</>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.ExoticMission} displayInactive={true}></GetDisplayPlayerActivities>;
 }
 export function SolidGrandMasters(props: { loading?: Element }) {
 	element = props.loading!;
-	return <>
-		<GetDisplayPlayerActivities activityType={ActivityType.ScoredNightFall} displayInactive={false}></GetDisplayPlayerActivities>
-	</>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.ScoredNightFall} displayInactive={false}></GetDisplayPlayerActivities>;
 }

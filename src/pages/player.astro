@@ -42,10 +42,50 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		button.addEventListener("click", async (event) => {
 			if (playerInfoPromise == undefined || button.innerHTML == "...") return;
 
-			button.innerHTML = "...";
-			await playerInfoPromise;
+			if (!CurrentPlayerProfile.get().complete){
+				Toastify({
+					text: "Retry in a bit, while we get all the information",
+					duration: 3000,
+					close: false,
+					gravity: "bottom",
+					position: "center",
+					style: {
+						color: '#FFFFFF',
+						background: "#0F0F0F",
+						"border-radius": "40px"
+					},
+				}).showToast();
+				return;
+			}
+			
+			Toastify({
+				text: "Generating image, screen may strech",
+				duration: 3000,
+				close: false,
+				gravity: "bottom",
+				position: "center",
+				style: {
+					color: '#FFFFFF',
+					background: "#0F0F0F",
+					"border-radius": "40px"
+				},
+			}).showToast();
 
-			const baseCanvas = await html2canvas(document.querySelector("#main-content")!, {allowTaint: true, backgroundColor: "#1a1c1d", useCORS: true, windowWidth: 1080, logging: false});
+			if (!navigator.canShare) {
+				await playerInfoPromise;
+			}
+
+
+
+			let cards = document.getElementsByClassName("activityGroupCard");
+			for (let card of cards) {
+				(card as HTMLElement).style.minWidth = "535px"
+			}
+			const baseCanvas = await html2canvas(document.querySelector("#main-content")!, {allowTaint: true, backgroundColor: "#1a1c1d", useCORS: true, windowWidth: 1080, width:1080, logging: false, scale: 1,
+			});
+			for (let card of cards) {
+				(card as HTMLElement).style.minWidth = ""
+			}
 			const canvas = document.createElement("canvas");
 			const canvasctx = canvas.getContext("2d")!;
 			canvas.width = baseCanvas.width;
@@ -54,41 +94,45 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			canvasctx.globalAlpha = 0.5;
 			canvasctx.drawImage((document.getElementById("logo") as HTMLImageElement)!, 3, canvas.height - 64);
 
-			//const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-			// Copy canvas to blob
 			try {
+				
 				const blob = await getBlobFromCanvas(canvas);
 				// Write the data to the clipboard
 				const data = {
 					files: [
-					new File([blob], 'file.png', {
+					new File([blob], `${CurrentPlayerProfile.get().info.UserCard.bungieGlobalDisplayName}#${("000" + CurrentPlayerProfile.get().info.UserCard.bungieGlobalDisplayNameCode).slice(-4)}.png`, {
 						type: blob.type,
 					}),
 					]
 				};
-  
-				await navigator.share(data);
-				Toastify({
-				text: "Copied to Clipboard!",
-				duration: 3000,
-				close: false,
-				gravity: "bottom", // `top` or `bottom`
-				position: "center",
-				stopOnFocus: true, // Prevents dismissing of toast on hover
-				style: {
-					color: '#FFFFFF',
-					background: "#0F0F0F",
-					"border-radius": "40px"
-				},
-			}).showToast();
+				if (!navigator.canShare) {
+					const data = [new ClipboardItem({ [blob.type]: blob })];
+					// Write the data to the clipboard
+					await navigator.clipboard.write(data);
+					Toastify({
+						text: "Copied to Clipboard!",
+						duration: 3000,
+						close: false,
+						gravity: "bottom",
+						position: "center",
+						style: {
+							color: '#FFFFFF',
+							background: "#0F0F0F",
+							"border-radius": "40px"
+						},
+					}).showToast();
+					button.innerHTML = "Share";
+				}
+				else {
+					await navigator.share(data);
+				}
 			} catch (error) {
 				Toastify({
 				text: JSON.stringify((error as Error).message),
 				duration: 3000,
 				close: false,
-				gravity: "bottom", // `top` or `bottom`
+				gravity: "bottom",
 				position: "center",
-				stopOnFocus: true, // Prevents dismissing of toast on hover
 				style: {
 					color: '#FFFFFF',
 					background: "#0F0F0F",
@@ -96,12 +140,11 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				},
 			}).showToast();
 			}
-			button.innerHTML = "Share";
 		}
 		);
 
 	</script>
-	<div class="content">
+	<div class="content" data-html2canvas-ignore>
 		<button style="margin-left: auto;" data-screenshot-button>Share</button>
 	</div>
 	<div class="content" id="main-content">
@@ -144,6 +187,12 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 </Layout>
 
 <style is:global>
+	astro-island {
+		display: block !important;
+		margin-inline: auto;
+		width: 100%;
+		unicode-bidi: isolate;
+	}
 	.activityGroup {
 		display: flex;
 		flex-direction: column;

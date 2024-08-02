@@ -38,6 +38,7 @@ export interface PlayerBadgeData {
 }
 
 export interface PlayerActivityDetails {
+	complete: boolean
 	info: PlayerBadgeData;
 	activities: Map<keyof typeof DestinyActivity, IPlayerActivity>;
 	collectibles: StringsKeysOf<typeof ExoticWeapon>[];
@@ -46,7 +47,7 @@ export interface PlayerActivityDetails {
 const playerActivitiesCompletions = new Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity>();
 SetPlayerActivitiesCompletionsBase(playerActivitiesCompletions);
 
-export const CurrentPlayerProfile: MapStore<PlayerActivityDetails> = map({ activities: playerActivitiesCompletions, collectibles: [] });
+export const CurrentPlayerProfile: MapStore<PlayerActivityDetails> = map({complete: false, activities: playerActivitiesCompletions, collectibles: [] });
 
 function SetPlayerActivitiesCompletionsBase(map: Map<StringsKeysOf<typeof DestinyActivity>, IPlayerActivity>) {
 	ActiveActivities.forEach((k) => {
@@ -339,6 +340,7 @@ export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint |
 
 	const playerCompletions = await GetPlayerCharactersCompletions(AllCharacters, destinyMembershipId, membershipType, ProfileRecords!, CharacterRecords!);
 	CurrentPlayerProfile.setKey("activities", playerCompletions);
+	CurrentPlayerProfile.setKey("complete", true);
 	return true;
 };
 
