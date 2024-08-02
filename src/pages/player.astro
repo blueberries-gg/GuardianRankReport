@@ -77,7 +77,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			}).showToast();
 			} catch (error) {
 				Toastify({
-				text: JSON.stringify(error),
+				text: JSON.stringify((error as Error).message),
 				duration: 3000,
 				close: false,
 				gravity: "bottom", // `top` or `bottom`
