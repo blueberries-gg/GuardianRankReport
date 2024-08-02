@@ -8,8 +8,9 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 
 <Layout title="Guardian Rank Report">
 	<script>
-		import { GetPlayerRelevantInformation } from "../stores/destinyPlayerData";
-
+		import { GetPlayerRelevantInformation, CurrentPlayerProfile } from "../stores/destinyPlayerData";
+		import html2canvas from "html2canvas";
+		let playerInfoProimise: Promise<boolean>;
 		window.addEventListener("DOMContentLoaded", async () => {
 			const url = new URL(window.location.href);
 			const params = new URLSearchParams(url.search);
@@ -17,12 +18,41 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			const membershipTypeName = "type";
 			const bungieNetMembershipId = params.get(bungieNetMembershipIdName);
 			const membershipType = params.get(membershipTypeName);
-			GetPlayerRelevantInformation(bungieNetMembershipId!, parseInt(membershipType!));
+			playerInfoProimise = GetPlayerRelevantInformation(bungieNetMembershipId!,parseInt(membershipType!));
 		});
+		const button = document.querySelector("[data-screenshot-button]")!;
+
+		async function download(event: Event) {
+			if (playerInfoProimise == undefined || button.innerHTML == "...") return;
+
+			button.innerHTML = "...";
+			await playerInfoProimise;
+
+			const baseCanvas = await html2canvas(document.querySelector("#main-content")!, {allowTaint: true, backgroundColor: "#1a1c1d", useCORS: true, windowWidth: 1080, logging: false});
+			const canvas = document.createElement("canvas");
+			const canvasctx = canvas.getContext("2d")!;
+			canvas.width = baseCanvas.width;
+			canvas.height = baseCanvas.height;
+			canvasctx.drawImage(baseCanvas, 0, 0);
+			canvasctx.globalAlpha = 0.5;
+			canvasctx.drawImage((document.getElementById("logo") as HTMLImageElement)!, 3, canvas.height - 64);
+
+			const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+			const imageDownloadElement = document.createElement("a");
+			const UserInfo = CurrentPlayerProfile.get().info.UserCard;
+			imageDownloadElement.setAttribute("download",`${UserInfo.bungieGlobalDisplayName}#${("000" + UserInfo.bungieGlobalDisplayNameCode).slice(-4)}.png`);
+			imageDownloadElement.setAttribute("href", image);
+			imageDownloadElement.click();
+			button.innerHTML = "Share";
+		}
+		button.addEventListener("click", (event) => download(event));
+
 	</script>
 	<div class="content">
+		<button style="margin-left: auto;" data-screenshot-button>Share</button>
+	</div>
+	<div class="content" id="main-content">
 		<PlayerBadge />
-		<div>
 			<div
 				style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; display: flex; flex-flow: row wrap; gap: 10px;">
 				<div class="activityGroup">
@@ -57,6 +87,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			</div>
 		</div>
 	</div>
+</div>
 </Layout>
 
 <style is:global>

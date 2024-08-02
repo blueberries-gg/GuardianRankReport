@@ -1,22 +1,22 @@
 import { DestinyActivity } from "../enums/DestinyActivities";
-import WarlordsRuin from "../../resources/images/loot/WarlordsRuin.jpg";
-import TheShatteredThrone from "../../resources/images/loot/TheShatteredThrone.jpg";
+import CrotasEnd from "../../resources/images/loot/CrotasEnd.jpg";
+import DeepStoneCrypt from "../../resources/images/loot/DeepStoneCrypt.jpg";
+import Duality from "../../resources/images/loot/Duality.jpg";
+import GardenOfSalvation from "../../resources/images/loot/GardenOfSalvation.jpg";
+import GhostsOfTheDeep from "../../resources/images/loot/GhostsOfTheDeep.jpg";
+import GraspOfAvarice from "../../resources/images/loot/GraspOfAvarice.jpg";
+import KingsFall from "../../resources/images/loot/KingsFall.jpg";
+import LastWish from "../../resources/images/loot/LastWish.png";
+import lootPlaceholder from "../../resources/images/lootPlaceholder.png";
 import PitOfHeresy from "../../resources/images/loot/PitOfHeresy.jpg";
 import Prophecy from "../../resources/images/loot/Prophecy.jpg";
-import GraspOfAvarice from "../../resources/images/loot/GraspOfAvarice.jpg";
-import Duality from "../../resources/images/loot/Duality.jpg";
+import RootOfNightmares from "../../resources/images/loot/RootOfNightmares.jpg";
+import SalvationsEdge from "../../resources/images/loot/SalvationsEdge.jpg";
 import SpireOfTheWatcher from "../../resources/images/loot/SpireOfTheWatcher.jpg";
-import GhostsOfTheDeep from "../../resources/images/loot/GhostsOfTheDeep.jpg";
-import LastWish from "../../resources/images/loot/LastWish.png";
-import GardenOfSalvation from "../../resources/images/loot/GardenOfSalvation.jpg";
-import DeepStoneCrypt from "../../resources/images/loot/DeepStoneCrypt.jpg";
+import TheShatteredThrone from "../../resources/images/loot/TheShatteredThrone.jpg";
 import VaultOfGlass from "../../resources/images/loot/VaultOfGlass.jpg";
 import VowOfTheDisciple from "../../resources/images/loot/VowOfTheDisciple.jpg";
-import KingsFall from "../../resources/images/loot/KingsFall.jpg";
-import RootOfNightmares from "../../resources/images/loot/RootOfNightmares.jpg";
-import CrotasEnd from "../../resources/images/loot/CrotasEnd.jpg";
-import SalvationsEdge from "../../resources/images/loot/SalvationsEdge.jpg";
-import lootPlaceholder from "../../resources/images/lootPlaceholder.png";
+import WarlordsRuin from "../../resources/images/loot/WarlordsRuin.jpg";
 
 
 export const DestinyActivityDetails: {

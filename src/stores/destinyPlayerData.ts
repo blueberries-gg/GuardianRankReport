@@ -339,7 +339,7 @@ export const GetPlayerRelevantInformation = async (destinyMembershipId: bigint |
 
 	const playerCompletions = await GetPlayerCharactersCompletions(AllCharacters, destinyMembershipId, membershipType, ProfileRecords!, CharacterRecords!);
 	CurrentPlayerProfile.setKey("activities", playerCompletions);
-	return playerCompletions;
+	return true;
 };
 
 export const GetDestinyInventoryItemDefinition = async (hashIdentifier: number) => {
