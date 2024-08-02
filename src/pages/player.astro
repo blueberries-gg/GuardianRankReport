@@ -39,6 +39,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			canvasctx.globalAlpha = 0.5;
 			canvasctx.drawImage((document.getElementById("logo") as HTMLImageElement)!, 3, canvas.height - 64);
 
+			//const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
 			const image = canvas.toDataURL('image/png');
 			const item = new ClipboardItem({
 				'image/png': (async () => {
@@ -46,12 +47,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				return await response.blob()
 				})(),
 			});
-			navigator.clipboard.write([item]);
-
-				(async () => {
-			const response = await fetch(image)
-			return await response.blob()
-			})(),
+			await navigator.clipboard.write([item]);
 
 			Toastify({
 				text: "Copied to Clipboard!",
