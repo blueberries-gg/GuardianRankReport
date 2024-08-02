@@ -59,7 +59,15 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			try {
 				const blob = await getBlobFromCanvas(canvas);
 				// Write the data to the clipboard
-				await navigator.share({ [blob.type]: blob });
+				const data = {
+					files: [
+					new File([blob], 'file.png', {
+						type: blob.type,
+					}),
+					]
+				};
+  
+				await navigator.share(data);
 				Toastify({
 				text: "Copied to Clipboard!",
 				duration: 3000,
