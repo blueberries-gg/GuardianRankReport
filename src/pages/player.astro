@@ -38,7 +38,6 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		});
 		}
 
-
 		button.addEventListener("click", async (event) => {
 			if (playerInfoPromise == undefined || button.innerHTML == "...") return;
 
@@ -57,7 +56,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				}).showToast();
 				return;
 			}
-			
+
 			Toastify({
 				text: "Generating image, screen may strech",
 				duration: 3000,
@@ -75,14 +74,13 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				await playerInfoPromise;
 			}
 
-
-
 			let cards = document.getElementsByClassName("activityGroupCard");
 			for (let card of cards) {
 				(card as HTMLElement).style.minWidth = "535px"
 			}
-			const baseCanvas = await html2canvas(document.querySelector("#main-content")!, {allowTaint: true, backgroundColor: "#1a1c1d", useCORS: true, windowWidth: 1080, width:1080, logging: false, scale: 1,
-			});
+
+			let htmlCanvas = document.getElementById("shareCanvas") as HTMLCanvasElement;
+			const baseCanvas = await html2canvas(document.querySelector("#main-content")!, {allowTaint: true, backgroundColor: "#1a1c1d", useCORS: true, windowWidth: 1080, width:1080, logging: false, scale: 0.9, x: 0, y:0, scrollX: 0, scrollY: 0});
 			for (let card of cards) {
 				(card as HTMLElement).style.minWidth = ""
 			}
@@ -95,18 +93,22 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 			canvasctx.drawImage((document.getElementById("logo") as HTMLImageElement)!, 3, canvas.height - 64);
 
 			try {
-				
+				const fileName = `${CurrentPlayerProfile.get().info.UserCard.bungieGlobalDisplayName}#${("000" + CurrentPlayerProfile.get().info.UserCard.bungieGlobalDisplayNameCode).slice(-4)}.png`;
 				const blob = await getBlobFromCanvas(canvas);
 				// Write the data to the clipboard
 				const data = {
 					files: [
-					new File([blob], `${CurrentPlayerProfile.get().info.UserCard.bungieGlobalDisplayName}#${("000" + CurrentPlayerProfile.get().info.UserCard.bungieGlobalDisplayNameCode).slice(-4)}.png`, {
+					new File([blob], fileName, {
 						type: blob.type,
 					}),
 					]
 				};
-				if (!navigator.canShare) {
+				if (navigator.canShare && navigator.canShare(data)) {
+					await navigator.share(data);
+				}
+				else {
 					const data = [new ClipboardItem({ [blob.type]: blob })];
+					try {
 					// Write the data to the clipboard
 					await navigator.clipboard.write(data);
 					Toastify({
@@ -121,10 +123,16 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 							"border-radius": "40px"
 						},
 					}).showToast();
-					button.innerHTML = "Share";
-				}
-				else {
-					await navigator.share(data);
+					}
+					catch {
+						const image = canvas.toDataURL("image/png");//.replace("image/png", "image/octet-stream");
+						const imageDownloadElement = document.createElement("a");
+						//const UserInfo = CurrentPlayerProfile.get().info.UserCard;
+						//imageDownloadElement.setAttribute("download", fileName);
+						imageDownloadElement.setAttribute("href", image);
+						imageDownloadElement.setAttribute("target", "_blank");
+						imageDownloadElement.click();
+					}
 				}
 			} catch (error) {
 				Toastify({
@@ -140,6 +148,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 				},
 			}).showToast();
 			}
+			button.innerHTML = "Share";
 		}
 		);
 
@@ -184,6 +193,9 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		</div>
 	</div>
 </div>
+<canvas style="display: none;" id="shareCanvas">
+
+</canvas>
 </Layout>
 
 <style is:global>
