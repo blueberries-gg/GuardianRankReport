@@ -6,7 +6,7 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://nznaza.github.io',
+  site: 'https://naza.nz',
   base: 'GuardianRankReport',
   trailingSlash: 'never',
   integrations: [solidJs({
