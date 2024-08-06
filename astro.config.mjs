@@ -6,8 +6,8 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://naza.nz',
-  base: '/',
+  site: 'https://guardianrank.naza.nz',
+  base: '',
   trailingSlash: 'never',
   integrations: [solidJs({
     devtools: true
