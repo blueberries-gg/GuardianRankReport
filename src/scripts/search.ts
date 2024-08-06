@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
 			const params = new URLSearchParams();
 			params.set("id", users[0].bungieNetMembershipId);
 			params.set("type", users[0].membershipType.toString());
-			navigate(`${import.meta.env.BASE_URL}/player?${params}`);
+			navigate(`${import.meta.env.BASE_URL}player?${params}`);
 		} else {
 			if (listUsernames?.hasChildNodes()) listUsernames.replaceChildren();
 			users.forEach(function (item) {
@@ -41,7 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
 				params.set("id", item.bungieNetMembershipId);
 				params.set("type", item.membershipType.toString());
 
-				option.text = `${import.meta.env.BASE_URL}/player?${params}`;
+				option.text = `${import.meta.env.BASE_URL}player?${params}`;
 				option.value = item.name;
 				option.label = item.name;
 				listUsernames?.appendChild(option);
