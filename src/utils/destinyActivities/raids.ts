@@ -14,8 +14,8 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 		},
 		Type: ActivityType.Raid,
 		PresentationNode: 238107129,
-		SealCompleteImage: "/common/destiny2_content/icons/34af91f1cfc2358ca3c813e8a8a0bb5a.png",
-		SealIncompleteImage: "/common/destiny2_content/icons/392fff0b6391ac1a8acf12ebf8189da1.png",
+		SealCompleteImage: "/common/destiny2_content/icons/67b88e8ebdb0f879584aefb86546b03e.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/3aa7d29d579752dfa69ba96dac132d3b.png",
 		TopLevel: true,
 		SealHash: 865076293,
 		SealObjectives: [
