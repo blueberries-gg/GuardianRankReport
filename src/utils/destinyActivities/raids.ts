@@ -58,7 +58,7 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 
 	GardenOfSalvation: {
 		Modes: {
-			Normal: [1042180643, 2497200493, 3458480158, 3845997235, 2659723068],
+			Normal: [1042180643, 2497200493, 3458480158, 3845997235, 2659723068,3823237780],
 		},
 		Type: ActivityType.Raid,
 		TopLevel: true,
