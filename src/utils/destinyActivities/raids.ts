@@ -219,7 +219,7 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 
 	RootOfNightmares: {
 		Modes: {
-			Normal: [2381413764],
+			Normal: [2381413764, 1191701339/* Missing??? Thannks Tom*/],
 			Master: [2918919505],
 		},
 		Type: ActivityType.Raid,
