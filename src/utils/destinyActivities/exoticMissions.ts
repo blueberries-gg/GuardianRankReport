@@ -120,6 +120,16 @@ export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExotic
 		SoloFlawlessHash: 1626830599,
 		SoloHash: 748425411,
 	},
+	Encore: {
+		Modes: {
+			Normal: [1550266704, 3542111805, 3542111804, 3542111807],
+			Legend: [655052177, 2362862867, 2741939455, 2362862866, 2362862865]
+		},
+		Type: ActivityType.ExoticMission,
+		TopLevel: true,
+		Active: true,
+		Free: true
+	}
 };
 
 export const ExoticMissionExoticDrops: ExoticCollectible[] = [
@@ -187,6 +197,14 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 		hasCatalyst: false,
 		sourceActivity: DestinyExoticMission[DestinyExoticMission.Starcrossed] as StringsKeysOf<typeof DestinyExoticMission>,
 		exoticWeapon: ExoticWeapon[ExoticWeapon.WishKeeper] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHashes: [2176629195,3866803860],
+		itemHash: 3698448090,
+		icon: "/common/destiny2_content/icons/80cc90861aa83c63de2273457a6c9345.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.Encore] as StringsKeysOf<typeof DestinyExoticMission>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.ChoirOfOne] as StringsKeysOf<typeof ExoticWeapon>
 	},
 
 ]

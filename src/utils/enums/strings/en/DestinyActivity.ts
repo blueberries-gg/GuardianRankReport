@@ -81,6 +81,7 @@ export const ExoticMissionsEn: { [key in keyof typeof DestinyExoticMission]: str
 	TheWhisper: "The Whisper",
 	VoxObscura: "Vox Obscura",
 	ZeroHour: "Zero Hour",
+	Encore: "Encore"
 };
 
 export const DestinyActivityString: { [key in keyof typeof DestinyActivity]: string } = {

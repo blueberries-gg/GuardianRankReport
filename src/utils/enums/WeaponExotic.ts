@@ -26,4 +26,5 @@ export enum ExoticWeapon {
     RevisionZero = DestinyExoticMission.SeraphsShield,
     Vexcalibur = DestinyExoticMission.Avalon,
     WishKeeper = DestinyExoticMission.Starcrossed,
+    ChoirOfOne = DestinyExoticMission.Encore,
 }

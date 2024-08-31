@@ -42,6 +42,7 @@ export enum DestinyExoticMission {
 	Starcrossed,
 	Excision,
 	DualDestiny,
+	Encore,
 }
 
 export enum DestinyGrandMasterNightFall {

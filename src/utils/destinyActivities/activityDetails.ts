@@ -22,7 +22,7 @@ import WarlordsRuin from "../../resources/images/loot/WarlordsRuin.jpg";
 export const DestinyActivityDetails: {
 	[key in keyof typeof DestinyActivity]: { description: string[]; image: string; imageWidth: number; imageHeight: number; link: string };
 } = {
-	AGardenWorld: {
+    AGardenWorld: {
         description: [
             "Help Osiris cut back an out-of-control Vex Mind.",
         ],
@@ -31,7 +31,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	BattlegroundBehemoth: {
+    BattlegroundBehemoth: {
         description: [
             "Empress Caiatl has deployed a tank fortress to Nessus and opened an invitation to survivors of the Red Legion to vie for a seat on her War Council. Vanquish the Cabal and prove yourself in glorious combat against her Chosen.",
         ],
@@ -40,7 +40,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	BattlegroundFoothold: {
+    BattlegroundFoothold: {
         description: [
             "In an act of vengeance for the destruction of their homeworld, the Cabal have struck out against a Hive nest dug deep into the Cosmodrome. Use this opportunity to hit the Cabal hard and show them that humanity will not back down.",
         ],
@@ -49,7 +49,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	BattlegroundHailstone: {
+    BattlegroundHailstone: {
         description: [
             "In a bid to earn Empress Caiatl's favor, a Cabal force has descended on Europa to scour the icy moon for relics of the Golden Age including the secrets of the Exo contained in the Deep Stone Crypt. Travel to Europa and put a stop to this operation.",
         ],
@@ -58,7 +58,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	BattlegroundOracle: {
+    BattlegroundOracle: {
         description: [
             "A group of former Red Legion Psions are communing with Vex prediction engines deep within Nessus. They seek to gain tactical insights by analyzing simulations of future events against their own psychic foresight. Eliminate this threat before they can deliver their intelligence to Empress Caiatl.",
         ],
@@ -67,7 +67,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	BirthplaceOfTheVile: {
+    BirthplaceOfTheVile: {
         description: [
             "Aided by the Witness, the Scorn have gained the power to break into the Throne World through areas the Light cannot touch. Beat them back.",
         ],
@@ -76,7 +76,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	Broodhold: {
+    Broodhold: {
         description: [
             "Eradicate a Hive infestation seething in the depths of the Tangled Shore.",
         ],
@@ -85,7 +85,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	DefiantBattlegroundCosmodrome: {
+    DefiantBattlegroundCosmodrome: {
         description: [
             "Rescue captives from a Shadow Legion Pyramid outpost in the Cosmodrome.",
         ],
@@ -94,7 +94,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	DefiantBattlegroundEDZ: {
+    DefiantBattlegroundEDZ: {
         description: [
             "Rescue captives from a Shadow Legion Pyramid outpost in the EDZ.",
         ],
@@ -103,7 +103,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	DefiantBattlegroundOrbitalPrison: {
+    DefiantBattlegroundOrbitalPrison: {
         description: [
             "Rescue captives from a Shadow Legion prison in near-Earth orbit.",
         ],
@@ -112,7 +112,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	ExodusCrash: {
+    ExodusCrash: {
         description: [
             "Purge the Vex and Fallen, who have overrun the Exodus Black crash site.",
         ],
@@ -121,7 +121,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	FallenSABER: {
+    FallenSABER: {
         description: [
             "Enter Rasputin's bunker in the Cosmodrome and discover the source of the security breach.",
         ],
@@ -130,7 +130,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	HeistBattlegroundEuropa: {
+    HeistBattlegroundEuropa: {
         description: [
             "Brave the cold winds of Europa to reclaim fragments of a hidden submind's code from the depths of Bray Exoscience.",
         ],
@@ -139,7 +139,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	HeistBattlegroundMars: {
+    HeistBattlegroundMars: {
         description: [
             "Blitz the BrayTech Futurescape campus on Mars to repossess fragments of the submind Charlemagne's code.",
         ],
@@ -148,7 +148,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	HeistBattlegroundMoon: {
+    HeistBattlegroundMoon: {
         description: [
             "Infiltrate the Seraph bunker tucked under the dust of the Moon to reclaim fragments of the submind Malahayati's code.",
         ],
@@ -157,7 +157,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	HyperNetCurrent: {
+    HyperNetCurrent: {
         description: [
             "Stop the Shadow Legion from bringing down Neomuna's defenses.",
         ],
@@ -166,7 +166,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	LakeOfShadows: {
+    LakeOfShadows: {
         description: [
             //"Stem the tide of Taken flowing into the European Dead Zone from beneath the waves.",
             "Purge the European Dead Zone of the Taken and Shadow Legion forces threatening to overtake the Reservoir and poison the precious water it holds.",
@@ -176,7 +176,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	LegendPsiOpsBattlegroundCosmodrome: {
+    LegendPsiOpsBattlegroundCosmodrome: {
         description: [
             "The Lucent Hive are using stolen Guardian Light for some wicked purpose. Breach their stronghold and uncover their plot.",
         ],
@@ -185,7 +185,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	Liminality: {
+    Liminality: {
         description: [
             "Carve your way through a treacherous mountain pass teeming with Lucent Hive and Taken.",
         ],
@@ -194,7 +194,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	ProvingGrounds: {
+    ProvingGrounds: {
         description: [
             "Defeat Caiatl's Chosen aboard the Land Tank, Halphas Electus, on Nessus.",
         ],
@@ -203,7 +203,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	PsiOpsBattlegroundEDZ: {
+    PsiOpsBattlegroundEDZ: {
         description: [
             "Guardians have recently gone missing in the EDZ. Investigate their disappearances and hunt down the Lucent Hive responsible.",
         ],
@@ -212,7 +212,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	PsiOpsBattlegroundMoon: {
+    PsiOpsBattlegroundMoon: {
         description: [
             "The Lucent Hive have opened a portal between Savathûn's throne world and the Scarlet Keep. Break up the portal ritual, and prevent a full-scale invasion of Earth.",
         ],
@@ -221,7 +221,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	SavathunsSong: {
+    SavathunsSong: {
         description: [
             "Delve deep into the Hive-infested Arcology in search of missing fireteams.",
         ],
@@ -230,7 +230,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	StrangeTerrain: {
+    StrangeTerrain: {
         description: [
             "Defeat Nokris before he completes his ritual.",
         ],
@@ -239,7 +239,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheArmsDealer: {
+    TheArmsDealer: {
         description: [
             //"Shut down the operations of an ironmonger providing weapons to the Red Legion.",
             "Stifle the legacy of a notorious ironmonger providing weapons to the Shadow Legion.",
@@ -249,7 +249,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheCorrupted: {
+    TheCorrupted: {
         description: [
             "Hunt down one of Queen Mara's most trusted advisors and free her from Taken possession.",
         ],
@@ -258,7 +258,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheDevilsLair: {
+    TheDevilsLair: {
         description: [
             "Enter into the Devils' Lair and weaken the Fallen presence within the Cosmodrome.",
         ],
@@ -267,7 +267,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheDisgraced: {
+    TheDisgraced: {
         description: [
             "Defeat the shamed Hive Wizard Navôta in the Cosmodrome.",
         ],
@@ -276,7 +276,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheFesteringCore: {
+    TheFesteringCore: {
         description: [
             "Descend into the heart of Io's Pyramidion and root out a burgeoning infestation.",
         ],
@@ -285,7 +285,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheGlassway: {
+    TheGlassway: {
         description: [
             "Prevent ancient and powerful Vex from escaping the Glassway on Europa.",
         ],
@@ -294,7 +294,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheHollowedLair: {
+    TheHollowedLair: {
         description: [
             "The Fanatic has returned. Take him down and finish the job you started.",
         ],
@@ -303,7 +303,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheInsightTerminus: {
+    TheInsightTerminus: {
         description: [
             "Break into the ancient Vex installation.",
         ],
@@ -312,7 +312,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheInvertedSpire: {
+    TheInvertedSpire: {
         description: [
             "End the Red Legion expedition that's ripped open the planet's surface.",
         ],
@@ -321,7 +321,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheLightblade: {
+    TheLightblade: {
         description: [
             "Recover an artifact from a monument to Oryx, located deep in the swamps of Savathûn's throne world.",
         ],
@@ -330,7 +330,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheScarletKeep: {
+    TheScarletKeep: {
         description: [
             "Investigate the recently erected Scarlet Keep and discover its dark purpose.",
         ],
@@ -339,7 +339,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TreeOfProbabilities: {
+    TreeOfProbabilities: {
         description: [
             "Contain a rampant army of Red Legion within the Infinite Forest.",
         ],
@@ -348,7 +348,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	WardenOfNothing: {
+    WardenOfNothing: {
         description: [
             "Help the Drifter restore order at the Prison of Elders.",
         ],
@@ -357,7 +357,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheWhisper: {
+    TheWhisper: {
         description: [
             "Investigate a Taken anomaly deep beneath the surface of Io.",
         ],
@@ -366,7 +366,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	ZeroHour: {
+    ZeroHour: {
         description: [
             "Race against the clock to stop House Salvation agents from stealing a dangerous weapon from the Old Tower.",
         ],
@@ -375,7 +375,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	Harbinger: {
+    Harbinger: {
         description: [
             "Embody the will of the Traveler and hunt those who would serve the Darkness.",
         ],
@@ -384,7 +384,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	Presage: {
+    Presage: {
         description: [
             "Jump coordinates matching an errant distress signal.",
         ],
@@ -393,7 +393,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	VoxObscura: {
+    VoxObscura: {
         description: [
             "Despite the Vanguard's recent victories, a dissident Psion faction continues to release Darkness-inspired propaganda. Return to Mars and learn how far the conspiracy goes.",
         ],
@@ -402,7 +402,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	SeraphsShield: {
+    SeraphsShield: {
         description: [
             "Infiltrate Seraph Station in Earth's orbit to plant a virus in the Warsat network.",
         ],
@@ -411,7 +411,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	Avalon: {
+    Avalon: {
         description: [
             "Investigate a Vex network node in the EDZ that has been overwritten with a single word: AVALON.",
         ],
@@ -420,7 +420,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	Starcrossed: {
+    Starcrossed: {
         description: [
             "Within the Black Garden, the Sol Divisive toil endlessly, systematically shutting down potential futures. With Riven's blessing, it's time to shut them down.",
         ],
@@ -429,7 +429,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	Excision: {
+    Excision: {
         description: [
             "Join your fellow Guardians to unmake the Witness once and for all.",
         ],
@@ -438,7 +438,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	DualDestiny: {
+    DualDestiny: {
         description: [
             "Two Guardians enter the depths of the Pale Heart in search of power…",
         ],
@@ -447,7 +447,14 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	TheShatteredThrone: {
+    Encore: {
+        description: ["Explore the strange structures at the core of Nessus, converted by the Vex at the Conductor's command."],
+        image: "https://www.bungie.net/img/destiny_content/pgcr/encore.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
+        link: ""
+    },
+    TheShatteredThrone: {
         description: [
             "Strike back at the curse that plagues the Dreaming City.",
         ],
@@ -456,7 +463,7 @@ export const DestinyActivityDetails: {
         imageHeight: TheShatteredThrone.height,
         link: "https://www.blueberries.gg/weapons/shattered-throne-loot-table/"
     },
-	PitOfHeresy: {
+    PitOfHeresy: {
         description: [
             "Deep beneath Sorrow's Harbor, the Hive keep their darkest secrets.",
         ],
@@ -465,7 +472,7 @@ export const DestinyActivityDetails: {
         imageHeight: PitOfHeresy.height,
         link: "https://www.blueberries.gg/weapons/pit-of-heresy-loot-table/"
     },
-	Prophecy: {
+    Prophecy: {
         description: [
             "Enter the realm of the Nine and ask the question: \"What is the nature of the Darkness?\"",
         ],
@@ -474,7 +481,7 @@ export const DestinyActivityDetails: {
         imageHeight: Prophecy.height,
         link: "https://www.blueberries.gg/weapons/destiny-2-prophecy-loot/"
     },
-	GraspOfAvarice: {
+    GraspOfAvarice: {
         description: [
             "A cautionary tale for adventurers willing to trade their humanity for riches.",
         ],
@@ -483,7 +490,7 @@ export const DestinyActivityDetails: {
         imageHeight: GraspOfAvarice.height,
         link: "https://www.blueberries.gg/weapons/grasp-of-avarice-loot/"
     },
-	Duality: {
+    Duality: {
         description: [
             "Dive into the depths of the exiled emperor's mind in search of dark secrets.",
         ],
@@ -492,7 +499,7 @@ export const DestinyActivityDetails: {
         imageHeight: Duality.height,
         link: "https://www.blueberries.gg/weapons/duality-loot-table/"
     },
-	SpireOfTheWatcher: {
+    SpireOfTheWatcher: {
         description: [
             "Machinations run wild in this dust-ridden ruin. Bring them to heel.",
         ],
@@ -501,7 +508,7 @@ export const DestinyActivityDetails: {
         imageHeight: SpireOfTheWatcher.height,
         link: "https://www.blueberries.gg/weapons/spire-of-the-watcher-loot/"
     },
-	GhostsOfTheDeep: {
+    GhostsOfTheDeep: {
         description: [
             "Drown in the deep, or rise from it.",
         ],
@@ -510,7 +517,7 @@ export const DestinyActivityDetails: {
         imageHeight: GhostsOfTheDeep.height,
         link: "https://www.blueberries.gg/weapons/ghosts-of-the-deep-loot/"
     },
-	WarlordsRuin: {
+    WarlordsRuin: {
         description: [
             "Nestled deep in the mountains of the EDZ, Scorn lay claim to a Dark Age castle containing dangerous relics, and a blighted vengeance festers in the dirt.",
         ],
@@ -519,7 +526,7 @@ export const DestinyActivityDetails: {
         imageHeight: WarlordsRuin.height,
         link: "https://www.blueberries.gg/weapons/warlords-ruin-loot-table/"
     },
-	Leviathan: {
+    Leviathan: {
         description: [
             "\"Grow fat from strength.\"",
         ],
@@ -528,7 +535,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	LeviathanEaterOfWorlds: {
+    LeviathanEaterOfWorlds: {
         description: [
             "\"In the belly of the beast.\"",
         ],
@@ -537,7 +544,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	LeviathanSpireOfStars: {
+    LeviathanSpireOfStars: {
         description: [
             "On the wings of Icarus.",
         ],
@@ -546,7 +553,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	LastWish: {
+    LastWish: {
         description: [
             "\"The opportunity of a lifetime.\"",
         ],
@@ -555,7 +562,7 @@ export const DestinyActivityDetails: {
         imageHeight: LastWish.height,
         link: "https://www.blueberries.gg/weapons/destiny-2-last-wish-loot-table/"
     },
-	ScourgeOfThePast: {
+    ScourgeOfThePast: {
         description: [
             "Beneath the ruins of the Last City lies the Black Armory's most precious vault, now under siege by Siviks and his crew, the Kell's Scourge.",
         ],
@@ -564,7 +571,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	CrownOfSorrow: {
+    CrownOfSorrow: {
         description: [
             "Grow [weak] with [pride].",
         ],
@@ -573,7 +580,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	GardenOfSalvation: {
+    GardenOfSalvation: {
         description: [
             "\"The Garden calls out to you.\"",
         ],
@@ -582,7 +589,7 @@ export const DestinyActivityDetails: {
         imageHeight: GardenOfSalvation.height,
         link: "https://www.blueberries.gg/weapons/garden-of-salvation-loot-table/"
     },
-	DeepStoneCrypt: {
+    DeepStoneCrypt: {
         description: [
             "The chains of legacy must be broken.",
         ],
@@ -591,7 +598,7 @@ export const DestinyActivityDetails: {
         imageHeight: DeepStoneCrypt.height,
         link: "https://www.blueberries.gg/weapons/destiny-2-deep-stone-crypt-loot/"
     },
-	VaultOfGlass: {
+    VaultOfGlass: {
         description: [
             "Beneath Venus, evil stirs…",
         ],
@@ -600,7 +607,7 @@ export const DestinyActivityDetails: {
         imageHeight: VaultOfGlass.height,
         link: "https://www.blueberries.gg/weapons/vault-of-glass-loot/"
     },
-	VowOfTheDisciple: {
+    VowOfTheDisciple: {
         description: [
             "The disciple beckons…",
         ],
@@ -609,7 +616,7 @@ export const DestinyActivityDetails: {
         imageHeight: VowOfTheDisciple.height,
         link: "https://www.blueberries.gg/weapons/vow-of-the-disciple-loot-table/"
     },
-	KingsFall: {
+    KingsFall: {
         description: [
             "Long live the King…",
         ],
@@ -618,7 +625,7 @@ export const DestinyActivityDetails: {
         imageHeight: KingsFall.height,
         link: "https://www.blueberries.gg/weapons/kings-fall-loot-table/"
     },
-	RootOfNightmares: {
+    RootOfNightmares: {
         description: [
             "A sinister threat has taken root.",
         ],
@@ -627,7 +634,7 @@ export const DestinyActivityDetails: {
         imageHeight: RootOfNightmares.height,
         link: "https://www.blueberries.gg/weapons/root-of-nightmares-loot-table/"
     },
-	CrotasEnd: {
+    CrotasEnd: {
         description: [
             "He waits in the dark below.",
         ],
@@ -636,7 +643,7 @@ export const DestinyActivityDetails: {
         imageHeight: CrotasEnd.height,
         link: "https://www.blueberries.gg/weapons/crotas-end-loot/"
     },
-	Pantheon: {
+    Pantheon: {
         description: [
             "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
@@ -645,7 +652,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	PhanteonAtraksSovereign: {
+    PhanteonAtraksSovereign: {
         description: [
             "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
@@ -654,7 +661,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	PhanteonOryxExalted: {
+    PhanteonOryxExalted: {
         description: [
             "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
@@ -663,7 +670,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	PhanteonRhulkIndomitable: {
+    PhanteonRhulkIndomitable: {
         description: [
             "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
@@ -672,7 +679,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	PhanteonNezarecSublime: {
+    PhanteonNezarecSublime: {
         description: [
             "Face off against a series of raid bosses enhanced with the Witness's power.",
         ],
@@ -681,7 +688,7 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-	SalvationsEdge: {
+    SalvationsEdge: {
         description: [
             "Free the Light.",
         ],
@@ -690,14 +697,15 @@ export const DestinyActivityDetails: {
         imageHeight: SalvationsEdge.height,
         link: "https://www.blueberries.gg/weapons/salvations-edge-loot-table/"
     },
-	None: {
+    None: {
         description: [
             "Empty template",
             "Nothing should show by default, unless client messes with javascript",
-       ],
+        ],
         image: lootPlaceholder.src,
         imageWidth: 1280,
         imageHeight: 720,
         link: ""
     },
+
 };

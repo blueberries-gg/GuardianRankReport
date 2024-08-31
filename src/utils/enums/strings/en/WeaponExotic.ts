@@ -24,5 +24,6 @@ export const ExoticWeaponString: { [key in keyof typeof ExoticWeapon]: string } 
     DeadMessenger: "Dead Messenger",
     RevisionZero: "Revision Zero",
     Vexcalibur: "Vexcalibur",
-    WishKeeper: "Wish-Keeper"
+    WishKeeper: "Wish-Keeper",
+    ChoirOfOne: "Choir of One"
 }
