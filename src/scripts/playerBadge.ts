@@ -55,13 +55,13 @@ function GetAbsoluteRank(profile: PlayerActivityDetails): AbsoluteRank {
 		currentRank = AbsoluteRank.Copper;
 	}
 
-    document.getElementById(`rank-${AbsoluteRank[currentRank].toLowerCase()}`)!.className = "";
+    document.getElementById(`rank-${AbsoluteRank[currentRank].toLowerCase()}`)!.className = "currentRank";
 
     if (currentRank > 0)
-        document.getElementById(`rank-${AbsoluteRank[currentRank - 1].toLowerCase()}`)!.className = "previousRank";
+        document.getElementById(`rank-${AbsoluteRank[currentRank - 1].toLowerCase()}`)!.className = "";
     
     if (currentRank < AbsoluteRank.Ascendant)
-        document.getElementById(`rank-${AbsoluteRank[currentRank + 1].toLowerCase()}`)!.className = "nextRank";
+        document.getElementById(`rank-${AbsoluteRank[currentRank + 1].toLowerCase()}`)!.className = "";
 	return currentRank;
 }
 // Listen to changes in the store, and show/hide the dialog accordingly

@@ -1,9 +1,10 @@
 <div id="playerBadge" class="playerBadge" data-html2canvas-ignore>
-    <table style="margin-inline: auto;">
+    <table style="margin-inline: auto;" class="rankFade">
         <!-- <tr>
           <th>Rank Assigned</th>
           <th>Condition</th>
         </tr> -->
+        <tbody>
         <tr id="rank-copper" class="hideRank">
           <td>Copper</td>
           <td style="text-align: center;">At least 1 raid OR 1 dungeon done</td>
@@ -36,6 +37,7 @@
           <td>Ascendant</td>
           <td style="text-align: center;">All flawless raids and dungeons done</td>
         </tr>
+      </tbody>
       </table>
       
       
@@ -56,15 +58,25 @@
     display: none;
   }
 
-  .previousRank {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  .currentRank {
+    font-weight: bold;
   }
 
-  .nextRank {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-
-  }
+  .rankFade {
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 30%,
+        rgba(0, 0, 0, 1) 70%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 30%,
+        rgba(0, 0, 0, 1) 70%,
+        rgba(0, 0, 0, 0) 100%
+    );
+}
 
 </style>
