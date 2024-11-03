@@ -31,42 +31,42 @@ export default function () {
 
 	return (
 		<div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100vw; overflow-y: auto; max-height: 85vh;">
-			<div
-				//id="modalImage"
-				style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
-				<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
-					<a
-						//class="image-zoom"
-						style="margin:auto"
-						href={DestinyActivityDetails[$requestedActivity()].link}
-						//data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
-						//data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
-						target="_blank">
-						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
-					</a>
+			<div style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
+				<Show when={DestinyActivityDetails[$requestedActivity()].link.length == 0}>
+					<div id="modalImage">
+						<a
+							class="image-zoom"
+							style="margin:auto"
+							href={DestinyActivityDetails[$requestedActivity()].image}
+							data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
+							data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
+							target="_blank">
+							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+						</a>
+					</div>
 				</Show>
 
-				<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
-					<a
-						//class="image-zoom"
-						style="margin:auto"
-						href="https://www.blueberries.gg/weapons/nightfall-weapons/"
-						//data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
-						//data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
-						target="_blank">
-						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
-					</a>
-				</Show>
-				{/* <a
-					class="image-zoom"
-					style="margin:auto"
-					href={DestinyActivityDetails[$requestedActivity()].image}
-					data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
-					data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
-					target="_blank">
-					<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
-				</a> */}
+				<div>
+					<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
+						<a
+							style="margin:auto"
+							href={DestinyActivityDetails[$requestedActivity()].link}
+							target="_blank">
+							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+						</a>
+					</Show>
+
+					<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
+						<a
+							style="margin:auto"
+							href="https://www.blueberries.gg/weapons/nightfall-weapons/"
+							target="_blank">
+							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+						</a>
+					</Show>
+				</div>
 			</div>
+
 			<div style="width: 55vw; flex-grow: 6;">
 				<div style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; font-size: 16pt;">
 					<div style="background: #ffffff1A; padding: 10px;">
