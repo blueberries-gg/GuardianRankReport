@@ -32,7 +32,7 @@ export default function () {
 	return (
 		<div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100vw; overflow-y: auto; max-height: 85vh;">
 			<div style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
-				<Show when={DestinyActivityDetails[$requestedActivity()].link.length == 0}>
+				<Show when={DestinyActivityDetails[$requestedActivity()].link.length == 0 && mapActivities[$requestedActivity()].Type != ActivityType.ScoredNightFall}>
 					<div id="modalImage">
 						<a
 							class="image-zoom"
@@ -45,26 +45,20 @@ export default function () {
 						</a>
 					</div>
 				</Show>
-
-				<div>
-					<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
-						<a
-							style="margin:auto"
-							href={DestinyActivityDetails[$requestedActivity()].link}
-							target="_blank">
+				<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
+					<div>
+						<a style="margin:auto" href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank">
 							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
 						</a>
-					</Show>
-
-					<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
-						<a
-							style="margin:auto"
-							href="https://www.blueberries.gg/weapons/nightfall-weapons/"
-							target="_blank">
+					</div>
+				</Show>
+				<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
+					<div>
+						<a style="margin:auto" href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">
 							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
 						</a>
-					</Show>
-				</div>
+					</div>
+				</Show>
 			</div>
 
 			<div style="width: 55vw; flex-grow: 6;">
