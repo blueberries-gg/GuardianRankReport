@@ -17,6 +17,7 @@ import TheShatteredThrone from "../../resources/images/loot/TheShatteredThrone.j
 import VaultOfGlass from "../../resources/images/loot/VaultOfGlass.jpg";
 import VowOfTheDisciple from "../../resources/images/loot/VowOfTheDisciple.jpg";
 import WarlordsRuin from "../../resources/images/loot/WarlordsRuin.jpg";
+import VespersHost from "../../resources/images/loot/VespersHost.jpeg";
 
 
 export const DestinyActivityDetails: {
@@ -525,6 +526,15 @@ export const DestinyActivityDetails: {
         imageWidth: WarlordsRuin.width,
         imageHeight: WarlordsRuin.height,
         link: "https://www.blueberries.gg/weapons/warlords-ruin-loot-table/"
+    },
+    VespersHost: {
+        description: [
+    	    "Defy the algorithm. Cut through its web.",
+        ],
+        image: VespersHost.src,
+        imageWidth: VespersHost.width,
+        imageHeight: VespersHost.height,
+        link: "https://www.blueberries.gg/weapons/vespers-host-loot-table/"
     },
     Leviathan: {
         description: [

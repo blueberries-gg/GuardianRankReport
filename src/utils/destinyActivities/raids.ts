@@ -9,7 +9,7 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 	CrotasEnd: {
 		Modes: {
 			Contest: [156253568] /*Superior Swordplay*/,
-			Normal: [4179289725],
+			Normal: [4179289725, 1566480315],
 			Master: [1507509200],
 		},
 		Type: ActivityType.Raid,
@@ -239,7 +239,7 @@ export const RaidsBaseDefinitions: { [key in keyof typeof DestinyRaid]: IActivit
 
 	SalvationsEdge: {
 		Modes: {
-			Normal: [1541433876],
+			Normal: [1541433876, 940375169],
 			Contest: [2192826039],
 			Master: [4129614942],
 		},

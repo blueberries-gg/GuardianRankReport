@@ -288,7 +288,7 @@ export const ScoredNightFallsBaseDefinitions: { [key in keyof typeof DestinyGran
 
 	TheInvertedSpire: {
 		Modes: {
-			GrandMaster: [2599001919, 281497220],
+			GrandMaster: [2599001919, 281497220, 419647232],
 		},
 		Type: ActivityType.ScoredNightFall,
 		TopLevel: true,

@@ -18,6 +18,7 @@ export enum ExoticWeapon {
     HierarchyOfNeeds = DestinyDungeon.SpireOfTheWatcher,
     TheNavigator = DestinyDungeon.GhostsOfTheDeep,
     BuriedBloodline = DestinyDungeon.WarlordsRuin,
+    IceBreaker = DestinyDungeon.VespersHost,
 
     WhisperOfTheWorm = DestinyExoticMission.TheWhisper,
     OutbreakPerfected = DestinyExoticMission.ZeroHour,

@@ -9,6 +9,7 @@ export const DungeonsEn: { [key in keyof typeof DestinyDungeon]: string } = {
 	SpireOfTheWatcher: "Spire Of The Watcher",
 	TheShatteredThrone: "The Shattered Throne",
 	WarlordsRuin: "Warlord's Ruin",
+	VespersHost: "Vesper's Host",
 };
 export const RaidsEn: { [key in keyof typeof DestinyRaid]: string } = {
 	CrotasEnd: "Crota's End",

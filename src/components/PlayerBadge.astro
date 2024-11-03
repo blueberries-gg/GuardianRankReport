@@ -150,19 +150,22 @@ import { Icon } from "astro-icon/components";
 <style>
 	.playerBadge {
 		background-repeat: no-repeat;
-		height: 96px;
+		min-height: 96px;
 		margin: auto;
 		font-family: "Neue Haas Grotesk Text Pro", "Helvetica", "Arial", sans-serif;
 		user-select: none;
 		-webkit-user-select: none;
 		aspect-ratio: 474/96;
 		min-width: 0;
+		flex-grow: 1;
+		background-size: contain;
+		max-width: 640px;
 	}
 	.playerBadgeContent {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		padding: 6px 3px 6px 87px;
+		padding: 1.2% 3px 1.2% 18%;
 	}
 	.playerBadgeUsername {
 		min-width: 0;

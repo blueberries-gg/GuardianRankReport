@@ -29,6 +29,7 @@ export enum DestinyDungeon {
 	SpireOfTheWatcher,
 	GhostsOfTheDeep,
 	WarlordsRuin,
+	VespersHost,
 }
 
 export enum DestinyExoticMission {

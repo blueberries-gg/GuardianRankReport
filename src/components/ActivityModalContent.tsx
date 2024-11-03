@@ -96,12 +96,12 @@ export default function () {
 
 						<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
 							<br></br>
-							<a href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">Check more info!</a>
+							<a href={DestinyActivityDetails[$requestedActivity()].link} target="_blank" class="linkStyle">Check more info!</a>
 						</Show>
 
 						<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
 							<br></br>
-							<a href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank">Check more info!</a>
+							<a href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank" class="linkStyle">Check more info!</a>
 						</Show>
 					</div>
 				</div>

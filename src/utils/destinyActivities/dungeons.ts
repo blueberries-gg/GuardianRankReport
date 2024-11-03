@@ -135,6 +135,26 @@ export const DungeonsBaseDefinitions: { [key in keyof typeof DestinyDungeon]: IA
 		Active: true,
 		Free: false,
 	},
+	VespersHost: {
+		Modes: {
+			Contest: [3492566689, /*Contest mode*/
+				1915770060, /*also Contest mode?*/],
+			Normal: [300092127],
+			Master: [],
+		},
+		Type: ActivityType.Dungeon,
+		TopLevel: true,
+		PresentationNode: 2723381343,
+		SealCompleteImage: "/common/destiny2_content/icons/cc4ad92bcf822f43058293867b42ee0b.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/096c7920e21dc8bc243ad974fd5d87b9.png",
+		SealHash: 4062961115,
+		SealObjectives: [2944960648, 591040974, 1305974707, 3957675217, 1481046148, 2156976337, 720193913, 4009562, 3278909320, 1296550017],
+		SoloHash: 591040974,
+		SoloFlawlessHash: 1553599507,
+		FlawlessHash: 1141690897,
+		Active: true,
+		Free: false,
+	},
 };
 
 export const DungeonExoticDrops: ExoticCollectible[] = [
@@ -193,5 +213,13 @@ export const DungeonExoticDrops: ExoticCollectible[] = [
 		hasCatalyst: true,
 		sourceActivity: DestinyDungeon[DestinyDungeon.WarlordsRuin] as StringsKeysOf<typeof DestinyDungeon>,
 		exoticWeapon: ExoticWeapon[ExoticWeapon.BuriedBloodline] as StringsKeysOf<typeof ExoticWeapon>,
+	},
+	{
+		collectibleHashes: [1643809765],
+		itemHash: 1111334348,
+		icon: "/common/destiny2_content/icons/7ec0e114e6e3c4db695006ce992b07dd.jpg",
+		hasCatalyst: true,
+		sourceActivity: DestinyDungeon[DestinyDungeon.VespersHost] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.IceBreaker] as StringsKeysOf<typeof ExoticWeapon>,
 	},
 ];

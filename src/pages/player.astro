@@ -104,7 +104,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 					}),
 					]
 				};
-				if (navigator.canShare && navigator.canShare(data)) {
+				if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && navigator.canShare && navigator.canShare(data)) {
 					await navigator.share(data);
 				}
 				else {
@@ -153,7 +153,7 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		);
 
 	</script>
-	<div class="content" data-html2canvas-ignore>
+	<div class="buttonShareContainer" data-html2canvas-ignore>
 		<button style="margin-left: auto;" data-screenshot-button class="btn-share">
 			<span class="btn-text">Share</span
 			>
@@ -228,6 +228,15 @@ import { SolidDungeons, SolidGrandMasters, SolidExoticMissions, SolidRaids } fro
 		width: 100%;
 		unicode-bidi: isolate;
 	}
+
+	.buttonShareContainer {
+		bottom: 10px;
+		position: fixed;
+		bottom: 10;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1000;
+	} 
 
 	.btn-share {
 		--btn-color: #275efe;

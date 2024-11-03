@@ -4,35 +4,35 @@
           <th>Rank Assigned</th>
           <th>Condition</th>
         </tr> -->
-        <tr>
+        <tr id="rank-copper" class="hideRank">
           <td>Copper</td>
           <td style="text-align: center;">At least 1 raid OR 1 dungeon done</td>
         </tr>
-        <tr>
+        <tr id="rank-bronze" class="hideRank">
           <td>Bronze</td>
           <td style="text-align: center;">At least 1 raid AND 1 dungeon done</td>
         </tr>
-        <tr>
+        <tr id="rank-silver" class="hideRank">
           <td>Silver</td>
           <td style="text-align: center;">More than 3 raids and 2 dungeons done</td>
         </tr>
-        <tr>
+        <tr id="rank-gold" class="hideRank">
           <td>Gold</td>
           <td style="text-align: center;">All raids OR all dungeons done</td>
         </tr>
-        <tr>
+        <tr id="rank-diamond" class="hideRank">
           <td>Diamond</td>
           <td style="text-align: center;">All raids AND all dungeons done</td>
         </tr>
-        <tr>
+        <tr id="rank-platinum" class="hideRank">
           <td>Platinum</td>
           <td style="text-align: center;">All raids OR dungeons seals acquired</td>
         </tr>
-        <tr>
+        <tr id="rank-adept" class="hideRank">
           <td>Adept</td>
           <td style="text-align: center;">All raids AND dungeons seals acquired</td>
         </tr>
-        <tr>
+        <tr id="rank-ascendant" class="hideRank">
           <td>Ascendant</td>
           <td style="text-align: center;">All flawless raids and dungeons done</td>
         </tr>
@@ -51,4 +51,19 @@
 		-webkit-user-select: none;
 		min-width: 0;
 	}
+
+  .hideRank {
+    display: none;
+  }
+
+  .previousRank {
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  }
+
+  .nextRank {
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  }
+
 </style>
