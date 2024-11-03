@@ -34,7 +34,30 @@ export default function () {
 			<div
 				id="modalImage"
 				style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
-				<a
+				<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
+					<a
+						class="image-zoom"
+						style="margin:auto"
+						href={DestinyActivityDetails[$requestedActivity()].link}
+						data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
+						data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
+						target="_blank">
+						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+					</a>
+				</Show>
+
+				<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
+					<a
+						class="image-zoom"
+						style="margin:auto"
+						href="https://www.blueberries.gg/weapons/nightfall-weapons/"
+						data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
+						data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
+						target="_blank">
+						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+					</a>
+				</Show>
+				{/* <a
 					class="image-zoom"
 					style="margin:auto"
 					href={DestinyActivityDetails[$requestedActivity()].image}
@@ -42,7 +65,7 @@ export default function () {
 					data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
 					target="_blank">
 					<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
-				</a>
+				</a> */}
 			</div>
 			<div style="width: 55vw; flex-grow: 6;">
 				<div style="color:#ffffffbf; font-family: 'Neue Haas Grotesk Text Pro','Helvetica', 'Arial', sans-serif; font-size: 16pt;">
@@ -96,12 +119,16 @@ export default function () {
 
 						<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
 							<br></br>
-							<a href={DestinyActivityDetails[$requestedActivity()].link} target="_blank" class="linkStyle">Check more info!</a>
+							<a href={DestinyActivityDetails[$requestedActivity()].link} target="_blank" class="linkStyle">
+								Check more info!
+							</a>
 						</Show>
 
 						<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
 							<br></br>
-							<a href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank" class="linkStyle">Check more info!</a>
+							<a href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank" class="linkStyle">
+								Check more info!
+							</a>
 						</Show>
 					</div>
 				</div>
