@@ -66,7 +66,7 @@ export const ScoredNightFallsEn: { [key in keyof typeof DestinyGrandMasterNightF
 	TheHollowedLair: "The Hollowed Lair",
 	TheInsightTerminus: "The Insight Terminus",
 	TheInvertedSpire: "The Inverted Spire",
-	TheLightblade: "The Inverted Spire",
+	TheLightblade: "The Lightblade",
 	TheScarletKeep: "The Scarlet Keep",
 	TreeOfProbabilities: "Tree of Probabilities",
 	WardenOfNothing: "Warden of Nothing",
