@@ -9,13 +9,12 @@ export const mapCurrentActiveActivities = new Map<string, IActivity>(Object.entr
 export const ActiveActivities = Array.from(mapCurrentActiveActivities.keys());//.sort((x)=> DestinyActivity[x]);
 
 export const ActiveScoredNightFalls = [
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheLightblade] as keyof typeof DestinyGrandMasterNightFall,
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.ProvingGrounds] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.HyperNetCurrent] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.HeistBattlegroundMars] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.LegendPsiOpsBattlegroundCosmodrome] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.LakeOfShadows] as keyof typeof DestinyGrandMasterNightFall,
 	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.HeistBattlegroundMoon] as keyof typeof DestinyGrandMasterNightFall,
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.BirthplaceOfTheVile] as keyof typeof DestinyGrandMasterNightFall,
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheArmsDealer] as keyof typeof DestinyGrandMasterNightFall,
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheInvertedSpire] as keyof typeof DestinyGrandMasterNightFall,
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.Liminality] as keyof typeof DestinyGrandMasterNightFall,
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheCorrupted] as keyof typeof DestinyGrandMasterNightFall,
-	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.BattlegroundBehemoth] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheScarletKeep] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheInsightTerminus] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.WardenOfNothing] as keyof typeof DestinyGrandMasterNightFall,
 ];

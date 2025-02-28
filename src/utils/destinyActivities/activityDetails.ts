@@ -529,7 +529,7 @@ export const DestinyActivityDetails: {
     },
     VespersHost: {
         description: [
-    	    "Defy the algorithm. Cut through its web.",
+            "Defy the algorithm. Cut through its web.",
         ],
         image: VespersHost.src,
         imageWidth: VespersHost.width,
@@ -707,6 +707,27 @@ export const DestinyActivityDetails: {
         imageHeight: SalvationsEdge.height,
         link: "https://www.blueberries.gg/weapons/salvations-edge-loot-table/"
     },
+    KellsFall: {
+        description: ["Enter Fikrul's Revenant Fortress in the Tangled Shore, where dark reflections make it difficult to discern illusion from reality."],
+        image: "https://www.bungie.net/img/destiny_content/pgcr/fikrul_keep.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
+        link: ""
+    },
+    Derealize: {
+        description: ["Investigate the source of a mysterious Taken power—and claim it before anyone else can."],
+        image: "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/placeholder.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
+        link: ""
+    },
+    SunderedDoctrine: {
+        description: ["Power lies in the deepest vault."],
+        image: "https://www.bungie.net/img/destiny_content/pgcr/dungeon_delver.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
+        link: "https://www.blueberries.gg/weapons/sundered-doctrine-loot-table/"
+    },
     None: {
         description: [
             "Empty template",
@@ -717,5 +738,4 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
-
 };

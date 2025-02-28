@@ -10,6 +10,7 @@ export const DungeonsEn: { [key in keyof typeof DestinyDungeon]: string } = {
 	TheShatteredThrone: "The Shattered Throne",
 	WarlordsRuin: "Warlord's Ruin",
 	VespersHost: "Vesper's Host",
+	SunderedDoctrine: "Sundered Doctrine"
 };
 export const RaidsEn: { [key in keyof typeof DestinyRaid]: string } = {
 	CrotasEnd: "Crota's End",
@@ -82,7 +83,9 @@ export const ExoticMissionsEn: { [key in keyof typeof DestinyExoticMission]: str
 	TheWhisper: "The Whisper",
 	VoxObscura: "Vox Obscura",
 	ZeroHour: "Zero Hour",
-	Encore: "Encore"
+	Encore: "Encore",
+	KellsFall: "Kell's Fall",
+	Derealize: "Derealize"
 };
 
 export const DestinyActivityString: { [key in keyof typeof DestinyActivity]: string } = {
