@@ -241,4 +241,12 @@ export const DungeonExoticDrops: ExoticCollectible[] = [
 		sourceActivity: DestinyDungeon[DestinyDungeon.VespersHost] as StringsKeysOf<typeof DestinyDungeon>,
 		exoticWeapon: ExoticWeapon[ExoticWeapon.IceBreaker] as StringsKeysOf<typeof ExoticWeapon>,
 	},
+	{
+		collectibleHashes: [1585644854],
+		itemHash: 331231237,
+		icon: "/common/destiny2_content/icons/22f0588bf5ce837fc5f4f89e86693c1f.jpg",
+		hasCatalyst: true,
+		sourceActivity: DestinyDungeon[DestinyDungeon.SunderedDoctrine] as StringsKeysOf<typeof DestinyDungeon>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.FinalitysAuger] as StringsKeysOf<typeof ExoticWeapon>
+	},
 ];

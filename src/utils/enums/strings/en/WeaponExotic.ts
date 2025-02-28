@@ -29,4 +29,5 @@ export const ExoticWeaponString: { [key in keyof typeof ExoticWeapon]: string } 
     IceBreaker: "Ice Breaker",
     SlayersFang: "Slayer's Fang",
     BarrowDyad: "Barrow-Dyad",
+    FinalitysAuger: "Finality's Auger"
 }

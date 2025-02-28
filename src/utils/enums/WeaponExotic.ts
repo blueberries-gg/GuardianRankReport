@@ -10,7 +10,7 @@ export enum ExoticWeapon {
     ConditionalFinality = DestinyRaid.RootOfNightmares,
     Necrochasm = DestinyRaid.CrotasEnd,
     Euphony = DestinyRaid.SalvationsEdge,
-    
+
     WishEnder = DestinyDungeon.TheShatteredThrone,
     Xenophage = DestinyDungeon.PitOfHeresy,
     Gjallarhorn = DestinyDungeon.GraspOfAvarice,
@@ -19,6 +19,7 @@ export enum ExoticWeapon {
     TheNavigator = DestinyDungeon.GhostsOfTheDeep,
     BuriedBloodline = DestinyDungeon.WarlordsRuin,
     IceBreaker = DestinyDungeon.VespersHost,
+    FinalitysAuger = DestinyDungeon.SunderedDoctrine,
 
     WhisperOfTheWorm = DestinyExoticMission.TheWhisper,
     OutbreakPerfected = DestinyExoticMission.ZeroHour,
@@ -28,6 +29,6 @@ export enum ExoticWeapon {
     Vexcalibur = DestinyExoticMission.Avalon,
     WishKeeper = DestinyExoticMission.Starcrossed,
     ChoirOfOne = DestinyExoticMission.Encore,
-    SlayersFang =DestinyExoticMission.KellsFall,
+    SlayersFang = DestinyExoticMission.KellsFall,
     BarrowDyad = DestinyExoticMission.Derealize,
 }

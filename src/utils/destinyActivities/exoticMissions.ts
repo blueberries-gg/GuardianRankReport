@@ -1,6 +1,6 @@
 import { StringsKeysOf } from "../common";
 import { ActivityType } from "../enums/ActivityType";
-import { DestinyExoticMission } from "../enums/DestinyActivities";
+import { DestinyActivity, DestinyDungeon, DestinyExoticMission } from "../enums/DestinyActivities";
 import { ExoticWeapon } from "../enums/WeaponExotic";
 import { IActivity } from "./activities";
 import { ExoticCollectible } from "./exoticDrops";
@@ -236,11 +236,10 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 	},
 	{
 		collectibleHashes: [622567281, 2756203682],
-		itemHash: 622567281,
+		itemHash: 1481594633,
 		icon: "/common/destiny2_content/icons/938bc6eb5c5c772e2f3d066380179d36.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyExoticMission[DestinyExoticMission.Derealize] as StringsKeysOf<typeof DestinyExoticMission>,
 		exoticWeapon: ExoticWeapon[ExoticWeapon.BarrowDyad] as StringsKeysOf<typeof ExoticWeapon>
 	},
-
 ]
