@@ -129,13 +129,33 @@ export const ExoticMissionsBaseDefinitions: { [key in keyof typeof DestinyExotic
 		TopLevel: true,
 		Active: true,
 		Free: true
+	},
+	KellsFall: {
+		Modes: {
+			Normal: [3212612420, 3296787721, 715393254, 1583447699],
+			Legend: [133833536, 1044034163, 264074906, 3447248293]
+		},
+		Type: ActivityType.ExoticMission,
+		TopLevel: true,
+		Active: true,
+		Free: true
+	},
+	Derealize: {
+		Modes: {
+			Normal: [648675065],
+			Legend: []
+		},
+		Type: ActivityType.ExoticMission,
+		TopLevel: true,
+		Active: true,
+		Free: true
 	}
 };
 
 export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 
 	{
-		collectibleHashes: [1763610692,545218287,3875807583],
+		collectibleHashes: [1763610692, 545218287, 3875807583],
 		itemHash: 1891561814,
 		icon: "/common/destiny2_content/icons/e47c31826843f6fd0aa863eac6fd093e.jpg",
 		hasCatalyst: false,
@@ -143,7 +163,7 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.WhisperOfTheWorm] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHashes: [360254771,449896716,2500286745],
+		collectibleHashes: [360254771, 449896716, 2500286745],
 		itemHash: 3824673936,
 		icon: "/common/destiny2_content/icons/a1b6a5f3e52878610397249986300b23.jpg",
 		hasCatalyst: false,
@@ -159,7 +179,7 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 		weaponExotic: WeaponExotics[WeaponExotics.Hawkmoon] as StringsKeysOf<typeof WeaponExotics>
 	},*/
 	{
-		collectibleHashes: [3324472233,2143216566,3723101298],
+		collectibleHashes: [3324472233, 2143216566, 3723101298],
 		itemHash: 2188764214,
 		icon: "/common/destiny2_content/icons/cfc2c246cfd404d749fffbfe3ae3dfec.jpg",
 		hasCatalyst: false,
@@ -167,7 +187,7 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.DeadMansTale] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHashes: [360554695,2097871936,4028619088],
+		collectibleHashes: [360554695, 2097871936, 4028619088],
 		itemHash: 46125926,
 		icon: "/common/destiny2_content/icons/0824b34bb37e0bb7c32b91adf6dcb79e.jpg",
 		hasCatalyst: false,
@@ -175,7 +195,7 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.DeadMessenger] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHashes: [1161231112,760708739],
+		collectibleHashes: [1161231112, 760708739],
 		itemHash: 1473821207,
 		icon: "/common/destiny2_content/icons/040a104defcc7011b570886e3ec3c73f.jpg",
 		hasCatalyst: false,
@@ -191,7 +211,7 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.Vexcalibur] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHashes: [3826612761,221021254],
+		collectibleHashes: [3826612761, 221021254],
 		itemHash: 2910326942,
 		icon: "/common/destiny2_content/icons/6b47d872840188bc913d6307fa537c3c.jpg",
 		hasCatalyst: false,
@@ -199,12 +219,28 @@ export const ExoticMissionExoticDrops: ExoticCollectible[] = [
 		exoticWeapon: ExoticWeapon[ExoticWeapon.WishKeeper] as StringsKeysOf<typeof ExoticWeapon>
 	},
 	{
-		collectibleHashes: [2176629195,3866803860],
+		collectibleHashes: [2176629195, 3866803860],
 		itemHash: 3698448090,
 		icon: "/common/destiny2_content/icons/80cc90861aa83c63de2273457a6c9345.jpg",
 		hasCatalyst: false,
 		sourceActivity: DestinyExoticMission[DestinyExoticMission.Encore] as StringsKeysOf<typeof DestinyExoticMission>,
 		exoticWeapon: ExoticWeapon[ExoticWeapon.ChoirOfOne] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHashes: [2454134342, 2690809637],
+		itemHash: 1047932517,
+		icon: "/common/destiny2_content/icons/45ba5d9ee8e425e1f9d50cb561fe4982.jpg",
+		hasCatalyst: true,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.KellsFall] as StringsKeysOf<typeof DestinyExoticMission>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.SlayersFang] as StringsKeysOf<typeof ExoticWeapon>
+	},
+	{
+		collectibleHashes: [622567281, 2756203682],
+		itemHash: 622567281,
+		icon: "/common/destiny2_content/icons/938bc6eb5c5c772e2f3d066380179d36.jpg",
+		hasCatalyst: false,
+		sourceActivity: DestinyExoticMission[DestinyExoticMission.Derealize] as StringsKeysOf<typeof DestinyExoticMission>,
+		exoticWeapon: ExoticWeapon[ExoticWeapon.BarrowDyad] as StringsKeysOf<typeof ExoticWeapon>
 	},
 
 ]

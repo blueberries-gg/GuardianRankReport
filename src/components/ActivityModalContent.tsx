@@ -49,7 +49,7 @@ export default function () {
 					</a>
 				</Show>
 				<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
-					<a class="image-zoom"  style="margin:auto; position: absolute" href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">
+					<a class="image-zoom" style="margin:auto; position: absolute" href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">
 						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
 					</a>
 				</Show>

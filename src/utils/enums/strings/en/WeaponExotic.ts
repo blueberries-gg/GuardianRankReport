@@ -25,5 +25,8 @@ export const ExoticWeaponString: { [key in keyof typeof ExoticWeapon]: string } 
     RevisionZero: "Revision Zero",
     Vexcalibur: "Vexcalibur",
     WishKeeper: "Wish-Keeper",
-    ChoirOfOne: "Choir of One"
+    ChoirOfOne: "Choir of One",
+    IceBreaker: "Ice Breaker",
+    SlayersFang: "Slayer's Fang",
+    BarrowDyad: "Barrow-Dyad",
 }

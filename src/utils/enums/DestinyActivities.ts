@@ -30,6 +30,7 @@ export enum DestinyDungeon {
 	GhostsOfTheDeep,
 	WarlordsRuin,
 	VespersHost,
+	SunderedDoctrine,
 }
 
 export enum DestinyExoticMission {
@@ -44,6 +45,8 @@ export enum DestinyExoticMission {
 	Excision,
 	DualDestiny,
 	Encore,
+	KellsFall,
+	Derealize
 }
 
 export enum DestinyGrandMasterNightFall {

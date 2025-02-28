@@ -139,7 +139,7 @@ export const DungeonsBaseDefinitions: { [key in keyof typeof DestinyDungeon]: IA
 		Modes: {
 			Contest: [3492566689, /*Contest mode*/
 				1915770060, /*also Contest mode?*/],
-			Normal: [300092127],
+			Normal: [300092127, 4293676253],
 			Master: [],
 		},
 		Type: ActivityType.Dungeon,
@@ -155,6 +155,25 @@ export const DungeonsBaseDefinitions: { [key in keyof typeof DestinyDungeon]: IA
 		Active: true,
 		Free: false,
 	},
+	SunderedDoctrine: {
+		Modes: {
+			Contest: [247869137],
+			Normal: [3834447244],
+			Master: [3521648250],
+		},
+		Type: ActivityType.Dungeon,
+		TopLevel: true,
+		PresentationNode: 2105055614,
+		SealCompleteImage: "/common/destiny2_content/icons/7b17c4a3f9f9d3631fe67e8415d0bb4c.png",
+		SealIncompleteImage: "/common/destiny2_content/icons/b38e0aefa27a8c0b83191fcbaee26c32.png",
+		SealHash: 2963918856,
+		SealObjectives: [1052417987, 2236876295, 1573451354, 376561218, 472168131, 1756133644, 2909873358, 1425479229, 538596919, 1809824416],
+		SoloHash: 2236876295,
+		SoloFlawlessHash: 28261116,
+		FlawlessHash: 2384937912,
+		Active: true,
+		Free: false,
+	}
 };
 
 export const DungeonExoticDrops: ExoticCollectible[] = [
