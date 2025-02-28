@@ -18,7 +18,7 @@ import VaultOfGlass from "../../resources/images/loot/VaultOfGlass.jpg";
 import VowOfTheDisciple from "../../resources/images/loot/VowOfTheDisciple.jpg";
 import WarlordsRuin from "../../resources/images/loot/WarlordsRuin.jpg";
 import VespersHost from "../../resources/images/loot/VespersHost.jpeg";
-
+import SunderedDoctrine from "../../resources/images/loot/SunderedDoctrine.jpeg";
 
 export const DestinyActivityDetails: {
 	[key in keyof typeof DestinyActivity]: { description: string[]; image: string; imageWidth: number; imageHeight: number; link: string };
@@ -723,9 +723,9 @@ export const DestinyActivityDetails: {
     },
     SunderedDoctrine: {
         description: ["Power lies in the deepest vault."],
-        image: "https://www.bungie.net/img/destiny_content/pgcr/dungeon_delver.jpg",
-        imageWidth: 1280,
-        imageHeight: 720,
+        image: SunderedDoctrine.src,
+        imageWidth: SunderedDoctrine.width,
+        imageHeight: SunderedDoctrine.height,
         link: "https://www.blueberries.gg/weapons/sundered-doctrine-loot-table/"
     },
     None: {
