@@ -288,6 +288,19 @@ import { Image } from "astro:assets";
 				max-width: 1280px;
 				margin: 0 auto;
 			}
+
+			/*
+			--minImgWidth: 480px;
+			--imgRatio: 45;
+			--min-text-modal-width: calc((100 * var(--minImgWidth)) / var(--imgRatio));
+			*/
+
+			@media only screen and (min-width: 1066.6666666667px) {
+				.modalTextPart {
+					max-height: calc(85vh - 92px); overflow: auto;
+				}			
+			}
+
 			@media only screen and (max-width: 474px) {
 				.header-container {
 					width: 9 5%;

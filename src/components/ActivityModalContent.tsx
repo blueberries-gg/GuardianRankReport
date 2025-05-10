@@ -31,28 +31,30 @@ export default function () {
 
 	return (
 		<div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100vw; overflow-y: auto; max-height: 85vh;">
-			<div style="width: 45vw; min-width: 474px; max-width: 1080px; flex-grow: 4; display:flex; position: sticky; top: 0; max-height: 85vh;">
-				<div id="modalImage">
-					<a
-						class="image-zoom"
-						style="margin:auto"
-						href={DestinyActivityDetails[$requestedActivity()].image}
-						data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
-						data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
-						target="_blank">
-						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
-					</a>
+			<div style="width: 45vw; min-width: 480px; max-width: 1080px; flex-grow: 4;  max-height: 85vh; display: flex">
+				<div style="display:flex; position: sticky; top: 0; margin: auto;">
+					<div id="modalImage">
+						<a
+							class="image-zoom"
+							style="margin:auto"
+							href={DestinyActivityDetails[$requestedActivity()].image}
+							data-pswp-width={DestinyActivityDetails[$requestedActivity()].imageWidth}
+							data-pswp-height={DestinyActivityDetails[$requestedActivity()].imageHeight}
+							target="_blank">
+							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+						</a>
+					</div>
+					<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
+						<a class="image-zoom" style="margin:auto; position: absolute" href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank">
+							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+						</a>
+					</Show>
+					<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
+						<a class="image-zoom" style="margin:auto; position: absolute" href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">
+							<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
+						</a>
+					</Show>
 				</div>
-				<Show when={mapActivities[$requestedActivity()].Type == ActivityType.ScoredNightFall}>
-					<a class="image-zoom" style="margin:auto; position: absolute" href="https://www.blueberries.gg/weapons/nightfall-weapons/" target="_blank">
-						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
-					</a>
-				</Show>
-				<Show when={DestinyActivityDetails[$requestedActivity()].link.length > 0}>
-					<a class="image-zoom" style="margin:auto; position: absolute" href={DestinyActivityDetails[$requestedActivity()].link} target="_blank">
-						<img src={DestinyActivityDetails[$requestedActivity()].image} style="width: 100%;" />
-					</a>
-				</Show>
 			</div>
 
 			<div style="width: 55vw; flex-grow: 6;">
@@ -66,7 +68,7 @@ export default function () {
 							</div>
 						</div>
 					</div>
-					<div style="padding: 15px;">
+					<div class="modalTextPart" style="padding: 15px;">
 						<For each={DestinyActivityDetails[$requestedActivity()].description}>{(item) => <p>{item}</p>}</For>
 						<Show
 							when={

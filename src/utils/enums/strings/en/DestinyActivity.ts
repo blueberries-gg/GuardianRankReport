@@ -28,7 +28,7 @@ export const RaidsEn: { [key in keyof typeof DestinyRaid]: string } = {
 	PhanteonOryxExalted: "The Pantheon: Oryx Exalted",
 	PhanteonRhulkIndomitable: "The Inverted Spire",
 	RootOfNightmares: "Root of Nightmares",
-	SalvationsEdge: "Salvations Edge",
+	SalvationsEdge: "Salvation's Edge",
 	ScourgeOfThePast: "Scourge of the Past",
 	VaultOfGlass: "Vault of Glass",
 	VowOfTheDisciple: "Vow of the Disciple",
