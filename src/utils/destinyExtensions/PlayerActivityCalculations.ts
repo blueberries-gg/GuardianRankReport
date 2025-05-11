@@ -34,7 +34,7 @@ export function GetPlayerActivitiesMasterCompletions(activities: IPlayerActivity
 	let complete = -1;
 	if (initialized) {
 		complete = 0;
-		activities.map((x) => complete += GetPlayerActivityMasterCompletions(x));
+		activities.map((x) => complete += GetPlayerActivityModesCompletions(x, [ModeType[ModeType.Master]] as StringsKeysOf<typeof ModeType>[]));
 	}
 	return complete;
 }
@@ -86,34 +86,26 @@ export function GetPlayerActivityCompletions(activity: IPlayerActivity) {
 	return complete;
 }
 
-export function GetPlayerActivityNormalCompletions(activity: IPlayerActivity) {
+export function GetPlayerActivityModesCompletions(activity: IPlayerActivity, ModeTypes: StringsKeysOf<typeof ModeType>[]) {
 	const initialized = activity.dataInitialized;
 	let complete = -1;
 	if (initialized) {
 		complete = 0
-		activity.Completions.get(ModeType[ModeType.Normal] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
-
+		ModeTypes.forEach(modeTypes => {
+			activity.Completions.get(modeTypes as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
+		});
 	}
 	return complete;
 }
 
-export function GetPlayerActivityMasterCompletions(activity: IPlayerActivity) {
+export function GetPlayerActivityModesDetailedCompletions(activity: IPlayerActivity, ModeTypes: StringsKeysOf<typeof ModeType>[]) {
 	const initialized = activity.dataInitialized;
 	let complete = -1;
 	if (initialized) {
 		complete = 0
-		activity.Completions.get(ModeType[ModeType.Master] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
-	}
-	return complete;
-}
-
-export function GetPlayerActivitiesGrandMasterCompletions(activity: IPlayerActivity) {
-
-	const initialized = activity.dataInitialized;
-	let complete = -1;
-	if (initialized) {
-		complete = 0
-		activity.Completions.get(ModeType[ModeType.GrandMaster] as StringsKeysOf<typeof ModeType>)?.forEach((x) => (complete += x));
+		ModeTypes.forEach(modeTypes => {
+			complete += activity.DetailCompletions.get(modeTypes as StringsKeysOf<typeof ModeType>) ?? 0;
+		});
 	}
 	return complete;
 }

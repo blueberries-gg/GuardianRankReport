@@ -23,7 +23,9 @@ export const getMasterLike = function (activity: _IBaseActivity): number[] {
 	const legend = activity.Modes[ModeType[ModeType.Legend] as keyof typeof ModeType] || [];
 	const heroic = activity.Modes[ModeType[ModeType.Heroic] as keyof typeof ModeType] || [];
 	const grandmaster = activity.Modes[ModeType[ModeType.GrandMaster] as keyof typeof ModeType] || [];
-	return [...master, ...legend, ...heroic, ...grandmaster];
+	const eternity = activity.Modes[ModeType[ModeType.Eternity] as keyof typeof ModeType] || [];
+	const ultimatum = activity.Modes[ModeType[ModeType.Ultimatum] as keyof typeof ModeType] || [];
+	return [...master, ...legend, ...heroic, ...grandmaster,...eternity,...ultimatum];
 }
 
 // Activities as of manifest 226232.24.06.12.1730-3-bnet.55913
@@ -155,6 +157,7 @@ export interface IActivityAndMode {
 export interface IPlayerActivity {
 	Activity: StringsKeysOf<typeof DestinyActivity>;
 	Type: keyof typeof ActivityType;
+	DetailCompletions: Map<StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>, number>;
 	Completions: Map<
 		StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>,
 		Map<StringsKeysOf<typeof ModeType> | StringsKeysOf<typeof DestinyActivity>, number>

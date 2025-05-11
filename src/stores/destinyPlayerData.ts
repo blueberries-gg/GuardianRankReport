@@ -54,6 +54,7 @@ function SetPlayerActivitiesCompletionsBase(map: Map<StringsKeysOf<typeof Destin
 		map.set(k as StringsKeysOf<typeof DestinyActivity>, {
 			Activity: k as StringsKeysOf<typeof DestinyActivity>,
 			Type: ActivityType[mapActivities[k]!.Type] as keyof typeof ActivityType,
+			DetailCompletions: new Map<StringsKeysOf<typeof ModeType>, number>(),
 			Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
 			isActive: true,
 			dataInitialized: false,
@@ -64,6 +65,7 @@ function SetPlayerActivitiesCompletionsBase(map: Map<StringsKeysOf<typeof Destin
 		map.set(k, {
 			Activity: k,
 			Type: ActivityType[mapActivities[k]!.Type] as keyof typeof ActivityType,
+			DetailCompletions: new Map<StringsKeysOf<typeof ModeType>, number>(),
 			Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
 			isActive: true,
 			dataInitialized: false,
@@ -123,6 +125,7 @@ function CalculateAggregatePlayerCompletions(aggregatePlayerActivitiesCompletion
 			displayActivity = {
 				Activity: activityKey,
 				Type: ActivityType[mapActivities[activityKey]!.Type] as keyof typeof ActivityType,
+				DetailCompletions: new Map<StringsKeysOf<typeof ModeType>, number>(),
 				Completions: new Map<StringsKeysOf<typeof ModeType>, Map<StringsKeysOf<typeof ModeType>, number>>(),
 				isActive: false,
 				dataInitialized: false,
@@ -172,10 +175,12 @@ function CalculateAggregatePlayerCompletions(aggregatePlayerActivitiesCompletion
 		if (currentActivity.TopLevel) {
 			const ModeCompletionMap = displayActivity.Completions.get(activityAndMode.Mode) ?? new Map<StringsKeysOf<typeof ModeType>, number>();
 			ModeCompletionMap.set(activityAndMode.UnderlyingMode, (ModeCompletionMap.get(activityAndMode.UnderlyingMode) ?? 0) + value);
+			displayActivity.DetailCompletions.set(activityAndMode.UnderlyingMode, ModeCompletionMap.get(activityAndMode.UnderlyingMode)??  0)
 			displayActivity.Completions.set(activityAndMode.Mode, ModeCompletionMap);
 		} else {
 			const ModeCompletionMap = displayActivity.Completions.get(activityKey) ?? new Map<StringsKeysOf<typeof DestinyActivity>, number>();
 			ModeCompletionMap.set(activityAndMode.Activity, (ModeCompletionMap.get(activityAndMode.Activity) ?? 0) + value);
+			displayActivity.DetailCompletions.set(activityAndMode.UnderlyingMode, ModeCompletionMap.get(activityAndMode.UnderlyingMode)??  0)
 			displayActivity.Completions.set(activityKey, ModeCompletionMap);
 		}
 

@@ -85,6 +85,7 @@ export enum DestinyGrandMasterNightFall {
 	TheInvertedSpire,
 	TheLightblade,
 	TheScarletKeep,
+	TheSunlessCell,
 	TreeOfProbabilities,
 	WardenOfNothing,
 }

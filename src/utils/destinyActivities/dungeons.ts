@@ -29,6 +29,9 @@ export const DungeonsBaseDefinitions: { [key in keyof typeof DestinyDungeon]: IA
 		Modes: {
 			Normal: [313828469],
 			Master: [2716998124],
+			Eternity: [2961030534],
+			Explorer: [1094262727,4190119662],
+			Ultimatum: [124340010]
 		},
 		Type: ActivityType.Dungeon,
 		TopLevel: true,
@@ -75,6 +78,9 @@ export const DungeonsBaseDefinitions: { [key in keyof typeof DestinyDungeon]: IA
 	Prophecy: {
 		Modes: {
 			Normal: [1077850348, 4148187374],
+			Eternity: [715153594],
+			Explorer: [3637651331,1788465402],
+			Ultimatum: [3193125350]
 		},
 		Type: ActivityType.Dungeon,
 		TopLevel: true,
@@ -89,6 +95,9 @@ export const DungeonsBaseDefinitions: { [key in keyof typeof DestinyDungeon]: IA
 		Modes: {
 			Normal: [1262462921],
 			Master: [1801496203, 2296818662],
+			Eternity: [4046934917],
+			Explorer: [1225969316,943878085],
+			Ultimatum: [3339002067]
 		},
 		Type: ActivityType.Dungeon,
 		TopLevel: true,

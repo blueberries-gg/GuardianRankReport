@@ -1,7 +1,7 @@
 import { ModeType } from "../../ModeType";
 
 export const ModeTypeString: { [key in keyof typeof ModeType]: string } = {
-	GrandMaster: "GrandMaster",
+	GrandMaster: "Grandmaster",
 	Normal: "Normal",
 	Legend: "Legend",
 	Master: "Master",
@@ -11,4 +11,7 @@ export const ModeTypeString: { [key in keyof typeof ModeType]: string } = {
 	Other: "Other",
 	Guided: "Guided Games",
 	Heroic: "Heroic",
+	Eternity: "Eternity",
+	Explorer: "Explorer",
+	Ultimatum: "Ultimatum"
 };

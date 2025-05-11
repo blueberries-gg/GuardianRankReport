@@ -340,6 +340,15 @@ export const DestinyActivityDetails: {
         imageHeight: 720,
         link: ""
     },
+    TheSunlessCell:{
+        description: [
+            "Pursue the Hive into the deep prison of the Dreadnaught.",
+        ],
+        image: "https://www.bungie.net/img/destiny_content/pgcr/raid_kings_fall.jpg",
+        imageWidth: 1280,
+        imageHeight: 720,
+        link: ""
+    },
     TreeOfProbabilities: {
         description: [
             "Contain a rampant army of Red Legion within the Infinite Forest.",

@@ -7,15 +7,86 @@ import { getMasterLike, IPlayerActivity, mapActivities } from "../utils/destinyA
 import complete from "../resources/images/complete.png";
 import missing from "../resources/images/missing.png";
 import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity";
-import { GetPlayerActivityCompletions, GetPlayerActivityNormalCompletions, GetPlayerActivityMasterCompletions, GetPlayerActivitiesGrandMasterCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions } from "../utils/destinyExtensions/PlayerActivityCalculations";
+import { GetPlayerActivityCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions, GetPlayerActivityModesCompletions, GetPlayerActivityModesDetailedCompletions, } from "../utils/destinyExtensions/PlayerActivityCalculations";
 import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
 import { ExoticCollectible, ExoticCollectibles } from "../utils/destinyActivities/exoticDrops";
 import { ExoticWeaponString } from "../utils/enums/strings/en/WeaponExotic";
 import { showModal } from "../scripts/fullScreenModal";
 import { requestedActivity } from "../stores/activityStore";
+import { ModeType } from "../utils/enums/ModeType";
+import { StringsKeysOf } from "../utils/common";
+import { ModeTypeString } from "../utils/enums/strings/en/ModeType";
 
 function ActivityCompletionsToString(complete: number, enabled: boolean) {
 	return enabled ? ((complete < 0) ? "?" : complete.toString()) : "";
+}
+
+function AllActivityCompletionsToString(props: { item: IPlayerActivity }) {
+	let normalCompletions = GetPlayerActivityModesDetailedCompletions(props.item, [ModeType[ModeType.Normal]] as StringsKeysOf<typeof ModeType>[])
+	let tooltipText = "Normal: " + normalCompletions.toString();
+	let activity = mapActivities[props.item.Activity]
+
+	Object.keys(ModeType).forEach(key => {
+		let mode = key as StringsKeysOf<typeof ModeType>
+		let completions = GetPlayerActivityModesDetailedCompletions(props.item, [mode])
+
+		if ((activity.Modes[mode] != undefined && completions > 0) && (mode != ModeType[ModeType.Normal])) {
+			tooltipText += `\n${ModeTypeString[mode]}: ` + completions.toString();
+		}
+	});
+
+	return tooltipText;
+}
+
+function AllMasterlikeActivityCompletionsToString(props: { item: IPlayerActivity }) {
+	let activity = mapActivities[props.item.Activity]
+
+	let masterCompletions = GetPlayerActivityModesDetailedCompletions(props.item, [ModeType[ModeType.Master]] as StringsKeysOf<typeof ModeType>[])
+	let tooltipText = masterCompletions > 0 ? "Master: " + masterCompletions : "";
+
+	if (activity.Modes.GrandMaster != undefined) {
+		let grandmasterCompletions = GetPlayerActivityModesDetailedCompletions(props.item, [ModeType[ModeType.GrandMaster]] as StringsKeysOf<typeof ModeType>[])
+		if (grandmasterCompletions >0)
+			{
+		tooltipText += tooltipText.length > 0 ? "\n" : "";
+		tooltipText += "Grandmaster: " + grandmasterCompletions.toString();
+	}
+	}
+
+	if (activity.Modes.Eternity != undefined) {
+		let eternityCompletions = GetPlayerActivityModesDetailedCompletions(props.item, [ModeType[ModeType.Eternity]] as StringsKeysOf<typeof ModeType>[])
+		if (eternityCompletions > 0) {
+			tooltipText += tooltipText.length > 0 ? "\n" : "";
+			tooltipText += "Eternity: " + eternityCompletions.toString();
+		}
+	}
+
+	if (activity.Modes.Ultimatum != undefined) {
+		let ultimatumCompletions = GetPlayerActivityModesDetailedCompletions(props.item, [ModeType[ModeType.Ultimatum]] as StringsKeysOf<typeof ModeType>[])
+		if (ultimatumCompletions > 0) {
+			tooltipText += tooltipText.length > 0 ? "\n" : "";
+			tooltipText += "Ultimatum: " + ultimatumCompletions.toString();
+		}
+	}
+
+	if (activity.Modes.Heroic != undefined) {
+		let heroicCompletions = GetPlayerActivityModesDetailedCompletions(props.item, [ModeType[ModeType.Heroic]] as StringsKeysOf<typeof ModeType>[])
+		if (heroicCompletions > 0) {
+			tooltipText += tooltipText.length > 0 ? "\n" : "";
+			tooltipText += "Heroic: " + heroicCompletions.toString();
+		}
+	}
+
+	if (activity.Modes.Legend != undefined) {
+		let legendCompletions = GetPlayerActivityModesDetailedCompletions(props.item, [ModeType[ModeType.Legend]] as StringsKeysOf<typeof ModeType>[])
+		if (legendCompletions > 0) {
+			tooltipText += tooltipText.length > 0 ? "\n" : "";
+			tooltipText += "Legend: " + legendCompletions.toString();
+		}
+
+	}
+
+	return tooltipText;
 }
 
 let element: Element;
@@ -73,17 +144,17 @@ function GetDisplayItemDungeon(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => { requestedActivity.set(props.item.Activity); showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
-			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
+			<td style="text-align: center;" title={AllActivityCompletionsToString(props)}>
 				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
-			<td style="text-align: center;">
-				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{ActivityCompletionsToString(GetPlayerActivityMasterCompletions(props.item), enabled)}
-				</Show>
-			</td>
+			<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} fallback={<td style="text-align: center;"></td>}>
+				<td style="text-align: center;" title={AllMasterlikeActivityCompletionsToString(props)}>
+					{ActivityCompletionsToString(GetPlayerActivityModesCompletions(props.item, [ModeType[ModeType.Master], ModeType[ModeType.GrandMaster], ModeType[ModeType.Ultimatum], ModeType[ModeType.Eternity]] as StringsKeysOf<typeof ModeType>[]), enabled)}
+				</td>
+			</Show>
 			<td>
 				<Show when={mapActivities[props.item.Activity].SoloHash !== undefined}>
 					<Show when={props.item.hasSolo == false}>
@@ -145,17 +216,17 @@ function GetDisplayItemRaid(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => { requestedActivity.set(props.item.Activity); showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
-			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
+			<td style="text-align: center;" title={AllActivityCompletionsToString(props)}>
 				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
-			<td style="text-align: center;">
-				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{ActivityCompletionsToString(GetPlayerActivityMasterCompletions(props.item), enabled)}
-				</Show>
-			</td>
+			<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} fallback={<td style="text-align: center;"></td>}>
+				<td style="text-align: center;" title={AllMasterlikeActivityCompletionsToString(props)}>
+					{ActivityCompletionsToString(GetPlayerActivityModesCompletions(props.item, [ModeType[ModeType.Master], ModeType[ModeType.GrandMaster]] as StringsKeysOf<typeof ModeType>[]), enabled)}
+				</td>
+			</Show>
 			<td>
 				<Show when={mapActivities[props.item.Activity].FlawlessHash !== undefined}>
 					<Show when={props.item.hasFlawless == false}>
@@ -198,17 +269,17 @@ function GetDisplayItemExoticMission(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => { requestedActivity.set(props.item.Activity); showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
-			<td style="text-align: center;" title={GetPlayerActivityNormalCompletions(props.item).toString()}>
+			<td style="text-align: center;" title={AllActivityCompletionsToString(props)}>
 				{ActivityCompletionsToString(totalCompletions, enabled)}
 			</td>
-			<td style="text-align: center;">
-				<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} >
-					{ActivityCompletionsToString(GetPlayerActivityMasterCompletions(props.item) + GetPlayerActivitiesGrandMasterCompletions(props.item), enabled)}
-				</Show>
-			</td>
+			<Show when={getMasterLike(mapActivities[props.item.Activity]).length > 0} fallback={<td style="text-align: center;"></td>}>
+				<td style="text-align: center;" title={AllMasterlikeActivityCompletionsToString(props)}>
+					{ActivityCompletionsToString(GetPlayerActivityModesCompletions(props.item, [ModeType[ModeType.Master], ModeType[ModeType.GrandMaster]] as StringsKeysOf<typeof ModeType>[]), enabled)}
+				</td>
+			</Show>
 			<td>
 				<Show when={mapActivities[props.item.Activity].SoloHash !== undefined}>
 					<Show when={props.item.hasSolo == false}>
@@ -248,7 +319,7 @@ function GetDisplayItemScoredNightFall(props: { item: IPlayerActivity }) {
 	const enabled = totalCompletions != 0;
 	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
-		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => {	requestedActivity.set(props.item.Activity);	showModal(); }}>
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => { requestedActivity.set(props.item.Activity); showModal(); }}>
 			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;">

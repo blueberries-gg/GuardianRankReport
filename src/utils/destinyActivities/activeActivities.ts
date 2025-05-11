@@ -17,4 +17,5 @@ export const ActiveScoredNightFalls = [
 	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheScarletKeep] as keyof typeof DestinyGrandMasterNightFall,
 	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheInsightTerminus] as keyof typeof DestinyGrandMasterNightFall,
 	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.WardenOfNothing] as keyof typeof DestinyGrandMasterNightFall,
+	DestinyGrandMasterNightFall[DestinyGrandMasterNightFall.TheSunlessCell] as keyof typeof DestinyGrandMasterNightFall,
 ];

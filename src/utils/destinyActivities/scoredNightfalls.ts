@@ -313,6 +313,14 @@ export const ScoredNightFallsBaseDefinitions: { [key in keyof typeof DestinyGran
 		Free: true,
 	},
 
+	TheSunlessCell:{
+		Modes: {
+			GrandMaster: [2438990097, 3089659738],
+		},
+		Type: ActivityType.ScoredNightFall,
+		TopLevel: true,
+		Free: true,
+	},
 	TreeOfProbabilities: {
 		Modes: {
 			GrandMaster: [2023667984, 2660931443],

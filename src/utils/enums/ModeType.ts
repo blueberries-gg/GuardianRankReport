@@ -9,4 +9,7 @@ export enum ModeType {
 	Prestige,
 	Other,
 	Guided,
+	Explorer,
+	Eternity,
+	Ultimatum
 }
