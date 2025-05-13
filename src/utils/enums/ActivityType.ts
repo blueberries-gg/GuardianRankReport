@@ -4,4 +4,5 @@ export enum ActivityType {
 	Raid,
 	ExoticMission,
 	Dungeon,
+	RiteOfTheNine
 }

@@ -2,13 +2,21 @@ import { ActivityType } from "../enums/ActivityType";
 import { ModeType } from "../enums/ModeType";
 import { IPlayerActivity } from "../destinyActivities/activities"
 import { StringsKeysOf } from "../common"
+import { DestinyActivity } from "../enums/DestinyActivities";
+import { d } from "../../../dist/_astro/web.Dqc7ZEmp";
 
 export function PlayerActivitiesFilterActive(activities: IPlayerActivity[], active: boolean) {
 	return activities.filter((x) => x.isActive == active);
 }
 
-export function PlayerActivitiesFilterType(activities: IPlayerActivity[], activityType: ActivityType) {
-	return activities.filter((x) => x.Type == (ActivityType[activityType] as keyof typeof ActivityType));
+export function PlayerActivitiesFilterType(activities: IPlayerActivity[], activityType: ActivityType | undefined) {
+	if (activityType != undefined)
+		return activities.filter((x) => x.Type == (ActivityType[activityType] as keyof typeof ActivityType));
+	return activities;
+}
+
+export function PlayerActivitiesFilterByActivity(activities: IPlayerActivity[], filteredActivities: DestinyActivity[]) {
+	return activities.filter((x) =>  filteredActivities.findIndex(y=> DestinyActivity[y] == x.Activity) != -1);
 }
 
 export function GetPlayerActivitiesCountComplete(activities: IPlayerActivity[]) {
@@ -19,12 +27,21 @@ export function GetPlayerActivitiesCountComplete(activities: IPlayerActivity[]) 
 	return complete;
 }
 
-export function GetPlayerActivitiesTotalCompletions(activities: IPlayerActivity[]) {
+export function GetPlayerActivitiesTotalCompletions(activities: IPlayerActivity[], tableType: string) {
 	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
 	let complete = -1;
 	if (initialized) {
 		complete = 0;
-		activities.map((x) => complete += GetPlayerActivityCompletions(x));
+	
+		switch (tableType){
+			default:
+				activities.map((x) => complete += GetPlayerActivityCompletions(x));
+				break;
+			case "RiteOfTheNine":
+				activities.map((x) => complete += GetPlayerActivityModesCompletions(x,[ModeType[ModeType.Explorer], ModeType[ModeType.Eternity], ModeType[ModeType.Ultimatum]]  as StringsKeysOf<typeof ModeType>[]));
+			break;
+		}
+
 	}
 	return complete;
 }
@@ -35,6 +52,16 @@ export function GetPlayerActivitiesMasterCompletions(activities: IPlayerActivity
 	if (initialized) {
 		complete = 0;
 		activities.map((x) => complete += GetPlayerActivityModesCompletions(x, [ModeType[ModeType.Master]] as StringsKeysOf<typeof ModeType>[]));
+	}
+	return complete;
+}
+
+export function GetPlayerActivitiesModesCompletions(activities: IPlayerActivity[], ModeTypes: StringsKeysOf<typeof ModeType>[]) {
+	const initialized = activities.findIndex((x) => x.dataInitialized) != -1;
+	let complete = -1;
+	if (initialized) {
+		complete = 0;
+		activities.map((x) => complete += GetPlayerActivityModesCompletions(x, ModeTypes));
 	}
 	return complete;
 }

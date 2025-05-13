@@ -7,7 +7,7 @@ import { getMasterLike, IPlayerActivity, mapActivities } from "../utils/destinyA
 import complete from "../resources/images/complete.png";
 import missing from "../resources/images/missing.png";
 import { DestinyActivityString } from "../utils/enums/strings/en/DestinyActivity";
-import { GetPlayerActivityCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions, GetPlayerActivityModesCompletions, GetPlayerActivityModesDetailedCompletions, } from "../utils/destinyExtensions/PlayerActivityCalculations";
+import { GetPlayerActivityCompletions, PlayerActivitiesFilterType, PlayerActivitiesFilterActive, GetPlayerActivitiesTotalCompletions, GetPlayerActivitiesMasterCompletions, GetPlayerActivitiesFlawlessCompletions, GetPlayerActivitiesSealCompletions, GetPlayerActivitiesSoloCompletions, GetPlayerActivitiesSoloFlawlessCompletions, GetPlayerActivityModesCompletions, GetPlayerActivityModesDetailedCompletions, PlayerActivitiesFilterByActivity, GetPlayerActivitiesModesCompletions, } from "../utils/destinyExtensions/PlayerActivityCalculations";
 import { BASE_BUNGIE_URL } from "../utils/destinyExtensions/APIExtensions";
 import { ExoticCollectible, ExoticCollectibles } from "../utils/destinyActivities/exoticDrops";
 import { ExoticWeaponString } from "../utils/enums/strings/en/WeaponExotic";
@@ -90,9 +90,9 @@ function AllMasterlikeActivityCompletionsToString(props: { item: IPlayerActivity
 }
 
 let element: Element;
-function GetDisplayListHeader(props: { activityType: ActivityType }) {
-	switch (props.activityType) {
-		case ActivityType.Dungeon:
+function GetDisplayListHeader(props: { activityTableType: string }) {
+	switch (props.activityTableType) {
+		case ActivityType[ActivityType.Dungeon]:
 			return (
 				<tr style="height:30px">
 					<th></th>
@@ -104,7 +104,7 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
-		case ActivityType.ExoticMission:
+		case  ActivityType[ActivityType.ExoticMission]:
 			return (
 				<tr style="height:30px">
 					<th></th>
@@ -116,7 +116,7 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
-		case ActivityType.Raid:
+		case  ActivityType[ActivityType.Raid]:
 			return (
 				<tr style="height:30px">
 					<th></th>
@@ -127,7 +127,7 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
-		case ActivityType.ScoredNightFall:
+		case  ActivityType[ActivityType.ScoredNightFall]:
 			return (
 				<tr style="height:30px">
 					<th></th>
@@ -136,6 +136,17 @@ function GetDisplayListHeader(props: { activityType: ActivityType }) {
 					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt"></th>
 				</tr>
 			);
+			case "RiteOfTheNine":
+				return (
+					<tr style="height:30px">
+					<th></th>
+					<th style="min-width: 180px"></th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt">Total Clears</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt; padding: 5px;">Explorer</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt; padding: 5px;">Eternity</th>
+					<th style="text-align: center; vertical-align: middle; max-width: 45pt; font-size: 10pt; padding: 5px;">Ultimatum</th>
+				</tr>
+				);
 	}
 }
 
@@ -320,7 +331,6 @@ function GetDisplayItemScoredNightFall(props: { item: IPlayerActivity }) {
 	const color = enabled ? "#FFFFFF" : "#7F7F7F";
 	return (
 		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => { requestedActivity.set(props.item.Activity); showModal(); }}>
-			<td></td>
 			<td>{DestinyActivityString[props.item.Activity]}</td>
 			<td style="text-align: center;">
 				{ActivityCompletionsToString(totalCompletions, enabled)}
@@ -329,15 +339,50 @@ function GetDisplayItemScoredNightFall(props: { item: IPlayerActivity }) {
 	);
 }
 
-function GetDisplayPlayerActivities(props: { activityType: ActivityType; displayInactive: boolean }) {
+function GetDisplayItemRiteOfTheNine(props: { item: IPlayerActivity }) {
+	const totalCompletions = GetPlayerActivityModesCompletions(props.item, [ModeType[ModeType.Explorer],  ModeType[ModeType.Eternity],ModeType[ModeType.Ultimatum]] as StringsKeysOf<typeof ModeType>[]);
+	const explorerCompletions = GetPlayerActivityModesCompletions(props.item, [ModeType[ModeType.Explorer], ] as StringsKeysOf<typeof ModeType>[]);
+	const eternityCompletions = GetPlayerActivityModesCompletions(props.item, [ModeType[ModeType.Eternity]] as StringsKeysOf<typeof ModeType>[]);
+	const ultimatumCompletions = GetPlayerActivityModesCompletions(props.item, [ModeType[ModeType.Ultimatum],] as StringsKeysOf<typeof ModeType>[]);
+	const enabled = totalCompletions != 0;
+	const color = enabled ? "#FFFFFF" : "#7F7F7F";
+	return (
+		<tr style={`color:${color};`} class="completions-table-row hoverable" onclick={() => { requestedActivity.set(props.item.Activity); showModal(); }}>
+			<td></td>
+			<td>{DestinyActivityString[props.item.Activity]}</td>
+			<td style="text-align: center;">
+				{ActivityCompletionsToString(totalCompletions, enabled)}
+			</td>
+			<td style="text-align: center;">
+				{ActivityCompletionsToString(explorerCompletions, enabled)}
+			</td>
+			<td style="text-align: center;">
+				{ActivityCompletionsToString(eternityCompletions, enabled)}
+			</td>
+			<td style="text-align: center;">
+				{ActivityCompletionsToString(ultimatumCompletions, enabled)}
+			</td>
+		</tr>
+	);
+}
+
+function GetDisplayPlayerActivities(props: { activityType?: ActivityType| undefined; filterActivities?: DestinyActivity[] | undefined; activityTableType?: string | undefined; displayInactive: boolean; title: string }) {
 	let activities = Array.from(CurrentPlayerProfile.get().activities.values());
+	let displayActivityTableType = props.activityTableType ?? ActivityType[props.activityType ?? ActivityType.None];
+
+	activities = PlayerActivitiesFilterType(activities, props.activityType);
+
+	if (props.filterActivities != undefined)
+		activities = PlayerActivitiesFilterByActivity(activities, props.filterActivities)
+
 	if (props.activityType != ActivityType.ScoredNightFall)
 		activities.sort((x, y) => DestinyActivity[y.Activity] - DestinyActivity[x.Activity]);
 	else
 		activities.sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity]);
-	let activityOfType = PlayerActivitiesFilterType(activities, props.activityType);
-	const [active, setActive] = createSignal(PlayerActivitiesFilterActive(activityOfType, true));
-	const [inactive, setInactive] = createSignal(PlayerActivitiesFilterActive(activityOfType, false));
+
+
+	const [active, setActive] = createSignal(PlayerActivitiesFilterActive(activities, true));
+	const [inactive, setInactive] = createSignal(PlayerActivitiesFilterActive(activities, false));
 
 	const [ownedCollectibles, setOwnedCollectibles] = createSignal<ExoticCollectible[]>();
 	const [unownedCollectibles, setUnownedCollectibles] = createSignal<ExoticCollectible[]>();
@@ -346,11 +391,20 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 		const ownedCollectiblesHashes = playerProfile.collectibles;
 		const unownedCollectiblesHashes = ExoticCollectibles.filter((exotic) => playerProfile.collectibles.findIndex((hash) => exotic.exoticWeapon == hash) == -1).flatMap((x) => x.exoticWeapon);
 
-		const ownedCollectibles = ownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType);
-		const unownedCollectibles = unownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType)
+		let ownedCollectibles: ExoticCollectible[];
+		let unownedCollectibles : ExoticCollectible[];
 
+		if(props.filterActivities != undefined){
+			ownedCollectibles = ownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) =>  props.filterActivities!.findIndex(y=> DestinyActivity[y] == x.sourceActivity) != -1);
+			unownedCollectibles = unownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) =>  props.filterActivities!.findIndex(y=> DestinyActivity[y] == x.sourceActivity) != -1);
+		}
+		else{
+			ownedCollectibles = ownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType);
+			unownedCollectibles = unownedCollectiblesHashes.map((hash) => ExoticCollectibles.find((exotic) => exotic.exoticWeapon == hash)!).filter((x) => mapActivities[x.sourceActivity].Type == props.activityType)
+		}
 		ownedCollectibles.sort((x, y) => DestinyActivity[y.sourceActivity] - DestinyActivity[x.sourceActivity]);
 		unownedCollectibles.sort((x, y) => DestinyActivity[y.sourceActivity] - DestinyActivity[x.sourceActivity]);
+
 
 		setOwnedCollectibles(ownedCollectibles);
 		setUnownedCollectibles(unownedCollectibles);
@@ -361,13 +415,17 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 	CurrentPlayerProfile.subscribe((playerProfile, _, changedKey) => {
 		if (changedKey == "activities") {
 			activities = Array.from(playerProfile.activities.values());
+			
+			if (props.filterActivities != undefined)
+				activities = PlayerActivitiesFilterByActivity(activities, props.filterActivities)
 			if (props.activityType != ActivityType.ScoredNightFall)
 				activities.sort((x, y) => DestinyActivity[y.Activity] - DestinyActivity[x.Activity]);
 			else
 				activities.sort((x, y) => DestinyActivity[x.Activity] - DestinyActivity[y.Activity]);
-			activityOfType = PlayerActivitiesFilterType(activities, props.activityType);
-			setActive([...PlayerActivitiesFilterActive(activityOfType, true)]);
-			setInactive(PlayerActivitiesFilterActive(activityOfType, false));
+			
+				activities = PlayerActivitiesFilterType(activities, props.activityType);
+			setActive([...PlayerActivitiesFilterActive(activities, true)]);
+			setInactive(PlayerActivitiesFilterActive(activities, false));
 		}
 		if (changedKey == "collectibles") {
 			UpdateCollectibles(playerProfile);
@@ -380,20 +438,7 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 				<div style="display: flex;">
 					<div style="margin: auto; padding-top: 3pt;">
 						<span style="font-size: 16pt; letter-spacing: 4pt;">
-							<Switch>
-								<Match when={props.activityType == ActivityType.Raid}>
-									RAIDS
-								</Match>
-								<Match when={props.activityType == ActivityType.Dungeon}>
-									DUNGEONS
-								</Match>
-								<Match when={props.activityType == ActivityType.ExoticMission}>
-									EXOTIC MISSIONS
-								</Match>
-								<Match when={props.activityType == ActivityType.ScoredNightFall}>
-									GRANDMASTER NIGHTFALLS
-								</Match>
-							</Switch>
+							{props.title}
 						</span>
 					</div>
 				</div>
@@ -404,22 +449,25 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 				</div>
 				<table class="completions-table">
 					<thead>
-						<GetDisplayListHeader activityType={props.activityType} />
+						<GetDisplayListHeader activityTableType={displayActivityTableType} />
 					</thead>
 					<tbody style="color: white">
 						<For each={active()}>{(item,) =>
 							<Switch>
-								<Match when={props.activityType == ActivityType.Raid}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.Raid]}>
 									<GetDisplayItemRaid item={item} />
 								</Match>
-								<Match when={props.activityType == ActivityType.Dungeon}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.Dungeon]}>
 									<GetDisplayItemDungeon item={item} />
 								</Match>
-								<Match when={props.activityType == ActivityType.ExoticMission}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.ExoticMission]}>
 									<GetDisplayItemExoticMission item={item} />
 								</Match>
-								<Match when={props.activityType == ActivityType.ScoredNightFall}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.ScoredNightFall]}>
 									<GetDisplayItemScoredNightFall item={item} />
+								</Match>
+								<Match when={displayActivityTableType == "RiteOfTheNine"}>
+									<GetDisplayItemRiteOfTheNine item={item} />
 								</Match>
 							</Switch>
 						}</For>
@@ -428,27 +476,34 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 						<tr style="height:30px;">
 							<td></td>
 							<td>Total</td>
-							<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesTotalCompletions(active()), true)}</td>
+							<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesTotalCompletions(active(), displayActivityTableType), true)}</td>
 							<Switch>
-								<Match when={props.activityType == ActivityType.Raid}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.Raid]}>
 									<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesMasterCompletions(active()), true)}</td>
 									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesFlawlessCompletions(active()), true)}/${active().filter((x) => mapActivities[x.Activity].FlawlessHash != undefined).length}`}</td>
 									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSealCompletions(active()), true)}/${active().filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
 								</Match>
-								<Match when={props.activityType == ActivityType.Dungeon}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.Dungeon]}>
 									<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesMasterCompletions(active()), true)}</td>
 									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloCompletions(active()), true)}/${active().filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
 									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloFlawlessCompletions(active()), true)}/${active().filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
 									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSealCompletions(active()), true)}/${active().filter((x) => mapActivities[x.Activity].SealHash != undefined).length}`}</td>
 								</Match>
-								<Match when={props.activityType == ActivityType.ExoticMission}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.ExoticMission]}>
 									<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesMasterCompletions(active()), true)}</td>
 									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloCompletions(active()), true)}/${active().filter((x) => mapActivities[x.Activity].SoloHash != undefined).length}`}</td>
 									<td style="text-align: center;">{`${ActivityCompletionsToString(GetPlayerActivitiesSoloFlawlessCompletions(active()), true)}/${active().filter((x) => mapActivities[x.Activity].SoloFlawlessHash != undefined).length}`}</td>
 									<td style="text-align: center;"></td>
 								</Match>
-								<Match when={props.activityType == ActivityType.ScoredNightFall}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.ScoredNightFall]}>
 									<td style="text-align: center;"></td>
+								</Match>
+								<Match when={displayActivityTableType == "RiteOfTheNine"}>
+								<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesModesCompletions(active(), [ModeType[ModeType.Explorer]] as StringsKeysOf<typeof ModeType>[]), true)}</td>
+								<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesModesCompletions(active(), [ModeType[ModeType.Eternity]] as StringsKeysOf<typeof ModeType>[]), true)}</td>
+								<td style="text-align: center;">{ActivityCompletionsToString(GetPlayerActivitiesModesCompletions(active(), [ModeType[ModeType.Ultimatum]] as StringsKeysOf<typeof ModeType>[]), true)}</td>
+
+
 								</Match>
 							</Switch>
 						</tr>
@@ -459,8 +514,8 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 						<tr style="height:30px; font-weight: bold; background:#FFFFFF1A; cursor:pointer;" onclick=
 							{
 								() => {
-									const element = document.getElementById(`${ActivityType[props.activityType]}-LegacyTable`);
-									const collapseButton = document.getElementById(`${ActivityType[props.activityType]}-CollapseButton`);
+									const element = document.getElementById(`${displayActivityTableType }-LegacyTable`);
+									const collapseButton = document.getElementById(`${displayActivityTableType}-CollapseButton`);
 									if (element!.style.display == 'none') {
 										element!.style.display = "table-row-group"
 										collapseButton!.innerHTML = '&#9650';
@@ -474,44 +529,44 @@ function GetDisplayPlayerActivities(props: { activityType: ActivityType; display
 						>
 							<td></td>
 							<Switch>
-								<Match when={props.activityType == ActivityType.Raid}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.Raid]}>
 									<td style="border-bottom-style: solid 1px;" colspan="4">
 										Legacy
 									</td>
 								</Match>
-								<Match when={props.activityType == ActivityType.Dungeon}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.Dungeon]}>
 									<td style="border-bottom-style: solid 1px;" colspan="5">
 										Legacy
 									</td>
 								</Match>
-								<Match when={props.activityType == ActivityType.ExoticMission}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.ExoticMission]}>
 									<td style="border-bottom-style: solid 1px;" colspan="5">
 										Legacy
 									</td>
 								</Match>
-								<Match when={props.activityType == ActivityType.ScoredNightFall}>
+								<Match when={displayActivityTableType == ActivityType[ActivityType.ScoredNightFall]}>
 									<td style="border-bottom-style: solid 1px;" colspan="2">
 										Legacy
 									</td>
 								</Match>
 							</Switch>
-							<td id={`${ActivityType[props.activityType]}-CollapseButton`} style="text-align:center; padding-inline:5px;">
+							<td id={`${displayActivityTableType}-CollapseButton`} style="text-align:center; padding-inline:5px;">
 								&#9660
 							</td>
 						</tr>
-						<tbody id={`${ActivityType[props.activityType]}-LegacyTable`} style="display: none; background:#FFFFFF0D">
+						<tbody id={`${displayActivityTableType}-LegacyTable`} style="display: none; background:#FFFFFF0D">
 							<For each={inactive()}>{(item,) =>
 								<Switch>
-									<Match when={props.activityType == ActivityType.Raid}>
+									<Match when={displayActivityTableType == ActivityType[ActivityType.Raid]}>
 										<GetDisplayItemRaid item={item} />
 									</Match>
-									<Match when={props.activityType == ActivityType.Dungeon}>
+									<Match when={displayActivityTableType == ActivityType[ActivityType.Dungeon]}>
 										<GetDisplayItemDungeon item={item} />
 									</Match>
-									<Match when={props.activityType == ActivityType.ExoticMission}>
+									<Match when={displayActivityTableType == ActivityType[ActivityType.ExoticMission]}>
 										<GetDisplayItemExoticMission item={item} />
 									</Match>
-									<Match when={props.activityType == ActivityType.ScoredNightFall}>
+									<Match when={displayActivityTableType == ActivityType[ActivityType.ScoredNightFall]}>
 										<GetDisplayItemScoredNightFall item={item} />
 									</Match>
 								</Switch>
@@ -557,19 +612,24 @@ function GetExoticIcon(props: { item: ExoticCollectible; acquired: boolean }) {
 	</>
 }
 
+export function SolidRitesOfTheNine(props: { loading?: Element }) {
+	element = props.loading!;
+	return <GetDisplayPlayerActivities activityTableType="RiteOfTheNine" filterActivities={[DestinyActivity.SpireOfTheWatcher, DestinyActivity.GhostsOfTheDeep, DestinyActivity.Prophecy ]} displayInactive={true} title="RITES OF THE NINE"></GetDisplayPlayerActivities>;
+}
+
 export function SolidRaids(props: { loading?: Element }) {
 	element = props.loading!;
-	return <GetDisplayPlayerActivities activityType={ActivityType.Raid} displayInactive={true}></GetDisplayPlayerActivities>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.Raid} displayInactive={true} title="RAIDS"></GetDisplayPlayerActivities>;
 }
 export function SolidDungeons(props: { loading?: Element }) {
 	element = props.loading!;
-	return <GetDisplayPlayerActivities activityType={ActivityType.Dungeon} displayInactive={true}></GetDisplayPlayerActivities>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.Dungeon} displayInactive={true} title="DUNGEONS"></GetDisplayPlayerActivities>;
 }
 export function SolidExoticMissions(props: { loading?: Element }) {
 	element = props.loading!;
-	return <GetDisplayPlayerActivities activityType={ActivityType.ExoticMission} displayInactive={true}></GetDisplayPlayerActivities>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.ExoticMission} displayInactive={true} title="EXOTIC MISSIONS"></GetDisplayPlayerActivities>;
 }
 export function SolidGrandMasters(props: { loading?: Element }) {
 	element = props.loading!;
-	return <GetDisplayPlayerActivities activityType={ActivityType.ScoredNightFall} displayInactive={false}></GetDisplayPlayerActivities>;
+	return <GetDisplayPlayerActivities activityType={ActivityType.ScoredNightFall} displayInactive={false} title="GRANDMASTER NIGHTFALLS"></GetDisplayPlayerActivities>;
 }
